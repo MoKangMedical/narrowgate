@@ -24,6 +24,8 @@ from core.crossing import CrossingEngine
 from core.masters import MasterManager
 from core.database import Database
 from core.mimo_client import MIMOClient, MIMOConfig
+from core.witness import WitnessNetwork
+from core.evolution import EvolutionPyramid
 
 # ============================================================
 # App
@@ -32,7 +34,7 @@ from core.mimo_client import MIMOClient, MIMOConfig
 app = FastAPI(
     title="窄门 NarrowGate",
     description="让人看见窄门并跨越窄门的进化平台",
-    version="2.0.0",
+    version="2.1.0",
 )
 
 # 核心引擎
@@ -42,6 +44,8 @@ crossing_engine = CrossingEngine()
 master_manager = MasterManager()
 db = Database()
 mimo = MIMOClient()
+witness_network = WitnessNetwork()
+evolution_pyramid = EvolutionPyramid()
 
 # 内存缓存（补充数据库）
 _active_audits: Dict[str, object] = {}
@@ -508,6 +512,79 @@ async def add_divinity(req: AddDivinityRequest):
 async def get_platform_stats():
     """获取平台统计"""
     return db.get_stats()
+
+
+
+# ============================================================
+# 见证人 API
+# ============================================================
+
+class WitnessRequest(BaseModel):
+    name: str
+    email: str = ""
+    relationship: str = "朋友"
+
+class VerifyRequest(BaseModel):
+    witness_id: str
+    crossing_id: str
+    day: int
+    challenge: str
+    approved: bool = True
+    message: str = ""
+
+@app.post("/api/witness/add")
+async def add_witness(req: WitnessRequest):
+    """添加见证人"""
+    witness = witness_network.add_witness(req.name, req.email, req.relationship)
+    return witness.to_dict()
+
+@app.get("/api/witness/list")
+async def list_witnesses():
+    """获取所有见证人"""
+    return [w.to_dict() for w in witness_network.get_all_witnesses()]
+
+@app.post("/api/witness/verify")
+async def verify_witness(req: VerifyRequest):
+    """发送见证验证"""
+    verification = witness_network.send_verification_request(
+        req.witness_id, req.crossing_id, req.day, req.challenge
+    )
+    return verification.to_dict()
+
+@app.get("/api/witness/report/{crossing_id}")
+async def get_witness_report(crossing_id: str):
+    """获取见证报告"""
+    return witness_network.get_witness_report(crossing_id)
+
+
+# ============================================================
+# 进化金字塔 API
+# ============================================================
+
+class EvolutionRequest(BaseModel):
+    user_id: str
+    gate_name: str = ""
+    description: str = ""
+
+@app.get("/api/evolution/{user_id}")
+async def get_evolution(user_id: str):
+    """获取用户进化状态"""
+    return evolution_pyramid.get_pyramid_data(user_id)
+
+@app.get("/api/evolution/{user_id}/pyramid")
+async def get_evolution_visual(user_id: str):
+    """获取进化金字塔可视化"""
+    return {"pyramid": evolution_pyramid.get_visual_pyramid(user_id)}
+
+@app.post("/api/evolution/breakthrough")
+async def record_breakthrough(req: EvolutionRequest):
+    """记录突破"""
+    return evolution_pyramid.record_breakthrough(req.user_id, req.gate_name, req.description)
+
+@app.post("/api/evolution/crossing-complete")
+async def record_evolution_crossing(req: EvolutionRequest):
+    """记录穿越完成（进化版）"""
+    return evolution_pyramid.record_crossing_completion(req.user_id, req.gate_name)
 
 
 # ============================================================
