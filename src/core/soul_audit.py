@@ -62,6 +62,7 @@ class AuditResponse:
     answer: str
     timestamp: str
     depth_level: int
+    dimension: str = ""  # 所属维度
     evasion_detected: bool = False
     evasion_type: str = ""  # 否认/转移/最小化/合理化/攻击
     ai_analysis: str = ""
@@ -321,6 +322,7 @@ class SoulAuditEngine:
             answer=answer,
             timestamp=datetime.now().isoformat(),
             depth_level=audit.current_depth,
+            dimension=audit.current_dimension,
             evasion_detected=evasion_detected,
             evasion_type=evasion_type,
         )

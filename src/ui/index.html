@@ -264,7 +264,9 @@
                     </div>
 
                     <div class="flex gap-3">
+        let selectedMasterId = "";
                         <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#0a0a0f] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#c9a84c] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
+        let selectedMasterId = "";
                         <button onclick="submitAnswer()" class="bg-[#c9a84c] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#e8c95a] transition text-sm">
                             发送
                         </button>
@@ -370,6 +372,7 @@
             container.appendChild(div);
         }
 
+        let selectedMasterId = "";
         async function submitAnswer() {
             const input = document.getElementById('answer-input');
             const answer = input.value.trim();
@@ -381,11 +384,13 @@
 
             try {
                 const data = await apiCall('/api/audit/answer', 'POST', {
-                    audit_id: currentAuditId, answer: answer,
+                    audit_id: currentAuditId,
+                    answer: answer,
+                    master_id: selectedMasterId || '',
                 });
                 document.getElementById('typing').classList.add('hidden');
-                if (data.evasion_detected) addEvasionAlert(data.evasion_type, data.ai_analysis);
-                addMessage('ai', data.next_question, `深度层级 ${data.next_depth}`);
+                if (data.evasion_detected) addEvasionAlert(data.evasion_type, data.ai_analysis || "");
+                addMessage('ai', data.ai_reply, `深度层级 ${data.depth}`);
                 document.getElementById('current-dimension').textContent = data.dimension;
                 document.getElementById('conversation-count').textContent = data.conversation_count;
                 document.getElementById('shackle-count').textContent = data.shackles_found;
@@ -621,7 +626,24 @@
             const master = MASTERS.find(m => m.id === masterId);
             addMasterMessage('user', '你', answer);
 
-            // 检测回避
+            // 如果有审计，通过API获取AI回复
+            if (currentAuditId) {
+                try {
+                    const data = await apiCall('/api/audit/answer', 'POST', {
+                        audit_id: currentAuditId,
+                        answer: answer,
+                        master_id: masterId,
+                    });
+                    if (data.evasion_detected) {
+                        addMasterMessage('ai', `${master.avatar} ${master.name} ⚠️`, 
+                            `回避检测(${data.evasion_type})：${data.ai_analysis || '我感觉到你在回避'}`);
+                    }
+                    addMasterMessage('ai', `${master.avatar} ${master.name}`, data.ai_reply);
+                    return;
+                } catch(e) { /* fallback to local */ }
+            }
+
+            // Demo模式：本地回避检测
             const evasionSignals = {
                 '否认': ['没有', '不是', '我不觉得', '还好', '还行'],
                 '转移': ['说起来', '对了', '另外'],
