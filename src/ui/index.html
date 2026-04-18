@@ -349,11 +349,25 @@
             document.getElementById('audit-chat').classList.remove('hidden');
             document.getElementById('audit-result').classList.add('hidden');
 
-            const data = await apiCall('/api/audit/start', 'POST', { user_id: 'user_' + Date.now() });
-            currentAuditId = data.audit_id;
+            try {
+                const data = await apiCall('/api/audit/start', 'POST', { user_id: 'user_' + Date.now() });
+                currentAuditId = data.audit_id;
+                addMessage('ai', data.question, data.purpose);
+                document.getElementById('current-dimension').textContent = data.dimension;
+            } catch(e) {
+                // Demo模式（无后端）
+                currentAuditId = 'demo_' + Date.now();
+                addMessage('ai', '你觉得自己的人生到现在，最大的成就是什么？', '探索表层认知');
+                addDemoNote();
+            }
+        }
 
-            addMessage('ai', data.question, data.purpose);
-            document.getElementById('current-dimension').textContent = data.dimension;
+        function addDemoNote() {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'text-center py-2';
+            div.innerHTML = '<p class="text-xs text-yellow-500/60 bg-yellow-900/20 rounded px-3 py-1 inline-block">🎭 Demo模式 — 启动后端可体验完整灵魂审计</p>';
+            container.appendChild(div);
         }
 
         async function submitAnswer() {
@@ -363,67 +377,68 @@
 
             input.value = '';
             addMessage('user', answer);
-
             document.getElementById('typing').classList.remove('hidden');
 
-            const data = await apiCall('/api/audit/answer', 'POST', {
-                audit_id: currentAuditId,
-                answer: answer,
-            });
-
-            document.getElementById('typing').classList.add('hidden');
-
-            if (data.evasion_detected) {
-                addEvasionAlert(data.evasion_type, data.ai_analysis);
+            try {
+                const data = await apiCall('/api/audit/answer', 'POST', {
+                    audit_id: currentAuditId, answer: answer,
+                });
+                document.getElementById('typing').classList.add('hidden');
+                if (data.evasion_detected) addEvasionAlert(data.evasion_type, data.ai_analysis);
+                addMessage('ai', data.next_question, `深度层级 ${data.next_depth}`);
+                document.getElementById('current-dimension').textContent = data.dimension;
+                document.getElementById('conversation-count').textContent = data.conversation_count;
+                document.getElementById('shackle-count').textContent = data.shackles_found;
+            } catch(e) {
+                // Demo模式
+                document.getElementById('typing').classList.add('hidden');
+                const demoQuestions = [
+                    '在这背后，你真正害怕面对的是什么？',
+                    '如果满分10分你给自己打几分？扣掉的分丢在哪里了？',
+                    '你有没有一个从未告诉任何人的秘密？关于你是谁？',
+                ];
+                const evasionSignals = ['没有','不是','还好','因为','没办法'];
+                const isEvasion = evasionSignals.some(s => answer.includes(s));
+                if (isEvasion) {
+                    addEvasionAlert('否认', '我感觉到你在回避。没关系，但我们需要再试一次。');
+                }
+                const count = document.getElementById('chat-messages').children.length;
+                addMessage('ai', demoQuestions[count % demoQuestions.length], `深度层级 ${Math.min(Math.floor(count/2)+1, 4)}`);
             }
-
-            addMessage('ai', data.next_question, `深度层级 ${data.next_depth}`);
-            document.getElementById('current-dimension').textContent = data.dimension;
-            document.getElementById('conversation-count').textContent = data.conversation_count;
-            document.getElementById('shackle-count').textContent = data.shackles_found;
         }
 
         async function completeAudit() {
             if (!currentAuditId) return;
 
-            const data = await apiCall('/api/audit/complete', 'POST', { user_id: currentAuditId.split('_')[1] });
-
             document.getElementById('audit-chat').classList.add('hidden');
             document.getElementById('audit-result').classList.remove('hidden');
 
-            const summary = data.summary || {};
+            let summary = { total_conversations: 0, evasion_count: 0, shackles_identified: 0, dimensions_explored: 0, first_gate: null };
+            let message = '';
+
+            try {
+                const data = await apiCall('/api/audit/complete', 'POST', { user_id: currentAuditId.split('_')[1] });
+                summary = data.summary || summary;
+                message = data.message || '';
+            } catch(e) {
+                // Demo模式结果
+                const msgCount = document.getElementById('chat-messages').children.length;
+                summary = { total_conversations: Math.floor(msgCount/2), evasion_count: Math.floor(msgCount/4), shackles_identified: 1, dimensions_explored: 3, first_gate: { name: '认知：舒适区依赖', description: '你一直在用已知的方式做事，回避未知领域', priority: 72 } };
+                message = '这是Demo审计结果。启动后端服务可获得完整AI灵魂审计体验。';
+            }
+
             document.getElementById('result-content').innerHTML = `
                 <p class="text-4xl mb-4">🚪</p>
                 <h3 class="font-serif text-xl mb-6">灵魂审计完成</h3>
                 <div class="grid grid-cols-2 gap-4 text-left mb-8">
-                    <div class="bg-[#0a0a0f] rounded-lg p-4">
-                        <p class="text-xs text-gray-500">对话次数</p>
-                        <p class="text-2xl font-bold text-white">${summary.total_conversations || 0}</p>
-                    </div>
-                    <div class="bg-[#0a0a0f] rounded-lg p-4">
-                        <p class="text-xs text-gray-500">回避次数</p>
-                        <p class="text-2xl font-bold text-red-400">${summary.evasion_count || 0}</p>
-                    </div>
-                    <div class="bg-[#0a0a0f] rounded-lg p-4">
-                        <p class="text-xs text-gray-500">识别枷锁</p>
-                        <p class="text-2xl font-bold text-[#c9a84c]">${summary.shackles_identified || 0}</p>
-                    </div>
-                    <div class="bg-[#0a0a0f] rounded-lg p-4">
-                        <p class="text-xs text-gray-500">探索维度</p>
-                        <p class="text-2xl font-bold text-gray-300">${summary.dimensions_explored || 0}</p>
-                    </div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4"><p class="text-xs text-gray-500">对话次数</p><p class="text-2xl font-bold text-white">${summary.total_conversations}</p></div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4"><p class="text-xs text-gray-500">回避次数</p><p class="text-2xl font-bold text-red-400">${summary.evasion_count}</p></div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4"><p class="text-xs text-gray-500">识别枷锁</p><p class="text-2xl font-bold text-[#c9a84c]">${summary.shackles_identified}</p></div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4"><p class="text-xs text-gray-500">探索维度</p><p class="text-2xl font-bold text-gray-300">${summary.dimensions_explored}</p></div>
                 </div>
-                ${summary.first_gate ? `
-                <div class="bg-[#2a1a0a] border border-[#c9a84c]/30 rounded-lg p-6 text-left mb-6">
-                    <p class="text-xs text-[#c9a84c] mb-1">你的窄门</p>
-                    <h4 class="text-lg font-bold text-white mb-2">${summary.first_gate.name}</h4>
-                    <p class="text-sm text-gray-400">${summary.first_gate.description}</p>
-                    <p class="text-sm text-[#c9a84c] mt-3">窄门优先级：${Math.round(summary.first_gate.priority)}/100</p>
-                </div>` : ''}
-                <p class="text-gray-400 text-sm leading-relaxed">${(data.message || '').replace(/\n/g, '<br>')}</p>
-                <button onclick="resetAudit()" class="mt-8 text-xs text-gray-600 hover:text-gray-400 transition">
-                    重新审计
-                </button>
+                ${summary.first_gate ? `<div class="bg-[#2a1a0a] border border-[#c9a84c]/30 rounded-lg p-6 text-left mb-6"><p class="text-xs text-[#c9a84c] mb-1">你的窄门</p><h4 class="text-lg font-bold text-white mb-2">${summary.first_gate.name}</h4><p class="text-sm text-gray-400">${summary.first_gate.description}</p><p class="text-sm text-[#c9a84c] mt-3">窄门优先级：${Math.round(summary.first_gate.priority)}/100</p></div>` : ''}
+                <p class="text-gray-400 text-sm leading-relaxed">${message.replace(/\n/g, '<br>')}</p>
+                <button onclick="resetAudit()" class="mt-8 text-xs text-gray-600 hover:text-gray-400 transition">重新审计</button>
             `;
         }
 
