@@ -597,7 +597,7 @@ async def health():
     return {
         "status": "running",
         "service": "窄门 NarrowGate",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "mimo_connected": True,
         "database": "sqlite",
         "stats": db.get_stats(),
