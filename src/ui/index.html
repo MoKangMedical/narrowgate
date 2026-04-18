@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>窄门 NarrowGate — 让人看见窄门并跨越窄门</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-card: #12121a;
+            --accent-gold: #c9a84c;
+            --accent-glow: #e8c95a;
+            --text-primary: #e8e6e3;
+            --text-muted: #8a8880;
+            --gate-narrow: #2a1a0a;
+            --gate-wide: #0a1a2a;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Inter', 'Noto Serif SC', sans-serif;
+        }
+
+        .font-serif { font-family: 'Noto Serif SC', serif; }
+
+        .gate-visual {
+            position: relative;
+            width: 200px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .gate-wide {
+            position: absolute;
+            left: 0;
+            width: 140px;
+            height: 300px;
+            border: 2px solid #334155;
+            border-radius: 4px 4px 0 0;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            opacity: 0.4;
+        }
+
+        .gate-narrow {
+            position: absolute;
+            right: 0;
+            width: 60px;
+            height: 300px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 2px 2px 0 0;
+            background: linear-gradient(180deg, #1a1205 0%, #2a1a0a 100%);
+            box-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(201, 168, 76, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(201, 168, 76, 0.5); }
+        }
+
+        .dimension-pyramid {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .pyramid-level {
+            margin: 0 auto 4px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .pyramid-level:hover { transform: scale(1.02); }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .evasion-alert {
+            border-left: 3px solid #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 0.5rem 0;
+        }
+
+        .progress-ring { transition: stroke-dashoffset 0.5s; }
+
+        .fade-enter { animation: fadeIn 0.3s ease; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- ============================================================ -->
+    <!-- 导航 -->
+    <!-- ============================================================ -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0a0a0f]/90 backdrop-blur border-b border-white/5">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-xl font-bold text-[#c9a84c]">窄门 NarrowGate</h1>
+            <div class="flex gap-6 text-sm text-gray-400">
+                <a href="#about" class="hover:text-white transition">关于</a>
+                <a href="#dimensions" class="hover:text-white transition">五层</a>
+                <a href="#audit" class="hover:text-white transition">灵魂审计</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- Hero -->
+    <!-- ============================================================ -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-[#c9a84c] text-sm tracking-[0.3em] uppercase mb-6">NARROW GATE PLATFORM</p>
+            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                你要进<span class="text-[#c9a84c]">窄门</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">
+                因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
+                引到生命，那门是窄的，路是小的，找着的人也少。
+            </p>
+            <p class="text-sm text-gray-600 mb-12">— 马太福音 7:13-14</p>
+
+            <div class="gate-visual mb-12">
+                <div class="gate-wide"></div>
+                <div class="gate-narrow"></div>
+            </div>
+
+            <button onclick="startAudit()" class="bg-[#c9a84c] text-black font-semibold px-8 py-4 rounded-lg hover:bg-[#e8c95a] transition text-lg">
+                开始灵魂审计 →
+            </button>
+            <p class="text-xs text-gray-600 mt-4">这不会舒服。但你会感谢自己。</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 五层进化 -->
+    <!-- ============================================================ -->
+    <section id="dimensions" class="py-20 px-6 bg-gradient-to-b from-transparent to-[#0d0d15]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">五层进化架构</h2>
+            <p class="text-gray-500 text-center mb-16">从凡人到封神——每层都有一个窄门在等你</p>
+
+            <div class="space-y-3">
+                <div class="pyramid-level rounded-lg" style="width:40%;background:linear-gradient(90deg,#1a1205,#2a1a0a);border:1px solid #c9a84c;">
+                    <span class="text-[#c9a84c] text-sm">五 · 封神</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:55%;background:linear-gradient(90deg,#15120a,#252015);border:1px solid #a08030;">
+                    <span class="text-[#c9a84c]/80 text-sm">四 · 觉醒</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:70%;background:linear-gradient(90deg,#12100a,#1e1a10);border:1px solid #706020;">
+                    <span class="text-[#c9a84c]/60 text-sm">三 · 穿越</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:85%;background:linear-gradient(90deg,#101010,#1a1a18);border:1px solid #505040;">
+                    <span class="text-gray-400 text-sm">二 · 看见</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:100%;background:linear-gradient(90deg,#0f0f0f,#171717);border:1px solid #333;">
+                    <span class="text-gray-500 text-sm">一 · 凡人</span>
+                </div>
+            </div>
+
+            <div class="mt-12 grid gap-4">
+                <div class="bg-[#12121a] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#c9a84c] mb-1">🚪 凡人 → 看见</h3>
+                    <p class="text-sm text-gray-400">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
+                </div>
+                <div class="bg-[#12121a] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#c9a84c] mb-1">⚡ 看见 → 穿越</h3>
+                    <p class="text-sm text-gray-400">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
+                </div>
+                <div class="bg-[#12121a] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#c9a84c] mb-1">🔥 穿越 → 觉醒</h3>
+                    <p class="text-sm text-gray-400">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
+                </div>
+                <div class="bg-[#12121a] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#c9a84c] mb-1">👑 觉醒 → 封神</h3>
+                    <p class="text-sm text-gray-400">构建一个让更多人看见窄门的系统。成为守门人。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 灵魂审计（核心交互区） -->
+    <!-- ============================================================ -->
+    <section id="audit" class="py-20 px-6">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12">AI 不接受表面答案。持续追问，直到你看见真相。</p>
+
+            <div id="audit-container" class="bg-[#12121a] border border-white/5 rounded-xl p-6 min-h-[400px]">
+                <!-- 初始状态 -->
+                <div id="audit-intro" class="text-center py-12">
+                    <p class="text-4xl mb-6">🚪</p>
+                    <h3 class="font-serif text-xl mb-4">准备好了吗？</h3>
+                    <p class="text-gray-500 text-sm mb-8 max-w-md mx-auto">
+                        灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
+                        AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
+                    </p>
+                    <button onclick="startAudit()" class="bg-[#c9a84c] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#e8c95a] transition">
+                        开始审计
+                    </button>
+                </div>
+
+                <!-- 对话状态 -->
+                <div id="audit-chat" class="hidden">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+                        <div>
+                            <span class="text-xs text-gray-500">当前维度</span>
+                            <span id="current-dimension" class="ml-2 text-[#c9a84c] font-semibold">认知</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-500">已对话</span>
+                            <span id="conversation-count" class="ml-2 text-gray-300">0</span>
+                            <span class="text-xs text-gray-500 ml-4">枷锁</span>
+                            <span id="shackle-count" class="ml-2 text-gray-300">0</span>
+                        </div>
+                    </div>
+
+                    <div id="chat-messages" class="space-y-4 mb-6 max-h-[400px] overflow-y-auto"></div>
+
+                    <div id="typing" class="hidden mb-4">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#0a0a0f] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#c9a84c] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
+                        <button onclick="submitAnswer()" class="bg-[#c9a84c] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#e8c95a] transition text-sm">
+                            发送
+                        </button>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">
+                            结束审计，查看结果
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 结果状态 -->
+                <div id="audit-result" class="hidden text-center py-8">
+                    <div id="result-content"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 关于 -->
+    <!-- ============================================================ -->
+    <section id="about" class="py-20 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-serif text-3xl font-bold mb-8">关于窄门</h2>
+            <p class="text-gray-400 leading-relaxed mb-8">
+                窄门不是一个给你答案的平台。它是一个<strong class="text-white">制造困境并引导穿越</strong>的平台。
+                我们训练人一步一步让自己从人变为神——不是宗教意义的神，是<strong class="text-white">人类潜能的极致释放</strong>。
+            </p>
+            <p class="text-gray-500 text-sm">
+                核心理念：痛苦回避度 × 成长杠杆率 = 窄门优先级<br>
+                你最不想面对的 × 能带来最大改变的 = 你最需要穿越的
+            </p>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-xs text-gray-700 border-t border-white/5">
+        窄门 NarrowGate · 让人看见窄门并跨越窄门
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================================ -->
+    <script>
+        let currentAuditId = null;
+
+        async function apiCall(url, method = 'POST', body = {}) {
+            const res = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: method === 'GET' ? undefined : JSON.stringify(body),
+            });
+            return res.json();
+        }
+
+        async function startAudit() {
+            document.getElementById('audit-intro').classList.add('hidden');
+            document.getElementById('audit-chat').classList.remove('hidden');
+            document.getElementById('audit-result').classList.add('hidden');
+
+            const data = await apiCall('/api/audit/start', 'POST', { user_id: 'user_' + Date.now() });
+            currentAuditId = data.audit_id;
+
+            addMessage('ai', data.question, data.purpose);
+            document.getElementById('current-dimension').textContent = data.dimension;
+        }
+
+        async function submitAnswer() {
+            const input = document.getElementById('answer-input');
+            const answer = input.value.trim();
+            if (!answer || !currentAuditId) return;
+
+            input.value = '';
+            addMessage('user', answer);
+
+            document.getElementById('typing').classList.remove('hidden');
+
+            const data = await apiCall('/api/audit/answer', 'POST', {
+                audit_id: currentAuditId,
+                answer: answer,
+            });
+
+            document.getElementById('typing').classList.add('hidden');
+
+            if (data.evasion_detected) {
+                addEvasionAlert(data.evasion_type, data.ai_analysis);
+            }
+
+            addMessage('ai', data.next_question, `深度层级 ${data.next_depth}`);
+            document.getElementById('current-dimension').textContent = data.dimension;
+            document.getElementById('conversation-count').textContent = data.conversation_count;
+            document.getElementById('shackle-count').textContent = data.shackles_found;
+        }
+
+        async function completeAudit() {
+            if (!currentAuditId) return;
+
+            const data = await apiCall('/api/audit/complete', 'POST', { user_id: currentAuditId.split('_')[1] });
+
+            document.getElementById('audit-chat').classList.add('hidden');
+            document.getElementById('audit-result').classList.remove('hidden');
+
+            const summary = data.summary || {};
+            document.getElementById('result-content').innerHTML = `
+                <p class="text-4xl mb-4">🚪</p>
+                <h3 class="font-serif text-xl mb-6">灵魂审计完成</h3>
+                <div class="grid grid-cols-2 gap-4 text-left mb-8">
+                    <div class="bg-[#0a0a0f] rounded-lg p-4">
+                        <p class="text-xs text-gray-500">对话次数</p>
+                        <p class="text-2xl font-bold text-white">${summary.total_conversations || 0}</p>
+                    </div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4">
+                        <p class="text-xs text-gray-500">回避次数</p>
+                        <p class="text-2xl font-bold text-red-400">${summary.evasion_count || 0}</p>
+                    </div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4">
+                        <p class="text-xs text-gray-500">识别枷锁</p>
+                        <p class="text-2xl font-bold text-[#c9a84c]">${summary.shackles_identified || 0}</p>
+                    </div>
+                    <div class="bg-[#0a0a0f] rounded-lg p-4">
+                        <p class="text-xs text-gray-500">探索维度</p>
+                        <p class="text-2xl font-bold text-gray-300">${summary.dimensions_explored || 0}</p>
+                    </div>
+                </div>
+                ${summary.first_gate ? `
+                <div class="bg-[#2a1a0a] border border-[#c9a84c]/30 rounded-lg p-6 text-left mb-6">
+                    <p class="text-xs text-[#c9a84c] mb-1">你的窄门</p>
+                    <h4 class="text-lg font-bold text-white mb-2">${summary.first_gate.name}</h4>
+                    <p class="text-sm text-gray-400">${summary.first_gate.description}</p>
+                    <p class="text-sm text-[#c9a84c] mt-3">窄门优先级：${Math.round(summary.first_gate.priority)}/100</p>
+                </div>` : ''}
+                <p class="text-gray-400 text-sm leading-relaxed">${(data.message || '').replace(/\n/g, '<br>')}</p>
+                <button onclick="resetAudit()" class="mt-8 text-xs text-gray-600 hover:text-gray-400 transition">
+                    重新审计
+                </button>
+            `;
+        }
+
+        function resetAudit() {
+            currentAuditId = null;
+            document.getElementById('audit-intro').classList.remove('hidden');
+            document.getElementById('audit-chat').classList.add('hidden');
+            document.getElementById('audit-result').classList.add('hidden');
+            document.getElementById('chat-messages').innerHTML = '';
+        }
+
+        function addMessage(role, text, subtext = '') {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            if (role === 'ai') {
+                div.className = 'chat-bubble bg-[#1a1a25] rounded-tl-sm';
+                div.innerHTML = `
+                    <p class="text-sm text-gray-200">${text}</p>
+                    ${subtext ? `<p class="text-xs text-gray-600 mt-2">${subtext}</p>` : ''}
+                `;
+            } else {
+                div.className = 'chat-bubble bg-[#c9a84c]/10 border border-[#c9a84c]/20 rounded-tr-sm ml-auto';
+                div.innerHTML = `<p class="text-sm text-gray-200">${text}</p>`;
+            }
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addEvasionAlert(type, analysis) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'evasion-alert fade-enter';
+            div.innerHTML = `
+                <p class="text-xs text-red-400 font-semibold mb-1">⚠️ 回避检测：${type}</p>
+                <p class="text-xs text-gray-400">${analysis}</p>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+    </script>
+</body>
+</html>
