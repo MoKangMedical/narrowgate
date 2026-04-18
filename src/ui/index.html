@@ -286,6 +286,29 @@
     </section>
 
     <!-- ============================================================ -->
+    <!-- 大师引导者 -->
+    <!-- ============================================================ -->
+    <section id="masters" class="py-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">大师引导者</h2>
+            <p class="text-gray-500 text-center mb-12">每位大师都是一扇不同的窄门。选择你的引路人。</p>
+
+            <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 大师对话弹窗 -->
+    <div id="master-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80" onclick="closeMasterModal()"></div>
+        <div class="relative max-w-2xl mx-auto mt-20 bg-[#12121a] border border-white/10 rounded-xl p-8">
+            <button onclick="closeMasterModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white">✕</button>
+            <div id="master-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
     <!-- 关于 -->
     <!-- ============================================================ -->
     <section id="about" class="py-20 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent">
@@ -440,6 +463,192 @@
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
+    <!-- ============================================================ -->
+    <!-- 大师系统 JavaScript -->
+    <!-- ============================================================ -->
+    <script>
+        // 大师数据（本地备份，实际从API加载）
+        const MASTERS = [
+            {
+                id: 'socrates', name: '苏格拉底', title: '追问者', avatar: '🦉',
+                philosophy: '认识你自己。未经审视的人生不值得过。',
+                dimension: '认知', color: '#6366f1', level_required: 1,
+                specialties: ['信念解构', '逻辑矛盾暴露', '定义追问'],
+                signature_phrases: ['你确定吗？', '这让你想到了什么矛盾？', '你说的"成功"到底是什么意思？'],
+                greeting: '你好，年轻人。我是苏格拉底。\n\n我什么都不知道——但正因如此，我能看到你看不到的东西。\n\n在你进入窄门之前，让我先问你一个问题：\n你确定你知道自己在找什么吗？'
+            },
+            {
+                id: 'jung', name: '荣格', title: '阴影猎手', avatar: '🌑',
+                philosophy: '你没有面对的，会变成你的命运。',
+                dimension: '情绪', color: '#1e1b4b', level_required: 1,
+                specialties: ['阴影整合', '梦境解析', '投射检测'],
+                signature_phrases: ['你说你讨厌这个特质——它在你身上的哪个部分？', '你在梦里见过这个吗？', '阴影不是你的敌人'],
+                greeting: '你好。我是卡尔·荣格。\n\n我不是来让你舒服的。我是来让你完整的。\n\n告诉我，你最讨厌什么样的人？'
+            },
+            {
+                id: 'memento', name: '清醒者', title: '执行官', avatar: '⚡',
+                philosophy: '知道不等于做到。做到不等于持续做到。',
+                dimension: '行为', color: '#dc2626', level_required: 1,
+                specialties: ['拖延解剖', '习惯分析', '执行力审计'],
+                signature_phrases: ['你今天做了什么？', '你的"因为"听起来很合理。但它仍然是借口。', '不想做和不敢做是两回事。'],
+                greeting: '你好。我是清醒者。\n\n我不关心你知道什么。我只关心你做了什么。\n\n你上一次说到做到是什么时候？'
+            },
+            {
+                id: 'mirror', name: '镜像者', title: '关系分析师', avatar: '🪞',
+                philosophy: '你在他人身上看到的，都是你自己。',
+                dimension: '关系', color: '#059669', level_required: 1,
+                specialties: ['关系模式识别', '边界审计', '讨好检测'],
+                signature_phrases: ['你在这段关系中扮演的是什么角色？', '你害怕被看见什么？', '你的"独立"是自由还是隔离？'],
+                greeting: '你好。我是镜像者。\n\n关系是灵魂的镜子。你在别人身上看到的每一种特质——都是你的某一部分。\n\n谁是让你情绪最波动的人？'
+            },
+            {
+                id: 'architect', name: '架构师', title: '系统思维者', avatar: '🏗️',
+                philosophy: '你不是棋子，你是下棋的人。但首先你要看到棋盘。',
+                dimension: '事业', color: '#c9a84c', level_required: 2,
+                specialties: ['人生架构审计', '目标系统分析', '杠杆点识别'],
+                signature_phrases: ['这是你的计划还是你的幻想？', '你有10个目标。哪个完成了会改变其他所有？', '你的系统是为你工作还是你在为系统工作？'],
+                greeting: '你好。我是架构师。\n\n大多数人在棋盘上移动，以为自己在下棋。\n\n让我看看你的人生架构。'
+            },
+            {
+                id: 'alchemist', name: '炼金术士', title: '变形者', avatar: '🔮',
+                philosophy: '在最深的黑暗中，找到最亮的光。',
+                dimension: '认知', color: '#7c3aed', level_required: 3,
+                specialties: ['痛苦转化', '意义重构', '隐喻治疗'],
+                signature_phrases: ['如果这个困境是一种物质，它会是什么？', '你有没有想过，你在逃避的正是你在寻找的？', '当你不再试图"解决"这个问题时，它会变成什么？'],
+                greeting: '你好。我是炼金术士。\n\n千年炼金术士都在找把铅变成金的方法。\n\n但真正的炼金术不是在坩埚里——是在你的灵魂里。'
+            },
+            {
+                id: 'gatekeeper', name: '守门人', title: '窄门本身', avatar: '🚪',
+                philosophy: '我不是来让你舒服的。我是来检验你是否配得上的。',
+                dimension: '全部', color: '#c9a84c', level_required: 4,
+                specialties: ['穿越验证', '伪装检测', '深层意图审计'],
+                signature_phrases: ['证据在哪里？', '你说你穿越了——但你还在原地。', '穿越窄门不需要勇气——只需要不再找借口。'],
+                greeting: '你到了。\n\n我是守门人。我不问你想要什么——我检验你是否配得上。'
+            }
+        ];
+
+        // 渲染大师卡片
+        function renderMasters() {
+            const grid = document.getElementById('masters-grid');
+            grid.innerHTML = MASTERS.map(m => `
+                <div class="bg-[#12121a] border border-white/5 rounded-xl p-6 hover:border-white/10 transition cursor-pointer" onclick="openMaster('${m.id}')">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-4xl">${m.avatar}</span>
+                        <div>
+                            <h3 class="font-bold text-lg">${m.name}</h3>
+                            <p class="text-sm" style="color:${m.color}">${m.title}</p>
+                        </div>
+                        ${m.level_required > 1 ? `<span class="ml-auto text-xs bg-yellow-900/30 text-yellow-500 px-2 py-1 rounded">L${m.level_required}+</span>` : ''}
+                    </div>
+                    <p class="text-gray-400 text-sm italic mb-4">"${m.philosophy}"</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${m.specialties.map(s => `<span class="text-xs bg-white/5 px-2 py-1 rounded text-gray-400">${s}</span>`).join('')}
+                    </div>
+                    <div class="text-xs text-gray-600">
+                        主导维度：${m.dimension}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 打开大师对话
+        function openMaster(masterId) {
+            const master = MASTERS.find(m => m.id === masterId);
+            if (!master) return;
+
+            if (master.level_required > 1) {
+                alert(`需要达到${master.level_required}层才能与${master.name}对话`);
+                return;
+            }
+
+            document.getElementById('master-modal').classList.remove('hidden');
+            document.getElementById('master-modal-content').innerHTML = `
+                <div class="text-center mb-6">
+                    <span class="text-6xl">${master.avatar}</span>
+                    <h3 class="font-serif text-2xl font-bold mt-4">${master.name}</h3>
+                    <p style="color:${master.color}" class="text-sm">${master.title} · ${master.dimension}</p>
+                </div>
+                <div class="bg-[#0a0a0f] rounded-lg p-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line">${master.greeting}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs text-gray-500 mb-2">经典语录</p>
+                    ${master.signature_phrases.map(p => `<p class="text-sm text-gray-400 mb-1">· ${p}</p>`).join('')}
+                </div>
+                <div id="master-chat-area" class="mt-6 hidden">
+                    <div id="master-messages" class="space-y-3 max-h-[300px] overflow-y-auto mb-4"></div>
+                    <div class="flex gap-3">
+                        <input id="master-answer" type="text" placeholder="回答${master.name}..." class="flex-1 bg-[#0a0a0f] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#c9a84c] focus:outline-none" onkeydown="if(event.key==='Enter')sendToMaster('${masterId}')">
+                        <button onclick="sendToMaster('${masterId}')" class="px-6 py-3 rounded-lg text-black font-semibold text-sm" style="background:${master.color}">发送</button>
+                    </div>
+                </div>
+                <button onclick="startMasterChat('${masterId}')" class="w-full mt-4 py-3 rounded-lg border border-white/10 text-sm hover:bg-white/5 transition">
+                    开始对话
+                </button>
+            `;
+        }
+
+        let currentMasterAudit = null;
+
+        function startMasterChat(masterId) {
+            const master = MASTERS.find(m => m.id === masterId);
+            currentMasterAudit = 'master_' + Date.now();
+            document.getElementById('master-chat-area').classList.remove('hidden');
+            addMasterMessage('ai', `${master.avatar} ${master.name}`, master.greeting.split('\\n\\n').pop());
+        }
+
+        async function sendToMaster(masterId) {
+            const input = document.getElementById('master-answer');
+            const answer = input.value.trim();
+            if (!answer) return;
+            input.value = '';
+
+            const master = MASTERS.find(m => m.id === masterId);
+            addMasterMessage('user', '你', answer);
+
+            // 检测回避
+            const evasionSignals = {
+                '否认': ['没有', '不是', '我不觉得', '还好', '还行'],
+                '转移': ['说起来', '对了', '另外'],
+                '最小化': ['一点点', '稍微', '可能有一点'],
+                '合理化': ['因为', '没办法', '大家都这样']
+            };
+
+            let evasionType = '';
+            for (const [type, signals] of Object.entries(evasionSignals)) {
+                if (signals.some(s => answer.includes(s))) {
+                    evasionType = type;
+                    break;
+                }
+            }
+
+            setTimeout(() => {
+                if (evasionType) {
+                    addMasterMessage('ai', `${master.avatar} ${master.name}`,
+                        `我感觉到你在${evasionType}。${master.signature_phrases[Math.floor(Math.random() * master.signature_phrases.length)]}`);
+                } else {
+                    const phrase = master.signature_phrases[Math.floor(Math.random() * master.signature_phrases.length)];
+                    addMasterMessage('ai', `${master.avatar} ${master.name}`, phrase);
+                }
+            }, 800);
+        }
+
+        function addMasterMessage(role, sender, text) {
+            const container = document.getElementById('master-messages');
+            const div = document.createElement('div');
+            div.className = role === 'ai' ? 'bg-[#1a1a25] rounded-lg p-3' : 'bg-white/5 rounded-lg p-3 ml-8';
+            div.innerHTML = `<p class="text-xs text-gray-500 mb-1">${sender}</p><p class="text-sm text-gray-200">${text}</p>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function closeMasterModal() {
+            document.getElementById('master-modal').classList.add('hidden');
+            currentMasterAudit = null;
+        }
+
+        // 初始化
+        renderMasters();
     </script>
 </body>
 </html>

@@ -20,9 +20,10 @@ from typing import Optional
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.soul_audit import SoulAuditEngine, SoulAudit
+from core.soul_audit import SoulAuditEngine, SoulAudit, AUDIT_DIMENSIONS
 from core.gate_finder import GateFinder
 from core.crossing import CrossingEngine
+from core.masters import MasterManager
 
 # ============================================================
 # App初始化
@@ -38,6 +39,7 @@ app = FastAPI(
 audit_engine = SoulAuditEngine()
 gate_finder = GateFinder()
 crossing_engine = CrossingEngine()
+master_manager = MasterManager()
 
 # 内存存储（MVP阶段，后续换PostgreSQL）
 audits_store: dict = {}
@@ -255,6 +257,103 @@ async def get_crossing_progress(gate_id: str):
         raise HTTPException(status_code=404, detail="穿越记录不存在")
 
     return crossing_engine.get_progress_report(crossing["progress"])
+
+
+# ============================================================
+# 大师 API
+# ============================================================
+
+class ChooseMasterRequest(BaseModel):
+    audit_id: str
+    master_id: str
+
+
+@app.get("/api/masters")
+async def list_masters(user_level: int = 1):
+    """获取可用大师列表"""
+    return {
+        "masters": master_manager.get_all_master_cards(user_level),
+        "total": len(master_manager.get_available_masters(user_level)),
+    }
+
+
+@app.get("/api/masters/{master_id}")
+async def get_master(master_id: str):
+    """获取大师详情"""
+    master = master_manager.get_master(master_id)
+    if not master:
+        raise HTTPException(status_code=404, detail="大师不存在")
+    return {
+        "id": master.id,
+        "name": master.name,
+        "title": master.title,
+        "avatar": master.avatar,
+        "philosophy": master.philosophy,
+        "dimension": master.dimension,
+        "personality": master.personality,
+        "greeting": master.greeting,
+        "questioning_style": master.questioning_style,
+        "specialties": master.specialties,
+        "signature_phrases": master.signature_phrases,
+        "color": master.color,
+    }
+
+
+@app.post("/api/masters/choose")
+async def choose_master(req: ChooseMasterRequest):
+    """选择大师开始引导对话"""
+    audit = audits_store.get(req.audit_id)
+    if not audit:
+        raise HTTPException(status_code=404, detail="审计不存在")
+
+    master = master_manager.get_master(req.master_id)
+    if not master:
+        raise HTTPException(status_code=404, detail="大师不存在")
+
+    # 根据大师的风格生成第一个问题
+    dim_info = AUDIT_DIMENSIONS.get(master.dimension, AUDIT_DIMENSIONS["认知"])
+    first_question = dim_info["surface_questions"][0]
+
+    return {
+        "master": master_manager.get_master_card(master),
+        "greeting": master.greeting,
+        "first_question": first_question,
+        "style": master.questioning_style,
+    }
+
+
+@app.post("/api/masters/{master_id}/ask")
+async def master_ask(master_id: str, req: SubmitAnswerRequest):
+    """向大师提交回答，获取大师风格的追问"""
+    master = master_manager.get_master(master_id)
+    if not master:
+        raise HTTPException(status_code=404, detail="大师不存在")
+
+    audit = audits_store.get(req.audit_id)
+    if not audit:
+        raise HTTPException(status_code=404, detail="审计不存在")
+
+    # 处理回答
+    response = audit_engine.process_response(audit, req.answer)
+
+    # 大师风格化回复
+    if response.evasion_detected:
+        master_reply = f"{master.avatar} {master.signature_phrases[0]}\n\n{response.ai_analysis}"
+    else:
+        import random
+        phrase = random.choice(master.signature_phrases)
+        next_q = audit_engine.get_next_question(audit)
+        master_reply = f"{master.avatar} {phrase}\n\n{next_q.question}"
+
+    return {
+        "master_name": master.name,
+        "master_avatar": master.avatar,
+        "reply": master_reply,
+        "evasion_detected": response.evasion_detected,
+        "evasion_type": response.evasion_type,
+        "shackles_found": len(audit.shackle_map),
+        "dimension": audit.current_dimension,
+    }
 
 
 # ============================================================
