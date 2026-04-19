@@ -101,6 +101,12 @@ async def index():
     return HTMLResponse(content="<h1>窄门 NarrowGate</h1><p>界面加载中...</p>")
 
 
+@app.get("/health")
+async def health():
+    """健康检查"""
+    return {"status": "ok", "service": "narrowgate", "version": "2.1.0"}
+
+
 # ============================================================
 # 用户 API
 # ============================================================
