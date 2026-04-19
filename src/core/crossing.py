@@ -160,6 +160,88 @@ CHALLENGE_TEMPLATES = {
 }
 
 
+
+
+# ============================================================
+# 30天四周训练计划
+# ============================================================
+
+TRAINING_WEEKS = [
+    {
+        "week": 1,
+        "name": "面对恐惧",
+        "subtitle": "承认它存在，然后第一次尝试",
+        "days": "D1-D7",
+        "difficulty_range": "3-5",
+        "color": "#ef4444",
+        "focus": "建立行动感，突破表层回避",
+        "principles": [
+            "从最轻的不适开始",
+            "每天只做一件事",
+            "重点是'做了'而非'做好'",
+        ],
+    },
+    {
+        "week": 2,
+        "name": "建立节奏",
+        "subtitle": "每日挑战形成习惯回路",
+        "days": "D8-D14",
+        "difficulty_range": "5-7",
+        "color": "#f97316",
+        "focus": "建立每日穿越的稳定节奏",
+        "principles": [
+            "难度渐进提升",
+            "引入见证人验证",
+            "开始记录恐惧 vs 现实",
+        ],
+    },
+    {
+        "week": 3,
+        "name": "突破瓶颈",
+        "subtitle": "难度升级，直面核心恐惧",
+        "days": "D15-D21",
+        "difficulty_range": "7-8",
+        "color": "#eab308",
+        "focus": "突破核心恐惧，旧模式松动",
+        "principles": [
+            "直面你最不想面对的事",
+            "公开暴露脆弱",
+            "从被动挑战到主动穿越",
+        ],
+    },
+    {
+        "week": 4,
+        "name": "巩固穿越",
+        "subtitle": "从刻意到自然，内化新身份",
+        "days": "D22-D30",
+        "difficulty_range": "8-回顾",
+        "color": "#c9a84c",
+        "focus": "整合新身份，从玩家变导师",
+        "principles": [
+            "从Be到Do到Have",
+            "帮助他人开始穿越",
+            "写穿越旅程总结",
+        ],
+    },
+]
+
+
+def get_week_for_day(day: int) -> dict:
+    """根据天数返回对应的周计划"""
+    if day <= 7:
+        return TRAINING_WEEKS[0]
+    elif day <= 14:
+        return TRAINING_WEEKS[1]
+    elif day <= 21:
+        return TRAINING_WEEKS[2]
+    else:
+        return TRAINING_WEEKS[3]
+
+
+def get_training_plan() -> list:
+    """返回完整30天训练计划"""
+    return TRAINING_WEEKS
+
 # ============================================================
 # 穿越训练引擎
 # ============================================================

@@ -525,6 +525,56 @@ async def get_platform_stats():
 # 见证人 API
 # ============================================================
 
+
+
+# ============================================================
+# 30天训练计划 API
+# ============================================================
+
+@app.get("/api/training/plan")
+async def get_training_plan():
+    """获取30天四周训练计划"""
+    from core.crossing import TRAINING_WEEKS
+    return {"weeks": TRAINING_WEEKS, "total_days": 30}
+
+@app.get("/api/training/week/{day}")
+async def get_training_week(day: int):
+    """根据天数获取当前周计划"""
+    from core.crossing import get_week_for_day
+    return get_week_for_day(day)
+
+@app.get("/api/training/challenge/{gate_id}/day/{day}")
+async def get_daily_challenge_detail(gate_id: str, day: int):
+    """获取某天的详细挑战（含四周上下文）"""
+    from core.crossing import get_week_for_day
+    week = get_week_for_day(day)
+    crossing = crossing_engine.active_crossings.get(gate_id)
+    if not crossing:
+        raise HTTPException(404, "未找到穿越记录")
+
+    gate = gate_finder.get_gate(gate_id) if hasattr(gate_finder, 'get_gate') else None
+    challenge = crossing_engine.generate_daily_challenge(
+        gate or type('obj', (object,), {'id': gate_id, 'dimension': '认知', 'name': '通用窄门', 'estimated_crossing_days': 30})(),
+        day
+    )
+
+    return {
+        "challenge": {
+            "id": challenge.id,
+            "day": day,
+            "text": challenge.challenge,
+            "difficulty": challenge.difficulty,
+            "status": challenge.status,
+        },
+        "week": week,
+        "progress": crossing_engine.get_progress_report(crossing),
+        "record_template": {
+            "fear_before": "做之前，写下你害怕发生什么",
+            "action": "具体描述你怎么做的",
+            "insight": "做完后发现了什么？恐惧 vs 现实的差距",
+        },
+    }
+
 class WitnessRequest(BaseModel):
     name: str
     email: str = ""
