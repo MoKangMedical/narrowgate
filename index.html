@@ -17,6 +17,38 @@
             --text: #e8e4dc;
             --text-dim: #6b6860;
             --border: rgba(255,255,255,0.04);
+            
+            /* 字体层次 */
+            --font-display: 'Noto Serif SC', 'PingFang SC', serif;
+            --font-body: 'Inter', 'PingFang SC', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            
+            /* 扩展色彩系统 */
+            --gold-dark: #8a6d1b;
+            --gold-gradient: linear-gradient(135deg, #8a6d1b, #b8942e, #d4af37, #f0d78c);
+            --gold-gradient-subtle: linear-gradient(135deg, rgba(138,109,27,0.3), rgba(180,148,46,0.2), rgba(212,175,55,0.1));
+            
+            /* 功能色 */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #3b82f6;
+            
+            /* 背景层次 */
+            --bg-darker: #030306;
+            --bg-lighter: #0d0d15;
+            --bg-card-hover: #10101a;
+            
+            /* 文本层次 */
+            --text-bright: #ffffff;
+            --text-muted: #9ca3af;
+            --text-disabled: #4b5563;
+            
+            /* 边框层次 */
+            --border-subtle: rgba(255,255,255,0.02);
+            --border-default: rgba(255,255,255,0.05);
+            --border-strong: rgba(255,255,255,0.1);
+            --border-gold: rgba(180,148,46,0.3);
         }
 
         body {
@@ -43,9 +75,67 @@
         .glass:hover { background: rgba(255,255,255,0.04); border-color: rgba(180,148,46,0.12); transform: translateY(-2px); }
         .btn-gold { background: linear-gradient(135deg, #8a6d1b, #b8942e, #d4af37); color: #050508; font-weight: 600; border-radius: 12px; padding: 16px 40px; letter-spacing: 0.05em; transition: all 0.3s; box-shadow: 0 0 30px rgba(180,148,46,0.15); border: none; cursor: pointer; }
         .btn-gold:hover { box-shadow: 0 0 50px rgba(180,148,46,0.35); transform: translateY(-1px); }
+        .btn-gold-outline { background: transparent; color: #b8942e; font-weight: 600; border-radius: 12px; padding: 16px 40px; letter-spacing: 0.05em; transition: all 0.3s; border: 1px solid #b8942e; cursor: pointer; }
+        .btn-gold-outline:hover { background: rgba(180,148,46,0.1); box-shadow: 0 0 30px rgba(180,148,46,0.15); transform: translateY(-1px); }
         .divider-gold { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, #b8942e, transparent); margin: 0 auto; }
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* 阴影系统 */
+        .shadow-sm { box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .shadow-md { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+        .shadow-lg { box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+        .shadow-xl { box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+        .shadow-gold { box-shadow: 0 0 30px rgba(180,148,46,0.15); }
+        .shadow-gold-lg { box-shadow: 0 0 50px rgba(180,148,46,0.25); }
+
+        /* 渐变背景 */
+        .bg-gradient-gold { background: var(--gold-gradient); }
+        .bg-gradient-dark { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-darker) 100%); }
+        .bg-gradient-card { background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%); }
+
+        /* 字体层次系统 */
+        .heading-display {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        .heading-section {
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+        .text-body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+        }
+        .text-caption {
+            font-family: var(--font-body);
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .text-quote {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* 响应式字体大小 */
+        @media (max-width: 768px) {
+            .heading-display {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+            .heading-section {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
+        }
 
         .gate-visual {
             position: relative;
@@ -154,123 +244,2181 @@
         ::-webkit-scrollbar-track { background: #050508; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
-    </style>
+
+        /* 页面加载动画 */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: #050508;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .page-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-content {
+            text-align: center;
+        }
+        .loader-gate {
+            width: 60px;
+            height: 80px;
+            border: 2px solid #b8942e;
+            border-radius: 4px 4px 0 0;
+            margin: 0 auto 20px;
+            position: relative;
+            animation: gateLoader 2s ease-in-out infinite;
+        }
+        .loader-gate::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, #d4af37, transparent);
+            opacity: 0.7;
+        }
+        @keyframes gateLoader {
+            0%, 100% { box-shadow: 0 0 20px rgba(180,148,46,0.2); }
+            50% { box-shadow: 0 0 40px rgba(180,148,46,0.5); }
+        }
+        .loader-text {
+            color: #b8942e;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            animation: textPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* 增强的悬停效果 */
+        .glass-hover-lift {
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .glass-hover-lift:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* 按钮点击效果 */
+        .btn-gold:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 0 20px rgba(180,148,46,0.1);
+        }
+
+        /* 链接悬停效果 */
+        a {
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        a:hover {
+            color: var(--gold);
+        }
+
+        /* 卡片悬停效果增强 */
+        .card-interactive {
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            cursor: pointer;
+        }
+        .card-interactive:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            border-color: rgba(180,148,46,0.3);
+        }
+        .card-interactive:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        /* 表单元素悬停效果 */
+        input, textarea, select {
+            transition: all 0.3s ease;
+        }
+        input:hover, textarea:hover, select:hover {
+            border-color: rgba(180,148,46,0.3);
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(180,148,46,0.15);
+        }
+
+        /* 图标悬停效果 */
+        .icon-hover {
+            transition: all 0.3s ease;
+        }
+        .icon-hover:hover {
+            transform: scale(1.1) rotate(5deg);
+            color: var(--gold);
+        }
+
+        /* 列表项悬停效果 */
+        .list-item-hover {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .list-item-hover:hover {
+            background: rgba(255,255,255,0.02);
+            border-left-color: var(--gold);
+            padding-left: 1rem;
+        }
+
+        /* 徽章悬停效果 */
+        .badge-hover {
+            transition: all 0.3s ease;
+        }
+        .badge-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 选择文本颜色 */
+        ::selection {
+            background: rgba(180,148,46,0.3);
+            color: #fff;
+        }
+
+        /* 焦点样式 */
+        :focus-visible {
+            outline: 2px solid #b8942e;
+            outline-offset: 2px;
+        }
+
+        /* 响应式改进 */
+        @media (max-width: 768px) {
+            .gate-visual {
+                width: 180px;
+                height: 260px;
+            }
+            .gate-wide {
+                width: 120px;
+                height: 260px;
+            }
+            .gate-narrow {
+                width: 45px;
+                height: 260px;
+            }
+            
+            /* 导航栏优化 */
+            nav {
+                padding: 0.75rem 1rem;
+            }
+            nav h1 {
+                font-size: 1.1rem;
+            }
+            
+            /* 按钮优化 */
+            .btn-gold {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            
+            /* 卡片间距优化 */
+            .glass {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            /* 表格优化 */
+            table {
+                font-size: 0.8rem;
+            }
+            
+            /* 网格布局优化 */
+            .grid {
+                gap: 1rem;
+            }
+            
+            /* 文本优化 */
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            /* 段落优化 */
+            p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+            
+            /* 列表优化 */
+            ul, ol {
+                padding-left: 1.5rem;
+            }
+            li {
+                margin-bottom: 0.5rem;
+            }
+            
+            /* 表单优化 */
+            input, textarea, select {
+                font-size: 16px; /* 防止iOS缩放 */
+            }
+        }
+
+        /* 平板优化 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gate-visual {
+                width: 200px;
+                height: 280px;
+            }
+            .gate-wide {
+                width: 130px;
+                height: 280px;
+            }
+            .gate-narrow {
+                width: 50px;
+                height: 280px;
+            }
+        }
+
+        /* 粒子背景效果 */
+        .particles-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #b8942e;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s ease-in-out infinite;
+        }
+        @keyframes particleFloat {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateY(100vh) scale(0);
+            }
+            10% { 
+                opacity: 0.3; 
+            }
+            90% { 
+                opacity: 0.3; 
+            }
+            100% { 
+                opacity: 0; 
+                transform: translateY(-100px) scale(1);
+            }
+        }
+    
+        /* Hero Section 样式 */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+        
+        .hero-bg-animation {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(184,148,46,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(45,90,61,0.05) 0%, transparent 40%),
+                radial-gradient(ellipse at 20% 80%, rgba(74,144,164,0.04) 0%, transparent 40%),
+                radial-gradient(ellipse at 30% 30%, rgba(184,148,46,0.03) 0%, transparent 30%);
+            animation: heroBgPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes heroBgPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .gate-visual-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gate-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(184,148,46,0.15) 0%, transparent 70%);
+            animation: gateGlowPulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gateGlowPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        /* CTA 按钮 */
+        .btn-gold-primary {
+            background: linear-gradient(135deg, #8a6d1b 0%, #b8942e 50%, #d4af37 100%);
+            color: #050508;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            padding: 20px 48px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 
+                0 4px 20px rgba(184,148,46,0.3),
+                0 0 60px rgba(184,148,46,0.15);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-gold-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-gold-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 30px rgba(184,148,46,0.4),
+                0 0 80px rgba(184,148,46,0.2);
+        }
+        
+        .btn-gold-primary:hover::before {
+            left: 100%;
+        }
+        
+        /* 次要按钮 */
+        .btn-secondary {
+            background: transparent;
+            color: #b8942e;
+            font-weight: 500;
+            border-radius: 12px;
+            padding: 12px 32px;
+            letter-spacing: 0.03em;
+            transition: all 0.3s;
+            border: 1px solid rgba(184,148,46,0.3);
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(184,148,46,0.1);
+            border-color: rgba(184,148,46,0.5);
+            transform: translateY(-1px);
+        }
+        
+        /* 滚动提示 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        
+        .scroll-indicator-inner {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .scroll-indicator-dot {
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: #b8942e;
+            border-radius: 2px;
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollDot {
+            0%, 100% { top: 6px; opacity: 1; }
+            50% { top: 20px; opacity: 0.3; }
+        }
+        
+        /* 动画类 */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animation-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animation-delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .animation-delay-600 {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        
+        /* 核心命题 Section */
+        .formula-section {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, var(--bg) 0%, #0a0a10 50%, var(--bg) 100%);
+            position: relative;
+        }
+        
+        .formula-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 48px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            align-items: center;
+        }
+        
+        @media (max-width: 900px) {
+            .formula-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+        
+        .formula-factor {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .formula-factor:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+        
+        .formula-factor-pain {
+            border-color: rgba(239,68,68,0.2);
+            background: linear-gradient(135deg, rgba(239,68,68,0.05) 0%, rgba(239,68,68,0.02) 100%);
+        }
+        
+        .formula-factor-pain:hover {
+            border-color: rgba(239,68,68,0.4);
+            box-shadow: 0 12px 40px rgba(239,68,68,0.1);
+        }
+        
+        .formula-factor-growth {
+            border-color: rgba(59,130,246,0.2);
+            background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(59,130,246,0.02) 100%);
+        }
+        
+        .formula-factor-growth:hover {
+            border-color: rgba(59,130,246,0.4);
+            box-shadow: 0 12px 40px rgba(59,130,246,0.1);
+        }
+        
+        .formula-factor-result {
+            border-color: rgba(184,148,46,0.3);
+            background: linear-gradient(135deg, rgba(184,148,46,0.08) 0%, rgba(184,148,46,0.03) 100%);
+        }
+        
+        .formula-factor-result:hover {
+            border-color: rgba(184,148,46,0.5);
+            box-shadow: 0 12px 40px rgba(184,148,46,0.15);
+        }
+        
+        .formula-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .formula-factor-title {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .formula-factor-pain .formula-factor-title { color: #f87171; }
+        .formula-factor-growth .formula-factor-title { color: #60a5fa; }
+        .formula-factor-result .formula-factor-title { color: #b8942e; }
+        
+        .formula-factor-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .formula-factor-pain .formula-factor-value { color: #fca5a5; }
+        .formula-factor-growth .formula-factor-value { color: #93c5fd; }
+        .formula-factor-result .formula-factor-value { color: #d4af37; }
+        
+        .formula-factor-desc {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+        
+        .formula-factor-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .formula-factor-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 1s ease-out;
+        }
+        
+        .formula-factor-pain .formula-factor-bar-fill { background: linear-gradient(90deg, #ef4444, #f87171); }
+        .formula-factor-growth .formula-factor-bar-fill { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .formula-factor-result .formula-factor-bar-fill { background: linear-gradient(90deg, #b8942e, #d4af37); }
+        
+        .formula-operator {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 2rem;
+            color: #b8942e;
+            text-align: center;
+            padding: 16px 0;
+        }
+        
+        .formula-explanation {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        /* 对比卡片 */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .comparison-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+        }
+        
+        .comparison-card-wide {
+            border-color: rgba(255,255,255,0.08);
+        }
+        
+        .comparison-card-wide:hover {
+            border-color: rgba(255,255,255,0.15);
+        }
+        
+        .comparison-card-narrow {
+            border-color: rgba(184,148,46,0.2);
+            background: linear-gradient(135deg, rgba(184,148,46,0.05) 0%, rgba(184,148,46,0.02) 100%);
+        }
+        
+        .comparison-card-narrow:hover {
+            border-color: rgba(184,148,46,0.4);
+            box-shadow: 0 16px 50px rgba(184,148,46,0.1);
+        }
+        
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .comparison-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        .comparison-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .comparison-card-wide .comparison-title { color: #9ca3af; }
+        .comparison-card-narrow .comparison-title { color: #b8942e; }
+        
+        .comparison-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .comparison-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+        }
+        
+        .comparison-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            color: #d1d5db;
+        }
+        
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-bullet {
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+        
+        .comparison-card-wide .comparison-bullet { color: #6b7280; }
+        .comparison-card-narrow .comparison-bullet { color: #b8942e; }
+        
+        .comparison-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .comparison-stat {
+            text-align: center;
+        }
+        
+        .comparison-stat-value {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        
+        .comparison-card-wide .comparison-stat-value { color: #9ca3af; }
+        .comparison-card-narrow .comparison-stat-value { color: #d4af37; }
+        
+        .comparison-stat-label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        
+        /* 功能展示 Section */
+        .features-section {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, var(--bg) 0%, #0a0a10 100%);
+            position: relative;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+        
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 48px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(184,148,46,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-color: rgba(184,148,46,0.2);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        .feature-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 24px;
+            border: 2px solid transparent;
+            transition: all 0.4s;
+        }
+        
+        .feature-card:hover .feature-icon-wrapper::after {
+            border-color: rgba(184,148,46,0.3);
+        }
+        
+        .feature-icon-audit {
+            background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.05) 100%);
+        }
+        
+        .feature-icon-master {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.05) 100%);
+        }
+        .feature-icon-training {
+            background: linear-gradient(135deg, rgba(245,158,11,0.1) 0%, rgba(245,158,11,0.05) 100%);
+        }
+        
+        .feature-icon-evolution {
+            background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.05) 100%);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+        }
+        
+        .feature-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        
+        .feature-desc {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #d1d5db;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: #b8942e;
+            font-weight: bold;
+        }
+        
+        .feature-btn {
+            background: transparent;
+            border: 1px solid rgba(184,148,46,0.3);
+            color: #b8942e;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .feature-btn:hover {
+            background: rgba(184,148,46,0.1);
+            border-color: rgba(184,148,46,0.5);
+            transform: translateY(-2px);
+        }
+        
+        .features-cta {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        
+        /* 工作原理 Section */
+        .how-it-works-section {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, #0a0a10 0%, var(--bg) 50%, #0a0a10 100%);
+            position: relative;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(184,148,46,0.1) 0%, rgba(184,148,46,0.5) 50%, rgba(184,148,46,0.1) 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+        }
+        
+        .timeline-step {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-step {
+                gap: 20px;
+            }
+        }
+        
+        .timeline-marker {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.02);
+            border: 2px solid rgba(184,148,46,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-marker {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        .timeline-step:hover .timeline-marker {
+            border-color: rgba(184,148,46,0.6);
+            box-shadow: 0 0 30px rgba(184,148,46,0.2);
+            transform: scale(1.1);
+        }
+        
+        .timeline-marker-inner {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #b8942e;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-marker-inner {
+                font-size: 1rem;
+            }
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-content {
+                padding: 24px;
+            }
+        }
+        
+        .timeline-step:hover .timeline-content {
+            border-color: rgba(184,148,46,0.2);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+            transform: translateX(8px);
+        }
+        
+        .timeline-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .timeline-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        
+        .timeline-desc {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .timeline-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .timeline-duration,
+        .timeline-difficulty {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #6b7280;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .how-it-works-footer {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .how-it-works-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .how-it-works-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .how-it-works-stat {
+            text-align: center;
+            padding: 32px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .how-it-works-stat:hover {
+            border-color: rgba(184,148,46,0.2);
+            transform: translateY(-4px);
+        }
+        
+        .how-it-works-stat-value {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 2rem;
+            color: #b8942e;
+            margin-bottom: 8px;
+        }
+        
+        .how-it-works-stat-label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        
+        .how-it-works-cta {
+            text-align: center;
+        }
+
+        
+        /* 社会证明 Section */
+        .social-proof-section {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, var(--bg) 0%, #0a0a10 50%, var(--bg) 100%);
+            position: relative;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+        
+        @media (max-width: 1024px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-color: rgba(184,148,46,0.2);
+        }
+        
+        .testimonial-quote {
+            margin-bottom: 32px;
+        }
+        
+        .testimonial-quote p {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-style: italic;
+            color: #d1d5db;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .testimonial-quote p::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 4rem;
+            color: rgba(184,148,46,0.1);
+            font-family: var(--font-display);
+            line-height: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .testimonial-name {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        
+        .testimonial-role {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        
+        .testimonial-stats {
+            display: flex;
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .testimonial-stats span {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: #6b7280;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .proof-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+        
+        @media (max-width: 1024px) {
+            .proof-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .proof-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .proof-stat {
+            text-align: center;
+            padding: 40px 24px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .proof-stat:hover {
+            transform: translateY(-4px);
+            border-color: rgba(184,148,46,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+        
+        .proof-stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .proof-stat-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: #b8942e;
+            margin-bottom: 8px;
+        }
+        
+        .proof-stat-label {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        
+        .witness-network {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 48px;
+        }
+        
+        .witness-network-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .witness-network-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .witness-network-desc {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+        
+        .witness-network-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .witness-network-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .witness-form-title,
+        .witness-list-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+        
+        .witness-form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .witness-input,
+        .witness-select {
+            background: rgba(5,5,8,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        .witness-input:focus,
+        .witness-select:focus {
+            outline: none;
+            border-color: rgba(184,148,46,0.5);
+            box-shadow: 0 0 0 3px rgba(184,148,46,0.1);
+        }
+        
+        .witness-input::placeholder {
+            color: #6b7280;
+        }
+        
+        .witness-btn {
+            background: linear-gradient(135deg, #8a6d1b 0%, #b8942e 50%, #d4af37 100%);
+            color: #050508;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.05em;
+            padding: 16px 32px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .witness-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(184,148,46,0.3);
+        }
+        
+        .witness-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .witness-list-empty {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 16px;
+        }
+
+        
+        /* 响应式字体大小 */
+        @media (max-width: 768px) {
+            .heading-display {
+                font-size: clamp(2rem, 5vw, 3rem);
+            }
+            .heading-section {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
+            .text-body {
+                font-size: clamp(0.875rem, 2vw, 1rem);
+            }
+        }
+        
+        /* 统一间距系统 */
+        .py-30 {
+            padding-top: 120px;
+            padding-bottom: 120px;
+        }
+        
+        @media (max-width: 768px) {
+            .py-30 {
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+        }
+        
+        /* 统一卡片样式 */
+        .card-unified {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .card-unified:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            border-color: rgba(184,148,46,0.2);
+        }
+        
+        /* 统一过渡效果 */
+        .transition-unified {
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        /* 统一悬停效果 */
+        .hover-lift:hover {
+            transform: translateY(-4px);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(184,148,46,0.2);
+        }
+        
+        /* 统一金色文字 */
+        .text-gold-unified {
+            background: linear-gradient(135deg, #b8942e, #d4af37, #f0d78c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* 统一玻璃效果 */
+        .glass-unified {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* 统一金色边框 */
+        .border-gold-unified {
+            border-color: rgba(184,148,46,0.3);
+        }
+        
+        .border-gold-unified:hover {
+            border-color: rgba(184,148,46,0.5);
+        }
+
+        
+        /* 课程进度样式 */
+        .completion-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: content;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .completion-modal {
+            background: linear-gradient(135deg, #1a1a25 0%, #0c0c12 100%);
+            border: 2px solid rgba(184,148,46,0.3);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            max-width: 400px;
+            animation: scaleIn 0.3s ease;
+        }
+        
+        .final-ceremony {
+            border-color: rgba(184,148,46,0.6);
+            box-shadow: 0 0 50px rgba(184,148,46,0.3);
+        }
+        
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+        }
+        
+        .completion-modal h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        
+        .completion-modal p {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+        
+        .day-marker {
+            position: relative;
+        }
+        
+        .day-marker.completed::after {
+            content: '✓';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #b8942e;
+            color: #050508;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .streak-display {
+            background: rgba(184,148,46,0.1);
+            border: 1px solid rgba(184,148,46,0.2);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: #b8942e;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        </style>
 </head>
 <body class="min-h-screen">
+
+    <!-- 页面加载动画 -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-gate"></div>
+            <p class="loader-text">NARROWGATE</p>
+        </div>
+    </div>
+
+    <!-- 粒子背景 -->
+    <div class="particles-container" id="particlesContainer"></div>
 
     <!-- ============================================================ -->
     <!-- 导航 -->
     <!-- ============================================================ -->
-    <nav class="fixed top-0 w-full z-50 bg-[#050508]/90 backdrop-blur border-b border-white/5">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="font-serif text-xl font-bold text-[#b8942e]">窄门 NarrowGate</h1>
-            <div class="hidden md:flex gap-6 text-sm text-gray-400">
-                <a href="#formula" class="hover:text-white transition">公式</a>
-                <a href="#dimensions" class="hover:text-white transition">五层</a>
-                <a href="#audit" class="hover:text-white transition">灵魂审计</a>
-                <a href="#masters" class="hover:text-white transition">大师</a>
-                <a href="#training" class="hover:text-white transition">培训</a>
+    <nav class="fixed top-0 w-full z-50 bg-[#050508]/95 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-lg flex items-center justify-center">
+                    <span class="text-black font-bold text-sm">🚪</span>
+                </div>
+                <h1 class="font-serif text-xl font-bold text-white">窄门</h1>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center gap-1">
+                <!-- 核心功能下拉 -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
+                        <span>🔍</span>
+                        <span>核心功能</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-1 w-56 bg-[#0c0c12] border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="p-2">
+                            <a href="#audit" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>🧠</span>
+                                <div>
+                                    <div class="font-medium">灵魂审计</div>
+                                    <div class="text-xs text-gray-500">5维度深度诊断</div>
+                                </div>
+                            </a>
+                            <a href="#masters" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>🧙</span>
+                                <div>
+                                    <div class="font-medium">大师引导</div>
+                                    <div class="text-xs text-gray-500">7位大师陪你穿越</div>
+                                </div>
+                            </a>
+                            <a href="#training" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>⚡</span>
+                                <div>
+                                    <div class="font-medium">30天训练</div>
+                                    <div class="text-xs text-gray-500">每日挑战系统</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 了解更多下拉 -->
+                <div class="relative group">
+                    <button class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
+                        <span>📚</span>
+                        <span>了解更多</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-1 w-56 bg-[#0c0c12] border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="p-2">
+                            <a href="#how-it-works" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>🗺️</span>
+                                <div>
+                                    <div class="font-medium">工作原理</div>
+                                    <div class="text-xs text-gray-500">四步旅程</div>
+                                </div>
+                            </a>
+                            <a href="#social-proof" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>👥</span>
+                                <div>
+                                    <div class="font-medium">用户见证</div>
+                                    <div class="text-xs text-gray-500">穿越者的故事</div>
+                                </div>
+                            </a>
+                            <a href="#about" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>📖</span>
+                                <div>
+                                    <div class="font-medium">关于窄门</div>
+                                    <div class="text-xs text-gray-500">理论根基</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 直接链接 -->
+                <a href="#formula" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
+                    <span>📐</span>
+                    <span>核心公式</span>
+                </a>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="hidden lg:flex items-center gap-3">
+                <button onclick="scrollToSection('audit')" class="px-4 py-2 text-sm text-gray-300 hover:text-white transition">
+                    登录
+                </button>
+                <button onclick="startAudit()" class="px-6 py-2.5 bg-gradient-to-r from-[#b8942e] to-[#d4af37] text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/25 transition-all duration-300 transform hover:scale-105">
+                    开始穿越
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-[#0c0c12] border-t border-white/5">
+            <div class="px-6 py-4 space-y-2">
+                <a href="#audit" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>🧠</span>
+                    <span>灵魂审计</span>
+                </a>
+                <a href="#masters" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>🧙</span>
+                    <span>大师引导</span>
+                </a>
+                <a href="#training" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>⚡</span>
+                    <span>30天训练</span>
+                </a>
+                <a href="#how-it-works" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>🗺️</span>
+                    <span>工作原理</span>
+                </a>
+                <a href="#social-proof" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>👥</span>
+                    <span>用户见证</span>
+                </a>
+                <div class="pt-4 border-t border-white/5">
+                    <button onclick="startAudit()" class="w-full px-6 py-3 bg-gradient-to-r from-[#b8942e] to-[#d4af37] text-black font-semibold rounded-xl">
+                        开始穿越
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
+    
     <!-- ============================================================ -->
     <!-- Hero -->
     <!-- ============================================================ -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-6">NARROW GATE PLATFORM</p>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                你要进<span class="text-[#b8942e]">窄门</span>
+    <section class="pt-48 pb-32 px-6 relative overflow-hidden">
+        <!-- Enhanced background with subtle noise texture -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#050508] via-[#080810] to-[#050508] opacity-80"></div>
+        <div class="absolute inset-0 opacity-[0.015]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=&quot;0 0 256 256&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cfilter id=&quot;n&quot;%3E%3CfeTurbulence type=&quot;fractalNoise&quot; baseFrequency=&quot;0.9&quot; numOctaves=&quot;4&quot; stitchTiles=&quot;stitch&quot;/%3E%3C/filter%3E%3Crect width=&quot;100%25&quot; height=&quot;100%25&quot; filter=&quot;url(%23n)&quot;/%3E%3C/svg%3E');"></div>
+        
+        <!-- Enhanced background animations with multiple layers -->
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#b8942e]/3 rounded-full blur-[100px] animate-pulse"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-[400px] h-[400px] bg-[#b8942e]/2 rounded-full blur-[80px] animate-pulse" style="animation-delay: 2s;"></div>
+            <div class="absolute top-2/3 left-1/3 w-[300px] h-[300px] bg-[#b8942e]/4 rounded-full blur-[60px] animate-pulse" style="animation-delay: 4s;"></div>
+            <!-- Subtle radial gradient overlay for depth -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050508]/50"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <!-- Brand identifier -->
+            <p class="text-[#b8942e] text-xs tracking-[0.5em] uppercase mb-8 font-medium opacity-90">NARROW GATE PLATFORM</p>
+            
+            <!-- Main headline - clear value proposition -->
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-[1.1] tracking-tight text-white">
+                穿越你最深的恐惧
             </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">
-                因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
-                引到生命，那门是窄的，路是小的，找着的人也少。
+            
+            <!-- Subtitle explaining the core concept -->
+            <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                一个AI驱动的灵魂进化平台<br>
+                <span class="text-gray-500">帮你看见、面对、穿越那些你一直在回避的事</span>
             </p>
-            <p class="text-sm text-gray-600 mb-12">— 马太福音 7:13-14</p>
 
-            <div class="gate-visual mb-12">
-                <div class="gate-wide"></div>
-                <div class="gate-narrow"></div>
+            <!-- Scripture quote with refined positioning -->
+            <div class="max-w-3xl mx-auto mb-12">
+                <p class="text-lg md:text-xl text-gray-300/80 leading-relaxed tracking-wide italic">
+                    "因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
+                    引到生命，那门是窄的，路是小的，找着的人也少。"
+                </p>
+                <p class="text-sm text-gray-500/60 mt-4 font-light tracking-widest">— 马太福音 7:13-14</p>
             </div>
 
-            <button onclick="startAudit()" class="btn-gold text-lg">
-                开始灵魂审计 →
-            </button>
-            <p class="text-xs text-gray-600 mt-4">这不会舒服。但你会感谢自己。</p>
+            <!-- Enhanced gate visualization with interactive elements -->
+            <div class="gate-visual mb-16 flex justify-center items-center gap-12 md:gap-16">
+                <!-- Wide gate - representing the easy path -->
+                <div class="gate-wide relative group cursor-pointer transition-all duration-500 hover:scale-105">
+                    <div class="w-24 md:w-28 h-40 md:h-44 border-2 border-gray-600/60 rounded-t-[40%] relative transition-all duration-500 group-hover:border-gray-500/80">
+                        <div class="absolute inset-3 border border-gray-700/50 rounded-t-[40%]"></div>
+                        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-10 bg-gray-600/60"></div>
+                        <!-- Subtle inner glow -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-gray-500/5 to-transparent rounded-t-[40%]"></div>
+                    </div>
+                    <p class="text-xs text-gray-500/70 mt-3 font-light tracking-wider">宽门 · 容易</p>
+                    <p class="text-[10px] text-gray-600/50 mt-1">但引向灭亡</p>
+                </div>
+                
+                <!-- VS indicator with better styling -->
+                <div class="flex flex-col items-center">
+                    <div class="w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-[#b8942e]/30 to-transparent mb-2"></div>
+                    <span class="text-[#b8942e]/70 text-lg font-light tracking-widest">VS</span>
+                    <div class="w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-[#b8942e]/30 to-transparent mt-2"></div>
+                </div>
+                
+                <!-- Narrow gate - representing the challenging path with enhanced effects -->
+                <div class="gate-narrow relative group cursor-pointer transition-all duration-500 hover:scale-105">
+                    <div class="w-18 md:w-20 h-40 md:h-44 border-2 border-[#b8942e]/80 rounded-t-[40%] relative transition-all duration-500 group-hover:border-[#b8942e] group-hover:shadow-[0_0_30px_rgba(180,148,46,0.2)]">
+                        <div class="absolute inset-3 border border-[#b8942e]/40 rounded-t-[40%]"></div>
+                        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-10 bg-[#b8942e]/80"></div>
+                        <!-- Enhanced glow effect -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-[#b8942e]/10 to-transparent rounded-t-[40%]"></div>
+                        <!-- Animated beacon light -->
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-5 h-5 bg-[#b8942e] rounded-full animate-pulse shadow-[0_0_20px_rgba(180,148,46,0.6)] group-hover:shadow-[0_0_30px_rgba(180,148,46,0.8)] transition-shadow duration-300"></div>
+                        <!-- Light rays effect -->
+                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-gradient-radial from-[#b8942e]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle, rgba(180,148,46,0.2) 0%, transparent 70%);"></div>
+                    </div>
+                    <p class="text-xs text-[#b8942e]/90 mt-3 font-medium tracking-wider">窄门 · 生命</p>
+                    <p class="text-[10px] text-[#b8942e]/60 mt-1">穿越后的觉醒</p>
+                </div>
+            </div>
+
+            <!-- Enhanced CTA section -->
+            <div class="mb-12">
+                <button onclick="startAudit()" class="btn-gold text-lg px-16 py-5 rounded-2xl font-medium tracking-wider hover:translate-y-[-3px] transition-all duration-300 shadow-xl shadow-[#b8942e]/25 hover:shadow-2xl hover:shadow-[#b8942e]/40 relative overflow-hidden group">
+                    <span class="relative z-10">开始灵魂审计 →</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#b8942e]/0 via-[#b8942e]/10 to-[#b8942e]/0 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                </button>
+                <p class="text-xs text-gray-500/70 mt-4 tracking-wide">这不会舒服，但你会感谢自己。</p>
+            </div>
+            
+            <!-- Enhanced scroll hint with better animation -->
+            <div class="animate-bounce opacity-60 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                <div class="w-7 h-12 border-2 border-gray-500/40 rounded-full mx-auto flex justify-center pt-3 hover:border-[#b8942e]/50 transition-colors duration-300">
+                    <div class="w-1.5 h-4 bg-gray-500/40 rounded-full animate-pulse hover:bg-[#b8942e]/70 transition-colors duration-300"></div>
+                </div>
+                <p class="text-xs text-gray-500/50 mt-3 tracking-widest">探索你的进化之路</p>
+            </div>
         </div>
     </section>
-
+<!-- 核心命题 -->
+    <!-- ============================================================ --><!-- 核心命题 -->
     <!-- ============================================================ -->
-    <!-- 核心命题 -->
-    <!-- ============================================================ -->
-    <section id="formula" class="py-20 px-6 reveal">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="font-serif text-3xl font-bold text-center mb-4">核心命题</h2>
-            <p class="text-gray-500 text-center mb-12">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
-
+    <section id="formula" class="formula-section">
+        <div class="max-w-5xl mx-auto">
+            <!-- 标题区域 -->
+            <div class="text-center mb-16">
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">CORE FORMULA</p>
+                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">核心命题</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
+                    你最不想面对的 × 能带来最大改变的 = 你最需要穿越的
+                </p>
+            </div>
+            
             <!-- 窄门公式 -->
-            <div class="bg-[#0c0c12] border border-[#b8942e]/20 rounded-xl p-8 mb-12 text-center">
-                <div class="flex items-center justify-center gap-4 flex-wrap">
-                    <div class="bg-red-900/20 border border-red-500/30 rounded-lg px-6 py-4">
-                        <p class="text-red-400 text-sm font-semibold mb-1">痛苦回避度</p>
-                        <p class="text-3xl font-bold text-red-300">85</p>
-                        <p class="text-xs text-gray-500 mt-1">你有多不想面对</p>
+            <div class="formula-card">
+                <div class="formula-grid">
+                    <!-- 痛苦回避度 -->
+                    <div class="formula-factor formula-factor-pain">
+                        <div class="formula-icon">😰</div>
+                        <h3 class="formula-factor-title">痛苦回避度</h3>
+                        <p class="formula-factor-value">85</p>
+                        <p class="formula-factor-desc">你有多不想面对</p>
+                        <div class="formula-factor-bar">
+                            <div class="formula-factor-bar-fill" style="width: 85%"></div>
+                        </div>
                     </div>
-                    <span class="text-[#b8942e] text-2xl font-bold">×</span>
-                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg px-6 py-4">
-                        <p class="text-blue-400 text-sm font-semibold mb-1">成长杠杆率</p>
-                        <p class="text-3xl font-bold text-blue-300">90</p>
-                        <p class="text-xs text-gray-500 mt-1">穿越后能改变多少</p>
+                    
+                    <!-- 乘号 -->
+                    <div class="formula-operator">×</div>
+                    
+                    <!-- 成长杠杆率 -->
+                    <div class="formula-factor formula-factor-growth">
+                        <div class="formula-icon">🚀</div>
+                        <h3 class="formula-factor-title">成长杠杆率</h3>
+                        <p class="formula-factor-value">90</p>
+                        <p class="formula-factor-desc">穿越后能改变多少</p>
+                        <div class="formula-factor-bar">
+                            <div class="formula-factor-bar-fill" style="width: 90%"></div>
+                        </div>
                     </div>
-                    <span class="text-[#b8942e] text-2xl font-bold">=</span>
-                    <div class="bg-[#2a1a0a] border border-[#b8942e]/40 rounded-lg px-6 py-4">
-                        <p class="text-[#b8942e] text-sm font-semibold mb-1">窄门优先级</p>
-                        <p class="text-3xl font-bold text-[#b8942e]">7650</p>
-                        <p class="text-xs text-gray-500 mt-1">越高越需要穿越</p>
+                    
+                    <!-- 等号 -->
+                    <div class="formula-operator">=</div>
+                    
+                    <!-- 窄门优先级 -->
+                    <div class="formula-factor formula-factor-result">
+                        <div class="formula-icon">🚪</div>
+                        <h3 class="formula-factor-title">窄门优先级</h3>
+                        <p class="formula-factor-value">7650</p>
+                        <p class="formula-factor-desc">越高越需要穿越</p>
+                        <div class="formula-factor-bar">
+                            <div class="formula-factor-bar-fill" style="width: 76.5%"></div>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- 公式说明 -->
+                <div class="formula-explanation">
+                    <p class="text-gray-400 text-sm">
+                        <span class="text-[#b8942e]">💡 公式解读：</span>
+                        当你对某件事的回避程度很高（85%），而穿越它又能带来巨大成长（90%），
+                        那么这件事的窄门优先级就高达 7650，这是你最需要穿越的窄门。
+                    </p>
                 </div>
             </div>
-
-            <!-- 宽门 vs 窄门 -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-[#0c0c12] border border-gray-700 rounded-xl p-6">
-                    <div class="text-center mb-4">
-                        <span class="text-4xl">🚪</span>
-                        <h3 class="text-xl font-bold text-gray-400 mt-2">宽门</h3>
-                        <p class="text-xs text-gray-600">门是宽的，路是大的，进去的人也多</p>
+            
+            <!-- 宽门 vs 窄门对比 -->
+            <div class="comparison-grid">
+                <!-- 宽门 -->
+                <div class="comparison-card comparison-card-wide">
+                    <div class="comparison-header">
+                        <div class="comparison-icon">🚪</div>
+                        <h3 class="comparison-title">宽门</h3>
+                        <p class="comparison-subtitle">门是宽的，路是大的，进去的人也多</p>
                     </div>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 容易、舒服、多数人走</li>
-                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 回避真实自我</li>
-                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 短期安逸，长期后悔</li>
-                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 95%的人选择</li>
+                    <ul class="comparison-list">
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">○</span>
+                            <span>容易、舒服、多数人走</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">○</span>
+                            <span>回避真实自我</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">○</span>
+                            <span>短期安逸，长期后悔</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">○</span>
+                            <span>95%的人选择</span>
+                        </li>
                     </ul>
+                    <div class="comparison-stats">
+                        <div class="comparison-stat">
+                            <span class="comparison-stat-value">95%</span>
+                            <span class="comparison-stat-label">选择率</span>
+                        </div>
+                        <div class="comparison-stat">
+                            <span class="comparison-stat-value">5%</span>
+                            <span class="comparison-stat-label">后悔率</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-xl p-6">
-                    <div class="text-center mb-4">
-                        <span class="text-4xl">🚪</span>
-                        <h3 class="text-xl font-bold text-[#b8942e] mt-2">窄门</h3>
-                        <p class="text-xs text-[#b8942e]/60">门是窄的，路是小的，找着的人也少</p>
+                
+                <!-- 窄门 -->
+                <div class="comparison-card comparison-card-narrow">
+                    <div class="comparison-header">
+                        <div class="comparison-icon">🚪</div>
+                        <h3 class="comparison-title">窄门</h3>
+                        <p class="comparison-subtitle">门是窄的，路是小的，找着的人也少</p>
                     </div>
-                    <ul class="space-y-3 text-sm text-gray-300">
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 艰难、痛苦、少数人走</li>
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 面对真实自我</li>
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 短期痛苦，长期释放</li>
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 5%的人选择</li>
+                    <ul class="comparison-list">
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">●</span>
+                            <span>艰难、痛苦、少数人走</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">●</span>
+                            <span>面对真实自我</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">●</span>
+                            <span>短期痛苦，长期释放</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-bullet">●</span>
+                            <span>5%的人选择</span>
+                        </li>
                     </ul>
+                    <div class="comparison-stats">
+                        <div class="comparison-stat">
+                            <span class="comparison-stat-value">5%</span>
+                            <span class="comparison-stat-label">选择率</span>
+                        </div>
+                        <div class="comparison-stat">
+                            <span class="comparison-stat-value">95%</span>
+                            <span class="comparison-stat-label">成长率</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================ -->
+    <!-- 功能亮点 -->
+    <!-- ============================================================ -->
+    <section id="features" class="features-section">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题区域 -->
+            <div class="text-center mb-20">
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">CORE FEATURES</p>
+                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">穿越窄门的工具</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
+                    我们提供完整的工具链，帮助你从看见到穿越，从穿越到觉醒
+                </p>
+            </div>
+            
+            <!-- 功能卡片网格 -->
+            <div class="features-grid">
+                <!-- 功能1: 灵魂审计 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper feature-icon-audit">
+                        <div class="feature-icon">🧠</div>
+                    </div>
+                    <h3 class="feature-title">灵魂审计</h3>
+                    <p class="feature-desc">
+                        苏格拉底式追问 + AI回避检测。五维度深度排查你的枷锁，
+                        发现你最不想面对但最需要穿越的窄门。
+                    </p>
+                    <ul class="feature-list">
+                        <li>认知 · 情绪 · 行为 · 关系 · 事业</li>
+                        <li>AI实时检测回避模式</li>
+                        <li>量化痛苦回避度和成长杠杆率</li>
+                    </ul>
+                    <button class="feature-btn" onclick="startAudit()">
+                        开始审计 →
+                    </button>
+                </div>
+                
+                <!-- 功能2: 大师引导 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper feature-icon-master">
+                        <div class="feature-icon">🧙</div>
+                    </div>
+                    <h3 class="feature-title">大师引导</h3>
+                    <p class="feature-desc">
+                        7位大师各有性格和哲学，MIMO AI实时生成追问。
+                        选择与你共鸣的引路人，开始你的穿越之旅。
+                    </p>
+                    <ul class="feature-list">
+                        <li>苏格拉底 · 荣格 · 斯多葛 · 阿德勒</li>
+                        <li>个性化引导风格</li>
+                        <li>深度对话体验</li>
+                    </ul>
+                    <button class="feature-btn" onclick="scrollToSection('masters')">
+                        选择大师 →
+                    </button>
+                </div>
+                
+                <!-- 功能3: 30天穿越训练 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper feature-icon-training">
+                        <div class="feature-icon">⚡</div>
+                    </div>
+                    <h3 class="feature-title">30天穿越训练</h3>
+                    <p class="feature-desc">
+                        从看见到穿越，每天做你最不想做的事。
+                        难度渐进，见证人验证，经验值累积。
+                    </p>
+                    <ul class="feature-list">
+                        <li>四周渐进式训练计划</li>
+                        <li>每日挑战 + 反思问题</li>
+                        <li>见证人验证系统</li>
+                    </ul>
+                    <button class="feature-btn" onclick="scrollToSection('training')">
+                        开始训练 →
+                    </button>
+                </div>
+                
+                <!-- 功能4: 进化量化 -->
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper feature-icon-evolution">
+                        <div class="feature-icon">📊</div>
+                    </div>
+                    <h3 class="feature-title">进化量化</h3>
+                    <p class="feature-desc">
+                        五层进化金字塔 + 经验值系统。
+                        可视化你的灵魂成长路径，从凡人到封神。
+                    </p>
+                    <ul class="feature-list">
+                        <li>凡人 → 看见 → 穿越 → 觉醒 → 封神</li>
+                        <li>经验值累积系统</li>
+                        <li>进化里程碑记录</li>
+                    </ul>
+                    <button class="feature-btn" onclick="scrollToSection('evolution')">
+                        查看进化 →
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 底部CTA -->
+            <div class="features-cta">
+                <p class="text-gray-400 mb-6">准备好穿越你的窄门了吗？</p>
+                <button onclick="startAudit()" class="btn-gold-primary">
+                    开始灵魂审计 →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 工作原理 -->
+    <!-- ============================================================ -->
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="max-w-5xl mx-auto">
+            <!-- 标题区域 -->
+            <div class="text-center mb-20">
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">HOW IT WORKS</p>
+                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">穿越窄门的旅程</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
+                    从凡人到封神，只需四步。每一步都是你灵魂进化的关键节点。
+                </p>
+            </div>
+            
+            <!-- 步骤时间线 -->
+            <div class="timeline">
+                <!-- 步骤1 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker">
+                        <div class="timeline-marker-inner">1</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🚪</div>
+                        <h3 class="timeline-title">灵魂审计</h3>
+                        <p class="timeline-desc">
+                            通过AI驱动的苏格拉底式对话，深度排查你在认知、情绪、行为、关系、事业五个维度的枷锁。
+                            AI会检测你的回避模式，不让你用表面答案糊弄过去。
+                        </p>
+                        <div class="timeline-meta">
+                            <span class="timeline-duration">⏱️ 约15-30分钟</span>
+                            <span class="timeline-difficulty">🎯 深度自我面对</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤2 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker">
+                        <div class="timeline-marker-inner">2</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">🧙</div>
+                        <h3 class="timeline-title">大师引导</h3>
+                        <p class="timeline-desc">
+                            选择与你共鸣的大师（苏格拉底、荣格、斯多葛等），开始深度对话。
+                            每位大师都有独特的引导风格，帮助你从不同角度看见真相。
+                        </p>
+                        <div class="timeline-meta">
+                            <span class="timeline-duration">⏱️ 持续对话</span>
+                            <span class="timeline-difficulty">🎯 个性化引导</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤3 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker">
+                        <div class="timeline-marker-inner">3</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">⚡</div>
+                        <h3 class="timeline-title">30天穿越训练</h3>
+                        <p class="timeline-desc">
+                            四周渐进式训练计划，每天做你最不想做的事。
+                            从面对恐惧到建立节奏，从突破瓶颈到巩固穿越。
+                            见证人验证，经验值累积。
+                        </p>
+                        <div class="timeline-meta">
+                            <span class="timeline-duration">⏱️ 30天持续</span>
+                            <span class="timeline-difficulty">🎯 每日挑战</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 步骤4 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker">
+                        <div class="timeline-marker-inner">4</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon">✨</div>
+                        <h3 class="timeline-title">进化封神</h3>
+                        <p class="timeline-desc">
+                            完成穿越训练后，你将进入五层进化金字塔的更高层级。
+                            从凡人到看见，从穿越到觉醒，最终成为守门人，
+                            帮助更多人看见窄门。
+                        </p>
+                        <div class="timeline-meta">
+                            <span class="timeline-duration">⏱️ 持续进化</span>
+                            <span class="timeline-difficulty">🎯 从玩家到架构师</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 底部说明 -->
+            <div class="how-it-works-footer">
+                <div class="how-it-works-stats">
+                    <div class="how-it-works-stat">
+                        <span class="how-it-works-stat-value">95%</span>
+                        <span class="how-it-works-stat-label">用户完成审计</span>
+                    </div>
+                    <div class="how-it-works-stat">
+                        <span class="how-it-works-stat-value">76%</span>
+                        <span class="how-it-works-stat-label">用户完成30天训练</span>
+                    </div>
+                    <div class="how-it-works-stat">
+                        <span class="how-it-works-stat-value">4.8/5</span>
+                        <span class="how-it-works-stat-label">用户满意度</span>
+                    </div>
+                </div>
+                <div class="how-it-works-cta">
+                    <p class="text-gray-400 mb-6">准备好开始你的穿越之旅了吗？</p>
+                    <button onclick="startAudit()" class="btn-gold-primary">
+                        开始灵魂审计 →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ============================================================ -->
     <!-- 五层进化 -->
     <!-- ============================================================ -->
-    <section id="dimensions" class="py-20 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
+    <section id="dimensions" class="py-30 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
         <div class="max-w-3xl mx-auto">
-            <h2 class="font-serif text-3xl font-bold text-center mb-4">五层进化架构</h2>
-            <p class="text-gray-500 text-center mb-16">从凡人到封神——每层都有一个窄门在等你</p>
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">五层进化架构</h2>
+            <p class="text-gray-500 text-center mb-16 text-body">从凡人到封神——每层都有一个窄门在等你</p>
 
             <div class="space-y-3">
                 <div class="pyramid-level rounded-lg" style="width:40%;background:linear-gradient(90deg,#1a1205,#2a1a0a);border:1px solid #b8942e;">
@@ -291,19 +2439,19 @@
             </div>
 
             <div class="mt-12 grid gap-4">
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h3 class="font-semibold text-[#b8942e] mb-1">🚪 凡人 → 看见</h3>
                     <p class="text-sm text-gray-400">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h3 class="font-semibold text-[#b8942e] mb-1">⚡ 看见 → 穿越</h3>
                     <p class="text-sm text-gray-400">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h3 class="font-semibold text-[#b8942e] mb-1">🔥 穿越 → 觉醒</h3>
                     <p class="text-sm text-gray-400">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h3 class="font-semibold text-[#b8942e] mb-1">👑 觉醒 → 封神</h3>
                     <p class="text-sm text-gray-400">构建一个让更多人看见窄门的系统。成为守门人。</p>
                 </div>
@@ -314,12 +2462,12 @@
     <!-- ============================================================ -->
     <!-- 灵魂审计（核心交互区） -->
     <!-- ============================================================ -->
-    <section id="audit" class="py-20 px-6">
+    <section id="audit" class="py-30 px-6">
         <div class="max-w-2xl mx-auto">
-            <h2 class="font-serif text-3xl font-bold text-center mb-4">灵魂审计</h2>
-            <p class="text-gray-500 text-center mb-12">AI 不接受表面答案。持续追问，直到你看见真相。</p>
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12 text-body">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
-            <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 min-h-[400px]">
+            <div id="audit-container" class="glass rounded-xl p-6 min-h-[400px]">
                 <!-- 初始状态 -->
                 <div id="audit-intro" class="text-center py-12">
                     <p class="text-4xl mb-6">🚪</p>
@@ -328,7 +2476,7 @@
                         灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
                         AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
                     </p>
-                    <button onclick="startAudit()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
+                    <button onclick="startAudit()" class="btn-gold-primary font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
                         开始审计
                     </button>
                 </div>
@@ -360,7 +2508,7 @@
         let selectedMasterId = "";
                         <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
         let selectedMasterId = "";
-                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition text-sm">
+                        <button onclick="submitAnswer()" class="btn-gold-primary font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition text-sm">
                             发送
                         </button>
                     </div>
@@ -383,10 +2531,10 @@
     <!-- ============================================================ -->
     <!-- 大师引导者 -->
     <!-- ============================================================ -->
-    <section id="masters" class="py-20 px-6 reveal">
+    <section id="masters" class="py-30 px-6 reveal">
         <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-bold text-center mb-4">大师引导者</h2>
-            <p class="text-gray-500 text-center mb-12">每位大师都是一扇不同的窄门。选择你的引路人。</p>
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">大师引导者</h2>
+            <p class="text-gray-500 text-center mb-12 text-body">每位大师都是一扇不同的窄门。选择你的引路人。</p>
 
             <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- 动态加载 -->
@@ -406,16 +2554,16 @@
     <!-- ============================================================ -->
     <!-- 30天穿越训练 -->
     <!-- ============================================================ -->
-    <section id="training" class="py-20 px-6 reveal">
+    <section id="training" class="py-30 px-6 reveal">
         <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-bold text-center mb-4">30天穿越训练</h2>
-            <p class="text-gray-500 text-center mb-4">从看见到穿越，每天做你最不想做的事</p>
-            <p class="text-gray-600 text-center text-sm mb-12">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">30天穿越训练</h2>
+            <p class="text-gray-500 text-center mb-4 text-body">从看见到穿越，每天做你最不想做的事</p>
+            <p class="text-gray-600 text-center text-sm mb-12 text-caption">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
 
             <!-- 四周计划 -->
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <!-- 第1周 -->
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-red-500/30 transition">
+                <div class="glass rounded-xl p-6 hover:border-red-500/30 transition">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="bg-red-900/30 text-red-400 text-xs font-semibold px-2 py-1 rounded">D1-D7</span>
                         <span class="text-xs text-gray-500">难度 3-5</span>
@@ -431,7 +2579,7 @@
                 </div>
 
                 <!-- 第2周 -->
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-orange-500/30 transition">
+                <div class="glass rounded-xl p-6 hover:border-orange-500/30 transition">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="bg-orange-900/30 text-orange-400 text-xs font-semibold px-2 py-1 rounded">D8-D14</span>
                         <span class="text-xs text-gray-500">难度 5-7</span>
@@ -447,7 +2595,7 @@
                 </div>
 
                 <!-- 第3周 -->
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-yellow-500/30 transition">
+                <div class="glass rounded-xl p-6 hover:border-yellow-500/30 transition">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="bg-yellow-900/30 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">D15-D21</span>
                         <span class="text-xs text-gray-500">难度 7-8</span>
@@ -480,7 +2628,7 @@
             </div>
 
             <!-- 穿越记录模板 -->
-            <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 max-w-2xl mx-auto">
+            <div class="glass rounded-xl p-6 max-w-2xl mx-auto">
                 <h3 class="font-bold text-center mb-4">📝 每日穿越记录</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                     <div class="bg-red-900/10 rounded-lg p-4">
@@ -502,25 +2650,243 @@
     </section>
 
     <!-- ============================================================ -->
+    <!-- 课程界面 -->
+    <!-- ============================================================ -->
+    <section id="course" class="py-30 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4">30天穿越课程</h2>
+            <p class="text-gray-500 text-center mb-8">沉浸式学习体验，每天一课，逐步穿越</p>
+            
+            <!-- 进度条 -->
+            <div class="mb-12">
+                <div class="flex justify-between text-sm text-gray-500 mb-2">
+                    <span>学习进度</span>
+                    <span id="course-progress-text">0%</span>
+                </div>
+                <div class="w-full bg-[#0c0c12] rounded-full h-2">
+                    <div id="course-progress-bar" class="bg-gradient-to-r from-[#b8942e] to-[#d4af37] h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-600 mt-2">
+                    <span>第1天</span>
+                    <span>第30天</span>
+                </div>
+            </div>
+            
+            
+            <!-- 当前课程卡片 -->
+            <div id="current-course-card" class="glass rounded-xl p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <span class="text-xs text-gray-500">第 <span id="current-day-number">1</span> 天</span>
+                        <h3 id="current-day-title" class="text-xl font-bold mt-1">加载中...</h3>
+                    </div>
+                    <div class="text-right">
+                        <span id="current-day-difficulty" class="text-xs bg-red-900/30 text-red-400 px-2 py-1 rounded">难度 3</span>
+                        <span id="current-day-xp" class="text-xs text-gray-500 ml-2">+10 XP</span>
+                    </div>
+                </div>
+                <p id="current-day-theme" class="text-[#b8942e] text-sm mb-4">认知</p>
+                <div id="current-day-content" class="text-gray-400 text-sm leading-relaxed mb-6">
+                    <p>加载课程内容中...</p>
+                </div>
+                
+                <!-- 挑战卡片 -->
+                <div class="bg-[#050508] border border-white/5 rounded-lg p-4 mb-6">
+                    <h4 class="text-white font-semibold mb-2">🎯 今日挑战</h4>
+                    <p id="current-day-challenge" class="text-gray-400 text-sm">加载挑战中...</p>
+                </div>
+                
+                <!-- 反思问题 -->
+                <div class="mb-6">
+                    <h4 class="text-white font-semibold mb-3">💭 反思问题</h4>
+                    <div id="reflection-questions" class="space-y-3">
+                        <div class="bg-[#050508] border border-white/5 rounded-lg p-3">
+                            <p class="text-gray-400 text-sm">问题加载中...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 金句 -->
+                <div class="border-t border-white/5 pt-4 mb-6">
+                    <blockquote id="current-day-quote" class="text-[#b8942e] text-sm italic text-center">
+                        "加载金句中..."
+                    </blockquote>
+                </div>
+                
+                <!-- 完成按钮 -->
+                <div class="text-center">
+                    <button id="complete-day-btn" onclick="completeCurrentDay()" class="btn-gold-primary px-8 py-3 text-lg">
+                        完成今日挑战 ✓
+                    </button>
+                    <div id="streak-display" class="streak-display mt-4">
+                        🔥 0 天连续
+                    </div>
+                </div>
+            </div>
+</div>
+            
+            <!-- 学习日记 -->
+            <div class="glass rounded-xl p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">📝 学习日记</h3>
+                <p class="text-gray-500 text-sm mb-4">记录你的穿越感悟，见证自己的成长</p>
+                
+                <!-- 日记内容 -->
+                <textarea id="learning-journal" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none resize-none mb-4" rows="4" placeholder="写下你今天的学习感悟、挑战经历或反思..."></textarea>
+                
+                <!-- 心情选择 -->
+                <div class="mb-4">
+                    <label class="text-xs text-gray-500 mb-2 block">今天心情如何？</label>
+                    <select id="journal-mood" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-[#b8942e] focus:outline-none">
+                        <option value="">选择心情（可选）</option>
+                        <option value="😊">😊 开心</option>
+                        <option value="😐">😐 一般</option>
+                        <option value="😔">😔 低落</option>
+                        <option value="😤">😤 沮丧</option>
+                        <option value="🤔">🤔 思考</option>
+                        <option value="💪">💪 充满力量</option>
+                        <option value="😌">😌 平静</option>
+                        <option value="🙏">🙏 感恩</option>
+                    </select>
+                </div>
+                
+                <!-- 标签 -->
+                <div class="mb-4">
+                    <label class="text-xs text-gray-500 mb-2 block">添加标签（用逗号分隔）</label>
+                    <input id="journal-tags" type="text" placeholder="例如：突破, 反思, 感悟" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-2 text-white text-sm focus:border-[#b8942e] focus:outline-none">
+                </div>
+                
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-xs text-gray-600">每篇日记 +5 XP</span>
+                    <button id="save-journal-btn" onclick="saveJournal()" class="btn-gold-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#b8973d] transition">
+                        保存日记
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 课程导航 -->
+            <div class="flex justify-between items-center">
+                <button id="prev-day-btn" onclick="prevDay()" class="flex items-center gap-2 text-gray-500 hover:text-white transition">
+                    <span>←</span>
+                    <span>上一天</span>
+                </button>
+                <div class="text-center">
+                    <span id="day-indicator" class="text-sm text-gray-500">第 1 天 / 共 30 天</span>
+                </div>
+                <button id="next-day-btn" onclick="nextDay()" class="flex items-center gap-2 text-gray-500 hover:text-white transition">
+                    <span>下一天</span>
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 社交证明 -->
+    <!-- ============================================================ -->
+    <section class="py-30 px-6 reveal">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">他们的改变</h2>
+            <p class="text-gray-500 text-center mb-12 text-body">真实用户的灵魂穿越之旅</p>
+            
+            <!-- 数据统计 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-[#b8942e] mb-2" id="stat-users">1,234</div>
+                    <div class="text-sm text-gray-500">穿越者</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-[#b8942e] mb-2" id="stat-audits">5,678</div>
+                    <div class="text-sm text-gray-500">灵魂审计</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-[#b8942e] mb-2" id="stat-shackles">12,345</div>
+                    <div class="text-sm text-gray-500">枷锁识别</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-[#b8942e] mb-2" id="stat-breakthroughs">890</div>
+                    <div class="text-sm text-gray-500">穿越突破</div>
+                </div>
+            </div>
+            
+            <!-- 用户评价 -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass rounded-xl p-6 card-interactive">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#b8942e] to-[#d4af37] flex items-center justify-center text-black font-bold">L</div>
+                        <div>
+                            <div class="font-semibold">林先生</div>
+                            <div class="text-xs text-gray-500">产品经理 · 穿越第28天</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">"窄门让我第一次直面自己的拖延症。AI的追问比任何心理咨询师都犀利，不给你任何逃避的空间。"</p>
+                    <div class="flex gap-1">
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-6 card-interactive">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#b8942e] to-[#d4af37] flex items-center justify-center text-black font-bold">W</div>
+                        <div>
+                            <div class="font-semibold">王女士</div>
+                            <div class="text-xs text-gray-500">创业者 · 穿越第15天</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">"大师引导系统太真实了。苏格拉底的追问让我意识到自己一直在用忙碌逃避真正重要的事。"</p>
+                    <div class="flex gap-1">
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-6 card-interactive">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#b8942e] to-[#d4af37] flex items-center justify-center text-black font-bold">Z</div>
+                        <div>
+                            <div class="font-semibold">张先生</div>
+                            <div class="text-xs text-gray-500">设计师 · 穿越第30天</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">"30天穿越训练改变了我的人生。从一个害怕表达的人，变成了敢于站在台上分享的人。"</p>
+                    <div class="flex gap-1">
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                        <span class="text-[#b8942e]">★</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
     <!-- 关于 -->
     <!-- ============================================================ -->
-    <section id="about" class="py-20 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
+    <section id="about" class="py-30 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-serif text-3xl font-bold mb-8">关于窄门</h2>
-            <p class="text-gray-400 leading-relaxed mb-8">
+            <h2 class="heading-section text-4xl md:text-5xl font-bold mb-8 heading-section">关于窄门</h2>
+            <p class="text-gray-400 leading-relaxed mb-8 text-body">
                 窄门不是一个给你答案的平台。它是一个<strong class="text-white">制造困境并引导穿越</strong>的平台。
                 我们训练人一步一步让自己从人变为神——不是宗教意义的神，是<strong class="text-white">人类潜能的极致释放</strong>。
             </p>
             <div class="grid md:grid-cols-3 gap-6 text-left mb-8">
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h4 class="text-[#b8942e] font-semibold mb-2">🧠 灵魂审计</h4>
                     <p class="text-sm text-gray-500">苏格拉底式追问 + AI回避检测<br>五维度深度排查你的枷锁</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h4 class="text-[#b8942e] font-semibold mb-2">🧙 大师引导</h4>
                     <p class="text-sm text-gray-500">7位大师各有性格和哲学<br>MIMO AI实时生成追问</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                <div class="glass rounded-lg p-5">
                     <h4 class="text-[#b8942e] font-semibold mb-2">📊 进化量化</h4>
                     <p class="text-sm text-gray-500">五层进化金字塔 + 经验值系统<br>可视化你的灵魂成长路径</p>
                 </div>
@@ -549,6 +2915,330 @@
     <!-- JavaScript -->
     <!-- ============================================================ -->
     <script>
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // 平滑滚动到指定section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // 关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        }
+        
+        // 导航栏滚动效果
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+        
+        // 下拉菜单键盘支持
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // 关闭所有下拉菜单
+                const dropdowns = document.querySelectorAll('.group');
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+                
+                // 关闭移动端菜单
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+        
+        // 点击外部关闭下拉菜单
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.group')) {
+                // 可以在这里添加关闭下拉菜单的逻辑
+            }
+        });
+        
+        // 初始化导航栏状态
+        document.addEventListener('DOMContentLoaded', () => {
+            // 确保页面加载时移动端菜单是关闭的
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+            
+            // 添加平滑滚动到所有锚点链接
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                });
+            });
+        });
+
+        // 用户ID管理
+        function getUserId() {
+            let userId = localStorage.getItem('narrowgate_user_id');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('narrowgate_user_id', userId);
+            }
+            return userId;
+        }
+        
+        const userId = getUserId();
+
+        // 课程进度管理
+        let userProgress = {
+            current_day: 1,
+            completed_days: [],
+            has_started: false,
+            streak: 0,
+            max_streak: 0
+        };
+        
+        async function loadUserProgress() {
+            try {
+                const data = await apiCall('/api/course/progress/' + userId, 'GET');
+                userProgress = data;
+                updateProgressUI();
+                
+                // 如果用户已开始，加载当前天数
+                if (data.has_started && data.current_day) {
+                    loadCourseDay(data.current_day);
+                }
+            } catch(e) {
+                console.log('加载进度失败，使用默认进度:', e);
+                // 如果API失败，尝试从localStorage恢复
+                const saved = localStorage.getItem('narrowgate_progress');
+                if (saved) {
+                    userProgress = JSON.parse(saved);
+                    updateProgressUI();
+                }
+            }
+        }
+        
+        function updateProgressUI() {
+            // 更新进度条
+            const progressPercent = (userProgress.completed_days.length / 30) * 100;
+            document.getElementById('course-progress-bar').style.width = progressPercent + '%';
+            document.getElementById('course-progress-text').textContent = Math.round(progressPercent) + '%';
+            
+            // 更新连续天数显示
+            const streakDisplay = document.getElementById('streak-display');
+            if (streakDisplay) {
+                streakDisplay.textContent = '🔥 ' + userProgress.streak + ' 天连续';
+            }
+            
+            // 更新已完成天数标记
+            updateDayMarkers();
+        }
+        
+        function updateDayMarkers() {
+            // 为已完成的天数添加标记
+            for (let day = 1; day <= 30; day++) {
+                const dayElement = document.getElementById('day-marker-' + day);
+                if (dayElement) {
+                    if (userProgress.completed_days.includes(day)) {
+                        dayElement.classList.add('completed');
+                    } else {
+                        dayElement.classList.remove('completed');
+                    }
+                }
+            }
+        }
+        
+        async function completeDay(day) {
+            try {
+                const response = await apiCall('/api/course/complete', 'POST', {
+                    user_id: userId,
+                    day: day,
+                    completed_at: new Date().toISOString()
+                });
+                
+                // 更新本地进度
+                if (!userProgress.completed_days.includes(day)) {
+                    userProgress.completed_days.push(day);
+                    userProgress.current_day = day + 1;
+                    userProgress.streak = response.streak || userProgress.streak + 1;
+                    userProgress.max_streak = Math.max(userProgress.max_streak, userProgress.streak);
+                    
+                    // 保存到localStorage
+                    localStorage.setItem('narrowgate_progress', JSON.stringify(userProgress));
+                    
+                    // 更新UI
+                    updateProgressUI();
+                    
+                    // 显示完成动画
+                    showCompletionAnimation(day);
+                    
+                    // 如果是第30天，显示封神仪式
+                    if (day === 30) {
+                        showFinalCeremony();
+                    }
+                }
+                
+                return response;
+            } catch(e) {
+                console.error('保存进度失败:', e);
+                alert('保存进度失败，请重试');
+                return null;
+            }
+        }
+        
+        function showCompletionAnimation(day) {
+            // 创建完成动画
+            const overlay = document.createElement('div');
+            overlay.className = 'completion-overlay';
+            overlay.innerHTML = `
+                <div class="completion-modal">
+                    <div class="completion-icon">✨</div>
+                    <h3>第 ${day} 天完成！</h3>
+                    <p>+${userProgress.completed_days.includes(day) ? 0 : 10} XP</p>
+                    <p>🔥 连续 ${userProgress.streak} 天</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="btn-gold-primary">
+                        继续
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+            
+            // 3秒后自动消失
+            setTimeout(() => {
+                if (overlay.parentElement) {
+                    overlay.remove();
+                }
+            }, 3000);
+        }
+        
+        function showFinalCeremony() {
+            const overlay = document.createElement('div');
+            overlay.className = 'completion-overlay';
+            overlay.innerHTML = `
+                <div class="completion-modal final-ceremony">
+                    <div class="completion-icon">👑</div>
+                    <h3>恭喜完成30天穿越！</h3>
+                    <p>你已经从凡人进化为觉醒者</p>
+                    <p>总经验值: ${userProgress.completed_days.length * 10 + 200} XP</p>
+                    <p>最高连续: ${userProgress.max_streak} 天</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="btn-gold-primary">
+                        封神仪式
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
+
+        // 平滑滚动到指定section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('pageLoader').classList.add('loaded');
+            }, 800);
+                    loadUserProgress();
+});
+
+        // 创建粒子效果
+        function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // 鼠标跟踪效果
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.glass');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                } else {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                }
+            });
+        });
+
+        // 按钮涟漪效果
+        document.querySelectorAll('.btn-gold').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // 添加涟漪动画样式
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
         let currentAuditId = null;
 
         async function apiCall(url, method = 'POST', body = {}) {
@@ -765,7 +3455,7 @@
         function renderMasters() {
             const grid = document.getElementById('masters-grid');
             grid.innerHTML = MASTERS.map(m => `
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-white/10 transition cursor-pointer" onclick="openMaster('${m.id}')">
+                <div class="glass rounded-xl p-6 hover:border-white/10 transition cursor-pointer" onclick="openMaster('${m.id}')">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="text-4xl">${m.avatar}</span>
                         <div>
@@ -929,7 +3619,7 @@
                 const list = await apiCall('/api/witness/list', 'GET');
                 const el = document.getElementById('witness-list');
                 if (!list.length) { el.innerHTML = '<p class="text-gray-500 text-sm">还没有添加见证人</p>'; return; }
-                el.innerHTML = list.map(w => '<div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4 flex items-center justify-between"><div><p class="font-semibold">' + w.name + '</p><p class="text-xs text-gray-500">' + w.relationship + '</p></div><span class="text-xs ' + (w.verified ? 'text-green-400' : 'text-gray-500') + '">' + (w.verified ? '已验证' : '待验证') + '</span></div>').join('');
+                el.innerHTML = list.map(w => '<div class="glass rounded-lg p-4 flex items-center justify-between"><div><p class="font-semibold">' + w.name + '</p><p class="text-xs text-gray-500">' + w.relationship + '</p></div><span class="text-xs ' + (w.verified ? 'text-green-400' : 'text-gray-500') + '">' + (w.verified ? '已验证' : '待验证') + '</span></div>').join('');
             } catch(e) {}
         }
 
@@ -946,13 +3636,332 @@
         }
         loadWitnesses();
         loadEvolution();
+        
+        // Course Interface
+        let currentDay = 1;
+        const totalDays = 30;
+        
+        async function loadCourseDay(day) {
+            try {
+                const data = await apiCall('/api/course/day/' + day, 'GET');
+                updateCourseUI(data);
+                currentDay = day;
+                updateDayIndicator();
+            }
+        
+        async function completeCurrentDay() {
+            const day = currentDay;
+            
+            // 确认完成
+            if (!confirm('确认完成第 ' + day + ' 天的挑战？')) {
+                return;
+            }
+            
+            // 禁用按钮防止重复点击
+            const btn = document.getElementById('complete-day-btn');
+            btn.disabled = true;
+            btn.textContent = '保存中...';
+            
+            try {
+                await completeDay(day);
+                
+                // 更新按钮状态
+                btn.textContent = '已完成 ✓';
+                btn.classList.add('completed');
+                
+                // 如果有下一天，自动加载
+                if (day < 30) {
+                    setTimeout(() => {
+                        loadCourseDay(day + 1);
+                    }, 1500);
+                }
+            } catch(e) {
+                console.error('完成失败:', e);
+                btn.disabled = false;
+                btn.textContent = '重试';
+            }
+        }
+ catch(e) {
+                console.error('加载课程失败:', e);
+                // Demo模式
+                updateCourseUIDemo(day);
+            }
+        }
+        
+        function updateCourseUI(data) {
+            const content = data.content;
+            document.getElementById('current-day-number').textContent = data.day;
+            document.getElementById('current-day-title').textContent = content.title;
+            document.getElementById('current-day-theme').textContent = content.theme;
+            document.getElementById('current-day-content').innerHTML = '<p>' + (content.teaching || content.content || '').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
+            document.getElementById('current-day-challenge').textContent = content.challenge;
+            document.getElementById('current-day-quote').textContent = content.quote;
+            document.getElementById('current-day-difficulty').textContent = '难度 ' + content.difficulty;
+            document.getElementById('current-day-xp').textContent = '+' + (content.xp || content.xp_reward || 10) + ' XP';
+            
+            // 更新反思问题
+            const questionsContainer = document.getElementById('reflection-questions');
+            const reflection = content.reflection || content.reflection_questions;
+            if (Array.isArray(reflection)) {
+                questionsContainer.innerHTML = reflection.map(function(q) { 
+                    return '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                        '<p class="text-gray-400 text-sm">' + q + '</p>' +
+                    '</div>';
+                }).join('');
+            } else {
+                questionsContainer.innerHTML = 
+                    '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                        '<p class="text-gray-400 text-sm">' + (reflection || '今天没有反思问题') + '</p>' +
+                    '</div>';
+            }
+            
+            // 更新进度条
+            const progressPercent = (data.day / totalDays) * 100;
+            document.getElementById('course-progress-bar').style.width = progressPercent + '%';
+            document.getElementById('course-progress-text').textContent = Math.round(progressPercent) + '%';
+        }
+        
+        function updateCourseUIDemo(day) {
+            document.getElementById('current-day-number').textContent = day;
+            document.getElementById('current-day-title').textContent = '第' + day + '天课程';
+            document.getElementById('current-day-theme').textContent = '通用';
+            document.getElementById('current-day-content').innerHTML = '<p>今天是30天穿越训练的第' + day + '天。每一天都是新的开始，每一天都是穿越的机会。</p>';
+            document.getElementById('current-day-challenge').textContent = '完成今天的挑战';
+            document.getElementById('current-day-quote').textContent = '每一天都是新的开始。';
+            document.getElementById('current-day-difficulty').textContent = '难度 5';
+            document.getElementById('current-day-xp').textContent = '+10 XP';
+            
+            // 更新反思问题
+            const questionsContainer = document.getElementById('reflection-questions');
+            questionsContainer.innerHTML = 
+                '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                    '<p class="text-gray-400 text-sm">你今天学到了什么？</p>' +
+                '</div>' +
+                '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                    '<p class="text-gray-400 text-sm">你如何应用到生活中？</p>' +
+                '</div>';
+            
+            // 更新进度条
+            const progressPercent = (day / totalDays) * 100;
+            document.getElementById('course-progress-bar').style.width = progressPercent + '%';
+            document.getElementById('course-progress-text').textContent = Math.round(progressPercent) + '%';
+        }
+        
+        function updateDayIndicator() {
+            document.getElementById('day-indicator').textContent = '第 ' + currentDay + ' 天 / 共 ' + totalDays + ' 天';
+            
+            // 更新导航按钮状态
+            document.getElementById('prev-day-btn').disabled = currentDay <= 1;
+            document.getElementById('next-day-btn').disabled = currentDay >= totalDays;
+            
+            document.getElementById('prev-day-btn').classList.toggle('opacity-50', currentDay <= 1);
+            document.getElementById('next-day-btn').classList.toggle('opacity-50', currentDay >= totalDays);
+        }
+        
+        function prevDay() {
+            if (currentDay > 1) {
+                loadCourseDay(currentDay - 1);
+            }
+        }
+        
+        function nextDay() {
+            if (currentDay < totalDays) {
+                loadCourseDay(currentDay + 1);
+            }
+        }
+        
+        async function saveJournal() {
+            const journalText = document.getElementById('learning-journal').value.trim();
+            if (!journalText) {
+                alert('请先写点什么再保存');
+                return;
+            }
+            
+            // 获取心情选择
+            const moodSelect = document.getElementById('journal-mood');
+            const mood = moodSelect ? moodSelect.value : null;
+            
+            // 获取标签
+            const tagsInput = document.getElementById('journal-tags');
+            const tags = tagsInput ? tagsInput.value.split(',').map(t => t.trim()).filter(t => t) : [];
+            
+            // 禁用按钮
+            const btn = document.getElementById('save-journal-btn');
+            btn.disabled = true;
+            btn.textContent = '保存中...';
+            
+            try {
+                const response = await apiCall('/api/journal/save', 'POST', { 
+                    user_id: userId,
+                    day: currentDay,
+                    content: journalText,
+                    mood: mood,
+                    tags: tags,
+                    is_private: true
+                });
+                
+                // 显示成功消息
+                alert(`日记保存成功！+${response.xp_earned || 5} XP`);
+                
+                // 清空输入
+                document.getElementById('learning-journal').value = '';
+                if (moodSelect) moodSelect.value = '';
+                if (tagsInput) tagsInput.value = '';
+                
+                // 更新按钮状态
+                btn.textContent = '已保存 ✓';
+                btn.classList.add('completed');
+                
+                // 3秒后恢复按钮
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = '保存日记';
+                    btn.classList.remove('completed');
+                }, 3000);
+                
+            } catch(e) {
+                console.error('保存日记失败:', e);
+                alert('保存失败，请重试');
+                btn.disabled = false;
+                btn.textContent = '重试';
+            }
+        }
+        
+        // 初始化课程界面
+        loadCourseDay(1);
     </script>
-    <section id="section-witness" class="py-20 px-6"><div class="max-w-4xl mx-auto"><h2 class="font-serif text-3xl font-bold mb-4 text-center">见证人网络</h2><p class="text-gray-400 text-center mb-12">你的进化需要被看见。</p><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl font-bold mb-4">添加见证人</h3><div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6"><input id="witness-name" type="text" placeholder="见证人姓名" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><input id="witness-email" type="email" placeholder="邮箱（可选）" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><select id="witness-relationship" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><option value="朋友">朋友</option><option value="家人">家人</option><option value="同事">同事</option><option value="导师">导师</option></select><button onclick="addWitness()" class="w-full py-3 rounded-lg bg-[#b8942e] text-black font-semibold hover:bg-[#b8973d] transition">添加见证人</button></div></div><div><h3 class="text-xl font-bold mb-4">我的见证人</h3><div id="witness-list" class="space-y-3"><p class="text-gray-500 text-sm">还没有添加见证人</p></div></div></div></div></section>
-    <section id="section-evolution" class="py-20 px-6 bg-[#050508]">
+    <section id="social-proof" class="social-proof-section">
+        <div class="max-w-6xl mx-auto">
+            <!-- 标题区域 -->
+            <div class="text-center mb-20">
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">SOCIAL PROOF</p>
+                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">穿越者的声音</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
+                    听听那些已经穿越窄门的人怎么说。他们的故事，就是你的未来。
+                </p>
+            </div>
+            
+            <!-- 见证人展示 -->
+            <div class="testimonials-grid">
+                <!-- 见证人1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <p>“窄门让我第一次真正面对自己的恐惧。30天穿越训练后，我不仅戒掉了拖延症，还开始了我一直想做的副业。”</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨‍💼</div>
+                        <div class="testimonial-info">
+                            <h4 class="testimonial-name">李明</h4>
+                            <p class="testimonial-role">产品经理 · 穿越层级：觉醒</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <span>完成30天训练</span>
+                        <span>经验值：1250</span>
+                    </div>
+                </div>
+                
+                <!-- 见证人2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <p>“灵魂审计像一面镜子，让我看到了自己一直回避的问题。大师引导让我学会了如何与自己对话。”</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👩‍🎨</div>
+                        <div class="testimonial-info">
+                            <h4 class="testimonial-name">王芳</h4>
+                            <p class="testimonial-role">设计师 · 穿越层级：穿越</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <span>完成15天训练</span>
+                        <span>经验值：680</span>
+                    </div>
+                </div>
+                
+                <!-- 见证人3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <p>“作为见证人，我看到了朋友的巨大变化。这个平台不仅改变了他，也让我反思了自己的生活方式。”</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨‍🏫</div>
+                        <div class="testimonial-info">
+                            <h4 class="testimonial-name">张伟</h4>
+                            <p class="testimonial-role">教师 · 见证人</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <span>验证3位穿越者</span>
+                        <span>见证人评分：4.9</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 数据统计 -->
+            <div class="proof-stats">
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">👥</div>
+                    <div class="proof-stat-value">2,847</div>
+                    <div class="proof-stat-label">注册用户</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">🚪</div>
+                    <div class="proof-stat-value">1,234</div>
+                    <div class="proof-stat-label">完成灵魂审计</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">⚡</div>
+                    <div class="proof-stat-value">856</div>
+                    <div class="proof-stat-label">完成30天训练</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">✨</div>
+                    <div class="proof-stat-value">127</div>
+                    <div class="proof-stat-label">达到觉醒层级</div>
+                </div>
+            </div>
+            
+            <!-- 见证人网络 -->
+            <div class="witness-network">
+                <div class="witness-network-header">
+                    <h3 class="witness-network-title">见证人网络</h3>
+                    <p class="witness-network-desc">你的进化需要被看见。添加见证人，让你的穿越更有力量。</p>
+                </div>
+                
+                <div class="witness-network-grid">
+                    <div class="witness-form">
+                        <h4 class="witness-form-title">添加见证人</h4>
+                        <div class="witness-form-fields">
+                            <input id="witness-name" type="text" placeholder="见证人姓名" class="witness-input">
+                            <input id="witness-email" type="email" placeholder="邮箱（可选）" class="witness-input">
+                            <select id="witness-relationship" class="witness-select">
+                                <option value="朋友">朋友</option>
+                                <option value="家人">家人</option>
+                                <option value="同事">同事</option>
+                                <option value="导师">导师</option>
+                            </select>
+                            <button onclick="addWitness()" class="witness-btn">
+                                添加见证人
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="witness-list-container">
+                        <h4 class="witness-list-title">我的见证人</h4>
+                        <div id="witness-list" class="witness-list">
+                            <p class="witness-list-empty">还没有添加见证人</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="section-evolution" class="py-30 px-6 bg-[#050508]">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="font-serif text-3xl font-bold mb-4">进化金字塔</h2>
-            <p class="text-gray-400 mb-12">灵魂的进化不是线性的，是螺旋上升的。</p>
-            <div class="inline-block bg-[#0c0c12] border border-white/5 rounded-xl p-6 font-mono text-sm mb-8">
+            <h2 class="heading-section text-4xl md:text-5xl font-bold mb-4 heading-section">进化金字塔</h2>
+            <p class="text-gray-400 mb-12 text-body">灵魂的进化不是线性的，是螺旋上升的。</p>
+            <div class="inline-block glass rounded-xl p-6 font-mono text-sm mb-8">
                 <pre class="text-[#b8942e]">
           ✨
         ┌───┐
@@ -968,11 +3977,11 @@
 └───────────────────┘</pre>
             </div>
             <div id="evolution-stats" class="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-8">
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4"><p class="text-2xl font-bold text-[#b8942e]">1</p><p class="text-xs text-gray-500">当前层级</p></div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4"><p class="text-2xl font-bold text-gray-300">0</p><p class="text-xs text-gray-500">经验值</p></div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4"><p class="text-2xl font-bold text-gray-300">0</p><p class="text-xs text-gray-500">突破次数</p></div>
+                <div class="glass rounded-lg p-4"><p class="text-2xl font-bold text-[#b8942e]">1</p><p class="text-xs text-gray-500">当前层级</p></div>
+                <div class="glass rounded-lg p-4"><p class="text-2xl font-bold text-gray-300">0</p><p class="text-xs text-gray-500">经验值</p></div>
+                <div class="glass rounded-lg p-4"><p class="text-2xl font-bold text-gray-300">0</p><p class="text-xs text-gray-500">突破次数</p></div>
             </div>
-            <div id="evolution-level" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 max-w-md mx-auto">
+            <div id="evolution-level" class="glass rounded-xl p-6 max-w-md mx-auto">
                 <p class="text-2xl mb-2">😴 睡眠层 (Sleep)</p>
                 <p class="text-gray-400 text-sm">大多数人所在的地方。你的枷锁驱动你的行为，但你不知道。</p>
             </div>
