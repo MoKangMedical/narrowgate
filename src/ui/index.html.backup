@@ -174,97 +174,90 @@
         </div>
     </nav>
 
-        <!-- ============================================================ -->
+    <!-- ============================================================ -->
     <!-- Hero -->
     <!-- ============================================================ -->
-    <section class="pt-40 pb-28 px-6">
+    <section class="pt-32 pb-20 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-8 opacity-80">NARROW GATE PLATFORM</p>
-            <h1 class="font-serif text-5xl md:text-7xl font-medium mb-10 leading-tight tracking-tight">
-                你要进<span class="text-gold">窄门</span>
+            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-6">NARROW GATE PLATFORM</p>
+            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                你要进<span class="text-[#b8942e]">窄门</span>
             </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-6 leading-relaxed">
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">
                 因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
                 引到生命，那门是窄的，路是小的，找着的人也少。
             </p>
-            <p class="text-sm text-gray-500 mb-16">— 马太福音 7:13-14</p>
+            <p class="text-sm text-gray-600 mb-12">— 马太福音 7:13-14</p>
 
-            <div class="gate-visual mb-16">
+            <div class="gate-visual mb-12">
                 <div class="gate-wide"></div>
                 <div class="gate-narrow"></div>
             </div>
 
-            <button onclick="startAudit()" class="btn-gold text-lg mb-6">
+            <button onclick="startAudit()" class="btn-gold text-lg">
                 开始灵魂审计 →
             </button>
-            <p class="text-xs text-gray-600 mb-12">这不会舒服。但你会感谢自己。</p>
-            
-            <!-- 滚动提示 -->
-            <div class="animate-bounce mt-8">
-                <svg class="w-6 h-6 mx-auto text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </div>
+            <p class="text-xs text-gray-600 mt-4">这不会舒服。但你会感谢自己。</p>
         </div>
     </section>
 
     <!-- ============================================================ -->
     <!-- 核心命题 -->
     <!-- ============================================================ -->
-    <section id="formula" class="py-24 px-6 reveal">
+    <section id="formula" class="py-20 px-6 reveal">
         <div class="max-w-4xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">核心命题</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">核心命题</h2>
+            <p class="text-gray-500 text-center mb-12">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
 
             <!-- 窄门公式 -->
-            <div class="bg-[#0c0c12] border border-[#b8942e]/20 rounded-2xl p-10 mb-16 text-center">
-                <div class="flex items-center justify-center gap-8 flex-wrap">
-                    <div class="bg-red-900/20 border border-red-500/30 rounded-xl px-8 py-6 hover:border-red-500/50 transition-all duration-300">
-                        <p class="text-red-400 text-sm font-semibold mb-2">痛苦回避度</p>
-                        <p class="text-5xl font-bold text-red-300 mb-2">85</p>
-                        <p class="text-xs text-gray-500">你有多不想面对</p>
+            <div class="bg-[#0c0c12] border border-[#b8942e]/20 rounded-xl p-8 mb-12 text-center">
+                <div class="flex items-center justify-center gap-4 flex-wrap">
+                    <div class="bg-red-900/20 border border-red-500/30 rounded-lg px-6 py-4">
+                        <p class="text-red-400 text-sm font-semibold mb-1">痛苦回避度</p>
+                        <p class="text-3xl font-bold text-red-300">85</p>
+                        <p class="text-xs text-gray-500 mt-1">你有多不想面对</p>
                     </div>
-                    <span class="text-[#b8942e] text-3xl font-bold">×</span>
-                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl px-8 py-6 hover:border-blue-500/50 transition-all duration-300">
-                        <p class="text-blue-400 text-sm font-semibold mb-2">成长杠杆率</p>
-                        <p class="text-5xl font-bold text-blue-300 mb-2">90</p>
-                        <p class="text-xs text-gray-500">穿越后能改变多少</p>
+                    <span class="text-[#b8942e] text-2xl font-bold">×</span>
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg px-6 py-4">
+                        <p class="text-blue-400 text-sm font-semibold mb-1">成长杠杆率</p>
+                        <p class="text-3xl font-bold text-blue-300">90</p>
+                        <p class="text-xs text-gray-500 mt-1">穿越后能改变多少</p>
                     </div>
-                    <span class="text-[#b8942e] text-3xl font-bold">=</span>
-                    <div class="bg-[#2a1a0a] border border-[#b8942e]/40 rounded-xl px-8 py-6 hover:border-[#b8942e]/60 transition-all duration-300">
-                        <p class="text-[#b8942e] text-sm font-semibold mb-2">窄门优先级</p>
-                        <p class="text-5xl font-bold text-[#b8942e] mb-2">7650</p>
-                        <p class="text-xs text-gray-500">越高越需要穿越</p>
+                    <span class="text-[#b8942e] text-2xl font-bold">=</span>
+                    <div class="bg-[#2a1a0a] border border-[#b8942e]/40 rounded-lg px-6 py-4">
+                        <p class="text-[#b8942e] text-sm font-semibold mb-1">窄门优先级</p>
+                        <p class="text-3xl font-bold text-[#b8942e]">7650</p>
+                        <p class="text-xs text-gray-500 mt-1">越高越需要穿越</p>
                     </div>
                 </div>
             </div>
 
             <!-- 宽门 vs 窄门 -->
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-[#0c0c12] border border-gray-700/50 rounded-2xl p-8 hover:border-gray-600/50 transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-                    <div class="text-center mb-6">
-                        <span class="text-5xl">🚪</span>
-                        <h3 class="text-xl font-medium text-gray-400 mt-3">宽门</h3>
-                        <p class="text-xs text-gray-600 mt-1">门是宽的，路是大的，进去的人也多</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-[#0c0c12] border border-gray-700 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-4xl">🚪</span>
+                        <h3 class="text-xl font-bold text-gray-400 mt-2">宽门</h3>
+                        <p class="text-xs text-gray-600">门是宽的，路是大的，进去的人也多</p>
                     </div>
-                    <ul class="space-y-4 text-sm text-gray-400">
-                        <li class="flex items-start gap-3"><span class="text-gray-600 mt-1">○</span> 容易、舒服、多数人走</li>
-                        <li class="flex items-start gap-3"><span class="text-gray-600 mt-1">○</span> 回避真实自我</li>
-                        <li class="flex items-start gap-3"><span class="text-gray-600 mt-1">○</span> 短期安逸，长期后悔</li>
-                        <li class="flex items-start gap-3"><span class="text-gray-600 mt-1">○</span> 95%的人选择</li>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 容易、舒服、多数人走</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 回避真实自我</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 短期安逸，长期后悔</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 95%的人选择</li>
                     </ul>
                 </div>
-                <div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-2xl p-8 hover:border-[#b8942e]/50 transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-                    <div class="text-center mb-6">
-                        <span class="text-5xl">🚪</span>
-                        <h3 class="text-xl font-medium text-[#b8942e] mt-3">窄门</h3>
-                        <p class="text-xs text-[#b8942e]/60 mt-1">门是窄的，路是小的，找着的人也少</p>
+                <div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-4xl">🚪</span>
+                        <h3 class="text-xl font-bold text-[#b8942e] mt-2">窄门</h3>
+                        <p class="text-xs text-[#b8942e]/60">门是窄的，路是小的，找着的人也少</p>
                     </div>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">●</span> 艰难、痛苦、少数人走</li>
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">●</span> 面对真实自我</li>
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">●</span> 短期痛苦，长期释放</li>
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">●</span> 5%的人选择</li>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 艰难、痛苦、少数人走</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 面对真实自我</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 短期痛苦，长期释放</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 5%的人选择</li>
                     </ul>
                 </div>
             </div>
@@ -274,60 +267,45 @@
     <!-- ============================================================ -->
     <!-- 五层进化 -->
     <!-- ============================================================ -->
-    <section id="dimensions" class="py-24 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
+    <section id="dimensions" class="py-20 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
         <div class="max-w-3xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">五层进化架构</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">从凡人到封神——每层都有一个窄门在等你</p>
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">五层进化架构</h2>
+            <p class="text-gray-500 text-center mb-16">从凡人到封神——每层都有一个窄门在等你</p>
 
-            <div class="space-y-4">
-                <div class="pyramid-level rounded-xl cursor-pointer group" style="width:40%;background:linear-gradient(90deg,#1a1205,#2a1a0a);border:1px solid #b8942e;" data-level="5">
-                    <div class="flex items-center justify-between w-full px-4">
-                        <span class="text-[#b8942e] text-sm font-medium">五 · 封神</span>
-                        <span class="text-xs text-[#b8942e]/60 opacity-0 group-hover:opacity-100 transition-opacity">成为守门人</span>
-                    </div>
+            <div class="space-y-3">
+                <div class="pyramid-level rounded-lg" style="width:40%;background:linear-gradient(90deg,#1a1205,#2a1a0a);border:1px solid #b8942e;">
+                    <span class="text-[#b8942e] text-sm">五 · 封神</span>
                 </div>
-                <div class="pyramid-level rounded-xl cursor-pointer group" style="width:55%;background:linear-gradient(90deg,#15120a,#252015);border:1px solid #a08030;" data-level="4">
-                    <div class="flex items-center justify-between w-full px-4">
-                        <span class="text-[#b8942e]/80 text-sm font-medium">四 · 觉醒</span>
-                        <span class="text-xs text-[#b8942e]/60 opacity-0 group-hover:opacity-100 transition-opacity">从玩家变架构师</span>
-                    </div>
+                <div class="pyramid-level rounded-lg" style="width:55%;background:linear-gradient(90deg,#15120a,#252015);border:1px solid #a08030;">
+                    <span class="text-[#b8942e]/80 text-sm">四 · 觉醒</span>
                 </div>
-                <div class="pyramid-level rounded-xl cursor-pointer group" style="width:70%;background:linear-gradient(90deg,#12100a,#1e1a10);border:1px solid #706020;" data-level="3">
-                    <div class="flex items-center justify-between w-full px-4">
-                        <span class="text-[#b8942e]/60 text-sm font-medium">三 · 穿越</span>
-                        <span class="text-xs text-[#b8942e]/60 opacity-0 group-hover:opacity-100 transition-opacity">30天每日挑战</span>
-                    </div>
+                <div class="pyramid-level rounded-lg" style="width:70%;background:linear-gradient(90deg,#12100a,#1e1a10);border:1px solid #706020;">
+                    <span class="text-[#b8942e]/60 text-sm">三 · 穿越</span>
                 </div>
-                <div class="pyramid-level rounded-xl cursor-pointer group" style="width:85%;background:linear-gradient(90deg,#101010,#1a1a18);border:1px solid #505040;" data-level="2">
-                    <div class="flex items-center justify-between w-full px-4">
-                        <span class="text-gray-400 text-sm font-medium">二 · 看见</span>
-                        <span class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">识别你的枷锁</span>
-                    </div>
+                <div class="pyramid-level rounded-lg" style="width:85%;background:linear-gradient(90deg,#101010,#1a1a18);border:1px solid #505040;">
+                    <span class="text-gray-400 text-sm">二 · 看见</span>
                 </div>
-                <div class="pyramid-level rounded-xl cursor-pointer group" style="width:100%;background:linear-gradient(90deg,#0f0f0f,#171717);border:1px solid #333;" data-level="1">
-                    <div class="flex items-center justify-between w-full px-4">
-                        <span class="text-gray-500 text-sm font-medium">一 · 凡人</span>
-                        <span class="text-xs text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">多数人的状态</span>
-                    </div>
+                <div class="pyramid-level rounded-lg" style="width:100%;background:linear-gradient(90deg,#0f0f0f,#171717);border:1px solid #333;">
+                    <span class="text-gray-500 text-sm">一 · 凡人</span>
                 </div>
             </div>
 
-            <div class="mt-16 grid gap-6">
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h3 class="font-medium text-[#b8942e] mb-2">🚪 凡人 → 看见</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
+            <div class="mt-12 grid gap-4">
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">🚪 凡人 → 看见</h3>
+                    <p class="text-sm text-gray-400">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h3 class="font-medium text-[#b8942e] mb-2">⚡ 看见 → 穿越</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">⚡ 看见 → 穿越</h3>
+                    <p class="text-sm text-gray-400">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h3 class="font-medium text-[#b8942e] mb-2">🔥 穿越 → 觉醒</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">🔥 穿越 → 觉醒</h3>
+                    <p class="text-sm text-gray-400">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h3 class="font-medium text-[#b8942e] mb-2">👑 觉醒 → 封神</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">构建一个让更多人看见窄门的系统。成为守门人。</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">👑 觉醒 → 封神</h3>
+                    <p class="text-sm text-gray-400">构建一个让更多人看见窄门的系统。成为守门人。</p>
                 </div>
             </div>
         </div>
@@ -336,39 +314,28 @@
     <!-- ============================================================ -->
     <!-- 灵魂审计（核心交互区） -->
     <!-- ============================================================ -->
-    <section id="audit" class="py-24 px-6">
+    <section id="audit" class="py-20 px-6">
         <div class="max-w-2xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">灵魂审计</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">AI 不接受表面答案。持续追问，直到你看见真相。</p>
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
-            <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 min-h-[500px]">
+            <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 min-h-[400px]">
                 <!-- 初始状态 -->
-                <div id="audit-intro" class="text-center py-16">
-                    <p class="text-5xl mb-8">🚪</p>
-                    <h3 class="font-serif text-2xl mb-6">准备好了吗？</h3>
-                    <p class="text-gray-500 text-sm mb-10 max-w-md mx-auto leading-relaxed">
+                <div id="audit-intro" class="text-center py-12">
+                    <p class="text-4xl mb-6">🚪</p>
+                    <h3 class="font-serif text-xl mb-4">准备好了吗？</h3>
+                    <p class="text-gray-500 text-sm mb-8 max-w-md mx-auto">
                         灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
                         AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
                     </p>
-                    <button onclick="startAudit()" class="btn-gold text-lg">
+                    <button onclick="startAudit()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
                         开始审计
                     </button>
                 </div>
 
                 <!-- 对话状态 -->
                 <div id="audit-chat" class="hidden">
-                    <!-- 进度指示器 -->
-                    <div class="mb-8">
-                        <div class="flex justify-between text-xs text-gray-500 mb-2">
-                            <span>审计进度</span>
-                            <span id="audit-progress">0/5 维度</span>
-                        </div>
-                        <div class="w-full bg-gray-800 rounded-full h-1">
-                            <div id="progress-bar" class="bg-[#b8942e] h-1 rounded-full transition-all duration-500" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
                         <div>
                             <span class="text-xs text-gray-500">当前维度</span>
                             <span id="current-dimension" class="ml-2 text-[#b8942e] font-semibold">认知</span>
@@ -381,22 +348,24 @@
                         </div>
                     </div>
 
-                    <div id="chat-messages" class="space-y-6 mb-8 max-h-[400px] overflow-y-auto pr-2"></div>
+                    <div id="chat-messages" class="space-y-4 mb-6 max-h-[400px] overflow-y-auto"></div>
 
-                    <div id="typing" class="hidden mb-6">
+                    <div id="typing" class="hidden mb-4">
                         <div class="typing-indicator">
                             <span></span><span></span><span></span>
                         </div>
                     </div>
 
-                    <div class="flex gap-4">
-                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-xl px-5 py-4 text-white text-sm focus:border-[#b8942e] focus:outline-none transition-colors" onkeydown="if(event.key==='Enter')submitAnswer()">
-                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-8 py-4 rounded-xl hover:bg-[#d4af37] transition text-sm">
+                    <div class="flex gap-3">
+        let selectedMasterId = "";
+                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
+        let selectedMasterId = "";
+                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition text-sm">
                             发送
                         </button>
                     </div>
 
-                    <div class="mt-6 text-center">
+                    <div class="mt-4 text-center">
                         <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">
                             结束审计，查看结果
                         </button>
@@ -404,7 +373,7 @@
                 </div>
 
                 <!-- 结果状态 -->
-                <div id="audit-result" class="hidden text-center py-12">
+                <div id="audit-result" class="hidden text-center py-8">
                     <div id="result-content"></div>
                 </div>
             </div>
@@ -414,12 +383,12 @@
     <!-- ============================================================ -->
     <!-- 大师引导者 -->
     <!-- ============================================================ -->
-    <section id="masters" class="py-24 px-6 reveal">
+    <section id="masters" class="py-20 px-6 reveal">
         <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">大师引导者</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">每位大师都是一扇不同的窄门。选择你的引路人。</p>
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">大师引导者</h2>
+            <p class="text-gray-500 text-center mb-12">每位大师都是一扇不同的窄门。选择你的引路人。</p>
 
-            <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- 动态加载 -->
             </div>
         </div>
@@ -427,9 +396,9 @@
 
     <!-- 大师对话弹窗 -->
     <div id="master-modal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeMasterModal()"></div>
-        <div class="relative max-w-2xl mx-auto mt-20 bg-[#0c0c12] border border-white/10 rounded-2xl p-10">
-            <button onclick="closeMasterModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition">✕</button>
+        <div class="absolute inset-0 bg-black/80" onclick="closeMasterModal()"></div>
+        <div class="relative max-w-2xl mx-auto mt-20 bg-[#0c0c12] border border-white/10 rounded-xl p-8">
+            <button onclick="closeMasterModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white">✕</button>
             <div id="master-modal-content"></div>
         </div>
     </div>
@@ -437,113 +406,97 @@
     <!-- ============================================================ -->
     <!-- 30天穿越训练 -->
     <!-- ============================================================ -->
-    <section id="training" class="py-24 px-6 reveal">
+    <section id="training" class="py-20 px-6 reveal">
         <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">30天穿越训练</h2>
-            <p class="text-gray-500 text-center mb-4 text-lg">从看见到穿越，每天做你最不想做的事</p>
-            <p class="text-gray-600 text-center text-sm mb-16">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
-
-            <!-- 进度可视化 -->
-            <div class="flex justify-center mb-16">
-                <div class="relative w-32 h-32">
-                    <svg class="w-full h-full" viewBox="0 0 100 100">
-                        <circle class="text-gray-800" stroke-width="8" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50"/>
-                        <circle class="text-[#b8942e]" stroke-width="8" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50"
-                                stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round"
-                                transform="rotate(-90 50 50)" id="training-progress-circle"/>
-                    </svg>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold text-white" id="training-day">0</span>
-                        <span class="text-xs text-gray-500">/30天</span>
-                    </div>
-                </div>
-            </div>
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">30天穿越训练</h2>
+            <p class="text-gray-500 text-center mb-4">从看见到穿越，每天做你最不想做的事</p>
+            <p class="text-gray-600 text-center text-sm mb-12">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
 
             <!-- 四周计划 -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
                 <!-- 第1周 -->
-                <div class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 hover:border-red-500/30 transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="bg-red-900/30 text-red-400 text-xs font-semibold px-3 py-1 rounded-full">D1-D7</span>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-red-500/30 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-red-900/30 text-red-400 text-xs font-semibold px-2 py-1 rounded">D1-D7</span>
                         <span class="text-xs text-gray-500">难度 3-5</span>
                     </div>
-                    <h3 class="font-medium text-lg mb-3">🔥 第一周：面对恐惧</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">承认它存在，然后第一次尝试</p>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">·</span> 写下你最不想承认的一个弱点</li>
-                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">·</span> 5:30起床（连续3天）</li>
-                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">·</span> 找一个你不同意的观点，写下它的合理之处</li>
-                        <li class="flex items-start gap-3"><span class="text-red-400 mt-1">·</span> 给一个疏远的朋友发消息</li>
+                    <h3 class="font-bold text-lg mb-2">🔥 第一周：面对恐惧</h3>
+                    <p class="text-gray-500 text-sm mb-4">承认它存在，然后第一次尝试</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 写下你最不想承认的一个弱点</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 5:30起床（连续3天）</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 找一个你不同意的观点，写下它的合理之处</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 给一个疏远的朋友发消息</li>
                     </ul>
                 </div>
 
                 <!-- 第2周 -->
-                <div class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 hover:border-orange-500/30 transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="bg-orange-900/30 text-orange-400 text-xs font-semibold px-3 py-1 rounded-full">D8-D14</span>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-orange-500/30 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-orange-900/30 text-orange-400 text-xs font-semibold px-2 py-1 rounded">D8-D14</span>
                         <span class="text-xs text-gray-500">难度 5-7</span>
                     </div>
-                    <h3 class="font-medium text-lg mb-3">⚡ 第二周：建立节奏</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">每日挑战形成习惯回路</p>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li class="flex items-start gap-3"><span class="text-orange-400 mt-1">·</span> 24小时不刷社交媒体</li>
-                        <li class="flex items-start gap-3"><span class="text-orange-400 mt-1">·</span> 每天跑步30分钟（连续7天）</li>
-                        <li class="flex items-start gap-3"><span class="text-orange-400 mt-1">·</span> 问3个人"你觉得我最大的盲点是什么"</li>
-                        <li class="flex items-start gap-3"><span class="text-orange-400 mt-1">·</span> 对一个不合理的要求说"不"</li>
+                    <h3 class="font-bold text-lg mb-2">⚡ 第二周：建立节奏</h3>
+                    <p class="text-gray-500 text-sm mb-4">每日挑战形成习惯回路</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 24小时不刷社交媒体</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 每天跑步30分钟（连续7天）</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 问3个人"你觉得我最大的盲点是什么"</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 对一个不合理的要求说"不"</li>
                     </ul>
                 </div>
 
                 <!-- 第3周 -->
-                <div class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 hover:border-yellow-500/30 transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="bg-yellow-900/30 text-yellow-400 text-xs font-semibold px-3 py-1 rounded-full">D15-D21</span>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-yellow-500/30 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-yellow-900/30 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">D15-D21</span>
                         <span class="text-xs text-gray-500">难度 7-8</span>
                     </div>
-                    <h3 class="font-medium text-lg mb-3">🔥 第三周：突破瓶颈</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">难度升级，直面核心恐惧</p>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li class="flex items-start gap-3"><span class="text-yellow-400 mt-1">·</span> 公开分享一次你的失败经历</li>
-                        <li class="flex items-start gap-3"><span class="text-yellow-400 mt-1">·</span> 向最在意的人表达从未说过的真实感受</li>
-                        <li class="flex items-start gap-3"><span class="text-yellow-400 mt-1">·</span> 结束一段你知道有毒的关系</li>
-                        <li class="flex items-start gap-3"><span class="text-yellow-400 mt-1">·</span> 连续7天每天做一件让你不舒服的事</li>
+                    <h3 class="font-bold text-lg mb-2">🔥 第三周：突破瓶颈</h3>
+                    <p class="text-gray-500 text-sm mb-4">难度升级，直面核心恐惧</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 公开分享一次你的失败经历</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 向最在意的人表达从未说过的真实感受</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 结束一段你知道有毒的关系</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 连续7天每天做一件让你不舒服的事</li>
                     </ul>
                 </div>
 
                 <!-- 第4周 -->
-                <div class="bg-[#2a1a0a] border border-[#b8942e]/20 rounded-2xl p-8 hover:border-[#b8942e]/40 transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="bg-[#b8942e]/20 text-[#b8942e] text-xs font-semibold px-3 py-1 rounded-full">D22-D30</span>
+                <div class="bg-[#2a1a0a] border border-[#b8942e]/20 rounded-xl p-6 hover:border-[#b8942e]/40 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-[#b8942e]/20 text-[#b8942e] text-xs font-semibold px-2 py-1 rounded">D22-D30</span>
                         <span class="text-xs text-gray-500">难度 8-回顾</span>
                     </div>
-                    <h3 class="font-medium text-lg mb-3">✨ 第四周：巩固穿越</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">从刻意到自然，内化新身份</p>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">·</span> 写一封信给你一直回避面对的人</li>
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">·</span> 原谅一个你一直恨着的人</li>
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">·</span> 写穿越旅程总结：恐惧 vs 现实</li>
-                        <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">·</span> 帮助另一个人开始他的穿越</li>
+                    <h3 class="font-bold text-lg mb-2">✨ 第四周：巩固穿越</h3>
+                    <p class="text-gray-500 text-sm mb-4">从刻意到自然，内化新身份</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 写一封信给你一直回避面对的人</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 原谅一个你一直恨着的人</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 写穿越旅程总结：恐惧 vs 现实</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 帮助另一个人开始他的穿越</li>
                     </ul>
                 </div>
             </div>
 
             <!-- 穿越记录模板 -->
-            <div class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 max-w-2xl mx-auto">
-                <h3 class="font-medium text-center mb-6">📝 每日穿越记录</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div class="bg-red-900/10 rounded-xl p-6">
-                        <p class="text-red-400 text-sm font-semibold mb-3">😰 做之前的恐惧</p>
+            <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 max-w-2xl mx-auto">
+                <h3 class="font-bold text-center mb-4">📝 每日穿越记录</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-red-900/10 rounded-lg p-4">
+                        <p class="text-red-400 text-sm font-semibold mb-2">😰 做之前的恐惧</p>
                         <p class="text-xs text-gray-500">写下你害怕发生什么</p>
                     </div>
-                    <div class="bg-blue-900/10 rounded-xl p-6">
-                        <p class="text-blue-400 text-sm font-semibold mb-3">⚡ 实际行动</p>
+                    <div class="bg-blue-900/10 rounded-lg p-4">
+                        <p class="text-blue-400 text-sm font-semibold mb-2">⚡ 实际行动</p>
                         <p class="text-xs text-gray-500">具体描述你怎么做的</p>
                     </div>
-                    <div class="bg-green-900/10 rounded-xl p-6">
-                        <p class="text-green-400 text-sm font-semibold mb-3">💡 穿越感悟</p>
+                    <div class="bg-green-900/10 rounded-lg p-4">
+                        <p class="text-green-400 text-sm font-semibold mb-2">💡 穿越感悟</p>
                         <p class="text-xs text-gray-500">恐惧 vs 现实的差距</p>
                     </div>
                 </div>
-                <p class="text-center text-xs text-gray-600 mt-6">每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200</p>
+                <p class="text-center text-xs text-gray-600 mt-4">每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200</p>
             </div>
         </div>
     </section>
@@ -551,57 +504,38 @@
     <!-- ============================================================ -->
     <!-- 关于 -->
     <!-- ============================================================ -->
-    <section id="about" class="py-24 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
+    <section id="about" class="py-20 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-serif text-3xl font-medium mb-8 tracking-tight">关于窄门</h2>
-            <p class="text-gray-400 leading-relaxed mb-12 text-lg">
+            <h2 class="font-serif text-3xl font-bold mb-8">关于窄门</h2>
+            <p class="text-gray-400 leading-relaxed mb-8">
                 窄门不是一个给你答案的平台。它是一个<strong class="text-white">制造困境并引导穿越</strong>的平台。
                 我们训练人一步一步让自己从人变为神——不是宗教意义的神，是<strong class="text-white">人类潜能的极致释放</strong>。
             </p>
-            
-            <div class="grid md:grid-cols-3 gap-8 text-left mb-16">
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h4 class="text-[#b8942e] font-medium mb-3">🧠 灵魂审计</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">苏格拉底式追问 + AI回避检测<br>五维度深度排查你的枷锁</p>
+            <div class="grid md:grid-cols-3 gap-6 text-left mb-8">
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h4 class="text-[#b8942e] font-semibold mb-2">🧠 灵魂审计</h4>
+                    <p class="text-sm text-gray-500">苏格拉底式追问 + AI回避检测<br>五维度深度排查你的枷锁</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h4 class="text-[#b8942e] font-medium mb-3">🧙 大师引导</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">7位大师各有性格和哲学<br>MIMO AI实时生成追问</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h4 class="text-[#b8942e] font-semibold mb-2">🧙 大师引导</h4>
+                    <p class="text-sm text-gray-500">7位大师各有性格和哲学<br>MIMO AI实时生成追问</p>
                 </div>
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/20 transition-all duration-300">
-                    <h4 class="text-[#b8942e] font-medium mb-3">📊 进化量化</h4>
-                    <p class="text-sm text-gray-500 leading-relaxed">五层进化金字塔 + 经验值系统<br>可视化你的灵魂成长路径</p>
-                </div>
-            </div>
-            
-            <!-- 理论根基 -->
-            <div class="border-t border-white/5 pt-12 mb-12">
-                <p class="text-gray-600 text-xs mb-6 tracking-widest uppercase">理论根基</p>
-                <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">苏格拉底</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">荣格个体化</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">斯多葛学派</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">Taleb反脆弱</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">CBT苏格拉底式提问</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">Frankl意义治疗</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">成长型思维</span>
-                    <span class="bg-white/5 px-4 py-2 rounded-full hover:bg-white/10 transition">原子习惯</span>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h4 class="text-[#b8942e] font-semibold mb-2">📊 进化量化</h4>
+                    <p class="text-sm text-gray-500">五层进化金字塔 + 经验值系统<br>可视化你的灵魂成长路径</p>
                 </div>
             </div>
-            
-            <!-- 信任元素 -->
-            <div class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 max-w-2xl mx-auto">
-                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
-                    "窄门让我第一次真正面对自己的恐惧。不是鸡汤式的'你可以的'，而是冷酷地问'你到底在怕什么'。"
-                </p>
-                <div class="flex items-center justify-center gap-3">
-                    <div class="w-8 h-8 bg-[#b8942e]/20 rounded-full flex items-center justify-center">
-                        <span class="text-[#b8942e] text-xs">L</span>
-                    </div>
-                    <div class="text-left">
-                        <p class="text-white text-sm font-medium">匿名用户</p>
-                        <p class="text-gray-600 text-xs">完成30天穿越训练</p>
-                    </div>
+            <div class="border-t border-white/5 pt-8">
+                <p class="text-gray-600 text-xs mb-4">理论根基</p>
+                <div class="flex flex-wrap justify-center gap-3 text-xs text-gray-500">
+                    <span class="bg-white/5 px-3 py-1 rounded">苏格拉底</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">荣格个体化</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">斯多葛学派</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">Taleb反脆弱</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">CBT苏格拉底式提问</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">Frankl意义治疗</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">成长型思维</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">原子习惯</span>
                 </div>
             </div>
         </div>

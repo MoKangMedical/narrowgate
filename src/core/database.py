@@ -113,10 +113,22 @@ class Database:
                     FOREIGN KEY (user_id) REFERENCES users(id)
                 );
 
+                CREATE TABLE IF NOT EXISTS check_ins (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT,
+                    check_in_date TEXT,
+                    streak_count INTEGER DEFAULT 1,
+                    max_streak INTEGER DEFAULT 1,
+                    created_at TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+
                 CREATE INDEX IF NOT EXISTS idx_audits_user ON audits(user_id);
                 CREATE INDEX IF NOT EXISTS idx_responses_audit ON audit_responses(audit_id);
                 CREATE INDEX IF NOT EXISTS idx_crossings_user ON crossings(user_id);
                 CREATE INDEX IF NOT EXISTS idx_daily_crossing ON daily_records(crossing_id);
+                CREATE INDEX IF NOT EXISTS idx_checkins_user ON check_ins(user_id);
+                CREATE INDEX IF NOT EXISTS idx_checkins_date ON check_ins(check_in_date);
             """)
 
     @contextmanager

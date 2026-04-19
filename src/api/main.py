@@ -644,6 +644,57 @@ async def record_evolution_crossing(req: EvolutionRequest):
 
 
 # ============================================================
+# 专家Agent API
+# ============================================================
+
+from core.expert_agents import ExpertManager
+
+expert_manager = ExpertManager()
+
+
+class ExpertChatRequest(BaseModel):
+    expert_id: str
+    message: str
+    conversation_id: str = ""
+
+
+@app.get("/api/experts")
+async def get_experts():
+    """获取所有专家列表"""
+    return {"experts": expert_manager.get_all_experts()}
+
+
+@app.get("/api/experts/{expert_id}")
+async def get_expert_detail(expert_id: str):
+    """获取专家详情"""
+    expert = expert_manager.get_expert_detail(expert_id)
+    if not expert:
+        raise HTTPException(status_code=404, detail="专家不存在")
+    return expert
+
+
+@app.post("/api/experts/chat")
+async def chat_with_expert(req: ExpertChatRequest):
+    """与专家对话"""
+    return expert_manager.chat(req.expert_id, req.message, req.conversation_id)
+
+
+@app.get("/api/experts/{expert_id}/cases")
+async def get_expert_cases(expert_id: str):
+    """获取专家的案例列表"""
+    cases = expert_manager.get_expert_cases(expert_id)
+    if not cases:
+        raise HTTPException(status_code=404, detail="专家不存在")
+    return {"expert_id": expert_id, "cases": cases}
+
+
+@app.get("/api/experts/domain/{domain}")
+async def get_domain_experts(domain: str):
+    """获取特定领域的专家"""
+    return {"domain": domain, "experts": expert_manager.get_domain_experts(domain)}
+
+
+# ============================================================
 # 系统 API
 # ============================================================
 
