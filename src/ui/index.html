@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- Language Detection -->
+    <script>
+        // 检测浏览器语言并设置
+        (function() {
+            const savedLang = localStorage.getItem('lang');
+            if (!savedLang) {
+                const browserLang = navigator.language || navigator.userLanguage;
+                const lang = browserLang.startsWith('zh') ? 'zh' : 'en';
+                localStorage.setItem('lang', lang);
+            }
+        })();
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>窄门 NarrowGate — 让人看见窄门并跨越窄门</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#b8942e">
+    <link rel="apple-touch-icon" href="/icon-192x192.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -165,11 +181,11 @@
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="font-serif text-xl font-bold text-[#b8942e]" data-i18n="nav.brand">窄门 NarrowGate</h1>
             <div class="hidden md:flex gap-6 text-sm text-gray-400 items-center">
-                <a href="#formula" class="hover:text-white transition">公式</a>
-                <a href="#dimensions" class="hover:text-white transition">五层</a>
-                <a href="#audit" class="hover:text-white transition">灵魂审计</a>
-                <a href="#masters" class="hover:text-white transition">大师</a>
-                <a href="#training" class="hover:text-white transition">培训</a>
+                <a href="#formula" class="hover:text-white transition" data-i18n="nav.formula">公式</a>
+                <a href="#dimensions" class="hover:text-white transition" data-i18n="nav.dimensions">五层</a>
+                <a href="#audit" class="hover:text-white transition" data-i18n="nav.audit">灵魂审计</a>
+                <a href="#masters" class="hover:text-white transition" data-i18n="nav.masters">大师</a>
+                <a href="#training" class="hover:text-white transition" data-i18n="nav.training">培训</a>
                 <button onclick="openCheckinModal()" class="px-4 py-2 bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-[#050508] font-semibold rounded-lg hover:shadow-lg hover:shadow-[#b8942e]/20 transition-all">
                     🔥 签到
                 </button>
@@ -195,9 +211,7 @@
             </div>
         
             <div class="flex items-center gap-4">
-                <button id="lang-switch" onclick="toggleLanguage()" class="text-gray-400 hover:text-white transition text-sm">
-                    EN
-                </button>
+                <button id="lang-switch" onclick="i18n.toggle()" class="text-gray-400 hover:text-white transition text-sm" title="切换语言">EN</button>
             </div>
         </div>
     </nav>
@@ -215,7 +229,7 @@
                 因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
                 引到生命，那门是窄的，路是小的，找着的人也少。
             </p>
-            <p class="text-sm text-gray-500 mb-16">— 马太福音 7:13-14</p>
+            <p class="text-sm text-gray-500 mb-16" data-i18n="hero.source">— 马太福音 7:13-14</p>
 
             <div class="gate-visual mb-16">
                 <div class="gate-wide"></div>
@@ -243,7 +257,7 @@
             <button onclick="startQuickAudit()" class="px-8 py-4 border border-[#b8942e]/40 text-[#b8942e] rounded-xl hover:bg-[#b8942e]/10 transition-all mb-6">
                 ⚡ 快速体验（3分钟）
             </button>
-            <p class="text-xs text-gray-600 mb-12">这不会舒服。但你会感谢自己。</p>
+            <p class="text-xs text-gray-600 mb-12" data-i18n="hero.warning">这不会舒服。但你会感谢自己。</p>
             
             <!-- 滚动提示 -->
             <div class="animate-bounce mt-8">
@@ -260,7 +274,7 @@
     <section id="formula" class="py-24 px-6 reveal">
         <div class="max-w-4xl mx-auto">
             <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="formula.title">核心命题</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
+            <p class="text-gray-500 text-center mb-16 text-lg" data-i18n="formula.subtitle">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
 
             <!-- 窄门公式 -->
             <div class="bg-[#0c0c12] border border-[#b8942e]/20 rounded-2xl p-10 mb-16 text-center">
@@ -385,13 +399,13 @@
     <section id="audit" class="py-24 px-6">
         <div class="max-w-2xl mx-auto">
             <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="audit.title">灵魂审计</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">AI 不接受表面答案。持续追问，直到你看见真相。</p>
+            <p class="text-gray-500 text-center mb-16 text-lg" data-i18n="audit.subtitle">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
             <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 min-h-[500px]">
                 <!-- 初始状态 -->
                 <div id="audit-intro" class="text-center py-16">
                     <p class="text-5xl mb-8">🚪</p>
-                    <h3 class="font-serif text-2xl mb-6">准备好了吗？</h3>
+                    <h3 class="font-serif text-2xl mb-6" data-i18n="audit.intro_title">准备好了吗？</h3>
                     <p class="text-gray-500 text-sm mb-10 max-w-md mx-auto leading-relaxed">
                         灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
                         AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
@@ -463,7 +477,7 @@
     <section id="masters" class="py-24 px-6 reveal">
         <div class="max-w-5xl mx-auto">
             <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="masters.title">大师引导者</h2>
-            <p class="text-gray-500 text-center mb-16 text-lg">每位大师都是一扇不同的窄门。选择你的引路人。</p>
+            <p class="text-gray-500 text-center mb-16 text-lg" data-i18n="masters.subtitle">每位大师都是一扇不同的窄门。选择你的引路人。</p>
 
             <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- 动态加载 -->
@@ -486,8 +500,8 @@
     <section id="training" class="py-24 px-6 reveal">
         <div class="max-w-5xl mx-auto">
             <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="training.title">30天穿越训练</h2>
-            <p class="text-gray-500 text-center mb-4 text-lg">从看见到穿越，每天做你最不想做的事</p>
-            <p class="text-gray-600 text-center text-sm mb-16">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
+            <p class="text-gray-500 text-center mb-4 text-lg" data-i18n="training.subtitle">从看见到穿越，每天做你最不想做的事</p>
+            <p class="text-gray-600 text-center text-sm mb-16" data-i18n="training.features">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
 
             <!-- 进度可视化 -->
             <div class="flex justify-center mb-16">
@@ -612,7 +626,7 @@
     <section id="about" class="py-24 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="font-serif text-3xl font-medium mb-8 tracking-tight" data-i18n="about.title">关于窄门</h2>
-            <p class="text-gray-400 leading-relaxed mb-12 text-lg">
+            <p class="text-gray-400 leading-relaxed mb-12 text-lg" data-i18n="about.description">
                 窄门不是一个给你答案的平台。它是一个<strong class="text-white">制造困境并引导穿越</strong>的平台。
                 我们训练人一步一步让自己从人变为神——不是宗教意义的神，是<strong class="text-white">人类潜能的极致释放</strong>。
             </p>
@@ -673,78 +687,7 @@
     <!-- JavaScript -->
     <!-- ============================================================ -->
     
-    <!-- Internationalization -->
-    <script>
-        // Language configuration
-        let currentLang = localStorage.getItem('lang') || 'zh';
-        let i18nData = {};
-        
-        // Load language configuration
-        async function loadLanguageConfig() {
-            try {
-                const response = await fetch('locales/i18n.json');
-                i18nData = await response.json();
-                updatePageContent();
-                updateLangButton();
-            } catch (error) {
-                console.error('Failed to load language config:', error);
-                // Fallback to inline config
-                i18nData = {
-                    zh: { nav: { brand: '窄门 NarrowGate' } },
-                    en: { nav: { brand: 'NarrowGate' } }
-                };
-            }
-        }
-        
-        // Toggle language
-        function toggleLanguage() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            localStorage.setItem('lang', currentLang);
-            updatePageContent();
-            updateLangButton();
-        }
-        
-        // Update page content
-        function updatePageContent() {
-            if (!i18nData[currentLang]) return;
-            
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                const keys = key.split('.');
-                let value = i18nData[currentLang];
-                
-                for (const k of keys) {
-                    if (value && value[k]) {
-                        value = value[k];
-                    } else {
-                        value = null;
-                        break;
-                    }
-                }
-                
-                if (value && typeof value === 'string') {
-                    el.textContent = value;
-                }
-            });
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en-US';
-        }
-        
-        // Update language button
-        function updateLangButton() {
-            const btn = document.getElementById('lang-switch');
-            if (btn) {
-                btn.textContent = currentLang === 'zh' ? 'EN' : '中';
-            }
-        }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadLanguageConfig();
-        });
-    </script>
+    
     <script>
         let currentAuditId = null;
 
@@ -1699,6 +1642,24 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Internationalization Module -->
+    <script src="js/i18n.js"></script>
+        <!-- Service Worker 注册 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 
 </body>
 </html>
