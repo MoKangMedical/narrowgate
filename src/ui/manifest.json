@@ -1,0 +1,27 @@
+{
+    "name": "窄门 NarrowGate",
+    "short_name": "窄门",
+    "description": "让人看见窄门并跨越窄门的进化平台",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050508",
+    "theme_color": "#b8942e",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["lifestyle", "health", "education"],
+    "lang": "zh-CN",
+    "dir": "ltr"
+}
