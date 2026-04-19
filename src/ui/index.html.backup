@@ -17,45 +17,12 @@
             --text: #e8e4dc;
             --text-dim: #6b6860;
             --border: rgba(255,255,255,0.04);
-            
-            /* 统一间距系统 - 8px基准 */
-            --space-1: 4px;
-            --space-2: 8px;
-            --space-3: 12px;
-            --space-4: 16px;
-            --space-5: 20px;
-            --space-6: 24px;
-            --space-8: 32px;
-            --space-10: 40px;
-            --space-12: 48px;
-            --space-16: 64px;
-            --space-20: 80px;
-            --space-24: 96px;
-            
-            /* 字体大小系统 */
-            --text-xs: 12px;
-            --text-sm: 14px;
-            --text-base: 16px;
-            --text-lg: 18px;
-            --text-xl: 20px;
-            --text-2xl: 24px;
-            --text-3xl: 30px;
-            --text-4xl: 36px;
-            --text-5xl: 48px;
-            
-            /* 行高系统 */
-            --leading-tight: 1.25;
-            --leading-normal: 1.5;
-            --leading-relaxed: 1.625;
-            --leading-loose: 1.75;
         }
 
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'Inter', 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
-            font-size: var(--text-base);
-            line-height: var(--leading-relaxed);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
@@ -82,59 +49,30 @@
 
         .gate-visual {
             position: relative;
-            width: 280px;
-            height: 380px;
+            width: 240px;
+            height: 340px;
             margin: 0 auto;
-            perspective: 1000px;
         }
         .gate-wide {
             position: absolute;
             left: 0;
-            width: 180px;
-            height: 380px;
+            width: 160px;
+            height: 340px;
             border: 1px solid rgba(255,255,255,0.06);
             border-radius: 4px 4px 0 0;
             background: linear-gradient(180deg, rgba(15,23,42,0.3), rgba(30,41,59,0.15));
             opacity: 0.3;
-            transform: rotateY(5deg);
-            transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
-        }
-        .gate-wide:hover {
-            opacity: 0.4;
-            transform: rotateY(0deg);
         }
         .gate-narrow {
             position: absolute;
             right: 0;
-            width: 70px;
-            height: 380px;
+            width: 60px;
+            height: 340px;
             border: 1px solid var(--gold);
             border-radius: 2px 2px 0 0;
             background: linear-gradient(180deg, rgba(180,148,46,0.08), rgba(180,148,46,0.02));
             box-shadow: 0 0 40px rgba(180,148,46,0.2), inset 0 0 30px rgba(180,148,46,0.05);
             animation: gateGlow 4s ease-in-out infinite;
-            transform: rotateY(-5deg);
-            transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
-        }
-        .gate-narrow:hover {
-            transform: rotateY(0deg) scale(1.02);
-            box-shadow: 0 0 60px rgba(180,148,46,0.4), inset 0 0 50px rgba(180,148,46,0.1);
-        }
-        .gate-narrow::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, rgba(180,148,46,0.6), transparent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
         }
         .gate-narrow::after {
             content: '';
@@ -149,16 +87,6 @@
         @keyframes gateGlow {
             0%, 100% { box-shadow: 0 0 40px rgba(180,148,46,0.15), inset 0 0 30px rgba(180,148,46,0.03); }
             50% { box-shadow: 0 0 60px rgba(180,148,46,0.35), inset 0 0 40px rgba(180,148,46,0.08); }
-        }
-        .gate-label {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
-            color: var(--gold);
-            opacity: 0.8;
-            letter-spacing: 0.2em;
         }
 
         .dimension-pyramid {
@@ -226,71 +154,6 @@
         ::-webkit-scrollbar-track { background: #050508; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
-        
-        /* 间距工具类 */
-        .space-section { margin-bottom: var(--space-20); }
-        .space-section-large { margin-bottom: var(--space-24); }
-        .space-content { margin-bottom: var(--space-12); }
-        .space-element { margin-bottom: var(--space-6); }
-        .space-element-small { margin-bottom: var(--space-4); }
-        .space-element-large { margin-bottom: var(--space-8); }
-        
-        /* 内边距工具类 */
-        .padding-section { padding: var(--space-20) var(--space-6); }
-        .padding-card { padding: var(--space-8); }
-        .padding-element { padding: var(--space-6); }
-        
-        /* 文字大小工具类 */
-        .text-body { font-size: var(--text-base); line-height: var(--leading-relaxed); }
-        .text-body-large { font-size: var(--text-lg); line-height: var(--leading-relaxed); }
-        .text-small { font-size: var(--text-sm); line-height: var(--leading-normal); }
-        .text-caption { font-size: var(--text-xs); line-height: var(--leading-normal); }
-        
-        /* 响应式间距 */
-        @media (max-width: 768px) {
-            .space-section { margin-bottom: var(--space-16); }
-            .space-section-large { margin-bottom: var(--space-20); }
-            .padding-section { padding: var(--space-16) var(--space-4); }
-            .padding-card { padding: var(--space-6); }
-        }
-        
-        /* 排版工具类 */
-        .heading-hero {
-            font-size: var(--text-5xl);
-            font-weight: 700;
-            line-height: var(--leading-tight);
-            letter-spacing: -0.02em;
-        }
-        .heading-section {
-            font-size: var(--text-3xl);
-            font-weight: 700;
-            line-height: var(--leading-tight);
-            letter-spacing: -0.01em;
-        }
-        .heading-subsection {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            line-height: var(--leading-tight);
-        }
-        .body-large {
-            font-size: var(--text-lg);
-            line-height: var(--leading-loose);
-        }
-        .body {
-            font-size: var(--text-base);
-            line-height: var(--leading-relaxed);
-        }
-        .body-small {
-            font-size: var(--text-sm);
-            line-height: var(--leading-relaxed);
-        }
-        
-        /* 响应式排版 */
-        @media (max-width: 768px) {
-            .heading-hero { font-size: var(--text-4xl); }
-            .heading-section { font-size: var(--text-2xl); }
-            .heading-subsection { font-size: var(--text-lg); }
-        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -298,77 +161,15 @@
     <!-- ============================================================ -->
     <!-- 导航 -->
     <!-- ============================================================ -->
-    <nav class="fixed top-0 w-full z-50 bg-[#050508]/95 backdrop-blur-lg border-b border-[#b8942e]/10">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="relative">
-                    <span class="text-2xl">🚪</span>
-                    <div class="absolute -top-1 -right-1 w-2 h-2 bg-[#b8942e] rounded-full animate-pulse"></div>
-                </div>
-                <div>
-                    <h1 class="font-serif text-xl font-bold text-[#b8942e]">窄门 NarrowGate</h1>
-                    <p class="text-xs text-gray-500 -mt-1">让人看见窄门并跨越窄门</p>
-                </div>
-            </div>
-            <div class="hidden md:flex items-center gap-8">
-                <div class="flex gap-6 text-sm text-gray-400">
-                    <a href="#" class="hover:text-[#b8942e] transition-colors duration-300 relative group">
-                        首页
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#b8942e] transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <div class="relative group">
-                        <a href="#formula" class="hover:text-[#b8942e] transition-colors duration-300 flex items-center gap-1">
-                            公式
-                            <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <div class="absolute top-full left-0 mt-2 w-48 bg-[#0c0c12] border border-[#b8942e]/20 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                            <a href="#formula" class="block px-4 py-2 text-sm text-gray-400 hover:text-[#b8942e] hover:bg-[#b8942e]/10">核心公式</a>
-                            <a href="#dimensions" class="block px-4 py-2 text-sm text-gray-400 hover:text-[#b8942e] hover:bg-[#b8942e]/10">五层进化</a>
-                        </div>
-                    </div>
-                    <a href="#audit" class="hover:text-[#b8942e] transition-colors duration-300 relative group">
-                        灵魂审计
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#b8942e] transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#masters" class="hover:text-[#b8942e] transition-colors duration-300 relative group">
-                        大师
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#b8942e] transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#training" class="hover:text-[#b8942e] transition-colors duration-300 relative group">
-                        30天穿越
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#b8942e] transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="#witness" class="hover:text-[#b8942e] transition-colors duration-300 relative group">
-                        见证人
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#b8942e] transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                </div>
-                <button onclick="startAudit()" class="bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-black font-semibold px-4 py-2 rounded-lg text-sm hover:shadow-lg hover:shadow-[#b8942e]/20 transition-all duration-300 transform hover:scale-105">
-                    开始审计
-                </button>
-            </div>
-            <!-- 移动端菜单按钮 -->
-            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-400 hover:text-[#b8942e] transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-        <!-- 移动端菜单 -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#0c0c12] border-t border-[#b8942e]/10">
-            <div class="px-6 py-4 space-y-3">
-                <a href="#" class="block text-gray-400 hover:text-[#b8942e] transition-colors">首页</a>
-                <a href="#formula" class="block text-gray-400 hover:text-[#b8942e] transition-colors">公式</a>
-                <a href="#dimensions" class="block text-gray-400 hover:text-[#b8942e] transition-colors">五层进化</a>
-                <a href="#audit" class="block text-gray-400 hover:text-[#b8942e] transition-colors">灵魂审计</a>
-                <a href="#masters" class="block text-gray-400 hover:text-[#b8942e] transition-colors">大师</a>
-                <a href="#training" class="block text-gray-400 hover:text-[#b8942e] transition-colors">30天穿越</a>
-                <a href="#witness" class="block text-gray-400 hover:text-[#b8942e] transition-colors">见证人</a>
-                <button onclick="startAudit()" class="w-full bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-black font-semibold px-4 py-2 rounded-lg text-sm">
-                    开始审计
-                </button>
+    <nav class="fixed top-0 w-full z-50 bg-[#050508]/90 backdrop-blur border-b border-white/5">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-xl font-bold text-[#b8942e]">窄门 NarrowGate</h1>
+            <div class="hidden md:flex gap-6 text-sm text-gray-400">
+                <a href="#formula" class="hover:text-white transition">公式</a>
+                <a href="#dimensions" class="hover:text-white transition">五层</a>
+                <a href="#audit" class="hover:text-white transition">灵魂审计</a>
+                <a href="#masters" class="hover:text-white transition">大师</a>
+                <a href="#training" class="hover:text-white transition">培训</a>
             </div>
         </div>
     </nav>
@@ -376,80 +177,27 @@
     <!-- ============================================================ -->
     <!-- Hero -->
     <!-- ============================================================ -->
-    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
-        <!-- 背景装饰 -->
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#b8942e]/5 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#b8942e]/3 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#b8942e]/10 to-transparent rounded-full opacity-30"></div>
-        </div>
-        
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 bg-[#b8942e]/10 border border-[#b8942e]/20 rounded-full px-4 py-2 mb-8 transform hover:scale-105 transition-transform duration-300">
-                <span class="w-2 h-2 bg-[#b8942e] rounded-full animate-pulse"></span>
-                <span class="text-[#b8942e] text-sm font-medium">灵魂进化平台</span>
-                <span class="text-xs text-gray-500">v2.3</span>
-            </div>
-            
-            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-6 opacity-80">NARROW GATE PLATFORM</p>
-            
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-6">NARROW GATE PLATFORM</p>
             <h1 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                <span class="block transform hover:scale-105 transition-transform duration-500">你要进<span class="text-[#b8942e] relative">窄门
-                    <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#b8942e] to-transparent"></span>
-                    <span class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#b8942e] rounded-full animate-ping"></span>
-                </span></span>
+                你要进<span class="text-[#b8942e]">窄门</span>
             </h1>
-            
-            <div class="relative mb-8">
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4 leading-relaxed">
-                    因为引到灭亡，那门是宽的，路是大的，进去的人也多；
-                </p>
-                <p class="text-2xl font-serif text-[#b8942e] max-w-2xl mx-auto mb-4 leading-relaxed font-medium">
-                    引到生命，那门是窄的，路是小的，找着的人也少。
-                </p>
-                <p class="text-sm text-gray-600 mb-12 flex items-center justify-center gap-2">
-                    <span class="w-8 h-px bg-gradient-to-r from-transparent to-[#b8942e]/30"></span>
-                    — 马太福音 7:13-14
-                    <span class="w-8 h-px bg-gradient-to-l from-transparent to-[#b8942e]/30"></span>
-                </p>
-            </div>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">
+                因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
+                引到生命，那门是窄的，路是小的，找着的人也少。
+            </p>
+            <p class="text-sm text-gray-600 mb-12">— 马太福音 7:13-14</p>
 
-            <div class="gate-visual mb-16 transform hover:scale-105 transition-transform duration-500">
+            <div class="gate-visual mb-12">
                 <div class="gate-wide"></div>
                 <div class="gate-narrow"></div>
-                <div class="gate-label">窄门</div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-                <button onclick="startAudit()" class="btn-gold text-lg group relative overflow-hidden transform hover:scale-105 transition-all duration-300">
-                    <span class="relative z-10">开始灵魂审计 →</span>
-                    <div class="absolute inset-0 bg-gradient-to-r from-[#d4af37] to-[#f0d78c] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </button>
-                <button class="text-[#b8942e] border border-[#b8942e]/30 px-6 py-3 rounded-lg hover:bg-[#b8942e]/10 transition-all duration-300 transform hover:scale-105">
-                    了解更多
-                </button>
-            </div>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-gray-500">
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-[#b8942e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                    </svg>
-                    这不会舒服。但你会感谢自己。
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-[#b8942e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                    30天穿越训练
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4 text-[#b8942e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                    见证人网络
-                </div>
-            </div>
+            <button onclick="startAudit()" class="btn-gold text-lg">
+                开始灵魂审计 →
+            </button>
+            <p class="text-xs text-gray-600 mt-4">这不会舒服。但你会感谢自己。</p>
         </div>
     </section>
 
@@ -457,114 +205,59 @@
     <!-- 核心命题 -->
     <!-- ============================================================ -->
     <section id="formula" class="py-20 px-6 reveal">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-3xl font-bold mb-4">核心命题</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
-            </div>
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">核心命题</h2>
+            <p class="text-gray-500 text-center mb-12">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
 
             <!-- 窄门公式 -->
-            <div class="bg-gradient-to-br from-[#0c0c12] to-[#1a1a25] border border-[#b8942e]/20 rounded-2xl p-8 mb-12 relative overflow-hidden">
-                <!-- 装饰元素 -->
-                <div class="absolute top-0 right-0 w-32 h-32 bg-[#b8942e]/5 rounded-full blur-2xl"></div>
-                <div class="absolute bottom-0 left-0 w-32 h-32 bg-[#b8942e]/3 rounded-full blur-2xl"></div>
-                
-                <div class="relative z-10">
-                    <div class="text-center mb-8">
-                        <h3 class="text-xl font-bold text-white mb-2">窄门公式</h3>
-                        <p class="text-gray-400 text-sm">量化你的成长路径</p>
+            <div class="bg-[#0c0c12] border border-[#b8942e]/20 rounded-xl p-8 mb-12 text-center">
+                <div class="flex items-center justify-center gap-4 flex-wrap">
+                    <div class="bg-red-900/20 border border-red-500/30 rounded-lg px-6 py-4">
+                        <p class="text-red-400 text-sm font-semibold mb-1">痛苦回避度</p>
+                        <p class="text-3xl font-bold text-red-300">85</p>
+                        <p class="text-xs text-gray-500 mt-1">你有多不想面对</p>
                     </div>
-                    
-                    <div class="flex items-center justify-center gap-6 flex-wrap">
-                        <div class="bg-red-900/20 border border-red-500/30 rounded-xl px-8 py-6 min-w-[180px] transform hover:scale-105 transition-transform duration-300">
-                            <p class="text-red-400 text-sm font-semibold mb-2">痛苦回避度</p>
-                            <p class="text-4xl font-bold text-red-300 mb-2">85</p>
-                            <p class="text-xs text-gray-500">你有多不想面对</p>
-                            <div class="mt-3 h-1 bg-red-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-red-500 rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="text-[#b8942e] text-3xl font-bold">×</div>
-                        
-                        <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl px-8 py-6 min-w-[180px] transform hover:scale-105 transition-transform duration-300">
-                            <p class="text-blue-400 text-sm font-semibold mb-2">成长杠杆率</p>
-                            <p class="text-4xl font-bold text-blue-300 mb-2">90</p>
-                            <p class="text-xs text-gray-500">穿越后能改变多少</p>
-                            <div class="mt-3 h-1 bg-blue-900/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-blue-500 rounded-full" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="text-[#b8942e] text-3xl font-bold">=</div>
-                        
-                        <div class="bg-gradient-to-br from-[#2a1a0a] to-[#3a2a1a] border border-[#b8942e]/40 rounded-xl px-8 py-6 min-w-[180px] transform hover:scale-105 transition-transform duration-300">
-                            <p class="text-[#b8942e] text-sm font-semibold mb-2">窄门优先级</p>
-                            <p class="text-4xl font-bold text-[#b8942e] mb-2">7650</p>
-                            <p class="text-xs text-gray-500">越高越需要穿越</p>
-                            <div class="mt-3 h-1 bg-[#b8942e]/30 rounded-full overflow-hidden">
-                                <div class="h-full bg-[#b8942e] rounded-full" style="width: 76.5%"></div>
-                            </div>
-                        </div>
+                    <span class="text-[#b8942e] text-2xl font-bold">×</span>
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg px-6 py-4">
+                        <p class="text-blue-400 text-sm font-semibold mb-1">成长杠杆率</p>
+                        <p class="text-3xl font-bold text-blue-300">90</p>
+                        <p class="text-xs text-gray-500 mt-1">穿越后能改变多少</p>
+                    </div>
+                    <span class="text-[#b8942e] text-2xl font-bold">=</span>
+                    <div class="bg-[#2a1a0a] border border-[#b8942e]/40 rounded-lg px-6 py-4">
+                        <p class="text-[#b8942e] text-sm font-semibold mb-1">窄门优先级</p>
+                        <p class="text-3xl font-bold text-[#b8942e]">7650</p>
+                        <p class="text-xs text-gray-500 mt-1">越高越需要穿越</p>
                     </div>
                 </div>
             </div>
 
             <!-- 宽门 vs 窄门 -->
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-[#0c0c12] border border-gray-700/50 rounded-2xl p-8 hover:border-gray-600/50 transition-all duration-300 group">
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-3xl">🚪</span>
-                        </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-[#0c0c12] border border-gray-700 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-4xl">🚪</span>
                         <h3 class="text-xl font-bold text-gray-400 mt-2">宽门</h3>
-                        <p class="text-xs text-gray-600 mt-1">门是宽的，路是大的，进去的人也多</p>
+                        <p class="text-xs text-gray-600">门是宽的，路是大的，进去的人也多</p>
                     </div>
-                    <ul class="space-y-4 text-sm text-gray-400">
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
-                            <span class="w-6 h-6 bg-gray-700/50 rounded-full flex items-center justify-center text-gray-500">○</span>
-                            <span>容易、舒服、多数人走</span>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
-                            <span class="w-6 h-6 bg-gray-700/50 rounded-full flex items-center justify-center text-gray-500">○</span>
-                            <span>回避真实自我</span>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
-                            <span class="w-6 h-6 bg-gray-700/50 rounded-full flex items-center justify-center text-gray-500">○</span>
-                            <span>短期安逸，长期后悔</span>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-800/30 transition-colors">
-                            <span class="w-6 h-6 bg-gray-700/50 rounded-full flex items-center justify-center text-gray-500">○</span>
-                            <span>95%的人选择</span>
-                        </li>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 容易、舒服、多数人走</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 回避真实自我</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 短期安逸，长期后悔</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 95%的人选择</li>
                     </ul>
                 </div>
-                
-                <div class="bg-gradient-to-br from-[#2a1a0a] to-[#1a1a25] border border-[#b8942e]/30 rounded-2xl p-8 hover:border-[#b8942e]/50 transition-all duration-300 group">
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 bg-[#b8942e]/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-3xl">🚪</span>
-                        </div>
+                <div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-4xl">🚪</span>
                         <h3 class="text-xl font-bold text-[#b8942e] mt-2">窄门</h3>
-                        <p class="text-xs text-[#b8942e]/60 mt-1">门是窄的，路是小的，找着的人也少</p>
+                        <p class="text-xs text-[#b8942e]/60">门是窄的，路是小的，找着的人也少</p>
                     </div>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-[#b8942e]/10 transition-colors">
-                            <span class="w-6 h-6 bg-[#b8942e]/20 rounded-full flex items-center justify-center text-[#b8942e]">●</span>
-                            <span>艰难、痛苦、少数人走</span>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-[#b8942e]/10 transition-colors">
-                            <span class="w-6 h-6 bg-[#b8942e]/20 rounded-full flex items-center justify-center text-[#b8942e]">●</span>
-                            <span>面对真实自我</span>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-[#b8942e]/10 transition-colors">
-                            <span class="w-6 h-6 bg-[#b8942e]/20 rounded-full flex items-center justify-center text-[#b8942e]">●</span>
-                            <span>短期痛苦，长期释放</span>
-                        </li>
-                        <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-[#b8942e]/10 transition-colors">
-                            <span class="w-6 h-6 bg-[#b8942e]/20 rounded-full flex items-center justify-center text-[#b8942e]">●</span>
-                            <span>5%的人选择</span>
-                        </li>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 艰难、痛苦、少数人走</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 面对真实自我</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 短期痛苦，长期释放</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 5%的人选择</li>
                     </ul>
                 </div>
             </div>
@@ -575,108 +268,44 @@
     <!-- 五层进化 -->
     <!-- ============================================================ -->
     <section id="dimensions" class="py-20 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-3xl font-bold mb-4">五层进化架构</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">从凡人到封神——每层都有一个窄门在等你</p>
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">五层进化架构</h2>
+            <p class="text-gray-500 text-center mb-16">从凡人到封神——每层都有一个窄门在等你</p>
+
+            <div class="space-y-3">
+                <div class="pyramid-level rounded-lg" style="width:40%;background:linear-gradient(90deg,#1a1205,#2a1a0a);border:1px solid #b8942e;">
+                    <span class="text-[#b8942e] text-sm">五 · 封神</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:55%;background:linear-gradient(90deg,#15120a,#252015);border:1px solid #a08030;">
+                    <span class="text-[#b8942e]/80 text-sm">四 · 觉醒</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:70%;background:linear-gradient(90deg,#12100a,#1e1a10);border:1px solid #706020;">
+                    <span class="text-[#b8942e]/60 text-sm">三 · 穿越</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:85%;background:linear-gradient(90deg,#101010,#1a1a18);border:1px solid #505040;">
+                    <span class="text-gray-400 text-sm">二 · 看见</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:100%;background:linear-gradient(90deg,#0f0f0f,#171717);border:1px solid #333;">
+                    <span class="text-gray-500 text-sm">一 · 凡人</span>
+                </div>
             </div>
 
-            <!-- 金字塔可视化 -->
-            <div class="relative mb-16">
-                <div class="flex flex-col items-center">
-                    <!-- 第5层 -->
-                    <div class="pyramid-level rounded-xl w-[40%] h-16 bg-gradient-to-r from-[#1a1205] to-[#2a1a0a] border border-[#b8942e] mb-2 flex items-center justify-center hover:scale-[1.02] transition-transform duration-300 shadow-lg shadow-[#b8942e]/10">
-                        <div class="text-center">
-                            <span class="text-[#b8942e] text-sm font-bold">五 · 封神</span>
-                            <p class="text-[10px] text-[#b8942e]/60">神性层 · 守门人</p>
-                        </div>
-                    </div>
-                    <!-- 第4层 -->
-                    <div class="pyramid-level rounded-xl w-[55%] h-16 bg-gradient-to-r from-[#15120a] to-[#252015] border border-[#a08030] mb-2 flex items-center justify-center hover:scale-[1.02] transition-transform duration-300 shadow-lg shadow-[#a08030]/10">
-                        <div class="text-center">
-                            <span class="text-[#b8942e]/80 text-sm font-bold">四 · 觉醒</span>
-                            <p class="text-[10px] text-[#a08030]/60">精通层 · 架构师</p>
-                        </div>
-                    </div>
-                    <!-- 第3层 -->
-                    <div class="pyramid-level rounded-xl w-[70%] h-16 bg-gradient-to-r from-[#12100a] to-[#1e1a10] border border-[#706020] mb-2 flex items-center justify-center hover:scale-[1.02] transition-transform duration-300 shadow-lg shadow-[#706020]/10">
-                        <div class="text-center">
-                            <span class="text-[#b8942e]/60 text-sm font-bold">三 · 穿越</span>
-                            <p class="text-[10px] text-[#706020]/60">突破层 · 炼金术士</p>
-                        </div>
-                    </div>
-                    <!-- 第2层 -->
-                    <div class="pyramid-level rounded-xl w-[85%] h-16 bg-gradient-to-r from-[#101010] to-[#1a1a18] border border-[#505040] mb-2 flex items-center justify-center hover:scale-[1.02] transition-transform duration-300 shadow-lg shadow-[#505040]/10">
-                        <div class="text-center">
-                            <span class="text-gray-400 text-sm font-bold">二 · 看见</span>
-                            <p class="text-[10px] text-gray-500">觉醒层 · 清醒者</p>
-                        </div>
-                    </div>
-                    <!-- 第1层 -->
-                    <div class="pyramid-level rounded-xl w-full h-16 bg-gradient-to-r from-[#0f0f0f] to-[#171717] border border-[#333] flex items-center justify-center hover:scale-[1.02] transition-transform duration-300 shadow-lg shadow-[#333]/10">
-                        <div class="text-center">
-                            <span class="text-gray-500 text-sm font-bold">一 · 凡人</span>
-                            <p class="text-[10px] text-gray-600">睡眠层 · 苏格拉底</p>
-                        </div>
-                    </div>
+            <div class="mt-12 grid gap-4">
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">🚪 凡人 → 看见</h3>
+                    <p class="text-sm text-gray-400">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
                 </div>
-                
-                <!-- 层级说明连接线 -->
-                <div class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#b8942e] via-[#706020] to-[#333] opacity-20"></div>
-            </div>
-
-            <!-- 详细说明 -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/30 transition-all duration-300 group">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-[#b8942e]/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-xl">🚪</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-[#b8942e]">凡人 → 看见</h3>
-                            <p class="text-xs text-gray-500">第一层：承认枷锁</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-400 leading-relaxed">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">⚡ 看见 → 穿越</h3>
+                    <p class="text-sm text-gray-400">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
                 </div>
-                
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/30 transition-all duration-300 group">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-[#b8942e]/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-xl">⚡</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-[#b8942e]">看见 → 穿越</h3>
-                            <p class="text-xs text-gray-500">第二层：每日行动</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-400 leading-relaxed">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">🔥 穿越 → 觉醒</h3>
+                    <p class="text-sm text-gray-400">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
                 </div>
-                
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/30 transition-all duration-300 group">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-[#b8942e]/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-xl">🔥</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-[#b8942e]">穿越 → 觉醒</h3>
-                            <p class="text-xs text-gray-500">第三层：教导他人</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-400 leading-relaxed">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
-                </div>
-                
-                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-[#b8942e]/30 transition-all duration-300 group">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 bg-[#b8942e]/10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <span class="text-xl">👑</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-[#b8942e]">觉醒 → 封神</h3>
-                            <p class="text-xs text-gray-500">第四层：构建系统</p>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-400 leading-relaxed">构建一个让更多人看见窄门的系统。成为守门人。</p>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">👑 觉醒 → 封神</h3>
+                    <p class="text-sm text-gray-400">构建一个让更多人看见窄门的系统。成为守门人。</p>
                 </div>
             </div>
         </div>
@@ -685,83 +314,66 @@
     <!-- ============================================================ -->
     <!-- 灵魂审计（核心交互区） -->
     <!-- ============================================================ -->
-    <section id="audit" class="py-20 px-6 relative">
-        <!-- 背景装饰 -->
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#b8942e]/3 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div class="max-w-3xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-3xl font-bold mb-4">灵魂审计</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto">AI 不接受表面答案。持续追问，直到你看见真相。</p>
-            </div>
+    <section id="audit" class="py-20 px-6">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
-            <div id="audit-container" class="bg-gradient-to-br from-[#0c0c12] to-[#1a1a25] border border-white/5 rounded-2xl p-8 min-h-[500px] relative overflow-hidden">
-                <!-- 装饰元素 -->
-                <div class="absolute top-0 right-0 w-32 h-32 bg-[#b8942e]/5 rounded-full blur-2xl"></div>
-                <div class="absolute bottom-0 left-0 w-32 h-32 bg-[#b8942e]/3 rounded-full blur-2xl"></div>
-                
+            <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 min-h-[400px]">
                 <!-- 初始状态 -->
-                <div id="audit-intro" class="text-center py-16 relative z-10">
-                    <div class="w-20 h-20 bg-[#b8942e]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <span class="text-4xl">🚪</span>
-                    </div>
-                    <h3 class="font-serif text-2xl mb-4">准备好了吗？</h3>
-                    <p class="text-gray-500 mb-8 max-w-md mx-auto leading-relaxed">
+                <div id="audit-intro" class="text-center py-12">
+                    <p class="text-4xl mb-6">🚪</p>
+                    <h3 class="font-serif text-xl mb-4">准备好了吗？</h3>
+                    <p class="text-gray-500 text-sm mb-8 max-w-md mx-auto">
                         灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
                         AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
                     </p>
-                    <button onclick="startAudit()" class="bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-black font-semibold px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/20 transition-all duration-300 transform hover:scale-105">
+                    <button onclick="startAudit()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
                         开始审计
                     </button>
                 </div>
 
                 <!-- 对话状态 -->
-                <div id="audit-chat" class="hidden relative z-10">
-                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
-                        <div class="flex items-center gap-4">
-                            <div class="bg-[#b8942e]/10 rounded-lg px-3 py-2">
-                                <span class="text-xs text-gray-500">当前维度</span>
-                                <span id="current-dimension" class="ml-2 text-[#b8942e] font-semibold">认知</span>
-                            </div>
-                            <div class="flex gap-4">
-                                <div class="text-center">
-                                    <span class="text-xs text-gray-500 block">已对话</span>
-                                    <span id="conversation-count" class="text-lg font-bold text-white">0</span>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-xs text-gray-500 block">枷锁</span>
-                                    <span id="shackle-count" class="text-lg font-bold text-[#b8942e]">0</span>
-                                </div>
-                            </div>
+                <div id="audit-chat" class="hidden">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+                        <div>
+                            <span class="text-xs text-gray-500">当前维度</span>
+                            <span id="current-dimension" class="ml-2 text-[#b8942e] font-semibold">认知</span>
                         </div>
-                        <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-[#b8942e] transition-colors">
-                            结束审计
+                        <div>
+                            <span class="text-xs text-gray-500">已对话</span>
+                            <span id="conversation-count" class="ml-2 text-gray-300">0</span>
+                            <span class="text-xs text-gray-500 ml-4">枷锁</span>
+                            <span id="shackle-count" class="ml-2 text-gray-300">0</span>
+                        </div>
+                    </div>
+
+                    <div id="chat-messages" class="space-y-4 mb-6 max-h-[400px] overflow-y-auto"></div>
+
+                    <div id="typing" class="hidden mb-4">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+        let selectedMasterId = "";
+                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
+        let selectedMasterId = "";
+                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition text-sm">
+                            发送
                         </button>
                     </div>
 
-                    <div id="chat-messages" class="space-y-4 mb-8 max-h-[400px] overflow-y-auto pr-2"></div>
-
-                    <div id="typing" class="hidden mb-6">
-                        <div class="typing-indicator flex items-center gap-2">
-                            <span class="w-2 h-2 bg-[#b8942e] rounded-full animate-bounce"></span>
-                            <span class="w-2 h-2 bg-[#b8942e] rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
-                            <span class="w-2 h-2 bg-[#b8942e] rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
-                            <span class="text-xs text-gray-500 ml-2">AI正在思考...</span>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-xl px-5 py-4 text-white focus:border-[#b8942e] focus:ring-2 focus:ring-[#b8942e]/20 focus:outline-none transition-all duration-300" onkeydown="if(event.key==='Enter')submitAnswer()">
-                        <button onclick="submitAnswer()" class="bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-black font-semibold px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/20 transition-all duration-300 transform hover:scale-105">
-                            发送
+                    <div class="mt-4 text-center">
+                        <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">
+                            结束审计，查看结果
                         </button>
                     </div>
                 </div>
 
                 <!-- 结果状态 -->
-                <div id="audit-result" class="hidden text-center py-12 relative z-10">
+                <div id="audit-result" class="hidden text-center py-8">
                     <div id="result-content"></div>
                 </div>
             </div>
@@ -885,6 +497,100 @@
                     </div>
                 </div>
                 <p class="text-center text-xs text-gray-600 mt-4">每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 课程界面 -->
+    <!-- ============================================================ -->
+    <section id="course" class="py-20 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">30天穿越课程</h2>
+            <p class="text-gray-500 text-center mb-8">沉浸式学习体验，每天一课，逐步穿越</p>
+            
+            <!-- 进度条 -->
+            <div class="mb-12">
+                <div class="flex justify-between text-sm text-gray-500 mb-2">
+                    <span>学习进度</span>
+                    <span id="course-progress-text">0%</span>
+                </div>
+                <div class="w-full bg-[#0c0c12] rounded-full h-2">
+                    <div id="course-progress-bar" class="bg-gradient-to-r from-[#b8942e] to-[#d4af37] h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-600 mt-2">
+                    <span>第1天</span>
+                    <span>第30天</span>
+                </div>
+            </div>
+            
+            <!-- 当前课程卡片 -->
+            <div id="current-course-card" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <span class="text-xs text-gray-500">第 <span id="current-day-number">1</span> 天</span>
+                        <h3 id="current-day-title" class="text-xl font-bold mt-1">加载中...</h3>
+                    </div>
+                    <div class="text-right">
+                        <span id="current-day-difficulty" class="text-xs bg-red-900/30 text-red-400 px-2 py-1 rounded">难度 3</span>
+                        <span id="current-day-xp" class="text-xs text-gray-500 ml-2">+10 XP</span>
+                    </div>
+                </div>
+                <p id="current-day-theme" class="text-[#b8942e] text-sm mb-4">认知</p>
+                <div id="current-day-content" class="text-gray-400 text-sm leading-relaxed mb-6">
+                    <p>加载课程内容中...</p>
+                </div>
+                
+                <!-- 挑战卡片 -->
+                <div class="bg-[#050508] border border-white/5 rounded-lg p-4 mb-6">
+                    <h4 class="text-white font-semibold mb-2">🎯 今日挑战</h4>
+                    <p id="current-day-challenge" class="text-gray-400 text-sm">加载挑战中...</p>
+                </div>
+                
+                <!-- 反思问题 -->
+                <div class="mb-6">
+                    <h4 class="text-white font-semibold mb-3">💭 反思问题</h4>
+                    <div id="reflection-questions" class="space-y-3">
+                        <div class="bg-[#050508] border border-white/5 rounded-lg p-3">
+                            <p class="text-gray-400 text-sm">问题加载中...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 金句 -->
+                <div class="border-t border-white/5 pt-4">
+                    <blockquote id="current-day-quote" class="text-[#b8942e] text-sm italic text-center">
+                        "加载金句中..."
+                    </blockquote>
+                </div>
+            </div>
+            
+            <!-- 学习日记 -->
+            <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">📝 学习日记</h3>
+                <p class="text-gray-500 text-sm mb-4">记录你的穿越感悟，见证自己的成长</p>
+                <textarea id="learning-journal" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none resize-none" rows="4" placeholder="写下你今天的学习感悟、挑战经历或反思..."></textarea>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-xs text-gray-600">每篇日记 +5 XP</span>
+                    <button onclick="saveJournal()" class="bg-[#b8942e] text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#b8973d] transition">
+                        保存日记
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 课程导航 -->
+            <div class="flex justify-between items-center">
+                <button id="prev-day-btn" onclick="prevDay()" class="flex items-center gap-2 text-gray-500 hover:text-white transition">
+                    <span>←</span>
+                    <span>上一天</span>
+                </button>
+                <div class="text-center">
+                    <span id="day-indicator" class="text-sm text-gray-500">第 1 天 / 共 30 天</span>
+                </div>
+                <button id="next-day-btn" onclick="nextDay()" class="flex items-center gap-2 text-gray-500 hover:text-white transition">
+                    <span>下一天</span>
+                    <span>→</span>
+                </button>
             </div>
         </div>
     </section>
@@ -1334,6 +1040,122 @@
         }
         loadWitnesses();
         loadEvolution();
+        
+        // Course Interface
+        let currentDay = 1;
+        const totalDays = 30;
+        
+        async function loadCourseDay(day) {
+            try {
+                const data = await apiCall('/api/course/day/' + day, 'GET');
+                updateCourseUI(data);
+                currentDay = day;
+                updateDayIndicator();
+            } catch(e) {
+                console.error('加载课程失败:', e);
+                // Demo模式
+                updateCourseUIDemo(day);
+            }
+        }
+        
+        function updateCourseUI(data) {
+            const content = data.content;
+            document.getElementById('current-day-number').textContent = data.day;
+            document.getElementById('current-day-title').textContent = content.title;
+            document.getElementById('current-day-theme').textContent = content.theme;
+            document.getElementById('current-day-content').innerHTML = content.content;
+            document.getElementById('current-day-challenge').textContent = content.challenge;
+            document.getElementById('current-day-quote').textContent = content.quote;
+            document.getElementById('current-day-difficulty').textContent = '难度 ' + content.difficulty;
+            document.getElementById('current-day-xp').textContent = '+' + content.xp_reward + ' XP';
+            
+            // 更新反思问题
+            const questionsContainer = document.getElementById('reflection-questions');
+            questionsContainer.innerHTML = content.reflection_questions.map(function(q) { 
+                return '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                    '<p class="text-gray-400 text-sm">' + q + '</p>' +
+                '</div>';
+            }).join('');
+            
+            // 更新进度条
+            const progressPercent = (data.day / totalDays) * 100;
+            document.getElementById('course-progress-bar').style.width = progressPercent + '%';
+            document.getElementById('course-progress-text').textContent = Math.round(progressPercent) + '%';
+        }
+        
+        function updateCourseUIDemo(day) {
+            document.getElementById('current-day-number').textContent = day;
+            document.getElementById('current-day-title').textContent = '第' + day + '天课程';
+            document.getElementById('current-day-theme').textContent = '通用';
+            document.getElementById('current-day-content').innerHTML = '<p>今天是30天穿越训练的第' + day + '天。每一天都是新的开始，每一天都是穿越的机会。</p>';
+            document.getElementById('current-day-challenge').textContent = '完成今天的挑战';
+            document.getElementById('current-day-quote').textContent = '每一天都是新的开始。';
+            document.getElementById('current-day-difficulty').textContent = '难度 5';
+            document.getElementById('current-day-xp').textContent = '+10 XP';
+            
+            // 更新反思问题
+            const questionsContainer = document.getElementById('reflection-questions');
+            questionsContainer.innerHTML = 
+                '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                    '<p class="text-gray-400 text-sm">你今天学到了什么？</p>' +
+                '</div>' +
+                '<div class="bg-[#050508] border border-white/5 rounded-lg p-3">' +
+                    '<p class="text-gray-400 text-sm">你如何应用到生活中？</p>' +
+                '</div>';
+            
+            // 更新进度条
+            const progressPercent = (day / totalDays) * 100;
+            document.getElementById('course-progress-bar').style.width = progressPercent + '%';
+            document.getElementById('course-progress-text').textContent = Math.round(progressPercent) + '%';
+        }
+        
+        function updateDayIndicator() {
+            document.getElementById('day-indicator').textContent = '第 ' + currentDay + ' 天 / 共 ' + totalDays + ' 天';
+            
+            // 更新导航按钮状态
+            document.getElementById('prev-day-btn').disabled = currentDay <= 1;
+            document.getElementById('next-day-btn').disabled = currentDay >= totalDays;
+            
+            document.getElementById('prev-day-btn').classList.toggle('opacity-50', currentDay <= 1);
+            document.getElementById('next-day-btn').classList.toggle('opacity-50', currentDay >= totalDays);
+        }
+        
+        function prevDay() {
+            if (currentDay > 1) {
+                loadCourseDay(currentDay - 1);
+            }
+        }
+        
+        function nextDay() {
+            if (currentDay < totalDays) {
+                loadCourseDay(currentDay + 1);
+            }
+        }
+        
+        async function saveJournal() {
+            const journalText = document.getElementById('learning-journal').value.trim();
+            if (!journalText) {
+                alert('请先写点什么再保存');
+                return;
+            }
+            
+            try {
+                // 这里可以调用API保存日记
+                // await apiCall('/api/journal/save', 'POST', { 
+                //     user_id: 'user_' + Date.now(),
+                //     day: currentDay,
+                //     content: journalText 
+                // });
+                
+                alert('日记保存成功！+5 XP');
+                document.getElementById('learning-journal').value = '';
+            } catch(e) {
+                alert('保存失败，请重试');
+            }
+        }
+        
+        // 初始化课程界面
+        loadCourseDay(1);
     </script>
     <section id="section-witness" class="py-20 px-6"><div class="max-w-4xl mx-auto"><h2 class="font-serif text-3xl font-bold mb-4 text-center">见证人网络</h2><p class="text-gray-400 text-center mb-12">你的进化需要被看见。</p><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl font-bold mb-4">添加见证人</h3><div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6"><input id="witness-name" type="text" placeholder="见证人姓名" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><input id="witness-email" type="email" placeholder="邮箱（可选）" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><select id="witness-relationship" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><option value="朋友">朋友</option><option value="家人">家人</option><option value="同事">同事</option><option value="导师">导师</option></select><button onclick="addWitness()" class="w-full py-3 rounded-lg bg-[#b8942e] text-black font-semibold hover:bg-[#b8973d] transition">添加见证人</button></div></div><div><h3 class="text-xl font-bold mb-4">我的见证人</h3><div id="witness-list" class="space-y-3"><p class="text-gray-500 text-sm">还没有添加见证人</p></div></div></div></div></section>
     <section id="section-evolution" class="py-20 px-6 bg-[#050508]">

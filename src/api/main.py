@@ -26,6 +26,7 @@ from core.database import Database
 from core.mimo_client import MIMOClient, MIMOConfig
 from core.witness import WitnessNetwork
 from core.evolution import EvolutionPyramid
+from core.monologue_prompts import get_random_prompt, get_welcome_message, get_mood_options
 
 # ============================================================
 # App
@@ -641,6 +642,68 @@ async def record_breakthrough(req: EvolutionRequest):
 async def record_evolution_crossing(req: EvolutionRequest):
     """记录穿越完成（进化版）"""
     return evolution_pyramid.record_crossing_completion(req.user_id, req.gate_name)
+
+
+# ============================================================
+# 深夜独白 API
+# ============================================================
+
+class StartMonologueRequest(BaseModel):
+    user_id: str
+
+class SaveMonologueRequest(BaseModel):
+    monologue_id: str
+    content: str
+    mood: str = ""
+
+@app.post("/api/monologue/start")
+async def start_monologue(req: StartMonologueRequest):
+    """开始深夜独白（获取引导问题）"""
+    import random
+    from datetime import datetime
+    
+    hour = datetime.now().hour
+    is_night = hour >= 22 or hour < 5
+    
+    prompt = get_random_prompt()
+    monologue_id = db.create_monologue(req.user_id, prompt)
+    
+    return {
+        "monologue_id": monologue_id,
+        "prompt": prompt,
+        "welcome": get_welcome_message(),
+        "is_night": is_night,
+        "moods": get_mood_options(),
+    }
+
+@app.post("/api/monologue/save")
+async def save_monologue(req: SaveMonologueRequest):
+    """保存独白内容"""
+    monologue = db.get_monologue(req.monologue_id)
+    if not monologue:
+        raise HTTPException(status_code=404, detail="独白记录不存在")
+    
+    db.save_monologue(req.monologue_id, req.content, req.mood)
+    
+    return {
+        "status": "saved",
+        "monologue_id": req.monologue_id,
+        "word_count": len(req.content),
+    }
+
+@app.get("/api/monologue/history/{user_id}")
+async def get_monologue_history(user_id: str, limit: int = 10):
+    """获取独白历史"""
+    monologues = db.get_monologues(user_id, limit)
+    return {
+        "monologues": monologues,
+        "total": len(monologues),
+    }
+
+@app.get("/api/monologue/stats/{user_id}")
+async def get_monologue_stats(user_id: str):
+    """获取独白统计数据"""
+    return db.get_monologue_stats(user_id)
 
 
 # ============================================================

@@ -113,6 +113,20 @@ class Database:
                     FOREIGN KEY (user_id) REFERENCES users(id)
                 );
 
+                CREATE TABLE IF NOT EXISTS monologues (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT,
+                    prompt TEXT,
+                    content TEXT DEFAULT '',
+                    mood TEXT DEFAULT '',
+                    word_count INTEGER DEFAULT 0,
+                    created_at TEXT,
+                    completed_at TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+
+                CREATE INDEX IF NOT EXISTS idx_monologues_user ON monologues(user_id);
+
                 CREATE INDEX IF NOT EXISTS idx_audits_user ON audits(user_id);
                 CREATE INDEX IF NOT EXISTS idx_responses_audit ON audit_responses(audit_id);
                 CREATE INDEX IF NOT EXISTS idx_crossings_user ON crossings(user_id);
@@ -355,6 +369,80 @@ class Database:
                 (user_id,),
             ).fetchall()
             return [dict(r) for r in rows]
+
+    # ============================================================
+    # 深夜独白
+    # ============================================================
+
+    def create_monologue(self, user_id: str, prompt: str) -> str:
+        """创建独白记录"""
+        monologue_id = f"mono_{uuid.uuid4().hex[:12]}"
+        now = datetime.now().isoformat()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO monologues (id, user_id, prompt, created_at)
+                   VALUES (?, ?, ?, ?)""",
+                (monologue_id, user_id, prompt, now),
+            )
+        return monologue_id
+
+    def save_monologue(self, monologue_id: str, content: str, mood: str = None):
+        """保存独白内容"""
+        now = datetime.now().isoformat()
+        word_count = len(content)
+        with self._connect() as conn:
+            conn.execute(
+                """UPDATE monologues 
+                   SET content = ?, mood = ?, word_count = ?, completed_at = ?
+                   WHERE id = ?""",
+                (content, mood or '', word_count, now, monologue_id),
+            )
+
+    def get_monologue(self, monologue_id: str) -> Optional[dict]:
+        """获取单条独白"""
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM monologues WHERE id = ?", (monologue_id,)
+            ).fetchone()
+            return dict(row) if row else None
+
+    def get_monologues(self, user_id: str, limit: int = 10) -> List[dict]:
+        """获取用户的独白历史"""
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT * FROM monologues 
+                   WHERE user_id = ? AND completed_at IS NOT NULL
+                   ORDER BY created_at DESC LIMIT ?""",
+                (user_id, limit),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+    def get_monologue_stats(self, user_id: str) -> dict:
+        """获取独白统计数据"""
+        with self._connect() as conn:
+            total = conn.execute(
+                "SELECT COUNT(*) FROM monologues WHERE user_id = ? AND completed_at IS NOT NULL",
+                (user_id,),
+            ).fetchone()[0]
+            
+            total_words = conn.execute(
+                "SELECT COALESCE(SUM(word_count), 0) FROM monologues WHERE user_id = ? AND completed_at IS NOT NULL",
+                (user_id,),
+            ).fetchone()[0]
+            
+            # 最近7天的独白数
+            from datetime import timedelta
+            week_ago = (datetime.now() - timedelta(days=7)).isoformat()
+            week_count = conn.execute(
+                "SELECT COUNT(*) FROM monologues WHERE user_id = ? AND completed_at IS NOT NULL AND created_at >= ?",
+                (user_id, week_ago),
+            ).fetchone()[0]
+            
+            return {
+                "total_monologues": total,
+                "total_words": total_words,
+                "week_count": week_count,
+            }
 
     # ============================================================
     # 统计

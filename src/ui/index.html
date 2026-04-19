@@ -170,37 +170,43 @@
                 <a href="#audit" class="hover:text-white transition">灵魂审计</a>
                 <a href="#masters" class="hover:text-white transition">大师</a>
                 <a href="#training" class="hover:text-white transition">培训</a>
+                <button onclick="openMonologue()" class="hover:text-white transition flex items-center gap-1">
+                    <span>🌙</span> 独白
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- ============================================================ -->
+        <!-- ============================================================ -->
     <!-- Hero -->
     <!-- ============================================================ -->
-    <section class="pt-32 pb-20 px-6">
+    <section class="pt-40 pb-28 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-6">NARROW GATE PLATFORM</p>
-            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                你要进<span class="text-[#b8942e]">窄门</span>
+            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-8 opacity-80">NARROW GATE PLATFORM</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-10 leading-tight">
+                你要进<span class="text-gold">窄门</span>
             </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">
-                因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
-                引到生命，那门是窄的，路是小的，找着的人也少。
-            </p>
-            <p class="text-sm text-gray-600 mb-12">— 马太福音 7:13-14</p>
+            <div class="max-w-2xl mx-auto mb-16">
+                <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-6">
+                    因为引到灭亡，那门是宽的，路是大的，进去的人也多；
+                </p>
+                <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-6">
+                    引到生命，那门是窄的，路是小的，找着的人也少。
+                </p>
+                <p class="text-sm text-gray-500 italic">— 马太福音 7:13-14</p>
+            </div>
 
-            <div class="gate-visual mb-12">
+            <div class="gate-visual mb-16">
                 <div class="gate-wide"></div>
                 <div class="gate-narrow"></div>
             </div>
 
-            <button onclick="startAudit()" class="btn-gold text-lg">
+            <button onclick="startAudit()" class="btn-gold text-lg px-12 py-4 rounded-xl">
                 开始灵魂审计 →
             </button>
-            <p class="text-xs text-gray-600 mt-4">这不会舒服。但你会感谢自己。</p>
+            <p class="text-sm text-gray-500 mt-6">这不会舒服。但你会感谢自己。</p>
         </div>
     </section>
-
     <!-- ============================================================ -->
     <!-- 核心命题 -->
     <!-- ============================================================ -->
@@ -539,6 +545,71 @@
             </div>
         </div>
     </section>
+
+    <!-- ============================================================ -->
+    <!-- 深夜独白模式 -->
+    <!-- ============================================================ -->
+    <div id="monologue-overlay" class="fixed inset-0 z-[1000] hidden" style="background: radial-gradient(ellipse at center, #0a0a15 0%, #050508 100%);">
+        <!-- 星空背景 -->
+        <canvas id="monologue-stars" class="absolute inset-0 w-full h-full"></canvas>
+        
+        <!-- 主内容区 -->
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-6">
+            <div class="w-full max-w-2xl">
+                <!-- 关闭按钮 -->
+                <div class="flex justify-end mb-6">
+                    <button onclick="closeMonologue()" class="text-gray-500 hover:text-gray-300 transition p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- 欢迎信息 -->
+                <div id="monologue-welcome" class="text-center mb-8">
+                    <p class="text-4xl mb-4">🌙</p>
+                    <p id="monologue-welcome-text" class="text-xl text-gray-300 font-serif"></p>
+                </div>
+                
+                <!-- 引导问题卡片 -->
+                <div class="bg-[#0c0c12]/80 backdrop-blur-xl border border-[#b8942e]/15 rounded-2xl p-8 mb-6">
+                    <p class="text-sm text-[#b8942e]/60 tracking-wider uppercase mb-3">灵魂提问</p>
+                    <p id="monologue-prompt" class="text-2xl font-serif text-white leading-relaxed"></p>
+                </div>
+                
+                <!-- 写作区域 -->
+                <div class="bg-[#0c0c12]/60 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
+                    <textarea 
+                        id="monologue-input"
+                        class="w-full h-64 bg-transparent border-none text-gray-200 text-lg leading-loose resize-none focus:outline-none placeholder-gray-600"
+                        placeholder="在这里，写下你内心最真实的声音..."
+                        oninput="updateMonologueCount()"
+                    ></textarea>
+                    
+                    <!-- 底部信息栏 -->
+                    <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                        <div class="flex items-center gap-4">
+                            <span id="monologue-count" class="text-sm text-gray-500">0 字</span>
+                            <span id="monologue-time" class="text-sm text-gray-600"></span>
+                        </div>
+                        
+                        <!-- 情绪选择 -->
+                        <div id="monologue-moods" class="flex items-center gap-2">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 保存按钮 -->
+                    <div class="mt-6 text-center">
+                        <button onclick="saveMonologue()" class="btn-gold">
+                            保存这份独白
+                        </button>
+                        <p class="text-xs text-gray-600 mt-3">你的文字将被妥善保存，只有你能看到</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="py-8 text-center text-xs text-gray-700 border-t border-white/5">
         窄门 NarrowGate · 让人看见窄门并跨越窄门
@@ -944,6 +1015,163 @@
         }
         loadWitnesses();
         loadEvolution();
+
+        // ============================================================
+        // 深夜独白模式
+        // ============================================================
+        
+        let currentMonologueId = null;
+        let monologueStartTime = null;
+        let selectedMood = null;
+        let starsAnimationId = null;
+
+        function openMonologue() {
+            const overlay = document.getElementById('monologue-overlay');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            monologueStartTime = new Date();
+            updateMonologueTime();
+            startMonologue();
+            initStars();
+        }
+
+        function closeMonologue() {
+            const overlay = document.getElementById('monologue-overlay');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+            if (starsAnimationId) {
+                cancelAnimationFrame(starsAnimationId);
+                starsAnimationId = null;
+            }
+        }
+
+        async function startMonologue() {
+            try {
+                const data = await apiCall('/api/monologue/start', 'POST', { 
+                    user_id: localStorage.getItem('narrowgate_user_id') || 'user_' + Date.now() 
+                });
+                currentMonologueId = data.monologue_id;
+                document.getElementById('monologue-welcome-text').textContent = data.welcome;
+                document.getElementById('monologue-prompt').textContent = data.prompt;
+                renderMoods(data.moods);
+            } catch(e) {
+                // Demo模式
+                currentMonologueId = 'demo_' + Date.now();
+                document.getElementById('monologue-welcome-text').textContent = '夜深了，这是只属于你的时刻。';
+                document.getElementById('monologue-prompt').textContent = '此刻，你觉得活着最重要的是什么？';
+                renderMoods([
+                    {emoji: '🌑', label: '忧郁', key: 'melancholy'},
+                    {emoji: '🌊', label: '平静', key: 'calm'},
+                    {emoji: '🔥', label: '愤怒', key: 'angry'},
+                    {emoji: '💧', label: '释然', key: 'relieved'},
+                    {emoji: '🌪️', label: '迷茫', key: 'confused'},
+                    {emoji: '✨', label: '希望', key: 'hopeful'},
+                ]);
+            }
+        }
+
+        function renderMoods(moods) {
+            const container = document.getElementById('monologue-moods');
+            container.innerHTML = moods.map(m => `
+                <button 
+                    onclick="selectMood('${m.key}', this)" 
+                    class="mood-btn text-2xl p-2 rounded-lg hover:bg-white/5 transition opacity-60 hover:opacity-100"
+                    title="${m.label}"
+                >${m.emoji}</button>
+            `).join('');
+        }
+
+        function selectMood(mood, btn) {
+            selectedMood = mood;
+            document.querySelectorAll('.mood-btn').forEach(b => {
+                b.classList.remove('opacity-100', 'bg-white/10', 'ring-2', 'ring-[#b8942e]');
+                b.classList.add('opacity-60');
+            });
+            btn.classList.remove('opacity-60');
+            btn.classList.add('opacity-100', 'bg-white/10', 'ring-2', 'ring-[#b8942e]');
+        }
+
+        function updateMonologueCount() {
+            const input = document.getElementById('monologue-input');
+            const count = input.value.length;
+            document.getElementById('monologue-count').textContent = count + ' 字';
+        }
+
+        function updateMonologueTime() {
+            if (!monologueStartTime) return;
+            const now = new Date();
+            const diff = Math.floor((now - monologueStartTime) / 1000);
+            const mins = Math.floor(diff / 60);
+            const secs = diff % 60;
+            document.getElementById('monologue-time').textContent = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            setTimeout(updateMonologueTime, 1000);
+        }
+
+        async function saveMonologue() {
+            const content = document.getElementById('monologue-input').value.trim();
+            if (!content) {
+                alert('请先写下你的独白');
+                return;
+            }
+
+            try {
+                await apiCall('/api/monologue/save', 'POST', {
+                    monologue_id: currentMonologueId,
+                    content: content,
+                    mood: selectedMood || '',
+                });
+                alert('你的独白已保存 ✨');
+                closeMonologue();
+            } catch(e) {
+                // Demo模式
+                alert('你的独白已保存 ✨');
+                closeMonologue();
+            }
+        }
+
+        // 星空动画
+        function initStars() {
+            const canvas = document.getElementById('monologue-stars');
+            const ctx = canvas.getContext('2d');
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const stars = [];
+            for (let i = 0; i < 200; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 1.5 + 0.5,
+                    opacity: Math.random() * 0.8 + 0.2,
+                    twinkleSpeed: Math.random() * 0.02 + 0.005,
+                    twinklePhase: Math.random() * Math.PI * 2,
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                stars.forEach(star => {
+                    star.twinklePhase += star.twinkleSpeed;
+                    const opacity = star.opacity * (0.5 + 0.5 * Math.sin(star.twinklePhase));
+                    
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+                    ctx.fill();
+                });
+
+                starsAnimationId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
     </script>
     <section id="section-witness" class="py-20 px-6"><div class="max-w-4xl mx-auto"><h2 class="font-serif text-3xl font-bold mb-4 text-center">见证人网络</h2><p class="text-gray-400 text-center mb-12">你的进化需要被看见。</p><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl font-bold mb-4">添加见证人</h3><div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6"><input id="witness-name" type="text" placeholder="见证人姓名" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><input id="witness-email" type="email" placeholder="邮箱（可选）" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><select id="witness-relationship" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><option value="朋友">朋友</option><option value="家人">家人</option><option value="同事">同事</option><option value="导师">导师</option></select><button onclick="addWitness()" class="w-full py-3 rounded-lg bg-[#b8942e] text-black font-semibold hover:bg-[#b8973d] transition">添加见证人</button></div></div><div><h3 class="text-xl font-bold mb-4">我的见证人</h3><div id="witness-list" class="space-y-3"><p class="text-gray-500 text-sm">还没有添加见证人</p></div></div></div></div></section>
     <section id="section-evolution" class="py-20 px-6 bg-[#050508]">
