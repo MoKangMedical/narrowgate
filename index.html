@@ -2,10 +2,981 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=src/ui/index.html">
-    <title>窄门 NarrowGate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>窄门 NarrowGate — 让人看见窄门并跨越窄门</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg: #050508;
+            --bg-card: #0c0c12;
+            --gold: #b8942e;
+            --gold-light: #d4af37;
+            --gold-glow: rgba(180,148,46,0.15);
+            --text: #e8e4dc;
+            --text-dim: #6b6860;
+            --border: rgba(255,255,255,0.04);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+        body > * { position: relative; z-index: 1; }
+
+        .font-serif { font-family: 'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', 'STSong', serif; }
+        .text-gold { background: linear-gradient(135deg, #b8942e, #d4af37, #f0d78c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .glass { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .glass:hover { background: rgba(255,255,255,0.04); border-color: rgba(180,148,46,0.12); transform: translateY(-2px); }
+        .btn-gold { background: linear-gradient(135deg, #8a6d1b, #b8942e, #d4af37); color: #050508; font-weight: 600; border-radius: 12px; padding: 16px 40px; letter-spacing: 0.05em; transition: all 0.3s; box-shadow: 0 0 30px rgba(180,148,46,0.15); border: none; cursor: pointer; }
+        .btn-gold:hover { box-shadow: 0 0 50px rgba(180,148,46,0.35); transform: translateY(-1px); }
+        .divider-gold { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, #b8942e, transparent); margin: 0 auto; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .gate-visual {
+            position: relative;
+            width: 240px;
+            height: 340px;
+            margin: 0 auto;
+        }
+        .gate-wide {
+            position: absolute;
+            left: 0;
+            width: 160px;
+            height: 340px;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 4px 4px 0 0;
+            background: linear-gradient(180deg, rgba(15,23,42,0.3), rgba(30,41,59,0.15));
+            opacity: 0.3;
+        }
+        .gate-narrow {
+            position: absolute;
+            right: 0;
+            width: 60px;
+            height: 340px;
+            border: 1px solid var(--gold);
+            border-radius: 2px 2px 0 0;
+            background: linear-gradient(180deg, rgba(180,148,46,0.08), rgba(180,148,46,0.02));
+            box-shadow: 0 0 40px rgba(180,148,46,0.2), inset 0 0 30px rgba(180,148,46,0.05);
+            animation: gateGlow 4s ease-in-out infinite;
+        }
+        .gate-narrow::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold-light), transparent);
+            opacity: 0.5;
+        }
+        @keyframes gateGlow {
+            0%, 100% { box-shadow: 0 0 40px rgba(180,148,46,0.15), inset 0 0 30px rgba(180,148,46,0.03); }
+            50% { box-shadow: 0 0 60px rgba(180,148,46,0.35), inset 0 0 40px rgba(180,148,46,0.08); }
+        }
+
+        .dimension-pyramid {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .pyramid-level {
+            margin: 0 auto 4px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .pyramid-level:hover { transform: scale(1.02); }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .evasion-alert {
+            border-left: 3px solid #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 0.5rem 0;
+        }
+
+        .progress-ring { transition: stroke-dashoffset 0.5s; }
+
+        .fade-enter { animation: fadeIn 0.3s ease; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050508; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
+    </style>
 </head>
-<body>
-    <p>正在加载窄门... <a href="src/ui/index.html">点击跳转</a></p>
+<body class="min-h-screen">
+
+    <!-- ============================================================ -->
+    <!-- 导航 -->
+    <!-- ============================================================ -->
+    <nav class="fixed top-0 w-full z-50 bg-[#050508]/90 backdrop-blur border-b border-white/5">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-xl font-bold text-[#b8942e]">窄门 NarrowGate</h1>
+            <div class="hidden md:flex gap-6 text-sm text-gray-400">
+                <a href="#formula" class="hover:text-white transition">公式</a>
+                <a href="#dimensions" class="hover:text-white transition">五层</a>
+                <a href="#audit" class="hover:text-white transition">灵魂审计</a>
+                <a href="#masters" class="hover:text-white transition">大师</a>
+                <a href="#training" class="hover:text-white transition">培训</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- Hero -->
+    <!-- ============================================================ -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-6">NARROW GATE PLATFORM</p>
+            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                你要进<span class="text-[#b8942e]">窄门</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-4">
+                因为引到灭亡，那门是宽的，路是大的，进去的人也多；<br>
+                引到生命，那门是窄的，路是小的，找着的人也少。
+            </p>
+            <p class="text-sm text-gray-600 mb-12">— 马太福音 7:13-14</p>
+
+            <div class="gate-visual mb-12">
+                <div class="gate-wide"></div>
+                <div class="gate-narrow"></div>
+            </div>
+
+            <button onclick="startAudit()" class="btn-gold text-lg">
+                开始灵魂审计 →
+            </button>
+            <p class="text-xs text-gray-600 mt-4">这不会舒服。但你会感谢自己。</p>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 核心命题 -->
+    <!-- ============================================================ -->
+    <section id="formula" class="py-20 px-6 reveal">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">核心命题</h2>
+            <p class="text-gray-500 text-center mb-12">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
+
+            <!-- 窄门公式 -->
+            <div class="bg-[#0c0c12] border border-[#b8942e]/20 rounded-xl p-8 mb-12 text-center">
+                <div class="flex items-center justify-center gap-4 flex-wrap">
+                    <div class="bg-red-900/20 border border-red-500/30 rounded-lg px-6 py-4">
+                        <p class="text-red-400 text-sm font-semibold mb-1">痛苦回避度</p>
+                        <p class="text-3xl font-bold text-red-300">85</p>
+                        <p class="text-xs text-gray-500 mt-1">你有多不想面对</p>
+                    </div>
+                    <span class="text-[#b8942e] text-2xl font-bold">×</span>
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg px-6 py-4">
+                        <p class="text-blue-400 text-sm font-semibold mb-1">成长杠杆率</p>
+                        <p class="text-3xl font-bold text-blue-300">90</p>
+                        <p class="text-xs text-gray-500 mt-1">穿越后能改变多少</p>
+                    </div>
+                    <span class="text-[#b8942e] text-2xl font-bold">=</span>
+                    <div class="bg-[#2a1a0a] border border-[#b8942e]/40 rounded-lg px-6 py-4">
+                        <p class="text-[#b8942e] text-sm font-semibold mb-1">窄门优先级</p>
+                        <p class="text-3xl font-bold text-[#b8942e]">7650</p>
+                        <p class="text-xs text-gray-500 mt-1">越高越需要穿越</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 宽门 vs 窄门 -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-[#0c0c12] border border-gray-700 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-4xl">🚪</span>
+                        <h3 class="text-xl font-bold text-gray-400 mt-2">宽门</h3>
+                        <p class="text-xs text-gray-600">门是宽的，路是大的，进去的人也多</p>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 容易、舒服、多数人走</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 回避真实自我</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 短期安逸，长期后悔</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">○</span> 95%的人选择</li>
+                    </ul>
+                </div>
+                <div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <span class="text-4xl">🚪</span>
+                        <h3 class="text-xl font-bold text-[#b8942e] mt-2">窄门</h3>
+                        <p class="text-xs text-[#b8942e]/60">门是窄的，路是小的，找着的人也少</p>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 艰难、痛苦、少数人走</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 面对真实自我</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 短期痛苦，长期释放</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">●</span> 5%的人选择</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 五层进化 -->
+    <!-- ============================================================ -->
+    <section id="dimensions" class="py-20 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">五层进化架构</h2>
+            <p class="text-gray-500 text-center mb-16">从凡人到封神——每层都有一个窄门在等你</p>
+
+            <div class="space-y-3">
+                <div class="pyramid-level rounded-lg" style="width:40%;background:linear-gradient(90deg,#1a1205,#2a1a0a);border:1px solid #b8942e;">
+                    <span class="text-[#b8942e] text-sm">五 · 封神</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:55%;background:linear-gradient(90deg,#15120a,#252015);border:1px solid #a08030;">
+                    <span class="text-[#b8942e]/80 text-sm">四 · 觉醒</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:70%;background:linear-gradient(90deg,#12100a,#1e1a10);border:1px solid #706020;">
+                    <span class="text-[#b8942e]/60 text-sm">三 · 穿越</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:85%;background:linear-gradient(90deg,#101010,#1a1a18);border:1px solid #505040;">
+                    <span class="text-gray-400 text-sm">二 · 看见</span>
+                </div>
+                <div class="pyramid-level rounded-lg" style="width:100%;background:linear-gradient(90deg,#0f0f0f,#171717);border:1px solid #333;">
+                    <span class="text-gray-500 text-sm">一 · 凡人</span>
+                </div>
+            </div>
+
+            <div class="mt-12 grid gap-4">
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">🚪 凡人 → 看见</h3>
+                    <p class="text-sm text-gray-400">承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。</p>
+                </div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">⚡ 看见 → 穿越</h3>
+                    <p class="text-sm text-gray-400">30天每日挑战，做你最不想做的事。公开记录，第三方验证。</p>
+                </div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">🔥 穿越 → 觉醒</h3>
+                    <p class="text-sm text-gray-400">教会另一个人穿越他的窄门。从玩家变成架构师。</p>
+                </div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h3 class="font-semibold text-[#b8942e] mb-1">👑 觉醒 → 封神</h3>
+                    <p class="text-sm text-gray-400">构建一个让更多人看见窄门的系统。成为守门人。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 灵魂审计（核心交互区） -->
+    <!-- ============================================================ -->
+    <section id="audit" class="py-20 px-6">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12">AI 不接受表面答案。持续追问，直到你看见真相。</p>
+
+            <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 min-h-[400px]">
+                <!-- 初始状态 -->
+                <div id="audit-intro" class="text-center py-12">
+                    <p class="text-4xl mb-6">🚪</p>
+                    <h3 class="font-serif text-xl mb-4">准备好了吗？</h3>
+                    <p class="text-gray-500 text-sm mb-8 max-w-md mx-auto">
+                        灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
+                        AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
+                    </p>
+                    <button onclick="startAudit()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
+                        开始审计
+                    </button>
+                </div>
+
+                <!-- 对话状态 -->
+                <div id="audit-chat" class="hidden">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+                        <div>
+                            <span class="text-xs text-gray-500">当前维度</span>
+                            <span id="current-dimension" class="ml-2 text-[#b8942e] font-semibold">认知</span>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-500">已对话</span>
+                            <span id="conversation-count" class="ml-2 text-gray-300">0</span>
+                            <span class="text-xs text-gray-500 ml-4">枷锁</span>
+                            <span id="shackle-count" class="ml-2 text-gray-300">0</span>
+                        </div>
+                    </div>
+
+                    <div id="chat-messages" class="space-y-4 mb-6 max-h-[400px] overflow-y-auto"></div>
+
+                    <div id="typing" class="hidden mb-4">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+        let selectedMasterId = "";
+                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
+        let selectedMasterId = "";
+                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition text-sm">
+                            发送
+                        </button>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">
+                            结束审计，查看结果
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 结果状态 -->
+                <div id="audit-result" class="hidden text-center py-8">
+                    <div id="result-content"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 大师引导者 -->
+    <!-- ============================================================ -->
+    <section id="masters" class="py-20 px-6 reveal">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">大师引导者</h2>
+            <p class="text-gray-500 text-center mb-12">每位大师都是一扇不同的窄门。选择你的引路人。</p>
+
+            <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 大师对话弹窗 -->
+    <div id="master-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80" onclick="closeMasterModal()"></div>
+        <div class="relative max-w-2xl mx-auto mt-20 bg-[#0c0c12] border border-white/10 rounded-xl p-8">
+            <button onclick="closeMasterModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white">✕</button>
+            <div id="master-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 30天穿越训练 -->
+    <!-- ============================================================ -->
+    <section id="training" class="py-20 px-6 reveal">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-3xl font-bold text-center mb-4">30天穿越训练</h2>
+            <p class="text-gray-500 text-center mb-4">从看见到穿越，每天做你最不想做的事</p>
+            <p class="text-gray-600 text-center text-sm mb-12">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
+
+            <!-- 四周计划 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- 第1周 -->
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-red-500/30 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-red-900/30 text-red-400 text-xs font-semibold px-2 py-1 rounded">D1-D7</span>
+                        <span class="text-xs text-gray-500">难度 3-5</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">🔥 第一周：面对恐惧</h3>
+                    <p class="text-gray-500 text-sm mb-4">承认它存在，然后第一次尝试</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 写下你最不想承认的一个弱点</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 5:30起床（连续3天）</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 找一个你不同意的观点，写下它的合理之处</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 给一个疏远的朋友发消息</li>
+                    </ul>
+                </div>
+
+                <!-- 第2周 -->
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-orange-500/30 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-orange-900/30 text-orange-400 text-xs font-semibold px-2 py-1 rounded">D8-D14</span>
+                        <span class="text-xs text-gray-500">难度 5-7</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">⚡ 第二周：建立节奏</h3>
+                    <p class="text-gray-500 text-sm mb-4">每日挑战形成习惯回路</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 24小时不刷社交媒体</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 每天跑步30分钟（连续7天）</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 问3个人"你觉得我最大的盲点是什么"</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 对一个不合理的要求说"不"</li>
+                    </ul>
+                </div>
+
+                <!-- 第3周 -->
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-yellow-500/30 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-yellow-900/30 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">D15-D21</span>
+                        <span class="text-xs text-gray-500">难度 7-8</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">🔥 第三周：突破瓶颈</h3>
+                    <p class="text-gray-500 text-sm mb-4">难度升级，直面核心恐惧</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 公开分享一次你的失败经历</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 向最在意的人表达从未说过的真实感受</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 结束一段你知道有毒的关系</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 连续7天每天做一件让你不舒服的事</li>
+                    </ul>
+                </div>
+
+                <!-- 第4周 -->
+                <div class="bg-[#2a1a0a] border border-[#b8942e]/20 rounded-xl p-6 hover:border-[#b8942e]/40 transition">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-[#b8942e]/20 text-[#b8942e] text-xs font-semibold px-2 py-1 rounded">D22-D30</span>
+                        <span class="text-xs text-gray-500">难度 8-回顾</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">✨ 第四周：巩固穿越</h3>
+                    <p class="text-gray-500 text-sm mb-4">从刻意到自然，内化新身份</p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 写一封信给你一直回避面对的人</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 原谅一个你一直恨着的人</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 写穿越旅程总结：恐惧 vs 现实</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 帮助另一个人开始他的穿越</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 穿越记录模板 -->
+            <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 max-w-2xl mx-auto">
+                <h3 class="font-bold text-center mb-4">📝 每日穿越记录</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-red-900/10 rounded-lg p-4">
+                        <p class="text-red-400 text-sm font-semibold mb-2">😰 做之前的恐惧</p>
+                        <p class="text-xs text-gray-500">写下你害怕发生什么</p>
+                    </div>
+                    <div class="bg-blue-900/10 rounded-lg p-4">
+                        <p class="text-blue-400 text-sm font-semibold mb-2">⚡ 实际行动</p>
+                        <p class="text-xs text-gray-500">具体描述你怎么做的</p>
+                    </div>
+                    <div class="bg-green-900/10 rounded-lg p-4">
+                        <p class="text-green-400 text-sm font-semibold mb-2">💡 穿越感悟</p>
+                        <p class="text-xs text-gray-500">恐惧 vs 现实的差距</p>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-600 mt-4">每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 关于 -->
+    <!-- ============================================================ -->
+    <section id="about" class="py-20 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-serif text-3xl font-bold mb-8">关于窄门</h2>
+            <p class="text-gray-400 leading-relaxed mb-8">
+                窄门不是一个给你答案的平台。它是一个<strong class="text-white">制造困境并引导穿越</strong>的平台。
+                我们训练人一步一步让自己从人变为神——不是宗教意义的神，是<strong class="text-white">人类潜能的极致释放</strong>。
+            </p>
+            <div class="grid md:grid-cols-3 gap-6 text-left mb-8">
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h4 class="text-[#b8942e] font-semibold mb-2">🧠 灵魂审计</h4>
+                    <p class="text-sm text-gray-500">苏格拉底式追问 + AI回避检测<br>五维度深度排查你的枷锁</p>
+                </div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h4 class="text-[#b8942e] font-semibold mb-2">🧙 大师引导</h4>
+                    <p class="text-sm text-gray-500">7位大师各有性格和哲学<br>MIMO AI实时生成追问</p>
+                </div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-5">
+                    <h4 class="text-[#b8942e] font-semibold mb-2">📊 进化量化</h4>
+                    <p class="text-sm text-gray-500">五层进化金字塔 + 经验值系统<br>可视化你的灵魂成长路径</p>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8">
+                <p class="text-gray-600 text-xs mb-4">理论根基</p>
+                <div class="flex flex-wrap justify-center gap-3 text-xs text-gray-500">
+                    <span class="bg-white/5 px-3 py-1 rounded">苏格拉底</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">荣格个体化</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">斯多葛学派</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">Taleb反脆弱</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">CBT苏格拉底式提问</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">Frankl意义治疗</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">成长型思维</span>
+                    <span class="bg-white/5 px-3 py-1 rounded">原子习惯</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-xs text-gray-700 border-t border-white/5">
+        窄门 NarrowGate · 让人看见窄门并跨越窄门
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- JavaScript -->
+    <!-- ============================================================ -->
+    <script>
+        let currentAuditId = null;
+
+        async function apiCall(url, method = 'POST', body = {}) {
+            const res = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: method === 'GET' ? undefined : JSON.stringify(body),
+            });
+            return res.json();
+        }
+
+        async function startAudit() {
+            document.getElementById('audit-intro').classList.add('hidden');
+            document.getElementById('audit-chat').classList.remove('hidden');
+            document.getElementById('audit-result').classList.add('hidden');
+
+            try {
+                const data = await apiCall('/api/audit/start', 'POST', { user_id: 'user_' + Date.now() });
+                currentAuditId = data.audit_id;
+                addMessage('ai', data.question, data.purpose);
+                document.getElementById('current-dimension').textContent = data.dimension;
+            } catch(e) {
+                // Demo模式（无后端）
+                currentAuditId = 'demo_' + Date.now();
+                addMessage('ai', '你觉得自己的人生到现在，最大的成就是什么？', '探索表层认知');
+                addDemoNote();
+            }
+        }
+
+        function addDemoNote() {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'text-center py-2';
+            div.innerHTML = '<p class="text-xs text-yellow-500/60 bg-yellow-900/20 rounded px-3 py-1 inline-block">🎭 Demo模式 — 启动后端可体验完整灵魂审计</p>';
+            container.appendChild(div);
+        }
+
+        let selectedMasterId = "";
+        async function submitAnswer() {
+            const input = document.getElementById('answer-input');
+            const answer = input.value.trim();
+            if (!answer || !currentAuditId) return;
+
+            input.value = '';
+            addMessage('user', answer);
+            document.getElementById('typing').classList.remove('hidden');
+
+            try {
+                const data = await apiCall('/api/audit/answer', 'POST', {
+                    audit_id: currentAuditId,
+                    answer: answer,
+                    master_id: selectedMasterId || '',
+                });
+                document.getElementById('typing').classList.add('hidden');
+                if (data.evasion_detected) addEvasionAlert(data.evasion_type, data.ai_analysis || "");
+                addMessage('ai', data.ai_reply, `深度层级 ${data.depth}`);
+                document.getElementById('current-dimension').textContent = data.dimension;
+                document.getElementById('conversation-count').textContent = data.conversation_count;
+                document.getElementById('shackle-count').textContent = data.shackles_found;
+            } catch(e) {
+                // Demo模式
+                document.getElementById('typing').classList.add('hidden');
+                const demoQuestions = [
+                    '在这背后，你真正害怕面对的是什么？',
+                    '如果满分10分你给自己打几分？扣掉的分丢在哪里了？',
+                    '你有没有一个从未告诉任何人的秘密？关于你是谁？',
+                ];
+                const evasionSignals = ['没有','不是','还好','因为','没办法'];
+                const isEvasion = evasionSignals.some(s => answer.includes(s));
+                if (isEvasion) {
+                    addEvasionAlert('否认', '我感觉到你在回避。没关系，但我们需要再试一次。');
+                }
+                const count = document.getElementById('chat-messages').children.length;
+                addMessage('ai', demoQuestions[count % demoQuestions.length], `深度层级 ${Math.min(Math.floor(count/2)+1, 4)}`);
+            }
+        }
+
+        async function completeAudit() {
+            if (!currentAuditId) return;
+
+            document.getElementById('audit-chat').classList.add('hidden');
+            document.getElementById('audit-result').classList.remove('hidden');
+
+            let summary = { total_conversations: 0, evasion_count: 0, shackles_identified: 0, dimensions_explored: 0, first_gate: null };
+            let message = '';
+
+            try {
+                const data = await apiCall('/api/audit/complete', 'POST', { user_id: currentAuditId.split('_')[1] });
+                summary = data.summary || summary;
+                message = data.message || '';
+            } catch(e) {
+                // Demo模式结果
+                const msgCount = document.getElementById('chat-messages').children.length;
+                summary = { total_conversations: Math.floor(msgCount/2), evasion_count: Math.floor(msgCount/4), shackles_identified: 1, dimensions_explored: 3, first_gate: { name: '认知：舒适区依赖', description: '你一直在用已知的方式做事，回避未知领域', priority: 72 } };
+                message = '这是Demo审计结果。启动后端服务可获得完整AI灵魂审计体验。';
+            }
+
+            document.getElementById('result-content').innerHTML = `
+                <p class="text-4xl mb-4">🚪</p>
+                <h3 class="font-serif text-xl mb-6">灵魂审计完成</h3>
+                <div class="grid grid-cols-2 gap-4 text-left mb-8">
+                    <div class="bg-[#050508] rounded-lg p-4"><p class="text-xs text-gray-500">对话次数</p><p class="text-2xl font-bold text-white">${summary.total_conversations}</p></div>
+                    <div class="bg-[#050508] rounded-lg p-4"><p class="text-xs text-gray-500">回避次数</p><p class="text-2xl font-bold text-red-400">${summary.evasion_count}</p></div>
+                    <div class="bg-[#050508] rounded-lg p-4"><p class="text-xs text-gray-500">识别枷锁</p><p class="text-2xl font-bold text-[#b8942e]">${summary.shackles_identified}</p></div>
+                    <div class="bg-[#050508] rounded-lg p-4"><p class="text-xs text-gray-500">探索维度</p><p class="text-2xl font-bold text-gray-300">${summary.dimensions_explored}</p></div>
+                </div>
+                ${summary.first_gate ? `<div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-lg p-6 text-left mb-6"><p class="text-xs text-[#b8942e] mb-1">你的窄门</p><h4 class="text-lg font-bold text-white mb-2">${summary.first_gate.name}</h4><p class="text-sm text-gray-400">${summary.first_gate.description}</p><p class="text-sm text-[#b8942e] mt-3">窄门优先级：${Math.round(summary.first_gate.priority)}/100</p></div>` : ''}
+                <p class="text-gray-400 text-sm leading-relaxed">${message.replace(/\n/g, '<br>')}</p>
+                <button onclick="resetAudit()" class="mt-8 text-xs text-gray-600 hover:text-gray-400 transition">重新审计</button>
+            `;
+        }
+
+        function resetAudit() {
+            currentAuditId = null;
+            document.getElementById('audit-intro').classList.remove('hidden');
+            document.getElementById('audit-chat').classList.add('hidden');
+            document.getElementById('audit-result').classList.add('hidden');
+            document.getElementById('chat-messages').innerHTML = '';
+        }
+
+        function addMessage(role, text, subtext = '') {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            if (role === 'ai') {
+                div.className = 'chat-bubble bg-[#1a1a25] rounded-tl-sm';
+                div.innerHTML = `
+                    <p class="text-sm text-gray-200">${text}</p>
+                    ${subtext ? `<p class="text-xs text-gray-600 mt-2">${subtext}</p>` : ''}
+                `;
+            } else {
+                div.className = 'chat-bubble bg-[#b8942e]/10 border border-[#b8942e]/20 rounded-tr-sm ml-auto';
+                div.innerHTML = `<p class="text-sm text-gray-200">${text}</p>`;
+            }
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addEvasionAlert(type, analysis) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'evasion-alert fade-enter';
+            div.innerHTML = `
+                <p class="text-xs text-red-400 font-semibold mb-1">⚠️ 回避检测：${type}</p>
+                <p class="text-xs text-gray-400">${analysis}</p>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+    <!-- ============================================================ -->
+    <!-- 大师系统 JavaScript -->
+    <!-- ============================================================ -->
+    <script>
+        // 大师数据（本地备份，实际从API加载）
+        const MASTERS = [
+            {
+                id: 'socrates', name: '苏格拉底', title: '追问者', avatar: '🦉',
+                philosophy: '认识你自己。未经审视的人生不值得过。',
+                dimension: '认知', color: '#6366f1', level_required: 1,
+                specialties: ['信念解构', '逻辑矛盾暴露', '定义追问'],
+                signature_phrases: ['你确定吗？', '这让你想到了什么矛盾？', '你说的"成功"到底是什么意思？'],
+                greeting: '你好，年轻人。我是苏格拉底。\n\n我什么都不知道——但正因如此，我能看到你看不到的东西。\n\n在你进入窄门之前，让我先问你一个问题：\n你确定你知道自己在找什么吗？'
+            },
+            {
+                id: 'jung', name: '荣格', title: '阴影猎手', avatar: '🌑',
+                philosophy: '你没有面对的，会变成你的命运。',
+                dimension: '情绪', color: '#1e1b4b', level_required: 1,
+                specialties: ['阴影整合', '梦境解析', '投射检测'],
+                signature_phrases: ['你说你讨厌这个特质——它在你身上的哪个部分？', '你在梦里见过这个吗？', '阴影不是你的敌人'],
+                greeting: '你好。我是卡尔·荣格。\n\n我不是来让你舒服的。我是来让你完整的。\n\n告诉我，你最讨厌什么样的人？'
+            },
+            {
+                id: 'memento', name: '清醒者', title: '执行官', avatar: '⚡',
+                philosophy: '知道不等于做到。做到不等于持续做到。',
+                dimension: '行为', color: '#dc2626', level_required: 1,
+                specialties: ['拖延解剖', '习惯分析', '执行力审计'],
+                signature_phrases: ['你今天做了什么？', '你的"因为"听起来很合理。但它仍然是借口。', '不想做和不敢做是两回事。'],
+                greeting: '你好。我是清醒者。\n\n我不关心你知道什么。我只关心你做了什么。\n\n你上一次说到做到是什么时候？'
+            },
+            {
+                id: 'mirror', name: '镜像者', title: '关系分析师', avatar: '🪞',
+                philosophy: '你在他人身上看到的，都是你自己。',
+                dimension: '关系', color: '#059669', level_required: 1,
+                specialties: ['关系模式识别', '边界审计', '讨好检测'],
+                signature_phrases: ['你在这段关系中扮演的是什么角色？', '你害怕被看见什么？', '你的"独立"是自由还是隔离？'],
+                greeting: '你好。我是镜像者。\n\n关系是灵魂的镜子。你在别人身上看到的每一种特质——都是你的某一部分。\n\n谁是让你情绪最波动的人？'
+            },
+            {
+                id: 'architect', name: '架构师', title: '系统思维者', avatar: '🏗️',
+                philosophy: '你不是棋子，你是下棋的人。但首先你要看到棋盘。',
+                dimension: '事业', color: '#b8942e', level_required: 2,
+                specialties: ['人生架构审计', '目标系统分析', '杠杆点识别'],
+                signature_phrases: ['这是你的计划还是你的幻想？', '你有10个目标。哪个完成了会改变其他所有？', '你的系统是为你工作还是你在为系统工作？'],
+                greeting: '你好。我是架构师。\n\n大多数人在棋盘上移动，以为自己在下棋。\n\n让我看看你的人生架构。'
+            },
+            {
+                id: 'alchemist', name: '炼金术士', title: '变形者', avatar: '🔮',
+                philosophy: '在最深的黑暗中，找到最亮的光。',
+                dimension: '认知', color: '#7c3aed', level_required: 3,
+                specialties: ['痛苦转化', '意义重构', '隐喻治疗'],
+                signature_phrases: ['如果这个困境是一种物质，它会是什么？', '你有没有想过，你在逃避的正是你在寻找的？', '当你不再试图"解决"这个问题时，它会变成什么？'],
+                greeting: '你好。我是炼金术士。\n\n千年炼金术士都在找把铅变成金的方法。\n\n但真正的炼金术不是在坩埚里——是在你的灵魂里。'
+            },
+            {
+                id: 'gatekeeper', name: '守门人', title: '窄门本身', avatar: '🚪',
+                philosophy: '我不是来让你舒服的。我是来检验你是否配得上的。',
+                dimension: '全部', color: '#b8942e', level_required: 4,
+                specialties: ['穿越验证', '伪装检测', '深层意图审计'],
+                signature_phrases: ['证据在哪里？', '你说你穿越了——但你还在原地。', '穿越窄门不需要勇气——只需要不再找借口。'],
+                greeting: '你到了。\n\n我是守门人。我不问你想要什么——我检验你是否配得上。'
+            }
+        ];
+
+        // 渲染大师卡片
+        function renderMasters() {
+            const grid = document.getElementById('masters-grid');
+            grid.innerHTML = MASTERS.map(m => `
+                <div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 hover:border-white/10 transition cursor-pointer" onclick="openMaster('${m.id}')">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-4xl">${m.avatar}</span>
+                        <div>
+                            <h3 class="font-bold text-lg">${m.name}</h3>
+                            <p class="text-sm" style="color:${m.color}">${m.title}</p>
+                        </div>
+                        ${m.level_required > 1 ? `<span class="ml-auto text-xs bg-yellow-900/30 text-yellow-500 px-2 py-1 rounded">L${m.level_required}+</span>` : ''}
+                    </div>
+                    <p class="text-gray-400 text-sm italic mb-4">"${m.philosophy}"</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${m.specialties.map(s => `<span class="text-xs bg-white/5 px-2 py-1 rounded text-gray-400">${s}</span>`).join('')}
+                    </div>
+                    <div class="text-xs text-gray-600">
+                        主导维度：${m.dimension}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 打开大师对话
+        function openMaster(masterId) {
+            const master = MASTERS.find(m => m.id === masterId);
+            if (!master) return;
+
+            if (master.level_required > 1) {
+                alert(`需要达到${master.level_required}层才能与${master.name}对话`);
+                return;
+            }
+
+            document.getElementById('master-modal').classList.remove('hidden');
+            document.getElementById('master-modal-content').innerHTML = `
+                <div class="text-center mb-6">
+                    <span class="text-6xl">${master.avatar}</span>
+                    <h3 class="font-serif text-2xl font-bold mt-4">${master.name}</h3>
+                    <p style="color:${master.color}" class="text-sm">${master.title} · ${master.dimension}</p>
+                </div>
+                <div class="bg-[#050508] rounded-lg p-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed whitespace-pre-line">${master.greeting}</p>
+                </div>
+                <div class="mb-4">
+                    <p class="text-xs text-gray-500 mb-2">经典语录</p>
+                    ${master.signature_phrases.map(p => `<p class="text-sm text-gray-400 mb-1">· ${p}</p>`).join('')}
+                </div>
+                <div id="master-chat-area" class="mt-6 hidden">
+                    <div id="master-messages" class="space-y-3 max-h-[300px] overflow-y-auto mb-4"></div>
+                    <div class="flex gap-3">
+                        <input id="master-answer" type="text" placeholder="回答${master.name}..." class="flex-1 bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none" onkeydown="if(event.key==='Enter')sendToMaster('${masterId}')">
+                        <button onclick="sendToMaster('${masterId}')" class="px-6 py-3 rounded-lg text-black font-semibold text-sm" style="background:${master.color}">发送</button>
+                    </div>
+                </div>
+                <button onclick="startMasterChat('${masterId}')" class="w-full mt-4 py-3 rounded-lg border border-white/10 text-sm hover:bg-white/5 transition">
+                    开始对话
+                </button>
+            `;
+        }
+
+        let currentMasterAudit = null;
+
+        function startMasterChat(masterId) {
+            const master = MASTERS.find(m => m.id === masterId);
+            currentMasterAudit = 'master_' + Date.now();
+            document.getElementById('master-chat-area').classList.remove('hidden');
+            addMasterMessage('ai', `${master.avatar} ${master.name}`, master.greeting.split('\\n\\n').pop());
+        }
+
+        async function sendToMaster(masterId) {
+            const input = document.getElementById('master-answer');
+            const answer = input.value.trim();
+            if (!answer) return;
+            input.value = '';
+
+            const master = MASTERS.find(m => m.id === masterId);
+            addMasterMessage('user', '你', answer);
+
+            // 如果有审计，通过API获取AI回复
+            if (currentAuditId) {
+                try {
+                    const data = await apiCall('/api/audit/answer', 'POST', {
+                        audit_id: currentAuditId,
+                        answer: answer,
+                        master_id: masterId,
+                    });
+                    if (data.evasion_detected) {
+                        addMasterMessage('ai', `${master.avatar} ${master.name} ⚠️`, 
+                            `回避检测(${data.evasion_type})：${data.ai_analysis || '我感觉到你在回避'}`);
+                    }
+                    addMasterMessage('ai', `${master.avatar} ${master.name}`, data.ai_reply);
+                    return;
+                } catch(e) { /* fallback to local */ }
+            }
+
+            // Demo模式：本地回避检测
+            const evasionSignals = {
+                '否认': ['没有', '不是', '我不觉得', '还好', '还行'],
+                '转移': ['说起来', '对了', '另外'],
+                '最小化': ['一点点', '稍微', '可能有一点'],
+                '合理化': ['因为', '没办法', '大家都这样']
+            };
+
+            let evasionType = '';
+            for (const [type, signals] of Object.entries(evasionSignals)) {
+                if (signals.some(s => answer.includes(s))) {
+                    evasionType = type;
+                    break;
+                }
+            }
+
+            setTimeout(() => {
+                if (evasionType) {
+                    addMasterMessage('ai', `${master.avatar} ${master.name}`,
+                        `我感觉到你在${evasionType}。${master.signature_phrases[Math.floor(Math.random() * master.signature_phrases.length)]}`);
+                } else {
+                    const phrase = master.signature_phrases[Math.floor(Math.random() * master.signature_phrases.length)];
+                    addMasterMessage('ai', `${master.avatar} ${master.name}`, phrase);
+                }
+            }, 800);
+        }
+
+        function addMasterMessage(role, sender, text) {
+            const container = document.getElementById('master-messages');
+            const div = document.createElement('div');
+            div.className = role === 'ai' ? 'bg-[#1a1a25] rounded-lg p-3' : 'bg-white/5 rounded-lg p-3 ml-8';
+            div.innerHTML = `<p class="text-xs text-gray-500 mb-1">${sender}</p><p class="text-sm text-gray-200">${text}</p>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function closeMasterModal() {
+            document.getElementById('master-modal').classList.add('hidden');
+            currentMasterAudit = null;
+        }
+
+        // 初始化
+        // Scroll reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        renderMasters();
+
+        // Witness Network
+        async function addWitness() {
+            const name = document.getElementById('witness-name').value.trim();
+            if (!name) { alert('请输入见证人姓名'); return; }
+            const email = document.getElementById('witness-email').value.trim();
+            const rel = document.getElementById('witness-relationship').value;
+            try {
+                await apiCall('/api/witness/add', 'POST', { name, email, relationship: rel });
+                alert(name + ' 已添加为见证人！');
+                loadWitnesses();
+                document.getElementById('witness-name').value = '';
+            } catch(e) { alert('添加失败'); }
+        }
+        async function loadWitnesses() {
+            try {
+                const list = await apiCall('/api/witness/list', 'GET');
+                const el = document.getElementById('witness-list');
+                if (!list.length) { el.innerHTML = '<p class="text-gray-500 text-sm">还没有添加见证人</p>'; return; }
+                el.innerHTML = list.map(w => '<div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4 flex items-center justify-between"><div><p class="font-semibold">' + w.name + '</p><p class="text-xs text-gray-500">' + w.relationship + '</p></div><span class="text-xs ' + (w.verified ? 'text-green-400' : 'text-gray-500') + '">' + (w.verified ? '已验证' : '待验证') + '</span></div>').join('');
+            } catch(e) {}
+        }
+
+        // Evolution Pyramid
+        async function loadEvolution() {
+            try {
+                const data = await apiCall('/api/evolution/demo', 'GET');
+                if (data.levels) {
+                    const cur = data.levels.find(l => l.is_current) || data.levels[0];
+                    const el = document.getElementById('evolution-level');
+                    if (el) el.innerHTML = '<p class="text-2xl mb-2">' + cur.emoji + ' ' + cur.name + '</p><p class="text-gray-400 text-sm">' + cur.description + '</p>';
+                }
+            } catch(e) {}
+        }
+        loadWitnesses();
+        loadEvolution();
+    </script>
+    <section id="section-witness" class="py-20 px-6"><div class="max-w-4xl mx-auto"><h2 class="font-serif text-3xl font-bold mb-4 text-center">见证人网络</h2><p class="text-gray-400 text-center mb-12">你的进化需要被看见。</p><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl font-bold mb-4">添加见证人</h3><div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6"><input id="witness-name" type="text" placeholder="见证人姓名" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><input id="witness-email" type="email" placeholder="邮箱（可选）" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><select id="witness-relationship" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><option value="朋友">朋友</option><option value="家人">家人</option><option value="同事">同事</option><option value="导师">导师</option></select><button onclick="addWitness()" class="w-full py-3 rounded-lg bg-[#b8942e] text-black font-semibold hover:bg-[#b8973d] transition">添加见证人</button></div></div><div><h3 class="text-xl font-bold mb-4">我的见证人</h3><div id="witness-list" class="space-y-3"><p class="text-gray-500 text-sm">还没有添加见证人</p></div></div></div></div></section>
+    <section id="section-evolution" class="py-20 px-6 bg-[#050508]">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-serif text-3xl font-bold mb-4">进化金字塔</h2>
+            <p class="text-gray-400 mb-12">灵魂的进化不是线性的，是螺旋上升的。</p>
+            <div class="inline-block bg-[#0c0c12] border border-white/5 rounded-xl p-6 font-mono text-sm mb-8">
+                <pre class="text-[#b8942e]">
+          ✨
+        ┌───┐
+        │ · │
+      ┌─┴───┴─┐
+      │   ·   │
+    ┌─┴───────┴─┐
+    │     ·     │
+  ┌─┴───────────┴─┐
+  │      ·        │
+┌─┴───────────────┴─┐
+│        1          │
+└───────────────────┘</pre>
+            </div>
+            <div id="evolution-stats" class="grid grid-cols-3 gap-4 max-w-lg mx-auto mb-8">
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4"><p class="text-2xl font-bold text-[#b8942e]">1</p><p class="text-xs text-gray-500">当前层级</p></div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4"><p class="text-2xl font-bold text-gray-300">0</p><p class="text-xs text-gray-500">经验值</p></div>
+                <div class="bg-[#0c0c12] border border-white/5 rounded-lg p-4"><p class="text-2xl font-bold text-gray-300">0</p><p class="text-xs text-gray-500">突破次数</p></div>
+            </div>
+            <div id="evolution-level" class="bg-[#0c0c12] border border-white/5 rounded-xl p-6 max-w-md mx-auto">
+                <p class="text-2xl mb-2">😴 睡眠层 (Sleep)</p>
+                <p class="text-gray-400 text-sm">大多数人所在的地方。你的枷锁驱动你的行为，但你不知道。</p>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
