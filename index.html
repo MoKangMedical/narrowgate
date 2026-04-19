@@ -2187,97 +2187,180 @@
     <!-- ============================================================ -->
     <!-- 功能亮点 -->
     <!-- ============================================================ -->
+        <!-- 功能展示 + 工作原理 -->
+    <!-- ============================================================ -->
     <section id="features" class="features-section">
         <div class="max-w-6xl mx-auto">
             <!-- 标题区域 -->
             <div class="text-center mb-20">
-                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">CORE FEATURES</p>
-                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">穿越窄门的工具</h2>
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">CORE FEATURES & JOURNEY</p>
+                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">穿越窄门的工具与旅程</h2>
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
-                    我们提供完整的工具链，帮助你从看见到穿越，从穿越到觉醒
+                    我们提供完整的工具链和清晰的旅程，帮助你从看见到穿越，从穿越到觉醒
                 </p>
             </div>
             
-            <!-- 功能卡片网格 -->
-            <div class="features-grid">
-                <!-- 功能1: 灵魂审计 -->
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper feature-icon-audit">
-                        <div class="feature-icon">🧠</div>
-                    </div>
-                    <h3 class="feature-title">灵魂审计</h3>
-                    <p class="feature-desc">
-                        苏格拉底式追问 + AI回避检测。五维度深度排查你的枷锁，
-                        发现你最不想面对但最需要穿越的窄门。
-                    </p>
-                    <ul class="feature-list">
-                        <li>认知 · 情绪 · 行为 · 关系 · 事业</li>
-                        <li>AI实时检测回避模式</li>
-                        <li>量化痛苦回避度和成长杠杆率</li>
-                    </ul>
-                    <button class="feature-btn" onclick="startAudit()">
-                        开始审计 →
+            <!-- 功能展示标签页 -->
+            <div class="features-tabs mb-16">
+                <div class="tabs-header flex justify-center gap-4 mb-8">
+                    <button onclick="showTab('features')" class="tab-btn active px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300">
+                        🛠️ 核心功能
+                    </button>
+                    <button onclick="showTab('journey')" class="tab-btn px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300">
+                        🗺️ 四步旅程
                     </button>
                 </div>
                 
-                <!-- 功能2: 大师引导 -->
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper feature-icon-master">
-                        <div class="feature-icon">🧙</div>
+                <!-- 功能展示内容 -->
+                <div id="features-tab" class="tab-content">
+                    <div class="features-grid">
+                        <!-- 功能1: 灵魂审计 -->
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper feature-icon-audit">
+                                <div class="feature-icon">🧠</div>
+                            </div>
+                            <h3 class="feature-title">灵魂审计</h3>
+                            <p class="feature-desc">
+                                苏格拉底式追问 + AI回避检测。五维度深度排查你的枷锁，
+                                发现你最不想面对但最需要穿越的窄门。
+                            </p>
+                            <ul class="feature-list">
+                                <li>认知 · 情绪 · 行为 · 关系 · 事业</li>
+                                <li>AI实时检测回避模式</li>
+                                <li>量化痛苦回避度和成长杠杆率</li>
+                            </ul>
+                            <button class="feature-btn" onclick="startAudit()">
+                                开始审计 →
+                            </button>
+                        </div>
+                        
+                        <!-- 功能2: 大师引导 -->
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper feature-icon-master">
+                                <div class="feature-icon">🧙</div>
+                            </div>
+                            <h3 class="feature-title">大师引导</h3>
+                            <p class="feature-desc">
+                                7位大师各有性格和哲学，MIMO AI实时生成追问。
+                                选择与你共鸣的引路人，开始你的穿越之旅。
+                            </p>
+                            <ul class="feature-list">
+                                <li>苏格拉底 · 荣格 · 斯多葛 · 阿德勒</li>
+                                <li>个性化引导风格</li>
+                                <li>深度对话体验</li>
+                            </ul>
+                            <button class="feature-btn" onclick="scrollToSection('masters')">
+                                选择大师 →
+                            </button>
+                        </div>
+                        
+                        <!-- 功能3: 30天穿越训练 -->
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper feature-icon-training">
+                                <div class="feature-icon">⚡</div>
+                            </div>
+                            <h3 class="feature-title">30天穿越训练</h3>
+                            <p class="feature-desc">
+                                从看见到穿越，每天做你最不想做的事。
+                                难度渐进，见证人验证，经验值累积。
+                            </p>
+                            <ul class="feature-list">
+                                <li>四周渐进式训练计划</li>
+                                <li>每日挑战 + 反思问题</li>
+                                <li>见证人验证系统</li>
+                            </ul>
+                            <button class="feature-btn" onclick="scrollToSection('training')">
+                                开始训练 →
+                            </button>
+                        </div>
+                        
+                        <!-- 功能4: 进化量化 -->
+                        <div class="feature-card">
+                            <div class="feature-icon-wrapper feature-icon-evolution">
+                                <div class="feature-icon">📊</div>
+                            </div>
+                            <h3 class="feature-title">进化量化</h3>
+                            <p class="feature-desc">
+                                五层进化金字塔 + 经验值系统。
+                                可视化你的灵魂成长路径，从凡人到封神。
+                            </p>
+                            <ul class="feature-list">
+                                <li>凡人 → 看见 → 穿越 → 觉醒 → 封神</li>
+                                <li>经验值累积系统</li>
+                                <li>进化里程碑记录</li>
+                            </ul>
+                            <button class="feature-btn" onclick="scrollToSection('evolution')">
+                                查看进化 →
+                            </button>
+                        </div>
                     </div>
-                    <h3 class="feature-title">大师引导</h3>
-                    <p class="feature-desc">
-                        7位大师各有性格和哲学，MIMO AI实时生成追问。
-                        选择与你共鸣的引路人，开始你的穿越之旅。
-                    </p>
-                    <ul class="feature-list">
-                        <li>苏格拉底 · 荣格 · 斯多葛 · 阿德勒</li>
-                        <li>个性化引导风格</li>
-                        <li>深度对话体验</li>
-                    </ul>
-                    <button class="feature-btn" onclick="scrollToSection('masters')">
-                        选择大师 →
-                    </button>
                 </div>
                 
-                <!-- 功能3: 30天穿越训练 -->
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper feature-icon-training">
-                        <div class="feature-icon">⚡</div>
+                <!-- 旅程展示内容 -->
+                <div id="journey-tab" class="tab-content hidden">
+                    <div class="journey-grid">
+                        <!-- 步骤1: 灵魂审计 -->
+                        <div class="journey-step">
+                            <div class="journey-step-number">1</div>
+                            <div class="journey-step-icon">🚪</div>
+                            <h3 class="journey-step-title">灵魂审计</h3>
+                            <p class="journey-step-desc">
+                                通过AI驱动的苏格拉底式对话，深度排查你在认知、情绪、行为、关系、事业五个维度的枷锁。
+                                AI会检测你的回避模式，不让你用表面答案糊弄过去。
+                            </p>
+                            <div class="journey-step-meta">
+                                <span class="journey-step-time">⏱️ 约15-30分钟</span>
+                                <span class="journey-step-goal">🎯 深度自我面对</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤2: 大师引导 -->
+                        <div class="journey-step">
+                            <div class="journey-step-number">2</div>
+                            <div class="journey-step-icon">🧙</div>
+                            <h3 class="journey-step-title">大师引导</h3>
+                            <p class="journey-step-desc">
+                                选择与你共鸣的大师（苏格拉底、荣格、斯多葛等），开始深度对话。
+                                每位大师都有独特的引导风格，帮助你从不同角度看见真相。
+                            </p>
+                            <div class="journey-step-meta">
+                                <span class="journey-step-time">⏱️ 持续对话</span>
+                                <span class="journey-step-goal">🎯 个性化引导</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤3: 30天穿越训练 -->
+                        <div class="journey-step">
+                            <div class="journey-step-number">3</div>
+                            <div class="journey-step-icon">⚡</div>
+                            <h3 class="journey-step-title">30天穿越训练</h3>
+                            <p class="journey-step-desc">
+                                四周渐进式训练计划，每天做你最不想做的事。
+                                从面对恐惧到建立节奏，从突破瓶颈到巩固穿越。
+                                见证人验证，经验值累积。
+                            </p>
+                            <div class="journey-step-meta">
+                                <span class="journey-step-time">⏱️ 30天持续</span>
+                                <span class="journey-step-goal">🎯 每日挑战</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 步骤4: 进化封神 -->
+                        <div class="journey-step">
+                            <div class="journey-step-number">4</div>
+                            <div class="journey-step-icon">✨</div>
+                            <h3 class="journey-step-title">进化封神</h3>
+                            <p class="journey-step-desc">
+                                完成穿越训练后，你将进入五层进化金字塔的更高层级。
+                                从凡人到看见，从穿越到觉醒，最终成为守门人，
+                                帮助更多人看见窄门。
+                            </p>
+                            <div class="journey-step-meta">
+                                <span class="journey-step-time">⏱️ 持续进化</span>
+                                <span class="journey-step-goal">🎯 从玩家到架构师</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="feature-title">30天穿越训练</h3>
-                    <p class="feature-desc">
-                        从看见到穿越，每天做你最不想做的事。
-                        难度渐进，见证人验证，经验值累积。
-                    </p>
-                    <ul class="feature-list">
-                        <li>四周渐进式训练计划</li>
-                        <li>每日挑战 + 反思问题</li>
-                        <li>见证人验证系统</li>
-                    </ul>
-                    <button class="feature-btn" onclick="scrollToSection('training')">
-                        开始训练 →
-                    </button>
-                </div>
-                
-                <!-- 功能4: 进化量化 -->
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper feature-icon-evolution">
-                        <div class="feature-icon">📊</div>
-                    </div>
-                    <h3 class="feature-title">进化量化</h3>
-                    <p class="feature-desc">
-                        五层进化金字塔 + 经验值系统。
-                        可视化你的灵魂成长路径，从凡人到封神。
-                    </p>
-                    <ul class="feature-list">
-                        <li>凡人 → 看见 → 穿越 → 觉醒 → 封神</li>
-                        <li>经验值累积系统</li>
-                        <li>进化里程碑记录</li>
-                    </ul>
-                    <button class="feature-btn" onclick="scrollToSection('evolution')">
-                        查看进化 →
-                    </button>
                 </div>
             </div>
             
@@ -2290,128 +2373,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ============================================================ -->
-    <!-- 工作原理 -->
-    <!-- ============================================================ -->
-    <section id="how-it-works" class="how-it-works-section">
-        <div class="max-w-5xl mx-auto">
-            <!-- 标题区域 -->
-            <div class="text-center mb-20">
-                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">HOW IT WORKS</p>
-                <h2 class="heading-section text-4xl md:text-5xl font-bold mb-6">穿越窄门的旅程</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
-                    从凡人到封神，只需四步。每一步都是你灵魂进化的关键节点。
-                </p>
-            </div>
-            
-            <!-- 步骤时间线 -->
-            <div class="timeline">
-                <!-- 步骤1 -->
-                <div class="timeline-step">
-                    <div class="timeline-marker">
-                        <div class="timeline-marker-inner">1</div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🚪</div>
-                        <h3 class="timeline-title">灵魂审计</h3>
-                        <p class="timeline-desc">
-                            通过AI驱动的苏格拉底式对话，深度排查你在认知、情绪、行为、关系、事业五个维度的枷锁。
-                            AI会检测你的回避模式，不让你用表面答案糊弄过去。
-                        </p>
-                        <div class="timeline-meta">
-                            <span class="timeline-duration">⏱️ 约15-30分钟</span>
-                            <span class="timeline-difficulty">🎯 深度自我面对</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 步骤2 -->
-                <div class="timeline-step">
-                    <div class="timeline-marker">
-                        <div class="timeline-marker-inner">2</div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">🧙</div>
-                        <h3 class="timeline-title">大师引导</h3>
-                        <p class="timeline-desc">
-                            选择与你共鸣的大师（苏格拉底、荣格、斯多葛等），开始深度对话。
-                            每位大师都有独特的引导风格，帮助你从不同角度看见真相。
-                        </p>
-                        <div class="timeline-meta">
-                            <span class="timeline-duration">⏱️ 持续对话</span>
-                            <span class="timeline-difficulty">🎯 个性化引导</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 步骤3 -->
-                <div class="timeline-step">
-                    <div class="timeline-marker">
-                        <div class="timeline-marker-inner">3</div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">⚡</div>
-                        <h3 class="timeline-title">30天穿越训练</h3>
-                        <p class="timeline-desc">
-                            四周渐进式训练计划，每天做你最不想做的事。
-                            从面对恐惧到建立节奏，从突破瓶颈到巩固穿越。
-                            见证人验证，经验值累积。
-                        </p>
-                        <div class="timeline-meta">
-                            <span class="timeline-duration">⏱️ 30天持续</span>
-                            <span class="timeline-difficulty">🎯 每日挑战</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 步骤4 -->
-                <div class="timeline-step">
-                    <div class="timeline-marker">
-                        <div class="timeline-marker-inner">4</div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-icon">✨</div>
-                        <h3 class="timeline-title">进化封神</h3>
-                        <p class="timeline-desc">
-                            完成穿越训练后，你将进入五层进化金字塔的更高层级。
-                            从凡人到看见，从穿越到觉醒，最终成为守门人，
-                            帮助更多人看见窄门。
-                        </p>
-                        <div class="timeline-meta">
-                            <span class="timeline-duration">⏱️ 持续进化</span>
-                            <span class="timeline-difficulty">🎯 从玩家到架构师</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 底部说明 -->
-            <div class="how-it-works-footer">
-                <div class="how-it-works-stats">
-                    <div class="how-it-works-stat">
-                        <span class="how-it-works-stat-value">95%</span>
-                        <span class="how-it-works-stat-label">用户完成审计</span>
-                    </div>
-                    <div class="how-it-works-stat">
-                        <span class="how-it-works-stat-value">76%</span>
-                        <span class="how-it-works-stat-label">用户完成30天训练</span>
-                    </div>
-                    <div class="how-it-works-stat">
-                        <span class="how-it-works-stat-value">4.8/5</span>
-                        <span class="how-it-works-stat-label">用户满意度</span>
-                    </div>
-                </div>
-                <div class="how-it-works-cta">
-                    <p class="text-gray-400 mb-6">准备好开始你的穿越之旅了吗？</p>
-                    <button onclick="startAudit()" class="btn-gold-primary">
-                        开始灵魂审计 →
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
 <!-- ============================================================ -->
     <!-- 五层进化 -->
     <!-- ============================================================ -->
@@ -2554,11 +2515,28 @@
     <!-- ============================================================ -->
     <!-- 30天穿越训练 -->
     <!-- ============================================================ -->
+        <!-- 30天穿越训练系统 -->
+    <!-- ============================================================ -->
     <section id="training" class="py-30 px-6 reveal">
         <div class="max-w-5xl mx-auto">
             <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">30天穿越训练</h2>
             <p class="text-gray-500 text-center mb-4 text-body">从看见到穿越，每天做你最不想做的事</p>
             <p class="text-gray-600 text-center text-sm mb-12 text-caption">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
+
+            <!-- 进度条 -->
+            <div class="mb-12">
+                <div class="flex justify-between text-sm text-gray-500 mb-2">
+                    <span>学习进度</span>
+                    <span id="course-progress-text">0%</span>
+                </div>
+                <div class="w-full bg-[#0c0c12] rounded-full h-2">
+                    <div id="course-progress-bar" class="bg-gradient-to-r from-[#b8942e] to-[#d4af37] h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-600 mt-2">
+                    <span>第1天</span>
+                    <span>第30天</span>
+                </div>
+            </div>
 
             <!-- 四周计划 -->
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -2627,52 +2605,6 @@
                 </div>
             </div>
 
-            <!-- 穿越记录模板 -->
-            <div class="glass rounded-xl p-6 max-w-2xl mx-auto">
-                <h3 class="font-bold text-center mb-4">📝 每日穿越记录</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                    <div class="bg-red-900/10 rounded-lg p-4">
-                        <p class="text-red-400 text-sm font-semibold mb-2">😰 做之前的恐惧</p>
-                        <p class="text-xs text-gray-500">写下你害怕发生什么</p>
-                    </div>
-                    <div class="bg-blue-900/10 rounded-lg p-4">
-                        <p class="text-blue-400 text-sm font-semibold mb-2">⚡ 实际行动</p>
-                        <p class="text-xs text-gray-500">具体描述你怎么做的</p>
-                    </div>
-                    <div class="bg-green-900/10 rounded-lg p-4">
-                        <p class="text-green-400 text-sm font-semibold mb-2">💡 穿越感悟</p>
-                        <p class="text-xs text-gray-500">恐惧 vs 现实的差距</p>
-                    </div>
-                </div>
-                <p class="text-center text-xs text-gray-600 mt-4">每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- 课程界面 -->
-    <!-- ============================================================ -->
-    <section id="course" class="py-30 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4">30天穿越课程</h2>
-            <p class="text-gray-500 text-center mb-8">沉浸式学习体验，每天一课，逐步穿越</p>
-            
-            <!-- 进度条 -->
-            <div class="mb-12">
-                <div class="flex justify-between text-sm text-gray-500 mb-2">
-                    <span>学习进度</span>
-                    <span id="course-progress-text">0%</span>
-                </div>
-                <div class="w-full bg-[#0c0c12] rounded-full h-2">
-                    <div id="course-progress-bar" class="bg-gradient-to-r from-[#b8942e] to-[#d4af37] h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
-                </div>
-                <div class="flex justify-between text-xs text-gray-600 mt-2">
-                    <span>第1天</span>
-                    <span>第30天</span>
-                </div>
-            </div>
-            
-            
             <!-- 当前课程卡片 -->
             <div id="current-course-card" class="glass rounded-xl p-6 mb-8">
                 <div class="flex items-center justify-between mb-4">
@@ -2723,10 +2655,29 @@
                     </div>
                 </div>
             </div>
-</div>
+
+            <!-- 穿越记录模板 -->
+            <div class="glass rounded-xl p-6 max-w-2xl mx-auto">
+                <h3 class="font-bold text-center mb-4">📝 每日穿越记录</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-red-900/10 rounded-lg p-4">
+                        <p class="text-red-400 text-sm font-semibold mb-2">😰 做之前的恐惧</p>
+                        <p class="text-xs text-gray-500">写下你害怕发生什么</p>
+                    </div>
+                    <div class="bg-blue-900/10 rounded-lg p-4">
+                        <p class="text-blue-400 text-sm font-semibold mb-2">⚡ 实际行动</p>
+                        <p class="text-xs text-gray-500">具体描述你怎么做的</p>
+                    </div>
+                    <div class="bg-green-900/10 rounded-lg p-4">
+                        <p class="text-green-400 text-sm font-semibold mb-2">💡 穿越感悟</p>
+                        <p class="text-xs text-gray-500">恐惧 vs 现实的差距</p>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-600 mt-4">每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200</p>
+            </div>
             
             <!-- 学习日记 -->
-            <div class="glass rounded-xl p-6 mb-8">
+            <div class="glass rounded-xl p-6 mt-8">
                 <h3 class="text-xl font-bold mb-4">📝 学习日记</h3>
                 <p class="text-gray-500 text-sm mb-4">记录你的穿越感悟，见证自己的成长</p>
                 
@@ -2764,22 +2715,16 @@
             </div>
             
             <!-- 课程导航 -->
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center mt-8">
                 <button id="prev-day-btn" onclick="prevDay()" class="flex items-center gap-2 text-gray-500 hover:text-white transition">
-                    <span>←</span>
-                    <span>上一天</span>
+                    ← 上一天
                 </button>
-                <div class="text-center">
-                    <span id="day-indicator" class="text-sm text-gray-500">第 1 天 / 共 30 天</span>
-                </div>
                 <button id="next-day-btn" onclick="nextDay()" class="flex items-center gap-2 text-gray-500 hover:text-white transition">
-                    <span>下一天</span>
-                    <span>→</span>
+                    下一天 →
                 </button>
             </div>
         </div>
     </section>
-
     <!-- ============================================================ -->
     <!-- 社交证明 -->
     <!-- ============================================================ -->
@@ -2915,6 +2860,147 @@
     <!-- JavaScript -->
     <!-- ============================================================ -->
     <script>
+        // 标签页切换功能
+        function showTab(tabName) {
+            // 隐藏所有标签页内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // 移除所有标签按钮的激活状态
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-[#b8942e]', 'text-black');
+                btn.classList.add('text-gray-400', 'hover:text-white');
+            });
+            
+            // 显示选中的标签页内容
+            const selectedTab = document.getElementById(tabName + '-tab');
+            if (selectedTab) {
+                selectedTab.classList.remove('hidden');
+            }
+            
+            // 激活选中的标签按钮
+            const activeBtn = document.querySelector(`[onclick="showTab('${tabName}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-[#b8942e]', 'text-black');
+                activeBtn.classList.remove('text-gray-400', 'hover:text-white');
+            }
+        }
+        
+        // 初始化标签页
+        document.addEventListener('DOMContentLoaded', () => {
+            // 默认显示功能标签页
+            showTab('features');
+        });
+        
+        // 添加标签页样式
+        const style = document.createElement('style');
+        style.textContent = `
+            .tab-btn {
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.1);
+                color: #9ca3af;
+                transition: all 0.3s ease;
+            }
+            
+            .tab-btn:hover {
+                background: rgba(255,255,255,0.05);
+                color: white;
+            }
+            
+            .tab-btn.active {
+                background: linear-gradient(135deg, #b8942e, #d4af37);
+                color: black;
+                border-color: transparent;
+                font-weight: 600;
+            }
+            
+            .tab-content {
+                animation: fadeIn 0.5s ease;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // 旅程步骤样式
+        const journeyStyles = document.createElement('style');
+        journeyStyles.textContent = `
+            .journey-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+            }
+            
+            .journey-step {
+                background: rgba(255,255,255,0.02);
+                border: 1px solid rgba(255,255,255,0.05);
+                border-radius: 16px;
+                padding: 24px;
+                position: relative;
+                transition: all 0.3s ease;
+            }
+            
+            .journey-step:hover {
+                background: rgba(255,255,255,0.04);
+                border-color: rgba(180,148,46,0.2);
+                transform: translateY(-2px);
+            }
+            
+            .journey-step-number {
+                position: absolute;
+                top: -12px;
+                left: 24px;
+                background: linear-gradient(135deg, #b8942e, #d4af37);
+                color: black;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            
+            .journey-step-icon {
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+            
+            .journey-step-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: white;
+                margin-bottom: 12px;
+            }
+            
+            .journey-step-desc {
+                color: #9ca3af;
+                font-size: 14px;
+                line-height: 1.6;
+                margin-bottom: 16px;
+            }
+            
+            .journey-step-meta {
+                display: flex;
+                gap: 16px;
+                font-size: 12px;
+                color: #6b7280;
+            }
+            
+            .journey-step-time,
+            .journey-step-goal {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+        `;
+        document.head.appendChild(journeyStyles);
+
         // 移动端菜单切换
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -3830,7 +3916,7 @@
         // 初始化课程界面
         loadCourseDay(1);
     </script>
-    <section id="social-proof" class="social-proof-section">
+        <section id="social-proof" class="social-proof-section">
         <div class="max-w-6xl mx-auto">
             <!-- 标题区域 -->
             <div class="text-center mb-20">
@@ -3841,8 +3927,32 @@
                 </p>
             </div>
             
+            <!-- 数据统计 -->
+            <div class="proof-stats mb-16">
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">👥</div>
+                    <div class="proof-stat-value">2,847</div>
+                    <div class="proof-stat-label">注册用户</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">🚪</div>
+                    <div class="proof-stat-value">1,234</div>
+                    <div class="proof-stat-label">完成灵魂审计</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">⚡</div>
+                    <div class="proof-stat-value">856</div>
+                    <div class="proof-stat-label">完成30天训练</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-stat-icon">✨</div>
+                    <div class="proof-stat-value">127</div>
+                    <div class="proof-stat-label">达到觉醒层级</div>
+                </div>
+            </div>
+            
             <!-- 见证人展示 -->
-            <div class="testimonials-grid">
+            <div class="testimonials-grid mb-16">
                 <!-- 见证人1 -->
                 <div class="testimonial-card">
                     <div class="testimonial-quote">
@@ -3896,29 +4006,128 @@
                         <span>见证人评分：4.9</span>
                     </div>
                 </div>
+                
+                <!-- 见证人4 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <p>“我一直在寻找人生的意义，窄门让我明白意义不是找到的，而是创造的。30天训练让我重新定义了自己。”</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👩‍⚕️</div>
+                        <div class="testimonial-info">
+                            <h4 class="testimonial-name">陈静</h4>
+                            <p class="testimonial-role">医生 · 穿越层级：觉醒</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <span>完成30天训练</span>
+                        <span>经验值：1180</span>
+                    </div>
+                </div>
+                
+                <!-- 见证人5 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <p>“作为创业者，我习惯了独自承担一切。窄门让我学会了寻求帮助，也让我明白了脆弱的力量。”</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨‍💻</div>
+                        <div class="testimonial-info">
+                            <h4 class="testimonial-name">刘强</h4>
+                            <p class="testimonial-role">创业者 · 穿越层级：穿越</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <span>完成20天训练</span>
+                        <span>经验值：920</span>
+                    </div>
+                </div>
+                
+                <!-- 见证人6 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <p>“我推荐了5个朋友使用窄门，现在我们组成了一个互助小组。见证彼此的成长，是最美好的事情。”</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👩‍🎓</div>
+                        <div class="testimonial-info">
+                            <h4 class="testimonial-name">赵雪</h4>
+                            <p class="testimonial-role">研究生 · 见证人</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stats">
+                        <span>验证5位穿越者</span>
+                        <span>见证人评分：4.8</span>
+                    </div>
+                </div>
             </div>
             
-            <!-- 数据统计 -->
-            <div class="proof-stats">
-                <div class="proof-stat">
-                    <div class="proof-stat-icon">👥</div>
-                    <div class="proof-stat-value">2,847</div>
-                    <div class="proof-stat-label">注册用户</div>
-                </div>
-                <div class="proof-stat">
-                    <div class="proof-stat-icon">🚪</div>
-                    <div class="proof-stat-value">1,234</div>
-                    <div class="proof-stat-label">完成灵魂审计</div>
-                </div>
-                <div class="proof-stat">
-                    <div class="proof-stat-icon">⚡</div>
-                    <div class="proof-stat-value">856</div>
-                    <div class="proof-stat-label">完成30天训练</div>
-                </div>
-                <div class="proof-stat">
-                    <div class="proof-stat-icon">✨</div>
-                    <div class="proof-stat-value">127</div>
-                    <div class="proof-stat-label">达到觉醒层级</div>
+            <!-- 成功案例 -->
+            <div class="success-stories mb-16">
+                <h3 class="text-2xl font-bold text-center mb-8">🌟 成功案例</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- 案例1 -->
+                    <div class="glass rounded-xl p-6 hover:border-[#b8942e]/30 transition">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-[#b8942e]/20 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">🚀</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">从拖延到高效</h4>
+                                <p class="text-sm text-gray-500">30天转变</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            "我以前总是把事情拖到最后一刻。通过窄门的30天训练，我学会了'最小可行行动'原则，现在每天都能完成最重要的事。"
+                        </p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <span>完成30天训练</span>
+                            <span>•</span>
+                            <span>经验值：1350</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 案例2 -->
+                    <div class="glass rounded-xl p-6 hover:border-[#b8942e]/30 transition">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-[#b8942e]/20 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">💪</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">克服社交恐惧</h4>
+                                <p class="text-sm text-gray-500">从回避到连接</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            "我害怕与人交流，总是回避社交场合。通过灵魂审计，我发现了恐惧的根源，现在我能自信地与人建立连接。"
+                        </p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <span>完成25天训练</span>
+                            <span>•</span>
+                            <span>经验值：1050</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 案例3 -->
+                    <div class="glass rounded-xl p-6 hover:border-[#b8942e]/30 transition">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 bg-[#b8942e]/20 rounded-full flex items-center justify-center">
+                                <span class="text-2xl">🎯</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">找到人生方向</h4>
+                                <p class="text-sm text-gray-500">从迷茫到清晰</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">
+                            "我不知道自己想要什么，每天浑浑噩噩。通过大师引导，我找到了自己的使命，现在每天都有明确的目标。"
+                        </p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <span>完成30天训练</span>
+                            <span>•</span>
+                            <span>经验值：1420</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -3956,8 +4165,7 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section id="section-evolution" class="py-30 px-6 bg-[#050508]">
+    </section>    <section id="section-evolution" class="py-30 px-6 bg-[#050508]">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="heading-section text-4xl md:text-5xl font-bold mb-4 heading-section">进化金字塔</h2>
             <p class="text-gray-400 mb-12 text-body">灵魂的进化不是线性的，是螺旋上升的。</p>
