@@ -638,6 +638,35 @@ async def get_witness_report(crossing_id: str):
     """获取见证报告"""
     return witness_network.get_witness_report(crossing_id)
 
+# 见证人小组API
+class GroupRequest(BaseModel):
+    name: str
+
+class JoinGroupRequest(BaseModel):
+    group_id: str
+    witness_id: str
+
+@app.post("/api/witness/group/create")
+async def create_witness_group(req: GroupRequest):
+    """创建见证人群组"""
+    group = witness_network.create_group(req.name)
+    return group.to_dict()
+
+@app.post("/api/witness/group/join")
+async def join_witness_group(req: JoinGroupRequest):
+    """加入见证人群组"""
+    success = witness_network.join_group(req.group_id, req.witness_id)
+    if not success:
+        raise HTTPException(status_code=400, detail="加入失败：小组不存在或已满")
+    return {"success": True}
+
+@app.get("/api/witness/group/{group_id}")
+async def get_witness_group(group_id: str):
+    """获取见证人群组详情"""
+    group = witness_network.get_group(group_id)
+    if not group:
+        raise HTTPException(status_code=404, detail="小组不存在")
+    return group.to_dict()
 
 # ============================================================
 # 进化金字塔 API

@@ -9,7 +9,7 @@ SQLite数据库，存储审计记录、穿越进度、用户数据。
 import json
 import sqlite3
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Optional
 from contextlib import contextmanager
@@ -98,6 +98,48 @@ class Database:
                     created_at TEXT,
                     completed_at TEXT,
                     FOREIGN KEY (crossing_id) REFERENCES crossings(id)
+                );
+
+                CREATE TABLE IF NOT EXISTS witnesses (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT,
+                    name TEXT NOT NULL,
+                    email TEXT DEFAULT '',
+                    relationship TEXT DEFAULT '朋友',
+                    verified INTEGER DEFAULT 0,
+                    created_at TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+
+                CREATE TABLE IF NOT EXISTS witness_verifications (
+                    id TEXT PRIMARY KEY,
+                    witness_id TEXT,
+                    crossing_id TEXT,
+                    day INTEGER,
+                    challenge TEXT,
+                    verified INTEGER DEFAULT 0,
+                    message TEXT DEFAULT '',
+                    timestamp TEXT,
+                    FOREIGN KEY (witness_id) REFERENCES witnesses(id),
+                    FOREIGN KEY (crossing_id) REFERENCES crossings(id)
+                );
+
+                CREATE TABLE IF NOT EXISTS witness_groups (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT,
+                    name TEXT NOT NULL,
+                    max_members INTEGER DEFAULT 5,
+                    created_at TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+
+                CREATE TABLE IF NOT EXISTS witness_group_members (
+                    group_id TEXT,
+                    witness_id TEXT,
+                    joined_at TEXT,
+                    PRIMARY KEY (group_id, witness_id),
+                    FOREIGN KEY (group_id) REFERENCES witness_groups(id),
+                    FOREIGN KEY (witness_id) REFERENCES witnesses(id)
                 );
 
                 CREATE TABLE IF NOT EXISTS divinity_records (

@@ -1,0 +1,526 @@
+{
+  "zh": {
+    "nav": {
+      "brand": "窄门 NarrowGate",
+      "formula": "公式",
+      "dimensions": "五层",
+      "audit": "灵魂审计",
+      "masters": "大师",
+      "training": "培训"
+    },
+    "hero": {
+      "subtitle": "NARROW GATE PLATFORM",
+      "title": "你要进窄门",
+      "quote": "因为引到灭亡，那门是宽的，路是大的，进去的人也多；引到生命，那门是窄的，路是小的，找着的人也少。",
+      "source": "— 马太福音 7:13-14",
+      "cta": "开始灵魂审计 →",
+      "warning": "这不会舒服。但你会感谢自己。",
+      "scroll_hint": "向下滚动"
+    },
+    "formula": {
+      "title": "核心命题",
+      "subtitle": "你最不想面对的 × 能带来最大改变的 = 你最需要穿越的",
+      "pain_avoidance": "痛苦回避度",
+      "pain_desc": "你有多不想面对",
+      "growth_leverage": "成长杠杆率",
+      "growth_desc": "穿越后能改变多少",
+      "gate_priority": "窄门优先级",
+      "priority_desc": "越高越需要穿越",
+      "wide_gate": "宽门",
+      "wide_gate_desc": "门是宽的，路是大的，进去的人也多",
+      "wide_gate_items": [
+        "容易、舒服、多数人走",
+        "回避真实自我",
+        "短期安逸，长期后悔",
+        "95%的人选择"
+      ],
+      "narrow_gate": "窄门",
+      "narrow_gate_desc": "门是窄的，路是小的，找着的人也少",
+      "narrow_gate_items": [
+        "艰难、痛苦、少数人走",
+        "面对真实自我",
+        "短期痛苦，长期释放",
+        "5%的人选择"
+      ]
+    },
+    "dimensions": {
+      "title": "五层进化架构",
+      "subtitle": "从凡人到封神——每层都有一个窄门在等你",
+      "level_5": "五 · 封神",
+      "level_5_desc": "成为守门人",
+      "level_4": "四 · 觉醒",
+      "level_4_desc": "从玩家变架构师",
+      "level_3": "三 · 穿越",
+      "level_3_desc": "30天每日挑战",
+      "level_2": "二 · 看见",
+      "level_2_desc": "识别你的枷锁",
+      "level_1": "一 · 凡人",
+      "level_1_desc": "多数人的状态",
+      "transitions": [
+        {
+          "title": "🚪 凡人 → 看见",
+          "desc": "承认自己的有限、懒惰、恐惧、自欺。完成灵魂审计，识别你的枷锁。"
+        },
+        {
+          "title": "⚡ 看见 → 穿越",
+          "desc": "30天每日挑战，做你最不想做的事。公开记录，第三方验证。"
+        },
+        {
+          "title": "🔥 穿越 → 觉醒",
+          "desc": "教会另一个人穿越他的窄门。从玩家变成架构师。"
+        },
+        {
+          "title": "👑 觉醒 → 封神",
+          "desc": "构建一个让更多人看见窄门的系统。成为守门人。"
+        }
+      ]
+    },
+    "audit": {
+      "title": "灵魂审计",
+      "subtitle": "AI 不接受表面答案。持续追问，直到你看见真相。",
+      "intro_title": "准备好了吗？",
+      "intro_desc": "灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。AI 会检测你的回避模式，不让你用\"还好\"、\"都行\"糊弄过去。",
+      "start_btn": "开始审计",
+      "progress": "审计进度",
+      "current_dim": "当前维度",
+      "conversation_count": "已对话",
+      "shackle_count": "枷锁",
+      "input_placeholder": "你的回答...",
+      "send_btn": "发送",
+      "complete_btn": "结束审计，查看结果",
+      "dimensions": {
+        "cognitive": "认知",
+        "emotional": "情绪",
+        "behavior": "行为",
+        "relationship": "关系",
+        "career": "事业"
+      }
+    },
+    "masters": {
+      "title": "大师引导者",
+      "subtitle": "每位大师都是一扇不同的窄门。选择你的引路人。",
+      "socrates": {
+        "name": "苏格拉底",
+        "title": "追问者",
+        "desc": "逻辑矛盾暴露",
+        "greeting": "你好，我是苏格拉底。我不给答案，只问问题。"
+      },
+      "jung": {
+        "name": "荣格",
+        "title": "阴影猎手",
+        "desc": "阴影整合",
+        "greeting": "你好，我是荣格。让我们探索你的潜意识。"
+      },
+      "memento": {
+        "name": "清醒者",
+        "title": "执行官",
+        "desc": "拖延解剖",
+        "greeting": "你好，我是清醒者。让我们分析你的拖延模式。"
+      },
+      "mirror": {
+        "name": "镜像者",
+        "title": "关系分析师",
+        "desc": "关系模式识别",
+        "greeting": "你好，我是镜像者。让我们看看你的人际关系。"
+      },
+      "architect": {
+        "name": "架构师",
+        "title": "系统思维者",
+        "desc": "人生架构审计",
+        "greeting": "你好，我是架构师。让我们设计你的人生系统。"
+      },
+      "alchemist": {
+        "name": "炼金术士",
+        "title": "变形者",
+        "desc": "痛苦转化",
+        "greeting": "你好，我是炼金术士。让我们把痛苦转化为力量。"
+      },
+      "gatekeeper": {
+        "name": "守门人",
+        "title": "窄门本身",
+        "desc": "穿越验证",
+        "greeting": "你好，我是守门人。让我见证你的穿越。"
+      }
+    },
+    "training": {
+      "title": "30天穿越训练",
+      "subtitle": "从看见到穿越，每天做你最不想做的事",
+      "features": "难度渐进 · 每日挑战 · 见证人验证 · 经验值累积",
+      "progress_title": "训练进度",
+      "weeks": [
+        {
+          "range": "D1-D7",
+          "difficulty": "难度 3-5",
+          "title": "🔥 第一周：面对恐惧",
+          "desc": "承认它存在，然后第一次尝试",
+          "items": [
+            "写下你最不想承认的一个弱点",
+            "5:30起床（连续3天）",
+            "找一个你不同意的观点，写下它的合理之处",
+            "给一个疏远的朋友发消息"
+          ]
+        },
+        {
+          "range": "D8-D14",
+          "difficulty": "难度 5-7",
+          "title": "⚡ 第二周：建立节奏",
+          "desc": "每日挑战形成习惯回路",
+          "items": [
+            "24小时不刷社交媒体",
+            "每天跑步30分钟（连续7天）",
+            "问3个人\"你觉得我最大的盲点是什么\"",
+            "对一个不合理的要求说\"不\""
+          ]
+        },
+        {
+          "range": "D15-D21",
+          "difficulty": "难度 7-8",
+          "title": "🔥 第三周：突破瓶颈",
+          "desc": "难度升级，直面核心恐惧",
+          "items": [
+            "公开分享一次你的失败经历",
+            "向最在意的人表达从未说过的真实感受",
+            "结束一段你知道有毒的关系",
+            "连续7天每天做一件让你不舒服的事"
+          ]
+        },
+        {
+          "range": "D22-D30",
+          "difficulty": "难度 8-回顾",
+          "title": "✨ 第四周：巩固穿越",
+          "desc": "从刻意到自然，内化新身份",
+          "items": [
+            "写一封信给你一直回避面对的人",
+            "原谅一个你一直恨着的人",
+            "写穿越旅程总结：恐惧 vs 现实",
+            "帮助另一个人开始他的穿越"
+          ]
+        }
+      ],
+      "record_template": {
+        "title": "📝 每日穿越记录",
+        "fear": "😰 做之前的恐惧",
+        "fear_desc": "写下你害怕发生什么",
+        "action": "⚡ 实际行动",
+        "action_desc": "具体描述你怎么做的",
+        "insight": "💡 穿越感悟",
+        "insight_desc": "恐惧 vs 现实的差距",
+        "rewards": "每完成一天 +10 经验值 · 见证人验证 +20 · 30天穿越完成 +200"
+      }
+    },
+    "about": {
+      "title": "关于窄门",
+      "description": "窄门不是一个给你答案的平台。它是一个制造困境并引导穿越的平台。我们训练人一步一步让自己从人变为神——不是宗教意义的神，是人类潜能的极致释放。",
+      "features": [
+        {
+          "title": "🧠 灵魂审计",
+          "desc": "苏格拉底式追问 + AI回避检测\n五维度深度排查你的枷锁"
+        },
+        {
+          "title": "🧙 大师引导",
+          "desc": "7位大师各有性格和哲学\nMIMO AI实时生成追问"
+        },
+        {
+          "title": "📊 进化量化",
+          "desc": "五层进化金字塔 + 经验值系统\n可视化你的灵魂成长路径"
+        }
+      ],
+      "foundations_title": "理论根基",
+      "foundations": [
+        "苏格拉底",
+        "荣格个体化",
+        "斯多葛学派",
+        "Taleb反脆弱",
+        "CBT苏格拉底式提问",
+        "Frankl意义治疗",
+        "成长型思维",
+        "原子习惯"
+      ],
+      "testimonial": {
+        "quote": "窄门让我第一次真正面对自己的恐惧。不是鸡汤式的'你可以的'，而是冷酷地问'你到底在怕什么'。",
+        "author": "匿名用户",
+        "achievement": "完成30天穿越训练"
+      }
+    },
+    "footer": {
+      "text": "窄门 NarrowGate · 让人看见窄门并跨越窄门"
+    },
+    "common": {
+      "loading": "加载中...",
+      "error": "错误",
+      "success": "成功",
+      "cancel": "取消",
+      "confirm": "确认",
+      "save": "保存",
+      "delete": "删除",
+      "edit": "编辑",
+      "view": "查看",
+      "back": "返回",
+      "next": "下一步",
+      "previous": "上一步",
+      "close": "关闭"
+    }
+  },
+  "en": {
+    "nav": {
+      "brand": "NarrowGate",
+      "formula": "Formula",
+      "dimensions": "Layers",
+      "audit": "Soul Audit",
+      "masters": "Masters",
+      "training": "Training"
+    },
+    "hero": {
+      "subtitle": "NARROW GATE PLATFORM",
+      "title": "Enter the Narrow Gate",
+      "quote": "For wide is the gate and broad is the way that leads to destruction, and many are those who enter through it. But small is the gate and narrow the way that leads to life, and only a few find it.",
+      "source": "— Matthew 7:13-14",
+      "cta": "Start Soul Audit →",
+      "warning": "This won't be comfortable. But you'll thank yourself.",
+      "scroll_hint": "Scroll down"
+    },
+    "formula": {
+      "title": "Core Proposition",
+      "subtitle": "What you least want to face × What can bring the greatest change = What you most need to cross",
+      "pain_avoidance": "Pain Avoidance",
+      "pain_desc": "How much you don't want to face it",
+      "growth_leverage": "Growth Leverage",
+      "growth_desc": "How much change after crossing",
+      "gate_priority": "Gate Priority",
+      "priority_desc": "Higher means more need to cross",
+      "wide_gate": "Wide Gate",
+      "wide_gate_desc": "Wide is the gate and broad is the way",
+      "wide_gate_items": [
+        "Easy, comfortable, most people take it",
+        "Avoids true self",
+        "Short-term comfort, long-term regret",
+        "95% choose this"
+      ],
+      "narrow_gate": "Narrow Gate",
+      "narrow_gate_desc": "Small is the gate and narrow the way",
+      "narrow_gate_items": [
+        "Difficult, painful, few people take it",
+        "Faces true self",
+        "Short-term pain, long-term freedom",
+        "5% choose this"
+      ]
+    },
+    "dimensions": {
+      "title": "Five-Layer Evolution",
+      "subtitle": "From mortal to divine—each layer has a narrow gate waiting for you",
+      "level_5": "Five · Divine",
+      "level_5_desc": "Become a gatekeeper",
+      "level_4": "Four · Awakening",
+      "level_4_desc": "From player to architect",
+      "level_3": "Three · Crossing",
+      "level_3_desc": "30-day daily challenges",
+      "level_2": "Two · Seeing",
+      "level_2_desc": "Identify your shackles",
+      "level_1": "One · Mortal",
+      "level_1_desc": "State of most people",
+      "transitions": [
+        {
+          "title": "🚪 Mortal → Seeing",
+          "desc": "Acknowledge your limitations, laziness, fears, self-deception. Complete soul audit, identify your shackles."
+        },
+        {
+          "title": "⚡ Seeing → Crossing",
+          "desc": "30-day daily challenges, do what you least want to do. Public records, third-party verification."
+        },
+        {
+          "title": "🔥 Crossing → Awakening",
+          "desc": "Teach someone else to cross their narrow gate. Become an architect from a player."
+        },
+        {
+          "title": "👑 Awakening → Divine",
+          "desc": "Build a system that helps more people see the narrow gate. Become a gatekeeper."
+        }
+      ]
+    },
+    "audit": {
+      "title": "Soul Audit",
+      "subtitle": "AI doesn't accept surface answers. Keeps追问 until you see the truth.",
+      "intro_title": "Are you ready?",
+      "intro_desc": "Soul audit will deeply追问 you in 5 dimensions: cognitive, emotional, behavioral, relational, career. AI will detect your evasion patterns, won't let you糊弄 with 'fine' or 'whatever'.",
+      "start_btn": "Start Audit",
+      "progress": "Audit Progress",
+      "current_dim": "Current Dimension",
+      "conversation_count": "Conversations",
+      "shackle_count": "Shackles",
+      "input_placeholder": "Your answer...",
+      "send_btn": "Send",
+      "complete_btn": "End Audit, View Results",
+      "dimensions": {
+        "cognitive": "Cognitive",
+        "emotional": "Emotional",
+        "behavior": "Behavior",
+        "relationship": "Relationship",
+        "career": "Career"
+      }
+    },
+    "masters": {
+      "title": "Master Guides",
+      "subtitle": "Each master is a different narrow gate. Choose your guide.",
+      "socrates": {
+        "name": "Socrates",
+        "title": "Questioner",
+        "desc": "Logical contradiction exposure",
+        "greeting": "Hello, I am Socrates. I don't give answers, only ask questions."
+      },
+      "jung": {
+        "name": "Jung",
+        "title": "Shadow Hunter",
+        "desc": "Shadow integration",
+        "greeting": "Hello, I am Jung. Let's explore your subconscious."
+      },
+      "memento": {
+        "name": "Awakener",
+        "title": "Executor",
+        "desc": "Procrastination dissection",
+        "greeting": "Hello, I am the Awakener. Let's analyze your procrastination patterns."
+      },
+      "mirror": {
+        "name": "Mirror",
+        "title": "Relationship Analyst",
+        "desc": "Relationship pattern recognition",
+        "greeting": "Hello, I am the Mirror. Let's look at your interpersonal relationships."
+      },
+      "architect": {
+        "name": "Architect",
+        "title": "Systems Thinker",
+        "desc": "Life architecture audit",
+        "greeting": "Hello, I am the Architect. Let's design your life system."
+      },
+      "alchemist": {
+        "name": "Alchemist",
+        "title": "Transformer",
+        "desc": "Pain transformation",
+        "greeting": "Hello, I am the Alchemist. Let's transform pain into power."
+      },
+      "gatekeeper": {
+        "name": "Gatekeeper",
+        "title": "The Narrow Gate",
+        "desc": "Crossing verification",
+        "greeting": "Hello, I am the Gatekeeper. Let me witness your crossing."
+      }
+    },
+    "training": {
+      "title": "30-Day Crossing Training",
+      "subtitle": "From seeing to crossing, do what you least want to do every day",
+      "features": "Progressive difficulty · Daily challenges · Witness verification · Experience accumulation",
+      "progress_title": "Training Progress",
+      "weeks": [
+        {
+          "range": "D1-D7",
+          "difficulty": "Difficulty 3-5",
+          "title": "🔥 Week 1: Face Fear",
+          "desc": "Acknowledge it exists, then take the first尝试",
+          "items": [
+            "Write down a weakness you least want to admit",
+            "Wake up at 5:30 (3 days in a row)",
+            "Find a观点 you disagree with, write down its合理性",
+            "Message a疏远 friend"
+          ]
+        },
+        {
+          "range": "D8-D14",
+          "difficulty": "Difficulty 5-7",
+          "title": "⚡ Week 2: Build Rhythm",
+          "desc": "Daily challenges form habit loops",
+          "items": [
+            "24 hours without social media",
+            "Run 30 minutes every day (7 days in a row)",
+            "Ask 3 people 'What do you think is my biggest blind spot?'",
+            "Say 'no' to an unreasonable request"
+          ]
+        },
+        {
+          "range": "D15-D21",
+          "difficulty": "Difficulty 7-8",
+          "title": "🔥 Week 3: Break Through",
+          "desc": "Difficulty升级, face core fears directly",
+          "items": [
+            "Publicly share a failure经历",
+            "Express真实 feelings to someone you care about most",
+            "End a relationship you know is有毒",
+            "Do something uncomfortable for 7 days in a row"
+          ]
+        },
+        {
+          "range": "D22-D30",
+          "difficulty": "Difficulty 8-Review",
+          "title": "✨ Week 4: Consolidate Crossing",
+          "desc": "From刻意 to natural, internalize new identity",
+          "items": [
+            "Write a letter to someone you've been avoiding",
+            "Forgive someone you've been恨着",
+            "Write crossing journey summary: fear vs reality",
+            "Help someone else start their crossing"
+          ]
+        }
+      ],
+      "record_template": {
+        "title": "📝 Daily Crossing Record",
+        "fear": "😰 Fear Before Action",
+        "fear_desc": "Write what you're afraid will happen",
+        "action": "⚡ Actual Action",
+        "action_desc": "Describe specifically what you did",
+        "insight": "💡 Crossing Insight",
+        "insight_desc": "Gap between fear and reality",
+        "rewards": "+10 XP per day completed · +20 for witness verification · +200 for 30-day crossing completion"
+      }
+    },
+    "about": {
+      "title": "About NarrowGate",
+      "description": "NarrowGate is not a platform that gives you answers. It's a platform that creates dilemmas and guides crossing. We train people step by step to transform from human to divine—not in a religious sense, but极致 release of human potential.",
+      "features": [
+        {
+          "title": "🧠 Soul Audit",
+          "desc": "Socratic追问 + AI evasion detection\nFive-dimension deep investigation of your shackles"
+        },
+        {
+          "title": "🧙 Master Guidance",
+          "desc": "7 masters with different personalities and philosophies\nMIMO AI real-time generation of追问"
+        },
+        {
+          "title": "📊 Evolution Quantification",
+          "desc": "Five-layer evolution pyramid + XP system\nVisualize your soul growth path"
+        }
+      ],
+      "foundations_title": "Theoretical Foundations",
+      "foundations": [
+        "Socrates",
+        "Jungian individuation",
+        "Stoicism",
+        "Taleb antifragile",
+        "CBT Socratic questioning",
+        "Frankl logotherapy",
+        "Growth mindset",
+        "Atomic habits"
+      ],
+      "testimonial": {
+        "quote": "NarrowGate made me truly face my fears for the first time. Not鸡汤式的 'you can do it', but冷酷地问 'what exactly are you afraid of?'",
+        "author": "Anonymous user",
+        "achievement": "Completed 30-day crossing training"
+      }
+    },
+    "footer": {
+      "text": "NarrowGate · Help people see the narrow gate and cross it"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "view": "View",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "close": "Close"
+    }
+  }
+}

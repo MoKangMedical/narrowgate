@@ -163,7 +163,7 @@
     <!-- ============================================================ -->
     <nav class="fixed top-0 w-full z-50 bg-[#050508]/90 backdrop-blur border-b border-white/5">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="font-serif text-xl font-bold text-[#b8942e]">窄门 NarrowGate</h1>
+            <h1 class="font-serif text-xl font-bold text-[#b8942e]" data-i18n="nav.brand">窄门 NarrowGate</h1>
             <div class="hidden md:flex gap-6 text-sm text-gray-400 items-center">
                 <a href="#formula" class="hover:text-white transition">公式</a>
                 <a href="#dimensions" class="hover:text-white transition">五层</a>
@@ -174,6 +174,31 @@
                     🔥 签到
                 </button>
             </div>
+            <!-- 移动端汉堡菜单按钮 -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#050508]/95 backdrop-blur border-t border-white/5">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#formula" class="block text-gray-400 hover:text-white transition py-2">公式</a>
+                <a href="#dimensions" class="block text-gray-400 hover:text-white transition py-2">五层</a>
+                <a href="#audit" class="block text-gray-400 hover:text-white transition py-2">灵魂审计</a>
+                <a href="#masters" class="block text-gray-400 hover:text-white transition py-2">大师</a>
+                <a href="#training" class="block text-gray-400 hover:text-white transition py-2">培训</a>
+                <button onclick="openCheckinModal()" class="w-full py-3 bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-[#050508] font-semibold rounded-lg hover:shadow-lg hover:shadow-[#b8942e]/20 transition-all">
+                    🔥 签到
+                </button>
+            </div>
+        
+            <div class="flex items-center gap-4">
+                <button id="lang-switch" onclick="toggleLanguage()" class="text-gray-400 hover:text-white transition text-sm">
+                    EN
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -182,8 +207,8 @@
     <!-- ============================================================ -->
     <section class="pt-40 pb-28 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-8 opacity-80">NARROW GATE PLATFORM</p>
-            <h1 class="font-serif text-5xl md:text-7xl font-medium mb-10 leading-tight tracking-tight">
+            <p class="text-[#b8942e] text-sm tracking-[0.3em] uppercase mb-8 opacity-80" data-i18n="hero.subtitle">NARROW GATE PLATFORM</p>
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium mb-10 leading-tight tracking-tight">
                 你要进<span class="text-gold">窄门</span>
             </h1>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-6 leading-relaxed">
@@ -212,7 +237,7 @@
                 </div>
             </div>
 
-            <button onclick="startAudit()" class="btn-gold text-lg mb-6">
+            <button onclick="startAudit()" class="btn-gold text-lg mb-6" data-i18n="hero.cta">
                 开始灵魂审计 →
             </button>
             <button onclick="startQuickAudit()" class="px-8 py-4 border border-[#b8942e]/40 text-[#b8942e] rounded-xl hover:bg-[#b8942e]/10 transition-all mb-6">
@@ -234,7 +259,7 @@
     <!-- ============================================================ -->
     <section id="formula" class="py-24 px-6 reveal">
         <div class="max-w-4xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">核心命题</h2>
+            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="formula.title">核心命题</h2>
             <p class="text-gray-500 text-center mb-16 text-lg">你最不想面对的 × 能带来最大改变的 = 你最需要穿越的</p>
 
             <!-- 窄门公式 -->
@@ -297,7 +322,7 @@
     <!-- ============================================================ -->
     <section id="dimensions" class="py-24 px-6 bg-gradient-to-b from-transparent to-[#0d0d15] reveal">
         <div class="max-w-3xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">五层进化架构</h2>
+            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="dimensions.title">五层进化架构</h2>
             <p class="text-gray-500 text-center mb-16 text-lg">从凡人到封神——每层都有一个窄门在等你</p>
 
             <div class="space-y-4">
@@ -359,7 +384,7 @@
     <!-- ============================================================ -->
     <section id="audit" class="py-24 px-6">
         <div class="max-w-2xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">灵魂审计</h2>
+            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="audit.title">灵魂审计</h2>
             <p class="text-gray-500 text-center mb-16 text-lg">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
             <div id="audit-container" class="bg-[#0c0c12] border border-white/5 rounded-2xl p-8 min-h-[500px]">
@@ -411,14 +436,14 @@
                     </div>
 
                     <div class="flex gap-4">
-                        <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-xl px-5 py-4 text-white text-sm focus:border-[#b8942e] focus:outline-none transition-colors" onkeydown="if(event.key==='Enter')submitAnswer()">
-                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-8 py-4 rounded-xl hover:bg-[#d4af37] transition text-sm">
+                        <input id="answer-input" type="text" placeholder="你的回答..." data-i18n-placeholder="audit.input_placeholder" class="flex-1 bg-[#050508] border border-white/10 rounded-xl px-5 py-4 text-white text-sm focus:border-[#b8942e] focus:outline-none transition-colors" onkeydown="if(event.key==='Enter')submitAnswer()">
+                        <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-8 py-4 rounded-xl hover:bg-[#d4af37] transition text-sm" data-i18n="audit.send_btn">
                             发送
                         </button>
                     </div>
 
                     <div class="mt-6 text-center">
-                        <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">
+                        <button onclick="completeAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition" data-i18n="audit.complete_btn">
                             结束审计，查看结果
                         </button>
                     </div>
@@ -437,7 +462,7 @@
     <!-- ============================================================ -->
     <section id="masters" class="py-24 px-6 reveal">
         <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">大师引导者</h2>
+            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="masters.title">大师引导者</h2>
             <p class="text-gray-500 text-center mb-16 text-lg">每位大师都是一扇不同的窄门。选择你的引路人。</p>
 
             <div id="masters-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -460,7 +485,7 @@
     <!-- ============================================================ -->
     <section id="training" class="py-24 px-6 reveal">
         <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight">30天穿越训练</h2>
+            <h2 class="font-serif text-3xl font-medium text-center mb-6 tracking-tight" data-i18n="training.title">30天穿越训练</h2>
             <p class="text-gray-500 text-center mb-4 text-lg">从看见到穿越，每天做你最不想做的事</p>
             <p class="text-gray-600 text-center text-sm mb-16">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
 
@@ -496,6 +521,9 @@
                         <li class="flex items-start gap-3"><span class="text-red-400 mt-1">·</span> 找一个你不同意的观点，写下它的合理之处</li>
                         <li class="flex items-start gap-3"><span class="text-red-400 mt-1">·</span> 给一个疏远的朋友发消息</li>
                     </ul>
+                    <button onclick="playWeekAudio(1)" class="mt-6 w-full py-2 border border-red-500/30 text-red-400 rounded-lg hover:bg-red-500/10 transition text-sm">
+                        🎧 播放本周音频
+                    </button>
                 </div>
 
                 <!-- 第2周 -->
@@ -512,6 +540,9 @@
                         <li class="flex items-start gap-3"><span class="text-orange-400 mt-1">·</span> 问3个人"你觉得我最大的盲点是什么"</li>
                         <li class="flex items-start gap-3"><span class="text-orange-400 mt-1">·</span> 对一个不合理的要求说"不"</li>
                     </ul>
+                    <button onclick="playWeekAudio(2)" class="mt-6 w-full py-2 border border-orange-500/30 text-orange-400 rounded-lg hover:bg-orange-500/10 transition text-sm">
+                        🎧 播放本周音频
+                    </button>
                 </div>
 
                 <!-- 第3周 -->
@@ -528,6 +559,9 @@
                         <li class="flex items-start gap-3"><span class="text-yellow-400 mt-1">·</span> 结束一段你知道有毒的关系</li>
                         <li class="flex items-start gap-3"><span class="text-yellow-400 mt-1">·</span> 连续7天每天做一件让你不舒服的事</li>
                     </ul>
+                    <button onclick="playWeekAudio(3)" class="mt-6 w-full py-2 border border-yellow-500/30 text-yellow-400 rounded-lg hover:bg-yellow-500/10 transition text-sm">
+                        🎧 播放本周音频
+                    </button>
                 </div>
 
                 <!-- 第4周 -->
@@ -544,6 +578,9 @@
                         <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">·</span> 写穿越旅程总结：恐惧 vs 现实</li>
                         <li class="flex items-start gap-3"><span class="text-[#b8942e] mt-1">·</span> 帮助另一个人开始他的穿越</li>
                     </ul>
+                    <button onclick="playWeekAudio(4)" class="mt-6 w-full py-2 border border-[#b8942e]/30 text-[#b8942e] rounded-lg hover:bg-[#b8942e]/10 transition text-sm">
+                        🎧 播放本周音频
+                    </button>
                 </div>
             </div>
 
@@ -574,7 +611,7 @@
     <!-- ============================================================ -->
     <section id="about" class="py-24 px-6 bg-gradient-to-b from-[#0d0d15] to-transparent reveal">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-serif text-3xl font-medium mb-8 tracking-tight">关于窄门</h2>
+            <h2 class="font-serif text-3xl font-medium mb-8 tracking-tight" data-i18n="about.title">关于窄门</h2>
             <p class="text-gray-400 leading-relaxed mb-12 text-lg">
                 窄门不是一个给你答案的平台。它是一个<strong class="text-white">制造困境并引导穿越</strong>的平台。
                 我们训练人一步一步让自己从人变为神——不是宗教意义的神，是<strong class="text-white">人类潜能的极致释放</strong>。
@@ -629,12 +666,85 @@
     </section>
 
     <footer class="py-8 text-center text-xs text-gray-700 border-t border-white/5">
-        窄门 NarrowGate · 让人看见窄门并跨越窄门
+        <span data-i18n="footer.text">窄门 NarrowGate · 让人看见窄门并跨越窄门</span>
     </footer>
 
     <!-- ============================================================ -->
     <!-- JavaScript -->
     <!-- ============================================================ -->
+    
+    <!-- Internationalization -->
+    <script>
+        // Language configuration
+        let currentLang = localStorage.getItem('lang') || 'zh';
+        let i18nData = {};
+        
+        // Load language configuration
+        async function loadLanguageConfig() {
+            try {
+                const response = await fetch('locales/i18n.json');
+                i18nData = await response.json();
+                updatePageContent();
+                updateLangButton();
+            } catch (error) {
+                console.error('Failed to load language config:', error);
+                // Fallback to inline config
+                i18nData = {
+                    zh: { nav: { brand: '窄门 NarrowGate' } },
+                    en: { nav: { brand: 'NarrowGate' } }
+                };
+            }
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('lang', currentLang);
+            updatePageContent();
+            updateLangButton();
+        }
+        
+        // Update page content
+        function updatePageContent() {
+            if (!i18nData[currentLang]) return;
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let value = i18nData[currentLang];
+                
+                for (const k of keys) {
+                    if (value && value[k]) {
+                        value = value[k];
+                    } else {
+                        value = null;
+                        break;
+                    }
+                }
+                
+                if (value && typeof value === 'string') {
+                    el.textContent = value;
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en-US';
+        }
+        
+        // Update language button
+        function updateLangButton() {
+            const btn = document.getElementById('lang-switch');
+            if (btn) {
+                btn.textContent = currentLang === 'zh' ? 'EN' : '中';
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLanguageConfig();
+        });
+    </script>
     <script>
         let currentAuditId = null;
 
@@ -1200,6 +1310,274 @@
         if (currentUserId) {
             loadCheckinStatus();
         }
+
+        // 播放介绍视频
+        function playIntroVideo() {
+            const modal = document.getElementById('video-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                // 这里可以嵌入实际视频，目前显示占位内容
+                const videoContainer = document.getElementById('video-container');
+                if (videoContainer) {
+                    videoContainer.innerHTML = `
+                        <div class="aspect-video bg-[#0c0c12] rounded-lg flex items-center justify-center">
+                            <div class="text-center p-8">
+                                <div class="text-6xl mb-4">🎬</div>
+                                <h3 class="text-2xl font-medium text-[#b8942e] mb-4">窄门介绍视频</h3>
+                                <p class="text-gray-400 mb-6">什么是灵魂审计？如何穿越窄门？</p>
+                                <p class="text-sm text-gray-500">视频内容即将上线...</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // 关闭视频模态框
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // 快速体验灵魂审计
+        function startQuickAudit() {
+            // 显示快速审计模态框
+            const modal = document.getElementById('quick-audit-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                // 初始化快速审计
+                initQuickAudit();
+            }
+        }
+
+        // 关闭快速审计模态框
+        function closeQuickAuditModal() {
+            const modal = document.getElementById('quick-audit-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // 快速审计状态
+        let quickAuditStep = 0;
+        let quickAuditAnswers = [];
+
+        // 快速审计问题列表（3个核心问题）
+        const quickAuditQuestions = [
+            {
+                dimension: "认知",
+                question: "你觉得自己的人生到现在，最大的成就是什么？",
+                purpose: "探索表层认知"
+            },
+            {
+                dimension: "情绪",
+                question: "你上一次真正生气是什么时候？因为什么？",
+                purpose: "探索情绪反应模式"
+            },
+            {
+                dimension: "行为",
+                question: "你明知道应该做但一直没做的事情是什么？",
+                purpose: "探索行为回避模式"
+            }
+        ];
+
+        // 初始化快速审计
+        function initQuickAudit() {
+            quickAuditStep = 0;
+            quickAuditAnswers = [];
+            showQuickAuditQuestion();
+        }
+
+        // 显示当前问题
+        function showQuickAuditQuestion() {
+            const container = document.getElementById('quick-audit-content');
+            if (!container) return;
+
+            if (quickAuditStep < quickAuditQuestions.length) {
+                const q = quickAuditQuestions[quickAuditStep];
+                container.innerHTML = `
+                    <div class="text-center mb-6">
+                        <span class="text-sm text-[#b8942e] bg-[#b8942e]/10 px-3 py-1 rounded-full">${q.dimension}</span>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-4">${q.question}</h3>
+                    <p class="text-gray-400 text-sm mb-6">${q.purpose}</p>
+                    <textarea id="quick-audit-answer" placeholder="写下你的回答..." 
+                        class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none mb-4" 
+                        rows="4"></textarea>
+                    <button onclick="submitQuickAuditAnswer()" class="w-full py-3 bg-[#b8942e] text-black font-semibold rounded-lg hover:bg-[#b8973d] transition">
+                        ${quickAuditStep < quickAuditQuestions.length - 1 ? '下一个问题 →' : '完成快速审计 ✨'}
+                    </button>
+                    <div class="mt-4 text-center">
+                        <span class="text-xs text-gray-500">问题 ${quickAuditStep + 1} / ${quickAuditQuestions.length}</span>
+                    </div>
+                `;
+            } else {
+                // 显示结果
+                showQuickAuditResult();
+            }
+        }
+
+        // 提交快速审计回答
+        function submitQuickAuditAnswer() {
+            const answerEl = document.getElementById('quick-audit-answer');
+            if (!answerEl) return;
+            
+            const answer = answerEl.value.trim();
+            if (!answer) {
+                alert('请写下你的回答');
+                return;
+            }
+
+            quickAuditAnswers.push({
+                step: quickAuditStep,
+                question: quickAuditQuestions[quickAuditStep].question,
+                answer: answer
+            });
+
+            quickAuditStep++;
+            showQuickAuditQuestion();
+        }
+
+        // 显示快速审计结果
+        function showQuickAuditResult() {
+            const container = document.getElementById('quick-audit-content');
+            if (!container) return;
+
+            // 生成简单分析
+            const analysis = generateQuickAnalysis();
+            
+            container.innerHTML = `
+                <div class="text-center mb-8">
+                    <div class="text-5xl mb-4">✨</div>
+                    <h3 class="text-2xl font-medium text-[#b8942e] mb-2">快速审计完成</h3>
+                    <p class="text-gray-400">这只是浅层探索，完整审计会深入追问</p>
+                </div>
+                <div class="bg-[#0c0c12] rounded-xl p-6 mb-6">
+                    <h4 class="text-lg font-medium text-white mb-4">初步发现</h4>
+                    <div class="space-y-4">
+                        ${analysis.map(item => `
+                            <div class="border-l-2 border-[#b8942e] pl-4">
+                                <p class="text-sm text-[#b8942e]">${item.dimension}</p>
+                                <p class="text-gray-300">${item.insight}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <button onclick="closeQuickAuditModal(); startAudit();" class="w-full py-3 bg-[#b8942e] text-black font-semibold rounded-lg hover:bg-[#b8973d] transition">
+                        进行完整灵魂审计 →
+                    </button>
+                    <button onclick="closeQuickAuditModal()" class="w-full py-3 border border-white/10 text-gray-400 rounded-lg hover:bg-white/5 transition">
+                        稍后再说
+                    </button>
+                </div>
+            `;
+        }
+
+        // 生成简单分析
+        function generateQuickAnalysis() {
+            const analysis = [];
+            
+            quickAuditAnswers.forEach((item, index) => {
+                const question = quickAuditQuestions[index];
+                let insight = '';
+                
+                if (question.dimension === '认知') {
+                    insight = '你对成就有清晰的认知，这是好的开始。';
+                } else if (question.dimension === '情绪') {
+                    insight = '你能觉察自己的情绪反应，这是情绪智慧的基础。';
+                } else if (question.dimension === '行为') {
+                    insight = '你意识到了行为上的回避模式，这是改变的第一步。';
+                }
+                
+                analysis.push({
+                    dimension: question.dimension,
+                    insight: insight
+                });
+            });
+            
+            return analysis;
+        }
+
+        // 移动端菜单切换
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // 点击菜单项后关闭菜单
+                const menuLinks = mobileMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+        });
+
+        // 音频播放器
+        let currentAudio = null;
+        let currentWeek = 0;
+
+        function playWeekAudio(week) {
+            // 如果正在播放同一周的音频，则暂停
+            if (currentAudio && currentWeek === week) {
+                currentAudio.pause();
+                currentAudio = null;
+                currentWeek = 0;
+                updateAudioButton(week, false);
+                return;
+            }
+
+            // 停止当前播放的音频
+            if (currentAudio) {
+                currentAudio.pause();
+                updateAudioButton(currentWeek, false);
+            }
+
+            // 创建音频元素（这里使用示例音频URL，实际应替换为真实音频文件）
+            const audioUrl = `/audio/week${week}.mp3`;
+            currentAudio = new Audio(audioUrl);
+            currentWeek = week;
+
+            // 更新按钮状态
+            updateAudioButton(week, true);
+
+            // 播放音频
+            currentAudio.play().catch(e => {
+                console.log('音频播放失败:', e);
+                alert('音频文件尚未准备好，敬请期待！');
+                updateAudioButton(week, false);
+                currentAudio = null;
+                currentWeek = 0;
+            });
+
+            // 播放结束时重置
+            currentAudio.addEventListener('ended', function() {
+                updateAudioButton(week, false);
+                currentAudio = null;
+                currentWeek = 0;
+            });
+        }
+
+        function updateAudioButton(week, isPlaying) {
+            const buttons = document.querySelectorAll(`[onclick="playWeekAudio(${week})"]`);
+            buttons.forEach(btn => {
+                if (isPlaying) {
+                    btn.innerHTML = '⏸️ 暂停音频';
+                    btn.classList.add('bg-red-500/20');
+                } else {
+                    btn.innerHTML = '🎧 播放本周音频';
+                    btn.classList.remove('bg-red-500/20');
+                }
+            });
+        }
     </script>
     <section id="section-witness" class="py-20 px-6"><div class="max-w-4xl mx-auto"><h2 class="font-serif text-3xl font-bold mb-4 text-center">见证人网络</h2><p class="text-gray-400 text-center mb-12">你的进化需要被看见。</p><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl font-bold mb-4">添加见证人</h3><div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6"><input id="witness-name" type="text" placeholder="见证人姓名" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><input id="witness-email" type="email" placeholder="邮箱（可选）" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><select id="witness-relationship" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><option value="朋友">朋友</option><option value="家人">家人</option><option value="同事">同事</option><option value="导师">导师</option></select><button onclick="addWitness()" class="w-full py-3 rounded-lg bg-[#b8942e] text-black font-semibold hover:bg-[#b8973d] transition">添加见证人</button></div></div><div><h3 class="text-xl font-bold mb-4">我的见证人</h3><div id="witness-list" class="space-y-3"><p class="text-gray-500 text-sm">还没有添加见证人</p></div></div></div></div></section>
     <section id="section-evolution" class="py-20 px-6 bg-[#050508]">
@@ -1232,5 +1610,95 @@
             </div>
         </div>
     </section>
+
+    <!-- 签到模态框 -->
+    <div id="checkin-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="bg-[#0c0c12] border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4 relative">
+            <!-- 关闭按钮 -->
+            <button onclick="closeCheckinModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- 签到状态 -->
+            <div id="checkin-status" class="mb-6">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🔥</div>
+                    <h3 class="text-2xl font-bold text-white mb-2">每日签到</h3>
+                    <p class="text-gray-400">坚持签到，见证你的成长</p>
+                </div>
+            </div>
+
+            <!-- 统计数据 -->
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="text-center">
+                    <p id="checkin-streak" class="text-3xl font-bold text-[#b8942e]">0</p>
+                    <p class="text-xs text-gray-500">连续天数</p>
+                </div>
+                <div class="text-center">
+                    <p id="checkin-max-streak" class="text-3xl font-bold text-gray-300">0</p>
+                    <p class="text-xs text-gray-500">最长连续</p>
+                </div>
+                <div class="text-center">
+                    <p id="checkin-total" class="text-3xl font-bold text-gray-300">0</p>
+                    <p class="text-xs text-gray-500">总签到</p>
+                </div>
+            </div>
+
+            <!-- 签到按钮 -->
+            <div id="checkin-button">
+                <button onclick="doCheckin()" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-[#050508] font-semibold hover:shadow-lg hover:shadow-[#b8942e]/30 transition-all">
+                    🔥 立即签到
+                </button>
+            </div>
+
+            <!-- 提示文字 -->
+            <p class="text-center text-xs text-gray-500 mt-4">
+                每天坚持签到，记录你的进化之路
+            </p>
+        </div>
+    </div>
+
+    <!-- 视频模态框 -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeVideoModal()"></div>
+        <div class="absolute inset-4 md:inset-10 lg:inset-20 flex items-center justify-center">
+            <div class="bg-[#0c0c12] rounded-2xl border border-[#b8942e]/20 w-full max-w-4xl max-h-full overflow-hidden">
+                <div class="flex justify-between items-center p-4 border-b border-white/5">
+                    <h3 class="text-lg font-medium text-[#b8942e]">窄门介绍</h3>
+                    <button onclick="closeVideoModal()" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="video-container" class="p-4">
+                    <!-- 视频内容将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 快速审计模态框 -->
+    <div id="quick-audit-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeQuickAuditModal()"></div>
+        <div class="absolute inset-4 md:inset-10 flex items-center justify-center">
+            <div class="bg-[#0c0c12] rounded-2xl border border-[#b8942e]/20 w-full max-w-2xl max-h-full overflow-y-auto">
+                <div class="flex justify-between items-center p-4 border-b border-white/5">
+                    <h3 class="text-lg font-medium text-[#b8942e]">⚡ 快速灵魂审计</h3>
+                    <button onclick="closeQuickAuditModal()" class="text-gray-400 hover:text-white transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="quick-audit-content" class="p-6">
+                    <!-- 快速审计内容将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

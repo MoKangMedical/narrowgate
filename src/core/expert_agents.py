@@ -165,7 +165,7 @@ EXPERTS_DATA = [
             ClassicCase(
                 id="nc2",
                 title="骆驼→狮子→孩子",
-                scenario="骆驼承担重负，狮子说"不"，孩子创造新价值",
+                scenario='骆驼承担重负，狮子说"不"，孩子创造新价值',
                 analysis="穿越窄门的三个阶段",
                 narrowgate_insight="从'你应该'到'我要'到'我是'的进化"
             )
@@ -595,7 +595,7 @@ class ExpertManager:
             "level_required": expert.level_required
         }
     
-    def chat(self, expert_id: str, user_message: str, 
+    async def chat(self, expert_id: str, user_message: str, 
              conversation_id: str = "") -> Dict:
         """与专家对话"""
         expert = self.get_expert(expert_id)
@@ -631,8 +631,8 @@ class ExpertManager:
         for msg in conversation.messages[-10:]:
             messages.append(msg)
         
-        # 调用MIMO API
-        response = self.mimo.chat(messages)
+        # 调用MIMO API（异步）
+        response = await self.mimo.chat(messages)
         
         # 添加助手回复
         conversation.messages.append({
