@@ -359,7 +359,6 @@
                     <div class="flex gap-3">
         let selectedMasterId = "";
                         <input id="answer-input" type="text" placeholder="你的回答..." class="flex-1 bg-[#050508] border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:border-[#b8942e] focus:outline-none" onkeydown="if(event.key==='Enter')submitAnswer()">
-        let selectedMasterId = "";
                         <button onclick="submitAnswer()" class="bg-[#b8942e] text-black font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition text-sm">
                             发送
                         </button>
@@ -586,7 +585,6 @@
             container.appendChild(div);
         }
 
-        let selectedMasterId = "";
         async function submitAnswer() {
             const input = document.getElementById('answer-input');
             const answer = input.value.trim();
