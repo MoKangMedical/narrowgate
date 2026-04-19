@@ -164,12 +164,15 @@
     <nav class="fixed top-0 w-full z-50 bg-[#050508]/90 backdrop-blur border-b border-white/5">
         <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="font-serif text-xl font-bold text-[#b8942e]">窄门 NarrowGate</h1>
-            <div class="hidden md:flex gap-6 text-sm text-gray-400">
+            <div class="hidden md:flex gap-6 text-sm text-gray-400 items-center">
                 <a href="#formula" class="hover:text-white transition">公式</a>
                 <a href="#dimensions" class="hover:text-white transition">五层</a>
                 <a href="#audit" class="hover:text-white transition">灵魂审计</a>
                 <a href="#masters" class="hover:text-white transition">大师</a>
                 <a href="#training" class="hover:text-white transition">培训</a>
+                <button onclick="openCheckinModal()" class="px-4 py-2 bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-[#050508] font-semibold rounded-lg hover:shadow-lg hover:shadow-[#b8942e]/20 transition-all">
+                    🔥 签到
+                </button>
             </div>
         </div>
     </nav>
@@ -194,8 +197,26 @@
                 <div class="gate-narrow"></div>
             </div>
 
+            <div class="mb-12">
+                <div class="relative w-full max-w-2xl mx-auto rounded-2xl overflow-hidden border border-[#b8942e]/20 bg-[#0c0c12]">
+                    <div class="aspect-video flex items-center justify-center">
+                        <div class="text-center p-8">
+                            <div class="text-5xl mb-4">🎬</div>
+                            <h3 class="text-xl font-medium text-[#b8942e] mb-2">3分钟了解窄门</h3>
+                            <p class="text-gray-400 text-sm mb-4">什么是灵魂审计？如何穿越窄门？</p>
+                            <button onclick="playIntroVideo()" class="px-6 py-3 bg-[#b8942e]/20 text-[#b8942e] rounded-lg hover:bg-[#b8942e]/30 transition-all border border-[#b8942e]/30">
+                                ▶ 播放介绍视频
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <button onclick="startAudit()" class="btn-gold text-lg mb-6">
                 开始灵魂审计 →
+            </button>
+            <button onclick="startQuickAudit()" class="px-8 py-4 border border-[#b8942e]/40 text-[#b8942e] rounded-xl hover:bg-[#b8942e]/10 transition-all mb-6">
+                ⚡ 快速体验（3分钟）
             </button>
             <p class="text-xs text-gray-600 mb-12">这不会舒服。但你会感谢自己。</p>
             
@@ -1012,6 +1033,173 @@
         }
         loadWitnesses();
         loadEvolution();
+
+        // ============================================================
+        // 签到系统
+        // ============================================================
+
+        let currentUserId = localStorage.getItem('narrowgate_user_id') || '';
+        let checkinData = {
+            today_checked: false,
+            streak_count: 0,
+            max_streak: 0,
+            total_checkins: 0
+        };
+
+        // 打开签到模态框
+        function openCheckinModal() {
+            const modal = document.getElementById('checkin-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                loadCheckinStatus();
+            }
+        }
+
+        // 关闭签到模态框
+        function closeCheckinModal() {
+            const modal = document.getElementById('checkin-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // 加载签到状态
+        async function loadCheckinStatus() {
+            if (!currentUserId) {
+                showCheckinUI({
+                    today_checked: false,
+                    streak_count: 0,
+                    max_streak: 0,
+                    total_checkins: 0
+                });
+                return;
+            }
+
+            try {
+                const data = await apiCall(`/api/checkin/${currentUserId}`, 'GET');
+                checkinData = data;
+                showCheckinUI(data);
+            } catch(e) {
+                console.error('加载签到状态失败:', e);
+                showCheckinUI({
+                    today_checked: false,
+                    streak_count: 0,
+                    max_streak: 0,
+                    total_checkins: 0
+                });
+            }
+        }
+
+        // 显示签到UI
+        function showCheckinUI(data) {
+            const statusEl = document.getElementById('checkin-status');
+            const buttonEl = document.getElementById('checkin-button');
+            const streakEl = document.getElementById('checkin-streak');
+            const maxStreakEl = document.getElementById('checkin-max-streak');
+            const totalEl = document.getElementById('checkin-total');
+
+            if (statusEl) {
+                if (data.today_checked) {
+                    statusEl.innerHTML = `
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">✨</div>
+                            <h3 class="text-2xl font-bold text-[#b8942e] mb-2">今日已签到</h3>
+                            <p class="text-gray-400">明天继续加油！</p>
+                        </div>
+                    `;
+                } else {
+                    statusEl.innerHTML = `
+                        <div class="text-center">
+                            <div class="text-6xl mb-4">🔥</div>
+                            <h3 class="text-2xl font-bold text-white mb-2">每日签到</h3>
+                            <p class="text-gray-400">坚持签到，见证你的成长</p>
+                        </div>
+                    `;
+                }
+            }
+
+            if (buttonEl) {
+                if (data.today_checked) {
+                    buttonEl.innerHTML = `
+                        <button disabled class="w-full py-4 rounded-xl bg-gray-700 text-gray-400 font-semibold cursor-not-allowed">
+                            ✓ 已签到
+                        </button>
+                    `;
+                } else {
+                    buttonEl.innerHTML = `
+                        <button onclick="doCheckin()" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#8a6d1b] to-[#b8942e] text-[#050508] font-semibold hover:shadow-lg hover:shadow-[#b8942e]/30 transition-all">
+                            🔥 立即签到
+                        </button>
+                    `;
+                }
+            }
+
+            if (streakEl) streakEl.textContent = data.streak_count || 0;
+            if (maxStreakEl) maxStreakEl.textContent = data.max_streak || 0;
+            if (totalEl) totalEl.textContent = data.total_checkins || 0;
+        }
+
+        // 执行签到
+        async function doCheckin() {
+            if (!currentUserId) {
+                // 自动注册用户
+                try {
+                    const userData = await apiCall('/api/user/register', 'POST', { username: '' });
+                    currentUserId = userData.id;
+                    localStorage.setItem('narrowgate_user_id', currentUserId);
+                } catch(e) {
+                    alert('注册失败，请刷新页面重试');
+                    return;
+                }
+            }
+
+            try {
+                const result = await apiCall('/api/checkin', 'POST', { user_id: currentUserId });
+                
+                if (result.success) {
+                    // 显示签到成功动画
+                    showCheckinSuccess(result);
+                    // 更新状态
+                    checkinData = {
+                        today_checked: true,
+                        streak_count: result.streak_count,
+                        max_streak: result.max_streak,
+                        total_checkins: (checkinData.total_checkins || 0) + 1
+                    };
+                    showCheckinUI(checkinData);
+                } else {
+                    alert(result.message || '签到失败');
+                }
+            } catch(e) {
+                console.error('签到失败:', e);
+                alert('签到失败，请稍后重试');
+            }
+        }
+
+        // 显示签到成功动画
+        function showCheckinSuccess(result) {
+            // 创建动画元素
+            const animation = document.createElement('div');
+            animation.className = 'fixed inset-0 flex items-center justify-center z-[100] pointer-events-none';
+            animation.innerHTML = `
+                <div class="text-center animate-bounce">
+                    <div class="text-8xl mb-4">🎉</div>
+                    <div class="text-4xl font-bold text-[#b8942e] mb-2">签到成功！</div>
+                    <div class="text-2xl text-white">连续 ${result.streak_count} 天</div>
+                </div>
+            `;
+            document.body.appendChild(animation);
+
+            // 2秒后移除动画
+            setTimeout(() => {
+                animation.remove();
+            }, 2000);
+        }
+
+        // 初始化签到状态
+        if (currentUserId) {
+            loadCheckinStatus();
+        }
     </script>
     <section id="section-witness" class="py-20 px-6"><div class="max-w-4xl mx-auto"><h2 class="font-serif text-3xl font-bold mb-4 text-center">见证人网络</h2><p class="text-gray-400 text-center mb-12">你的进化需要被看见。</p><div class="grid md:grid-cols-2 gap-8"><div><h3 class="text-xl font-bold mb-4">添加见证人</h3><div class="bg-[#0c0c12] border border-white/5 rounded-xl p-6"><input id="witness-name" type="text" placeholder="见证人姓名" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><input id="witness-email" type="email" placeholder="邮箱（可选）" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><select id="witness-relationship" class="w-full bg-[#050508] border border-white/10 rounded-lg px-4 py-3 mb-4 text-white text-sm focus:border-[#b8942e] focus:outline-none"><option value="朋友">朋友</option><option value="家人">家人</option><option value="同事">同事</option><option value="导师">导师</option></select><button onclick="addWitness()" class="w-full py-3 rounded-lg bg-[#b8942e] text-black font-semibold hover:bg-[#b8973d] transition">添加见证人</button></div></div><div><h3 class="text-xl font-bold mb-4">我的见证人</h3><div id="witness-list" class="space-y-3"><p class="text-gray-500 text-sm">还没有添加见证人</p></div></div></div></div></section>
     <section id="section-evolution" class="py-20 px-6 bg-[#050508]">

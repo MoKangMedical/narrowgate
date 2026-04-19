@@ -389,6 +389,142 @@ class Database:
             }
 
 
+    # ============================================================
+    # 签到系统
+    # ============================================================
+
+    def check_in(self, user_id: str) -> dict:
+        """
+        每日签到
+        
+        返回：{
+            "success": True/False,
+            "streak_count": 连续天数,
+            "max_streak": 最长连续,
+            "is_new_checkin": 是否是今天第一次签到,
+            "message": 提示消息
+        }
+        """
+        today = datetime.now().strftime("%Y-%m-%d")
+        now = datetime.now().isoformat()
+        
+        with self._connect() as conn:
+            # 检查今天是否已签到
+            existing = conn.execute(
+                "SELECT * FROM check_ins WHERE user_id = ? AND check_in_date = ?",
+                (user_id, today)
+            ).fetchone()
+            
+            if existing:
+                return {
+                    "success": False,
+                    "streak_count": existing["streak_count"],
+                    "max_streak": existing["max_streak"],
+                    "is_new_checkin": False,
+                    "message": "今天已经签到过了"
+                }
+            
+            # 获取昨天的签到记录
+            yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+            yesterday_record = conn.execute(
+                "SELECT * FROM check_ins WHERE user_id = ? AND check_in_date = ?",
+                (user_id, yesterday)
+            ).fetchone()
+            
+            # 计算连续天数
+            if yesterday_record:
+                streak_count = yesterday_record["streak_count"] + 1
+            else:
+                streak_count = 1
+            
+            # 获取用户最长连续记录
+            max_streak_result = conn.execute(
+                "SELECT MAX(max_streak) as max_streak FROM check_ins WHERE user_id = ?",
+                (user_id,)
+            ).fetchone()
+            max_streak = max(max_streak_result["max_streak"] if max_streak_result["max_streak"] else 0, streak_count)
+            
+            # 创建签到记录
+            checkin_id = f"checkin_{uuid.uuid4().hex[:12]}"
+            conn.execute(
+                """INSERT INTO check_ins (id, user_id, check_in_date, streak_count, max_streak, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (checkin_id, user_id, today, streak_count, max_streak, now)
+            )
+            
+            return {
+                "success": True,
+                "streak_count": streak_count,
+                "max_streak": max_streak,
+                "is_new_checkin": True,
+                "message": f"连续签到 {streak_count} 天！"
+            }
+
+    def get_checkin_status(self, user_id: str) -> dict:
+        """
+        获取用户签到状态
+        
+        返回：{
+            "today_checked": 今天是否已签到,
+            "streak_count": 当前连续天数,
+            "max_streak": 最长连续天数,
+            "total_checkins": 总签到次数,
+            "last_checkin": 最后签到时间
+        }
+        """
+        today = datetime.now().strftime("%Y-%m-%d")
+        
+        with self._connect() as conn:
+            # 检查今天是否已签到
+            today_record = conn.execute(
+                "SELECT * FROM check_ins WHERE user_id = ? AND check_in_date = ?",
+                (user_id, today)
+            ).fetchone()
+            
+            # 获取最新签到记录
+            latest_record = conn.execute(
+                "SELECT * FROM check_ins WHERE user_id = ? ORDER BY check_in_date DESC LIMIT 1",
+                (user_id,)
+            ).fetchone()
+            
+            # 获取总签到次数
+            total_checkins = conn.execute(
+                "SELECT COUNT(*) FROM check_ins WHERE user_id = ?",
+                (user_id,)
+            ).fetchone()[0]
+            
+            # 获取最长连续天数
+            max_streak_result = conn.execute(
+                "SELECT MAX(max_streak) as max_streak FROM check_ins WHERE user_id = ?",
+                (user_id,)
+            ).fetchone()
+            
+            return {
+                "today_checked": today_record is not None,
+                "streak_count": latest_record["streak_count"] if latest_record else 0,
+                "max_streak": max_streak_result["max_streak"] if max_streak_result["max_streak"] else 0,
+                "total_checkins": total_checkins,
+                "last_checkin": latest_record["created_at"] if latest_record else None
+            }
+
+    def get_checkin_history(self, user_id: str, days: int = 30) -> List[dict]:
+        """
+        获取签到历史记录
+        
+        返回最近N天的签到记录
+        """
+        start_date = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+        
+        with self._connect() as conn:
+            rows = conn.execute(
+                """SELECT * FROM check_ins 
+                   WHERE user_id = ? AND check_in_date >= ?
+                   ORDER BY check_in_date DESC""",
+                (user_id, start_date)
+            ).fetchall()
+            return [dict(r) for r in rows]
+
+
 # ============================================================
 # 导出
 # ============================================================

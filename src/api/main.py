@@ -133,6 +133,32 @@ async def get_user(user_id: str):
 
 
 # ============================================================
+# 签到 API
+# ============================================================
+
+class CheckInRequest(BaseModel):
+    user_id: str
+
+@app.post("/api/checkin")
+async def check_in(req: CheckInRequest):
+    """每日签到"""
+    result = db.check_in(req.user_id)
+    return result
+
+@app.get("/api/checkin/{user_id}")
+async def get_checkin_status(user_id: str):
+    """获取签到状态"""
+    status = db.get_checkin_status(user_id)
+    return status
+
+@app.get("/api/checkin/{user_id}/history")
+async def get_checkin_history(user_id: str, days: int = 30):
+    """获取签到历史"""
+    history = db.get_checkin_history(user_id, days)
+    return {"history": history}
+
+
+# ============================================================
 # 灵魂审计 API
 # ============================================================
 
