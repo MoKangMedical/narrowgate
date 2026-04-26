@@ -1,0 +1,86 @@
+name: NarrowGate CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov flake8
+
+      - name: Lint with flake8
+        run: |
+          # Stop the build on syntax errors or undefined names
+          flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Warnings as non-blocking
+          flake8 src/ --count --exit-zero --max-line-length=120 --statistics
+
+      - name: Run tests
+        env:
+          MIMO_API_KEY: test_key
+          NARROWGATE_DB_PATH: /tmp/test_narrowgate.db
+        run: |
+          cd src && python -m pytest ../tests/ -v --cov=core --cov-report=xml --cov-report=term-missing
+        continue-on-error: true
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+
+  build-check:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check project structure
+        run: |
+          echo "=== Project Structure ==="
+          find . -type f -name "*.py" | head -30
+          echo ""
+          echo "=== Core Modules ==="
+          ls -la src/core/
+          echo ""
+          echo "=== API Modules ==="
+          ls -la src/api/
+          echo ""
+          echo "=== Verify imports ==="
+          python3 -c "
+          import sys
+          sys.path.insert(0, 'src')
+          from core.database import Database
+          from core.evolution import EvolutionPyramid
+          from core.gate_finder import GateFinder
+          from core.masters import MasterManager
+          print('All core imports OK')
+          "

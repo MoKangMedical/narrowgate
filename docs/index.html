@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NarrowGate — Soul Evolution Platform</title>
+<meta name="description" content="AI-driven soul evolution platform. See the narrow gate and cross it.">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;
+  --gold:#d4a853;--gold-dim:#a07830;--gold-glow:rgba(212,168,83,.15);
+  --white:#f0ece4;--gray:#8a8a9a;--gray-dim:#555566;
+  --font:'Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --mono:'SF Mono','Fira Code',monospace;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:var(--font);color:var(--white);background:var(--bg);line-height:1.7;overflow-x:hidden}
+a{color:var(--gold);text-decoration:none;transition:color .3s}
+a:hover{color:#e8c474}
+
+/* === NAV === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,168,83,.1)}
+.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:.05em;color:var(--gold)}
+.nav-links{display:flex;gap:2rem;font-size:.85rem}
+.nav-links a{color:var(--gray);transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+
+/* === HERO === */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(212,168,83,.08) 0%,transparent 70%);pointer-events:none}
+.hero-label{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,var(--white) 0%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-quote{font-size:1.1rem;color:var(--gray);max-width:600px;margin:0 auto 2rem;font-style:italic}
+.hero-tagline{font-size:1.25rem;color:var(--gold);font-weight:600;margin-bottom:3rem}
+.hero-cta{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2.2rem;background:var(--gold);color:var(--bg);font-weight:700;font-size:.95rem;border-radius:8px;transition:all .3s}
+.hero-cta:hover{background:#e8c474;transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,168,83,.3);color:var(--bg)}
+
+/* === SECTIONS === */
+section{padding:6rem 2rem;max-width:1100px;margin:0 auto}
+.section-label{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.5rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;margin-bottom:1rem}
+.section-desc{color:var(--gray);max-width:700px;margin-bottom:3rem;font-size:1.05rem}
+
+/* === PILLARS === */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.pillar{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2rem;transition:all .4s;position:relative;overflow:hidden}
+.pillar:hover{border-color:rgba(212,168,83,.2);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.pillar-icon{width:48px;height:48px;margin-bottom:1.2rem;color:var(--gold)}
+.pillar h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
+.pillar p{color:var(--gray);font-size:.9rem;line-height:1.6}
+
+/* === PYRAMID === */
+.pyramid-section{text-align:center}
+.pyramid{display:flex;flex-direction:column;align-items:center;gap:0;margin:3rem auto;max-width:500px}
+.pyramid-level{padding:1rem 0;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.9rem;border-radius:4px;transition:all .3s;cursor:default}
+.pyramid-level:hover{transform:scale(1.02)}
+.pyramid-level:nth-child(1){width:30%;background:linear-gradient(90deg,rgba(212,168,83,.05),rgba(212,168,83,.15));border:1px solid rgba(212,168,83,.1)}
+.pyramid-level:nth-child(2){width:45%;background:linear-gradient(90deg,rgba(212,168,83,.08),rgba(212,168,83,.2));border:1px solid rgba(212,168,83,.15)}
+.pyramid-level:nth-child(3){width:60%;background:linear-gradient(90deg,rgba(212,168,83,.12),rgba(212,168,83,.25));border:1px solid rgba(212,168,83,.2)}
+.pyramid-level:nth-child(4){width:78%;background:linear-gradient(90deg,rgba(212,168,83,.18),rgba(212,168,83,.3));border:1px solid rgba(212,168,83,.25)}
+.pyramid-level:nth-child(5){width:96%;background:linear-gradient(90deg,rgba(212,168,83,.25),rgba(212,168,83,.4));border:1px solid rgba(212,168,83,.35);color:var(--gold)}
+.xp-rule{color:var(--gray);font-size:.85rem;margin-top:2rem}
+.xp-rule span{color:var(--gold);font-weight:600}
+
+/* === MASTERS === */
+.masters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.master{background:var(--bg2);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .3s}
+.master:hover{border-color:rgba(212,168,83,.15);background:var(--bg3)}
+.master-icon{width:44px;height:44px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem;color:var(--gold)}
+.master h4{font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.master .dim{font-size:.75rem;color:var(--gold-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem}
+.master p{color:var(--gray);font-size:.85rem;line-height:1.5}
+
+/* === ARCHITECTURE === */
+.arch-diagram{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:2.5rem;font-family:var(--mono);font-size:.85rem;line-height:2;color:var(--gray);overflow-x:auto}
+.arch-diagram .layer{padding:.8rem 1.2rem;margin:.4rem 0;border-radius:6px;text-align:center}
+.arch-diagram .l1{background:rgba(212,168,83,.08);border:1px solid rgba(212,168,83,.15);color:var(--gold)}
+.arch-diagram .l2{background:rgba(100,200,255,.06);border:1px solid rgba(100,200,255,.1);color:#8ac4e8}
+.arch-diagram .l3{background:rgba(180,130,255,.06);border:1px solid rgba(180,130,255,.1);color:#b49aff}
+.arch-diagram .l4{background:rgba(100,220,150,.06);border:1px solid rgba(100,220,150,.1);color:#7ad4a0}
+
+/* === API === */
+.api-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.api-table th{text-align:left;padding:.8rem 1rem;color:var(--gold-dim);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.08)}
+.api-table td{padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--gray)}
+.api-table td:first-child{color:var(--gold);font-family:var(--mono);font-size:.8rem;font-weight:600}
+.api-table td:nth-child(2){font-family:var(--mono);font-size:.82rem;color:var(--white)}
+.api-table tr:hover{background:rgba(212,168,83,.03)}
+
+/* === STATS === */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center;padding:4rem 0}
+.stat-num{font-size:2.5rem;font-weight:800;color:var(--gold);line-height:1}
+.stat-label{font-size:.8rem;color:var(--gray);margin-top:.5rem}
+
+/* === CTA === */
+.cta-section{text-align:center;padding:8rem 2rem;background:linear-gradient(180deg,transparent,rgba(212,168,83,.04),transparent)}
+.cta-section h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:700;margin-bottom:1rem}
+.cta-section p{color:var(--gray);max-width:500px;margin:0 auto 2rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-outline{padding:.8rem 2rem;border:1px solid rgba(212,168,83,.3);color:var(--gold);border-radius:8px;font-weight:600;transition:all .3s}
+.btn-outline:hover{background:rgba(212,168,83,.1);border-color:var(--gold)}
+
+/* === FOOTER === */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(255,255,255,.05);font-size:.8rem;color:var(--gray-dim)}
+
+/* === RESPONSIVE === */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  section{padding:4rem 1.5rem}
+  .pillars{grid-template-columns:1fr}
+  .masters-grid{grid-template-columns:1fr}
+}
+
+/* === ANIMATIONS === */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NARROWGATE</div>
+  <div class="nav-links">
+    <a href="#pillars">Five Pillars</a>
+    <a href="#pyramid">Evolution</a>
+    <a href="#masters">Masters</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#api">API</a>
+    <a href="https://github.com/MoKangMedical/narrowgate">GitHub</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Soul Evolution Platform</div>
+  <h1>NarrowGate</h1>
+  <p class="hero-quote">"Enter through the narrow gate. For wide is the gate and broad is the road that leads to destruction."</p>
+  <p class="hero-tagline">You don't lack knowledge. You lack the will to act on what you already know.</p>
+  <a href="https://github.com/MoKangMedical/narrowgate" class="hero-cta">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+    View on GitHub
+  </a>
+</section>
+
+<!-- FIVE PILLARS -->
+<section id="pillars" class="fade-in">
+  <div class="section-label">Core Methodology</div>
+  <h2 class="section-title">Five Pillars of Evolution</h2>
+  <p class="section-desc">Not another meditation app. Not another goal tracker. A differential diagnosis engine for the soul.</p>
+  <div class="pillars">
+    <div class="pillar">
+      <svg class="pillar-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <h3>Soul Audit</h3>
+      <p>Socratic questioning across 5 dimensions: cognition, emotion, behavior, relationship, and mission. Real-time evasion detection catches denial, deflection, minimization, and rationalization.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <h3>Master Guides</h3>
+      <p>7 AI masters with distinct personalities, powered by MIMO. From Socrates to the Gatekeeper, each challenges you through their unique lens of human transformation.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <h3>Crossing Training</h3>
+      <p>30-day progressive challenge system. Each day, do the thing you least want to do. Breakthrough moments tracked and rewarded with XP.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <h3>Witness Network</h3>
+      <p>Real human witnesses who observe your evolution. Accountability through presence, not judgment. Your transformation becomes visible.</p>
+    </div>
+    <div class="pillar">
+      <svg class="pillar-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <h3>Evolution Pyramid</h3>
+      <p>Five-layer visualization: from the Sleep layer through Awakening, Breakthrough, and Mastery to the Divinity layer. XP-gated progression.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EVOLUTION PYRAMID -->
+<section id="pyramid" class="pyramid-section fade-in">
+  <div class="section-label">Progression System</div>
+  <h2 class="section-title">Evolution Pyramid</h2>
+  <p class="section-desc" style="margin-left:auto;margin-right:auto">From unconscious sleep to divine mastery. Each layer unlocks deeper challenges and more powerful masters.</p>
+  <div class="pyramid">
+    <div class="pyramid-level">Divinity</div>
+    <div class="pyramid-level">Mastery</div>
+    <div class="pyramid-level">Breakthrough</div>
+    <div class="pyramid-level">Awakening</div>
+    <div class="pyramid-level">Sleep</div>
+  </div>
+  <p class="xp-rule">Daily challenge: <span>+10 XP</span> &middot; Breakthrough: <span>+50 XP</span> &middot; Crossing complete: <span>+200 XP</span></p>
+</section>
+
+<!-- MASTERS -->
+<section id="masters" class="fade-in">
+  <div class="section-label">AI Guides</div>
+  <h2 class="section-title">Seven Masters</h2>
+  <p class="section-desc">Each master is an AI personality with a distinct methodology for uncovering your deepest patterns.</p>
+  <div class="masters-grid">
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div>
+        <h4>Socrates</h4>
+        <div class="dim">Cognition</div>
+        <p>Logical contradiction exposure. Asks the question behind your answer.</p>
+      </div>
+    </div>
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </div>
+      <div>
+        <h4>Jung</h4>
+        <div class="dim">Emotion</div>
+        <p>Shadow integration. Guides you to face what you've buried.</p>
+      </div>
+    </div>
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div>
+        <h4>The Awakener</h4>
+        <div class="dim">Behavior</div>
+        <p>Procrastination dissection. Shows you the anatomy of your avoidance.</p>
+      </div>
+    </div>
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div>
+        <h4>The Mirror</h4>
+        <div class="dim">Relationship</div>
+        <p>Relationship pattern recognition. Reflects who you become around others.</p>
+      </div>
+    </div>
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </div>
+      <div>
+        <h4>The Architect</h4>
+        <div class="dim">Career &middot; L2+</div>
+        <p>Life architecture audit. Systems thinking for your existence.</p>
+      </div>
+    </div>
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <h4>The Alchemist</h4>
+        <div class="dim">Cognition &middot; L3+</div>
+        <p>Pain transmutation. Converts suffering into fuel for growth.</p>
+      </div>
+    </div>
+    <div class="master">
+      <div class="master-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </div>
+      <div>
+        <h4>The Gatekeeper</h4>
+        <div class="dim">All &middot; L4+</div>
+        <p>Final crossing verification. The narrow gate itself speaks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture" class="fade-in">
+  <div class="section-label">Technical Design</div>
+  <h2 class="section-title">Architecture</h2>
+  <p class="section-desc">Four-layer stack: frontend, API, core engines, and AI backend. Clean separation, full testability.</p>
+  <div class="arch-diagram">
+    <div class="layer l1">Frontend &mdash; HTML + Tailwind CSS + Vanilla JS</div>
+    <div class="layer l2">FastAPI Server &mdash; Routes, Middleware, Auth, Payment</div>
+    <div class="layer l3">Core Engines &mdash; SoulAudit | GateFinder | Crossing | Masters | Witness | Evolution</div>
+    <div class="layer l4">MIMO AI &mdash; Socratic Questioning | Shadow Work | Behavioral Analysis</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="fade-in">
+  <div class="stats">
+    <div><div class="stat-num">15</div><div class="stat-label">Core Modules</div></div>
+    <div><div class="stat-num">7</div><div class="stat-label">AI Masters</div></div>
+    <div><div class="stat-num">5</div><div class="stat-label">Audit Dimensions</div></div>
+    <div><div class="stat-num">30</div><div class="stat-label">Day Challenges</div></div>
+  </div>
+</section>
+
+<!-- API -->
+<section id="api" class="fade-in">
+  <div class="section-label">Developer Reference</div>
+  <h2 class="section-title">API Endpoints</h2>
+  <p class="section-desc">RESTful API with 12 core endpoints. Full OpenAPI documentation at /docs.</p>
+  <table class="api-table">
+    <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>POST</td><td>/api/audit/start</td><td>Initialize a soul audit session</td></tr>
+      <tr><td>POST</td><td>/api/audit/answer</td><td>Submit audit response with AI follow-up</td></tr>
+      <tr><td>POST</td><td>/api/audit/complete</td><td>Finalize audit and generate gate candidates</td></tr>
+      <tr><td>GET</td><td>/api/audit/{id}/gates</td><td>Retrieve narrow gate candidates</td></tr>
+      <tr><td>GET</td><td>/api/masters</td><td>List all available master guides</td></tr>
+      <tr><td>POST</td><td>/api/masters/choose</td><td>Select a master for guidance</td></tr>
+      <tr><td>POST</td><td>/api/crossing/start</td><td>Begin a 30-day crossing challenge</td></tr>
+      <tr><td>POST</td><td>/api/crossing/complete</td><td>Mark daily challenge as complete</td></tr>
+      <tr><td>POST</td><td>/api/witness/add</td><td>Add a witness to your evolution</td></tr>
+      <tr><td>GET</td><td>/api/witness/list</td><td>List your witness network</td></tr>
+      <tr><td>GET</td><td>/api/evolution/{user_id}</td><td>Get evolution pyramid status</td></tr>
+      <tr><td>POST</td><td>/api/evolution/breakthrough</td><td>Record a breakthrough event</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>The Gate Is Waiting</h2>
+  <p>You already know what you need to do. The question is whether you'll do it.</p>
+  <div class="cta-btns">
+    <a href="https://github.com/MoKangMedical/narrowgate" class="hero-cta">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      Star on GitHub
+    </a>
+    <a href="https://github.com/MoKangMedical/narrowgate#getting-started" class="btn-outline">Get Started</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>NarrowGate by MoKangMedical &middot; Powered by MIMO AI</p>
+  <p style="margin-top:.5rem;font-size:.7rem;color:var(--gray-dim)">The narrow gate is not a destination. It is a decision.</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
