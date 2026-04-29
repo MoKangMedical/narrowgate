@@ -32,6 +32,7 @@ dependencies = [
     "wechatpayv3>=1.2.0",
     "alipay-sdk-python>=3.0.0",
     "PyJWT>=2.8",
+    "requests>=2.31",
 ]
 
 [project.optional-dependencies]
