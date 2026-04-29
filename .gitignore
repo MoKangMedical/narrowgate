@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+*.so
+
+# Data & secrets
+data/*.db
+*.db
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*_secret*
+credentials.json
+b2b/*.json
+
+# Logs
+*.log
+logs/
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing & coverage
+.pytest_cache/
+htmlcov/
+coverage.xml
+coverage/
+.mypy_cache/
+.ruff_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual environment
+venv/
+.venv/
+
+# Tailwind output
+src/ui/tailwind.css.map
+
+# Backups
+*.backup
+*.bak

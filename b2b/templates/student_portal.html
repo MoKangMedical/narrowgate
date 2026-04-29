@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>窄门 NarrowGate — AI灵性引导</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,sans-serif;background:#f5f7fa;max-width:420px;margin:0 auto;color:#333}
+.hdr{background:linear-gradient(135deg,#ff6f00,#e65100);color:#fff;padding:20px;text-align:center;border-radius:0 0 20px 20px}
+.hdr h1{font-size:18px}.hdr p{font-size:12px;opacity:.8;margin-top:4px}
+.wrap{padding:16px}
+.card{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.card h3{font-size:14px;color:#ff6f00;margin-bottom:10px}
+.chat-area{min-height:200px;max-height:350px;overflow-y:auto}
+.msg{padding:12px 16px;border-radius:14px;margin-bottom:10px;font-size:14px;line-height:1.7;max-width:90%}
+.msg.user{background:#fff3e0;margin-left:auto;text-align:right}
+.msg.bot{background:#fce4ec}
+.msg .label{font-size:11px;color:#888;margin-bottom:4px}
+.chat-input{display:flex;gap:8px;margin-top:10px}
+.chat-input input{flex:1;padding:10px;border:1px solid #ddd;border-radius:20px;font-size:14px}
+.chat-input button{padding:10px 16px;background:#ff6f00;color:#fff;border:none;border-radius:20px;font-size:14px}
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:10px;font-size:14px;cursor:pointer;margin-top:8px}
+.btn.orange{background:#ff6f00;color:#fff}
+.btn.outline{background:#fff;color:#ff6f00;border:1px solid #ff6f00}
+.progress{display:flex;gap:6px;margin:10px 0}
+.progress .day{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.progress .done{background:#ff6f00;color:#fff}.progress .current{background:#fff3e0;color:#ff6f00;border:2px solid #ff6f00}.progress .future{background:#f5f5f5;color:#bbb}
+.quote{font-style:italic;color:#888;font-size:13px;padding:12px;border-left:3px solid #ff6f00;margin:10px 0}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🚪 窄门 NarrowGate</h1>
+  <p>AI灵性引导 · 穿越内心的窄门</p>
+</div>
+<div class="wrap">
+  <!-- 每日一言 -->
+  <div class="card">
+    <h3>🌅 今日引导</h3>
+    <div class="quote">"引到永生，那门是窄的，路是小的，找着的人也少。"<br>—— 马太福音 7:14</div>
+    <p style="font-size:13px;color:#555;line-height:1.6">今天的灵魂问题：<strong>你正在回避什么？</strong></p>
+  </div>
+
+  <!-- 30天穿越进度 -->
+  <div class="card">
+    <h3>📅 30天穿越训练 · 第7天</h3>
+    <div class="progress">
+      <div class="day done">1</div><div class="day done">2</div><div class="day done">3</div>
+      <div class="day done">4</div><div class="day done">5</div><div class="day done">6</div>
+      <div class="day current">7</div><div class="day future">8</div><div class="day future">9</div>
+      <div class="day future">...</div><div class="day future">30</div>
+    </div>
+    <p style="font-size:12px;color:#888">本周主题：面对恐惧 · 已完成6/7天挑战</p>
+  </div>
+
+  <!-- 苏格拉底对话 -->
+  <div class="card">
+    <h3>🦉 苏格拉底对话</h3>
+    <div class="chat-area" id="chatArea">
+      <div class="msg bot">
+        <div class="label">🦉 苏格拉底</div>
+        欢迎来到窄门。我不是要给你答案，而是要问你问题。<br><br>
+        今天，让我们从一个简单的问题开始：<br><br>
+        <strong>如果没有任何人会评判你，你最想做什么？</strong>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="回答苏格拉底的问题..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()">发送</button>
+    </div>
+  </div>
+
+  <!-- 快捷入口 -->
+  <div class="card">
+    <h3>⚡ 快捷入口</h3>
+    <button class="btn orange" onclick="startChat('灵魂拷问')">🔥 灵魂拷问模式</button>
+    <button class="btn outline" onclick="startChat('大师引导')">🧘 大师引导对话</button>
+    <button class="btn outline" onclick="startChat('苏格拉底')">🦉 苏格拉底追问</button>
+    <button class="btn outline" onclick="viewProgress()">📊 查看成长报告</button>
+  </div>
+
+  <!-- 成长档案 -->
+  <div class="card">
+    <h3>📁 成长档案</h3>
+    <div style="font-size:13px;line-height:2">
+      🎯 穿越天数：<strong>7天</strong><br>
+      💬 对话次数：<strong>23次</strong><br>
+      🔥 灵魂拷问完成：<strong>15题</strong><br>
+      📈 成长评分：<strong>72分</strong><br>
+      🏆 当前段位：<strong>入门探索者</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+const socrates=[
+  "这是一个有趣的想法。但你为什么这样认为呢？",
+  "你确定这是你真正想要的，还是别人告诉你的？",
+  "如果这件事失败了，最坏的结果是什么？你能承受吗？",
+  "你说你想做这件事，但你今天为此做了什么？",
+  "什么是你一直在推迟的事情？为什么？",
+  "如果时间不是问题，你会如何度过每一天？",
+  "你觉得什么是你人生中最重要的三件事？它们之间有冲突吗？"
+];
+let qIdx=0;
+
+function sendMsg(){
+  const input=document.getElementById('chatInput');
+  const q=input.value.trim();if(!q)return;
+  const area=document.getElementById('chatArea');
+  area.innerHTML+=`<div class="msg user"><div class="label">👤 你</div>${q}</div>`;
+  input.value='';
+  setTimeout(()=>{
+    const resp=socrates[qIdx%socrates.length];qIdx++;
+    area.innerHTML+=`<div class="msg bot"><div class="label">🦉 苏格拉底</div>${resp}</div>`;
+    area.scrollTop=area.scrollHeight;
+  },800);
+}
+function startChat(mode){
+  const area=document.getElementById('chatArea');
+  const intros={
+    '灵魂拷问':'🔥 <strong>灵魂拷问模式</strong><br><br>准备好了吗？我会问你一些你可能一直在回避的问题。<br><br><strong>第一个问题：你最害怕失去什么？</strong>',
+    '大师引导':'🧘 <strong>大师引导模式</strong><br><br>闭上眼睛，深呼吸三次。<br><br>现在，告诉我你此刻最强烈的感受是什么？',
+    '苏格拉底':'🦉 <strong>苏格拉底追问模式</strong><br><br>我会不断追问"为什么"，直到你触及真相。<br><br>准备好了吗？请告诉我你最近做了一个重要决定。'
+  };
+  area.innerHTML+=`<div class="msg bot">${intros[mode]||intros['苏格拉底']}</div>`;
+  area.scrollTop=area.scrollHeight;
+}
+function viewProgress(){
+  alert('📊 成长报告\n\n穿越天数：7天\n对话次数：23次\n灵魂拷问：15题\n成长评分：72分\n段位：入门探索者\n\n继续坚持，你会看到更大的变化！');
+}
+</script>
+</body>
+</html>

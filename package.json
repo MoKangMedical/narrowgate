@@ -1,0 +1,26 @@
+{
+  "name": "narrowgate",
+  "version": "1.0.0",
+  "description": "> **\"引到永生，那门是窄的，路是小的，找着的人也少。\"**",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoKangMedical/narrowgate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoKangMedical/narrowgate/issues"
+  },
+  "homepage": "https://github.com/MoKangMedical/narrowgate#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
