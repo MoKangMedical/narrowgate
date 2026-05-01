@@ -1,0 +1,65 @@
+{
+  "course_id": "shadow_integration",
+  "title": "shadow_integration 课程测验",
+  "description": "测试你对shadow_integration课程内容的理解",
+  "total_questions": 4,
+  "passing_score": 2,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "荣格定义的'阴影'是什么？",
+      "options": [
+        "A. 无意识的恐惧",
+        "B. 被压抑的人格部分",
+        "C. 黑暗的梦境",
+        "D. 童年的创伤"
+      ],
+      "answer": "B",
+      "explanation": "阴影是我们人格中被压抑、否认的部分，通常包含我们认为不可接受的特质。"
+    },
+    {
+      "id": 2,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "投射作用如何表现？",
+      "options": [
+        "A. 把他人优点投射到自己身上",
+        "B. 把自己不喜欢的特质归到别人身上",
+        "C. 客观评价他人",
+        "D. 模仿他人行为"
+      ],
+      "answer": "B",
+      "explanation": "投射是防御机制的一种，我们把自己压抑的特质投射到他人身上。"
+    },
+    {
+      "id": 3,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "整合阴影的目的是什么？",
+      "options": [
+        "A. 消灭阴影",
+        "B. 接纳完整的自我",
+        "C. 变得完美",
+        "D. 控制他人"
+      ],
+      "answer": "B",
+      "explanation": "阴影整合的目标不是消灭阴影，而是承认并接纳这些被压抑的部分，成为更完整的人。"
+    },
+    {
+      "id": 4,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "梦境在阴影整合中的作用是什么？",
+      "options": [
+        "A. 预知未来",
+        "B. 阴影通过象征表达自己",
+        "C. 提供娱乐",
+        "D. 释放压力"
+      ],
+      "answer": "B",
+      "explanation": "梦境是无意识与意识的桥梁，阴影常通过梦中的象征和人物来表达自己。"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "course_id": "meaning_construction",
+  "title": "meaning_construction 课程测验",
+  "description": "测试你对meaning_construction课程内容的理解",
+  "total_questions": 3,
+  "passing_score": 1,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "关于第1章的核心概念，以下哪项最准确地描述了其本质？",
+      "options": [
+        "A. 它主要关注外在行为的改变",
+        "B. 它强调内在认知和态度的转化",
+        "C. 它是一种纯粹的理论研究",
+        "D. 它只适用于特定人群"
+      ],
+      "answer": "B",
+      "explanation": "第1章的核心在于理解内在认知和态度的转化，这是实践的基础。"
+    },
+    {
+      "id": 2,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "关于第2章的核心概念，以下哪项最准确地描述了其本质？",
+      "options": [
+        "A. 它主要关注外在行为的改变",
+        "B. 它强调内在认知和态度的转化",
+        "C. 它是一种纯粹的理论研究",
+        "D. 它只适用于特定人群"
+      ],
+      "answer": "B",
+      "explanation": "第2章的核心在于理解内在认知和态度的转化，这是实践的基础。"
+    },
+    {
+      "id": 3,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "关于第3章的核心概念，以下哪项最准确地描述了其本质？",
+      "options": [
+        "A. 它主要关注外在行为的改变",
+        "B. 它强调内在认知和态度的转化",
+        "C. 它是一种纯粹的理论研究",
+        "D. 它只适用于特定人群"
+      ],
+      "answer": "B",
+      "explanation": "第3章的核心在于理解内在认知和态度的转化，这是实践的基础。"
+    }
+  ]
+}
