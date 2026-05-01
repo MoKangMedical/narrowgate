@@ -1,0 +1,219 @@
+{
+  "course_id": "evasion_anatomy",
+  "title": "回避解剖课程测验",
+  "description": "50道测试题，涵盖回避心理学、十种回避模式、识别与突破策略",
+  "total_questions": 15,
+  "passing_score": 10,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "回避（Evasion）与逃避（Avoidance）的本质区别是什么？",
+      "options": [
+        "A. 回避是无意识的，逃避是有意识的",
+        "B. 回避比逃避更严重",
+        "C. 回避只发生在工作中",
+        "D. 两者没有区别"
+      ],
+      "answer": "A",
+      "explanation": "回避是无意识的心理策略——你甚至不知道自己在回避；逃避是有意识的选择——你知道该面对但选择不去。"
+    },
+    {
+      "id": 2,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "为什么回避机制在进化中被保留下来？",
+      "options": [
+        "A. 它帮助远古人类逃避猛兽",
+        "B. 它是一种社会生存工具，帮助维持群体和谐",
+        "C. 它让人类更聪明",
+        "D. 它没有任何进化价值"
+      ],
+      "answer": "B",
+      "explanation": "在部落社会中，能够快速忽略威胁性信息、维持群体和谐的个体更容易生存，回避机制由此进化。"
+    },
+    {
+      "id": 3,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "当杏仁核检测到威胁时，它对前额叶皮层的影响是什么？",
+      "options": [
+        "A. 增强其活动",
+        "B. 没有影响",
+        "C. 抑制其活动，降低理性思维能力",
+        "D. 改变其颜色"
+      ],
+      "answer": "C",
+      "explanation": "杏仁核可以抑制前额叶皮层的活动，这意味着在回避状态下，你的理性思维能力在生理层面被暂时降级。"
+    },
+    {
+      "id": 4,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "以下哪种属于'原始回避'？",
+      "options": [
+        "A. 过度理智化",
+        "B. 否认",
+        "C. 表演脆弱",
+        "D. 合理化升级"
+      ],
+      "answer": "B",
+      "explanation": "否认是最直接、最原始的回避方式——干脆不承认事实存在。"
+    },
+    {
+      "id": 5,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "转移（Displacement）回避的典型表现是什么？",
+      "options": [
+        "A. 把情绪发泄到不相关的对象上",
+        "B. 承认问题存在但把它变小",
+        "C. 用分析代替感受",
+        "D. 表面坦白实际隐藏"
+      ],
+      "answer": "A",
+      "explanation": "转移是把注意力从真正的问题转移到其他事情上，例如老板批评你，你回家对家人发火。"
+    },
+    {
+      "id": 6,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "合理化（Rationalization）的核心特征是什么？",
+      "options": [
+        "A. 直接否认事实",
+        "B. 为回避行为找到逻辑上'合理'的解释",
+        "C. 攻击指出问题的人",
+        "D. 用反问转移焦点"
+      ],
+      "answer": "B",
+      "explanation": "合理化是为回避行为找到看似合理的逻辑解释，让回避看起来像是理性选择。"
+    },
+    {
+      "id": 7,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "过度理智化（Intellectualization）的问题在于什么？",
+      "options": [
+        "A. 太过情绪化",
+        "B. 用分析代替感受，完全没有触及真实情感",
+        "C. 思考不够深入",
+        "D. 行动太快"
+      ],
+      "answer": "B",
+      "explanation": "过度理智化把情感问题变成学术讨论，说得头头是道但完全没有触及真实的情感体验。"
+    },
+    {
+      "id": 8,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "假性坦诚（Pseudo-honesty）为什么是一种回避？",
+      "options": [
+        "A. 因为它完全是谎言",
+        "B. 它只承认安全的部分，隐藏核心真相",
+        "C. 因为它太诚实了",
+        "D. 它没有回避任何东西"
+      ],
+      "answer": "B",
+      "explanation": "假性坦诚看似在坦白，实际只承认不那么敏感的部分，核心真相仍然被完美隐藏。"
+    },
+    {
+      "id": 9,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "反问回避（Deflection via Questions）的目的是什么？",
+      "options": [
+        "A. 获取更多信息",
+        "B. 不回答原问题，转移对话焦点",
+        "C. 展示好奇心",
+        "D. 表达关心"
+      ],
+      "answer": "B",
+      "explanation": "反问回避中的问题不是为了获取信息，而是为了不回答原问题——是一种隐蔽的回避策略。"
+    },
+    {
+      "id": 10,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "表演脆弱（Performative Vulnerability）的本质是什么？",
+      "options": [
+        "A. 真实地暴露自己",
+        "B. 展示一种'安全'的脆弱来回避真正的脆弱",
+        "C. 完全不表达情感",
+        "D. 只在社交媒体上表达"
+      ],
+      "answer": "B",
+      "explanation": "表演脆弱是展示一种经过筛选的、安全的脆弱，来回避暴露真正的、不安全的脆弱。"
+    },
+    {
+      "id": 11,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "合理化升级（Rationalization Escalation）的特点是什么？",
+      "options": [
+        "A. 只用一个理由",
+        "B. 当一个理由被戳穿后，立刻升级到更深的合理化",
+        "C. 完全不合理化",
+        "D. 拒绝所有理由"
+      ],
+      "answer": "B",
+      "explanation": "合理化升级形成层层嵌套的防御系统——每个被戳穿的理由都会引发更深一层的合理化。"
+    },
+    {
+      "id": 12,
+      "chapter": 6,
+      "type": "multiple_choice",
+      "question": "回避之所以难以打破，是因为它有怎样的神经生物学基础？",
+      "options": [
+        "A. 没有神经生物学基础",
+        "B. 每次成功回避会释放多巴胺产生即时奖励",
+        "C. 回避增强记忆力",
+        "D. 回避让大脑休息"
+      ],
+      "answer": "B",
+      "explanation": "每次成功回避，大脑释放少量多巴胺，产生「问题解决了」的虚假信号，强化回避行为。"
+    },
+    {
+      "id": 13,
+      "chapter": 7,
+      "type": "multiple_choice",
+      "question": "识别回避模式的第一步是什么？",
+      "options": [
+        "A. 立即停止回避",
+        "B. 分析为什么会回避",
+        "C. 减速，让觉察的速度追上回避的速度",
+        "D. 找别人帮忙识别"
+      ],
+      "answer": "C",
+      "explanation": "回避比觉察快——目标不是消灭回避，而是让觉察的速度追上回避的速度。第一步是看见。"
+    },
+    {
+      "id": 14,
+      "chapter": 7,
+      "type": "multiple_choice",
+      "question": "当你发现自己说'我不知道'时，应该怎么做？",
+      "options": [
+        "A. 相信自己真的不知道",
+        "B. 暂停一下，检查这是否是'我知道但不想面对'",
+        "C. 立即给出答案",
+        "D. 问别人"
+      ],
+      "answer": "B",
+      "explanation": "真正的'我不知道'很少见——大多数时候，'我不知道'其实是'我知道但不想面对'的回避信号。"
+    },
+    {
+      "id": 15,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "以下哪项最准确地描述了回避的本质？",
+      "options": [
+        "A. 故意说谎",
+        "B. 无意识的心理策略，目的是减少焦虑和维持心理平衡",
+        "C. 缺乏勇气",
+        "D. 智力不足"
+      ],
+      "answer": "B",
+      "explanation": "回避是一种无意识的心理策略系统，它的功能是保护现有的自我认知，减少威胁性信息带来的焦虑。"
+    }
+  ]
+}

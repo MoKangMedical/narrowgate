@@ -291,7 +291,7 @@ class CrossingEngine:
 
         # 根据天数调整难度
         if day <= 10:
-            difficulty = min(day, 5)
+            difficulty = max(min(day, 5), 1)
         elif day <= 20:
             difficulty = min(day - 5, 7)
         else:

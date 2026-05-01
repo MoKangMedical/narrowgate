@@ -1,0 +1,65 @@
+{
+  "course_id": "socratic_introspection",
+  "title": "socratic_introspection 课程测验",
+  "description": "测试你对socratic_introspection课程内容的理解",
+  "total_questions": 4,
+  "passing_score": 2,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "苏格拉底说'我唯一知道的就是我一无所知'，这体现了什么哲学立场？",
+      "options": [
+        "A. 绝对怀疑主义",
+        "B. 认识论谦逊",
+        "C. 虚无主义",
+        "D. 不可知论"
+      ],
+      "answer": "B",
+      "explanation": "苏格拉底的立场是认识论谦逊——承认自己知识的有限性，这是真正智慧的起点。"
+    },
+    {
+      "id": 2,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "德尔斐神谕'认识你自己'的核心含义是什么？",
+      "options": [
+        "A. 学习哲学知识",
+        "B. 向内审视自我",
+        "C. 了解社会规则",
+        "D. 掌握心理技术"
+      ],
+      "answer": "B",
+      "explanation": "这句箴言强调的是向内的自我审视，而非向外的知识积累。"
+    },
+    {
+      "id": 3,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "确认偏误如何影响自我认知？",
+      "options": [
+        "A. 让我们更客观",
+        "B. 选择性收集支持既有信念的证据",
+        "C. 增强记忆力",
+        "D. 提高逻辑能力"
+      ],
+      "answer": "B",
+      "explanation": "确认偏误让我们不自觉地寻找支持既有信念的证据，忽略反驳性信息。"
+    },
+    {
+      "id": 4,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "苏格拉底式提问法的核心是什么？",
+      "options": [
+        "A. 给出正确答案",
+        "B. 通过连续追问揭示矛盾",
+        "C. 教授知识",
+        "D. 赢得辩论"
+      ],
+      "answer": "B",
+      "explanation": "苏格拉底式提问通过连续追问，让对方自己发现思维中的矛盾和盲区。"
+    }
+  ]
+}

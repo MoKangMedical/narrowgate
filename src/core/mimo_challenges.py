@@ -84,8 +84,10 @@ class MIMOChallengeGenerator:
                 system_prompt,
                 temperature=0.9,
             )
-        except Exception:
+        except (ConnectionError, TimeoutError, Exception) as e:
             # Fallback to template
+            import logging
+            logging.getLogger("narrowgate").debug(f"MIMO挑战生成失败: {e}")
             challenge = self._get_fallback_challenge(gate, day)
 
         return {

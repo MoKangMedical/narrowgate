@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#07070f"/>
+      <stop offset="100%" style="stop-color:#141422"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <circle cx="400" cy="200" r="200" fill="url(#glow)"/>
+  <text x="400" y="160" text-anchor="middle" font-size="80">🪞</text>
+  <text x="400" y="240" text-anchor="middle" font-family="sans-serif" font-size="36" font-weight="800" fill="#d4a853">关系镜像</text>
+  <text x="400" y="285" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#8a8a9a">每段关系都是灵魂的镜子</text>
+  <rect x="320" y="310" width="160" height="2" rx="1" fill="#059669" opacity="0.5"/>
+  <text x="400" y="345" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#555566">窄门 · AI灵魂进化平台</text>
+</svg>

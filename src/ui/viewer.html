@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>窄门课程 — AI灵魂进化平台</title>
+<style>
+:root {
+  --bg: #07070f; --bg2: #0d0d18; --bg3: #141422; --bg4: #1a1a2e;
+  --gold: #d4a853; --gold-bright: #f0d78c; --gold-dim: #a07830;
+  --white: #f0ece4; --gray: #8a8a9a; --gray-dim: #555566;
+  --green: #4ade80; --blue: #60a5fa; --purple: #a78bfa; --red: #f87171;
+  --font: 'Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --mono: 'SF Mono','Fira Code','Cascadia Code',monospace;
+  --radius: 14px; --max-w: 900px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body { font-family: var(--font); color: var(--white); background: var(--bg); line-height: 1.8; }
+a { color: var(--gold); text-decoration: none; }
+
+/* === NAV === */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 2rem; height: 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(7,7,15,.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212,168,83,.08); }
+.nav-logo { font-size: 1.2rem; font-weight: 800; color: var(--gold); cursor: pointer; }
+.nav-logo span { font-size: .75rem; color: var(--gray-dim); margin-left: .5rem; }
+.nav-right { display: flex; gap: 1rem; align-items: center; }
+.nav-btn { background: rgba(212,168,83,.12); border: 1px solid rgba(212,168,83,.2);
+  color: var(--gold); padding: .45rem 1rem; border-radius: 8px; cursor: pointer;
+  font-size: .85rem; transition: all .2s; }
+.nav-btn:hover { background: rgba(212,168,83,.2); }
+
+/* === LAYOUT === */
+main { padding: 84px 1.5rem 3rem; max-width: var(--max-w); margin: 0 auto; }
+
+/* === COURSE LIST === */
+.page-title { font-size: 2rem; font-weight: 800; margin-bottom: .5rem; color: var(--gold); }
+.page-sub { color: var(--gray); margin-bottom: 2rem; font-size: 1.05rem; }
+.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+.course-card { background: var(--bg2); border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius); padding: 1.5rem; cursor: pointer;
+  transition: all .25s; position: relative; overflow: hidden; }
+.course-card:hover { border-color: rgba(212,168,83,.25); transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+.course-card .icon { font-size: 2rem; margin-bottom: .6rem; }
+.course-card .name { font-size: 1.25rem; font-weight: 700; margin-bottom: .3rem; }
+.course-card .sub { font-size: .85rem; color: var(--gray); margin-bottom: .8rem; }
+.course-card .meta { display: flex; gap: 1rem; font-size: .78rem; color: var(--gray-dim); }
+.course-card .dim-tag { position: absolute; top: 1rem; right: 1rem;
+  background: rgba(212,168,83,.15); color: var(--gold); padding: .15rem .6rem;
+  border-radius: 20px; font-size: .7rem; font-weight: 600; }
+
+/* === COURSE DETAIL === */
+.detail-header { margin-bottom: 2rem; }
+.back-btn { display: inline-flex; align-items: center; gap: .4rem; color: var(--gray);
+  cursor: pointer; font-size: .9rem; margin-bottom: 1rem; transition: color .2s; }
+.back-btn:hover { color: var(--gold); }
+.detail-title { font-size: 2.2rem; font-weight: 800; margin-bottom: .4rem; }
+.detail-sub { font-size: 1.1rem; color: var(--gray); margin-bottom: .6rem; }
+.detail-desc { font-size: 1rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem; }
+.chapter-list { display: flex; flex-direction: column; gap: .6rem; }
+.chapter-item { background: var(--bg2); border: 1px solid rgba(255,255,255,.05);
+  border-radius: 12px; padding: 1.2rem 1.4rem; cursor: pointer; transition: all .2s; }
+.chapter-item:hover { border-color: rgba(212,168,83,.2); background: var(--bg3); }
+.chapter-item .ch-num { font-size: .75rem; color: var(--gold); font-weight: 600; margin-bottom: .3rem; }
+.chapter-item .ch-title { font-size: 1.15rem; font-weight: 600; }
+.chapter-item .ch-meta { font-size: .78rem; color: var(--gray-dim); margin-top: .3rem; }
+
+/* === READER === */
+.reader { font-size: 1.2rem; line-height: 2; }
+.reader h1 { font-size: 2rem; font-weight: 800; color: var(--gold); margin: 2rem 0 1rem;
+  line-height: 1.4; }
+.reader h2 { font-size: 1.55rem; font-weight: 700; color: var(--white); margin: 2rem 0 .8rem;
+  border-left: 3px solid var(--gold); padding-left: .8rem; }
+.reader h3 { font-size: 1.3rem; font-weight: 600; color: var(--gold-bright); margin: 1.5rem 0 .6rem; }
+.reader p { margin-bottom: 1.2rem; }
+.reader strong { color: var(--gold-bright); }
+.reader em { color: var(--purple); font-style: italic; }
+.reader ul, .reader ol { margin: .8rem 0 1.2rem 1.5rem; }
+.reader li { margin-bottom: .5rem; }
+.reader hr { border: none; border-top: 1px solid rgba(212,168,83,.15); margin: 2rem 0; }
+.reader blockquote { border-left: 3px solid var(--purple); padding: .8rem 1.2rem;
+  background: rgba(167,139,250,.06); margin: 1rem 0; border-radius: 0 8px 8px 0; }
+
+/* === TTS BAR === */
+.tts-bar { position: sticky; bottom: 0; left: 0; right: 0; z-index: 90;
+  background: rgba(13,13,24,.95); backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(212,168,83,.1); padding: .8rem 1.5rem;
+  display: flex; align-items: center; gap: 1rem; max-width: var(--max-w); margin: 0 auto; }
+.tts-btn { background: var(--gold); color: var(--bg); border: none; border-radius: 50%;
+  width: 44px; height: 44px; font-size: 1.2rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; transition: all .2s; flex-shrink: 0; }
+.tts-btn:hover { background: var(--gold-bright); transform: scale(1.05); }
+.tts-btn.active { background: var(--red); }
+.tts-progress { flex: 1; font-size: .82rem; color: var(--gray); }
+.tts-speed { display: flex; gap: .4rem; }
+.speed-btn { background: rgba(212,168,83,.1); border: 1px solid rgba(212,168,83,.2);
+  color: var(--gold); padding: .2rem .5rem; border-radius: 6px; cursor: pointer;
+  font-size: .75rem; }
+.speed-btn.active { background: rgba(212,168,83,.25); }
+
+/* === QUIZ === */
+.quiz-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(212,168,83,.1); }
+.quiz-title { font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 1.5rem; }
+.quiz-q { background: var(--bg2); border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.quiz-q .q-num { font-size: .8rem; color: var(--gold); font-weight: 600; margin-bottom: .5rem; }
+.quiz-q .q-text { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; }
+.quiz-opt { display: block; width: 100%; text-align: left; padding: .8rem 1.2rem;
+  background: var(--bg3); border: 1px solid rgba(255,255,255,.08); border-radius: 10px;
+  color: var(--white); cursor: pointer; font-size: 1.05rem; margin-bottom: .5rem;
+  transition: all .2s; }
+.quiz-opt:hover { border-color: rgba(212,168,83,.3); background: rgba(212,168,83,.08); }
+.quiz-opt.correct { border-color: var(--green); background: rgba(74,222,128,.1); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: rgba(248,113,113,.1); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: .6; }
+.quiz-opt.correct-answer { border-color: var(--green); }
+.explanation { background: rgba(96,165,250,.08); border-left: 3px solid var(--blue);
+  padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin-top: .8rem;
+  font-size: .95rem; color: var(--blue); line-height: 1.7; display: none; }
+.explanation.show { display: block; }
+
+/* === BOOKS === */
+.books-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(212,168,83,.1); }
+.book-card { display: flex; align-items: center; gap: 1rem; background: var(--bg2);
+  border: 1px solid rgba(255,255,255,.05); border-radius: 12px; padding: 1rem 1.2rem;
+  margin-bottom: .6rem; transition: all .2s; }
+.book-card:hover { border-color: rgba(212,168,83,.2); }
+.book-icon { font-size: 1.8rem; flex-shrink: 0; }
+.book-info { flex: 1; }
+.book-title { font-size: 1.05rem; font-weight: 600; }
+.book-author { font-size: .85rem; color: var(--gray); }
+.book-link { color: var(--gold); font-size: .85rem; font-weight: 600; flex-shrink: 0; }
+
+/* === STATS === */
+.stats-bar { display: flex; gap: 1.5rem; margin: 1rem 0 1.5rem; flex-wrap: wrap; }
+.stat { background: var(--bg2); padding: .6rem 1rem; border-radius: 10px; font-size: .85rem; }
+.stat b { color: var(--gold); font-size: 1.1rem; margin-right: .3rem; }
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  main { padding: 74px 1rem 5rem; }
+  .page-title { font-size: 1.5rem; }
+  .course-grid { grid-template-columns: 1fr; }
+  .reader { font-size: 1.1rem; }
+  .reader h1 { font-size: 1.6rem; }
+  .reader h2 { font-size: 1.3rem; }
+  .tts-bar { padding: .6rem 1rem; }
+  .quiz-opt { font-size: 1rem; padding: .7rem 1rem; }
+  .detail-title { font-size: 1.7rem; }
+  nav { padding: 0 1rem; }
+}
+
+/* === LOADING === */
+.loading { text-align: center; padding: 3rem; color: var(--gray); }
+.loading .dot { display: inline-block; animation: pulse 1.2s infinite; }
+@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* === FOOTER SPACE === */
+.footer-space { height: 80px; }
+
+/* === QUIZ SCORE === */
+.quiz-score { text-align: center; padding: 2rem; background: var(--bg2);
+  border-radius: var(--radius); margin-top: 1.5rem; }
+.quiz-score .big { font-size: 3rem; font-weight: 800; color: var(--gold); }
+.quiz-score .label { color: var(--gray); margin-top: .5rem; }
+.quiz-retry { background: var(--gold); color: var(--bg); border: none; padding: .7rem 2rem;
+  border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer;
+  margin-top: 1rem; transition: all .2s; }
+.quiz-retry:hover { background: var(--gold-bright); }
+
+/* === OPENING ANIMATION === */
+.door-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg); overflow: hidden; }
+.door-left, .door-right { position: absolute; top: 0; bottom: 0; width: 50%;
+  background: linear-gradient(135deg, #0a0a18 0%, #141422 50%, #1a1a2e 100%);
+  transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.door-left { left: 0; border-right: 2px solid rgba(212,168,83,.2); }
+.door-right { right: 0; border-left: 2px solid rgba(212,168,83,.2); }
+.door-overlay.open .door-left { transform: translateX(-100%); }
+.door-overlay.open .door-right { transform: translateX(100%); }
+.door-content { text-align: center; padding: 2rem; animation: fadeInUp 1s ease-out;
+  opacity: 0; animation-fill-mode: forwards; animation-delay: 0.3s; }
+.door-icon { font-size: 5rem; margin-bottom: 1rem; animation: pulse 2s infinite; }
+.door-title { font-size: 2.5rem; font-weight: 900; color: var(--gold);
+  letter-spacing: .15em; margin-bottom: .5rem; }
+.door-sub { font-size: 1.1rem; color: var(--gray); letter-spacing: .08em; }
+.door-enter { margin-top: 2rem; background: var(--gold); color: var(--bg);
+  border: none; padding: .8rem 2.5rem; border-radius: 12px; font-size: 1.1rem;
+  font-weight: 700; cursor: pointer; letter-spacing: .05em; transition: all .3s;
+  animation: fadeInUp 1s ease-out; animation-delay: 0.8s; opacity: 0;
+  animation-fill-mode: forwards; }
+.door-enter:hover { background: var(--gold-bright); transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(212,168,83,.3); }
+.door-glow { position: absolute; width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,83,.15) 0%, transparent 70%);
+  animation: glowPulse 3s infinite; pointer-events: none; }
+.door-particles { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+.particle { position: absolute; width: 3px; height: 3px; background: var(--gold);
+  border-radius: 50%; opacity: 0; animation: float 4s infinite; }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes glowPulse { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.2);opacity:.8} }
+@keyframes float { 0%{opacity:0;transform:translateY(100vh)} 20%{opacity:.8} 80%{opacity:.8} 100%{opacity:0;transform:translateY(-20vh)} }
+.door-lines { position: absolute; width: 100%; height: 100%; pointer-events: none;
+  opacity: 0.06; background: repeating-linear-gradient(0deg, var(--gold) 0px, transparent 1px, transparent 40px); }
+
+/* === COURSE COVER === */
+.course-cover { width: 100%; border-radius: var(--radius); margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,.06); }
+
+/* === AUDIO PLAYER === */
+.audio-player { background: var(--bg3); border: 1px solid rgba(212,168,83,.15);
+  border-radius: var(--radius); padding: 1.2rem 1.5rem; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem; }
+.audio-play-btn { background: var(--gold); color: var(--bg); border: none; border-radius: 50%;
+  width: 48px; height: 48px; font-size: 1.3rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; transition: all .2s; flex-shrink: 0; }
+.audio-play-btn:hover { background: var(--gold-bright); transform: scale(1.05); }
+.audio-info { flex: 1; }
+.audio-title { font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: .3rem; }
+.audio-sub { font-size: .82rem; color: var(--gray); }
+.audio-progress { width: 100%; height: 4px; background: var(--bg); border-radius: 2px;
+  margin-top: .6rem; overflow: hidden; }
+.audio-progress-bar { height: 100%; background: var(--gold); border-radius: 2px;
+  transition: width .3s; width: 0%; }
+
+/* === CHAPTER AUDIO === */
+.chapter-audio { background: rgba(212,168,83,.06); border: 1px solid rgba(212,168,83,.1);
+  border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .8rem; }
+.chapter-audio-btn { background: rgba(212,168,83,.15); color: var(--gold); border: none;
+  border-radius: 50%; width: 40px; height: 40px; font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; }
+.chapter-audio-text { font-size: .9rem; color: var(--gray); }
+</style>
+</head>
+<body>
+
+<!-- Door Opening Animation -->
+<div class="door-overlay" id="doorOverlay">
+  <div class="door-lines"></div>
+  <div class="door-left">
+    <div class="door-content">
+      <div class="door-icon">🚪</div>
+      <div class="door-title">窄 门</div>
+      <div class="door-sub">NarrowGate · AI 灵魂进化平台</div>
+    </div>
+  </div>
+  <div class="door-right">
+    <div class="door-glow"></div>
+    <div class="door-particles" id="particles"></div>
+  </div>
+  <button class="door-enter" onclick="openDoor()" style="position:relative;z-index:10">
+    推开窄门 →
+  </button>
+</div>
+
+<nav>
+  <div class="nav-logo" onclick="showHome()">🚪 窄门 <span>NarrowGate</span></div>
+  <div class="nav-right">
+    <button class="nav-btn" onclick="showHome()">📚 课程</button>
+    <button class="nav-btn" onclick="window.open('/docs','_blank')">📖 API</button>
+  </div>
+</nav>
+
+<main id="app">
+  <div class="loading"><span class="dot">●</span> 加载中...</div>
+</main>
+
+<div class="tts-bar" id="ttsBar" style="display:none">
+  <button class="tts-btn" id="ttsBtn" onclick="toggleTTS()">▶</button>
+  <div class="tts-progress" id="ttsProgress">语音讲解就绪</div>
+  <div class="tts-speed">
+    <button class="speed-btn" onclick="setSpeed(0.8)">0.8×</button>
+    <button class="speed-btn active" onclick="setSpeed(1)">1×</button>
+    <button class="speed-btn" onclick="setSpeed(1.3)">1.3×</button>
+  </div>
+</div>
+
+<script>
+const API = location.origin;
+let coursesCache = null;
+let booksCache = null;
+let currentCourse = null;
+let currentChapter = null;
+let synth = window.speechSynthesis;
+let ttsUtterance = null;
+let ttsRate = 1;
+let ttsPlaying = false;
+let audioPlayer = null; // HTML5 audio element for generated files
+
+// === DOOR ANIMATION ===
+function openDoor() {
+  const overlay = document.getElementById('doorOverlay');
+  overlay.classList.add('open');
+  setTimeout(() => { overlay.style.display = 'none'; }, 2000);
+}
+
+// Generate particles
+(function() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 4 + 's';
+    p.style.animationDuration = (3 + Math.random() * 3) + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+    container.appendChild(p);
+  }
+})();
+
+// === INIT ===
+async function init() {
+  const [courses, books] = await Promise.all([
+    fetch(API + '/api/courses').then(r => r.json()).catch(() => ({courses:[]})),
+    fetch(API + '/api/books').then(r => r.json()).catch(() => ({}))
+  ]);
+  coursesCache = (courses.courses || courses);
+  booksCache = books;
+  showHome();
+}
+
+// === HOME: COURSE LIST ===
+function showHome() {
+  stopTTS();
+  document.getElementById('ttsBar').style.display = 'none';
+  let html = `<div class="page-title">🚪 窄门课程</div>
+    <div class="page-sub">AI灵魂进化平台 · 12门课程 · 认知觉醒到行动穿越</div>
+    <div class="course-grid">`;
+  coursesCache.forEach(c => {
+    html += `<div class="course-card" onclick="showCourse('${c.id}')">
+      <div class="dim-tag">${c.dimension}</div>
+      <div class="icon">${c.icon}</div>
+      <div class="name">${c.name}</div>
+      <div class="sub">${c.subtitle}</div>
+      <div class="meta">
+        <span>📖 ${c.chapter_count} 章节</span>
+        <span>📝 ${c.quiz_count} 题</span>
+        <span>🎧 语音</span>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+// === COURSE DETAIL ===
+async function showCourse(courseId) {
+  stopTTS();
+  document.getElementById('ttsBar').style.display = 'none';
+  const resp = await fetch(`${API}/api/courses/${courseId}`);
+  const data = await resp.json();
+  const course = data.course || data;
+  currentCourse = courseId;
+  const books = booksCache[courseId] || [];
+
+  let html = `<div class="detail-header">
+    <div class="back-btn" onclick="showHome()">← 返回课程列表</div>
+    <img class="course-cover" src="${API}/api/courses/${courseId}/cover" alt="${course.name}"
+      onerror="this.style.display='none'">
+    <div class="detail-title">${course.icon} ${course.name}</div>
+    <div class="detail-sub">${course.subtitle}</div>
+    <div class="detail-desc">${course.description}</div>
+    <div class="stats-bar">
+      <div class="stat"><b>${course.chapter_count || 0}</b> 章节</div>
+      <div class="stat"><b>${course.quiz_count || 0}</b> 测试题</div>
+      <div class="stat"><b>${course.dimension}</b> 维度</div>
+    </div>
+  </div>
+
+  <!-- Audio Player -->
+  <div class="audio-player">
+    <button class="audio-play-btn" onclick="playCourseAudio('${courseId}')">▶</button>
+    <div class="audio-info">
+      <div class="audio-title">🎧 课程语音导览</div>
+      <div class="audio-sub">点击播放课程讲解音频</div>
+      <div class="audio-progress"><div class="audio-progress-bar" id="audioBar"></div></div>
+    </div>
+  </div>`;
+
+  // Chapters
+  const chapters = course.chapters || [];
+  if (chapters.length) {
+    html += '<h3 style="color:var(--gold);margin-bottom:1rem;font-size:1.3rem">📖 章节内容</h3><div class="chapter-list">';
+    chapters.forEach((ch, i) => {
+      html += `<div class="chapter-item" onclick="showChapter('${courseId}','${ch.id}')">
+        <div class="ch-num">第 ${i + 1} 章</div>
+        <div class="ch-title">${ch.title}</div>
+        <div class="ch-meta">⏱ ${ch.reading_minutes || 5} 分钟阅读</div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  // Quiz
+  html += `<div class="quiz-section">
+    <div class="quiz-title">📝 章节测试</div>
+    <p style="color:var(--gray);margin-bottom:1rem">完成章节阅读后，来这里测试你的理解程度。</p>
+    <button class="nav-btn" onclick="showQuiz('${courseId}')">开始测试 →</button>
+  </div>`;
+
+  // Books
+  if (books.length) {
+    html += `<div class="books-section">
+      <div class="quiz-title">📚 推荐书单</div>`;
+    books.forEach(b => {
+      html += `<div class="book-card">
+        <div class="book-icon">📕</div>
+        <div class="book-info">
+          <div class="book-title">${b.title}</div>
+          <div class="book-author">${b.author}</div>
+        </div>
+        <a class="book-link" href="${b.url}" target="_blank">查看详情 →</a>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  html += '<div class="footer-space"></div>';
+  document.getElementById('app').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+// === CHAPTER READER ===
+async function showChapter(courseId, chapterId) {
+  stopTTS();
+  if (audioPlayer) { audioPlayer.pause(); }
+  const resp = await fetch(`${API}/api/courses/${courseId}/chapters/${chapterId}`);
+  const data = await resp.json();
+  const content = data.content || '内容加载失败';
+  currentChapter = { courseId, chapterId, content };
+
+  let html = `<div class="back-btn" onclick="showCourse('${courseId}')">← 返回课程目录</div>
+    <div class="chapter-audio">
+      <button class="chapter-audio-btn" onclick="toggleTTS()">🎧</button>
+      <div class="chapter-audio-text">点击开始语音朗读本章内容（支持调速）</div>
+    </div>
+    <div class="reader" id="readerContent">${marked(content)}</div>
+    <div class="footer-space"></div>`;
+  document.getElementById('app').innerHTML = html;
+  document.getElementById('ttsBar').style.display = 'flex';
+  window.scrollTo(0, 0);
+}
+
+// === QUIZ ===
+async function showQuiz(courseId) {
+  stopTTS();
+  document.getElementById('ttsBar').style.display = 'none';
+  let quizData;
+  try {
+    const resp = await fetch(`${API}/api/courses/${courseId}/chapters/x/quiz`);
+    // If chapter-specific quiz fails, we'll handle it
+    quizData = await resp.json();
+  } catch(e) {
+    quizData = { questions: [] };
+  }
+
+  // Also try to get quiz from our generated data
+  if (!quizData.questions || quizData.questions.length === 0) {
+    // Show a message that quizzes will be available soon
+    document.getElementById('app').innerHTML = `
+      <div class="back-btn" onclick="showCourse('${courseId}')">← 返回课程</div>
+      <div class="quiz-title">📝 课程测试</div>
+      <div style="text-align:center;padding:3rem;color:var(--gray)">
+        <div style="font-size:3rem;margin-bottom:1rem">🏗️</div>
+        <p>测试题正在生成中，敬请期待！</p>
+        <p style="font-size:.85rem;margin-top:.5rem">先去阅读章节内容吧 📖</p>
+      </div>`;
+    return;
+  }
+
+  const questions = quizData.questions;
+  let html = `<div class="back-btn" onclick="showCourse('${courseId}')">← 返回课程</div>
+    <div class="quiz-title">📝 课程测试</div>
+    <div id="quizArea">`;
+
+  questions.forEach((q, i) => {
+    const qText = q.question;
+    const opts = q.options;
+    const correct = q.answer;
+    const explanation = q.explanation || '';
+    html += `<div class="quiz-q" id="q${i}">
+      <div class="q-num">第 ${i + 1} 题</div>
+      <div class="q-text">${qText}</div>`;
+    opts.forEach((opt, j) => {
+      const letter = String.fromCharCode(65 + j);
+      html += `<button class="quiz-opt" data-q="${i}" data-letter="${letter}"
+        data-correct="${correct}" onclick="checkAnswer(this,'${explanation.replace(/'/g,"\\'")}')">${opt}</button>`;
+    });
+    html += `<div class="explanation" id="exp${i}">💡 ${explanation}</div></div>`;
+  });
+
+  html += `</div><div class="quiz-score" id="quizScore" style="display:none">
+    <div class="big" id="scoreNum">0/0</div>
+    <div class="label" id="scoreLabel">正确率</div>
+    <button class="quiz-retry" onclick="showQuiz('${courseId}')">再试一次</button>
+  </div><div class="footer-space"></div>`;
+
+  document.getElementById('app').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function checkAnswer(btn, explanation) {
+  const qIdx = btn.dataset.q;
+  const letter = btn.dataset.letter;
+  const correct = btn.dataset.correct;
+  const qDiv = document.getElementById('q' + qIdx);
+  const opts = qDiv.querySelectorAll('.quiz-opt');
+
+  opts.forEach(o => {
+    o.classList.add('disabled');
+    if (o.dataset.letter === correct) o.classList.add('correct-answer');
+  });
+
+  if (letter === correct) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+  }
+
+  document.getElementById('exp' + qIdx).classList.add('show');
+
+  // Check if all answered
+  const total = document.querySelectorAll('.quiz-q').length;
+  const answered = document.querySelectorAll('.quiz-opt.disabled').length / document.querySelectorAll('.quiz-opt').length * total;
+  if (answered >= total) showScore();
+}
+
+function showScore() {
+  const correct = document.querySelectorAll('.quiz-opt.correct').length;
+  const total = document.querySelectorAll('.quiz-q').length;
+  document.getElementById('scoreNum').textContent = `${correct}/${total}`;
+  const pct = Math.round(correct / total * 100);
+  document.getElementById('scoreLabel').textContent = pct >= 60 ? '🎉 及格！继续加油！' : '💪 再接再厉！';
+  document.getElementById('quizScore').style.display = 'block';
+}
+
+// === TTS (Voice Narration) ===
+function toggleTTS() {
+  if (ttsPlaying) {
+    stopTTS();
+  } else {
+    speakContent();
+  }
+}
+
+function speakContent() {
+  if (!currentChapter) return;
+  stopTTS();
+  const text = currentChapter.content
+    .replace(/#{1,6}\s*/g, '')
+    .replace(/\*{1,2}([^*]+)\*{1,2}/g, '$1')
+    .replace(/---/g, '，')
+    .replace(/\n{2,}/g, '。')
+    .replace(/\n/g, '，');
+
+  ttsUtterance = new SpeechSynthesisUtterance(text);
+  ttsUtterance.lang = 'zh-CN';
+  ttsUtterance.rate = ttsRate;
+  ttsUtterance.onend = () => { stopTTS(); };
+  ttsUtterance.onboundary = (e) => {
+    const pct = Math.round(e.charIndex / text.length * 100);
+    document.getElementById('ttsProgress').textContent = `朗读中... ${pct}%`;
+  };
+
+  synth.speak(ttsUtterance);
+  ttsPlaying = true;
+  document.getElementById('ttsBtn').textContent = '⏸';
+  document.getElementById('ttsBtn').classList.add('active');
+  document.getElementById('ttsProgress').textContent = '朗读中...';
+}
+
+function stopTTS() {
+  synth.cancel();
+  ttsPlaying = false;
+  const btn = document.getElementById('ttsBtn');
+  if (btn) {
+    btn.textContent = '▶';
+    btn.classList.remove('active');
+  }
+  const prog = document.getElementById('ttsProgress');
+  if (prog) prog.textContent = '语音讲解就绪';
+}
+
+function setSpeed(rate) {
+  ttsRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  if (ttsPlaying) { speakContent(); }
+}
+
+// === COURSE AUDIO (Generated Files) ===
+function playCourseAudio(courseId) {
+  if (audioPlayer) { audioPlayer.pause(); audioPlayer = null; }
+  stopTTS();
+  
+  audioPlayer = new Audio(`${API}/api/courses/${courseId}/audio/audio_intro.mp3`);
+  const btn = document.querySelector('.audio-play-btn');
+  const bar = document.getElementById('audioBar');
+  
+  audioPlayer.addEventListener('play', () => { if(btn) btn.textContent = '⏸'; });
+  audioPlayer.addEventListener('pause', () => { if(btn) btn.textContent = '▶'; });
+  audioPlayer.addEventListener('ended', () => { if(btn) btn.textContent = '▶'; if(bar) bar.style.width = '0%'; });
+  audioPlayer.addEventListener('timeupdate', () => {
+    if (bar && audioPlayer.duration) {
+      bar.style.width = (audioPlayer.currentTime / audioPlayer.duration * 100) + '%';
+    }
+  });
+  
+  audioPlayer.play().catch(e => console.log('Audio play failed:', e));
+}
+
+// === MARKDOWN PARSER (simplified) ===
+function marked(md) {
+  if (!md) return '';
+  let html = md
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    .replace(/^---$/gm, '<hr>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>' + m + '</ul>')
+    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/\n{2,}/g, '</p><p>')
+    .replace(/\n/g, '<br>');
+  return '<p>' + html + '</p>';
+}
+
+// === START ===
+init();
+</script>
+</body>
+</html>
