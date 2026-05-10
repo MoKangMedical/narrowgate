@@ -1,1 +1,10 @@
-{"total_words": 21000, "total_reading_minutes": 42}
+{
+  "total_words": 12930,
+  "total_reading_minutes": 25,
+  "course_id": "evasion_anatomy",
+  "title": "回避解剖",
+  "subtitle": "你所有借口的完整图谱",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
+}

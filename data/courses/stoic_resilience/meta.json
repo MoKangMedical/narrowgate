@@ -1,4 +1,10 @@
 {
-  "total_words": 25000,
-  "total_reading_minutes": 50
+  "total_words": 12654,
+  "total_reading_minutes": 25,
+  "course_id": "stoic_resilience",
+  "title": "斯多葛韧性",
+  "subtitle": "在失控的世界里找到掌控",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
 }

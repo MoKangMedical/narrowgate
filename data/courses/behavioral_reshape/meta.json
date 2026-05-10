@@ -5,7 +5,7 @@
   "description": "本课程基于行为科学、心理学和神经科学的最新研究成果，系统讲解如何通过习惯回路、执行意图、环境设计等方法，从根本上重塑个人行为模式。课程包含10个核心章节，从理论基础到实践工具，帮助学员建立可持续的行为改变系统。",
   "version": "1.0.0",
   "created_at": "2026-04-27",
-  "updated_at": "2026-04-27",
+  "updated_at": "2026-05-10",
   "author": "窄门项目组",
   "category": "self_improvement",
   "difficulty": "intermediate",
@@ -30,7 +30,13 @@
       "file": "ch01.md",
       "title": "行为科学基础",
       "subtitle": "习惯回路、触发器、奖励机制",
-      "keywords": ["习惯回路", "触发器", "奖励机制", "基底神经节", "多巴胺"],
+      "keywords": [
+        "习惯回路",
+        "触发器",
+        "奖励机制",
+        "基底神经节",
+        "多巴胺"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -38,7 +44,13 @@
       "file": "ch02.md",
       "title": "原子习惯法则",
       "subtitle": "James Clear的四定律",
-      "keywords": ["显而易见", "充满吸引力", "简便易行", "令人愉悦", "习惯记分卡"],
+      "keywords": [
+        "显而易见",
+        "充满吸引力",
+        "简便易行",
+        "令人愉悦",
+        "习惯记分卡"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -46,7 +58,13 @@
       "file": "ch03.md",
       "title": "执行意图",
       "subtitle": "「如果X则Y」的行为编程",
-      "keywords": ["执行意图", "实施意图", "Gollwitzer", "行为编程", "情境线索"],
+      "keywords": [
+        "执行意图",
+        "实施意图",
+        "Gollwitzer",
+        "行为编程",
+        "情境线索"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -54,7 +72,13 @@
       "file": "ch04.md",
       "title": "拖延解剖",
       "subtitle": "拖延的四种心理根源",
-      "keywords": ["情绪调节", "任务厌恶", "时间折扣", "自我效能", "拖延怪圈"],
+      "keywords": [
+        "情绪调节",
+        "任务厌恶",
+        "时间折扣",
+        "自我效能",
+        "拖延怪圈"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -62,7 +86,13 @@
       "file": "ch05.md",
       "title": "习惯堆叠",
       "subtitle": "用已有习惯锚定新习惯",
-      "keywords": ["习惯堆叠", "锚定习惯", "行为链", "微习惯", "习惯配方"],
+      "keywords": [
+        "习惯堆叠",
+        "锚定习惯",
+        "行为链",
+        "微习惯",
+        "习惯配方"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -70,7 +100,13 @@
       "file": "ch06.md",
       "title": "环境设计",
       "subtitle": "让好行为成为默认选项",
-      "keywords": ["选择架构", "摩擦力", "默认效应", "环境提示", "空间布局"],
+      "keywords": [
+        "选择架构",
+        "摩擦力",
+        "默认效应",
+        "环境提示",
+        "空间布局"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -78,7 +114,13 @@
       "file": "ch07.md",
       "title": "身份认同改变",
       "subtitle": "从「我想」到「我是」",
-      "keywords": ["身份认同", "自我概念", "认知失调", "价值一致性", "内在动机"],
+      "keywords": [
+        "身份认同",
+        "自我概念",
+        "认知失调",
+        "价值一致性",
+        "内在动机"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -86,7 +128,13 @@
       "file": "ch08.md",
       "title": "问责系统",
       "subtitle": "外部约束和内部动力",
-      "keywords": ["问责伙伴", "承诺机制", "社会压力", "自我监控", "进度追踪"],
+      "keywords": [
+        "问责伙伴",
+        "承诺机制",
+        "社会压力",
+        "自我监控",
+        "进度追踪"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -94,7 +142,13 @@
       "file": "ch09.md",
       "title": "失败重启",
       "subtitle": "每次跌倒都是数据",
-      "keywords": ["失败分析", "弹性恢复", "二日法则", "成长心态", "迭代改进"],
+      "keywords": [
+        "失败分析",
+        "弹性恢复",
+        "二日法则",
+        "成长心态",
+        "迭代改进"
+      ],
       "estimated_minutes": 240
     },
     {
@@ -102,7 +156,13 @@
       "file": "ch10.md",
       "title": "从行为到系统",
       "subtitle": "建立自我运转的行为架构",
-      "keywords": ["行为系统", "习惯生态", "自动化", "复合效应", "长期维护"],
+      "keywords": [
+        "行为系统",
+        "习惯生态",
+        "自动化",
+        "复合效应",
+        "长期维护"
+      ],
       "estimated_minutes": 240
     }
   ],
@@ -110,7 +170,11 @@
     "quiz_file": "quiz.json",
     "total_questions": 50,
     "passing_score": 70,
-    "question_types": ["multiple_choice", "true_false", "scenario"]
+    "question_types": [
+      "multiple_choice",
+      "true_false",
+      "scenario"
+    ]
   },
   "resources": [
     {
@@ -131,5 +195,9 @@
       "type": "book",
       "year": 2008
     }
-  ]
+  ],
+  "total_words": 12152,
+  "total_reading_minutes": 24,
+  "quality_status": "production_ready",
+  "audio_required": true
 }

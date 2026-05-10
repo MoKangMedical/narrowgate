@@ -1,1 +1,10 @@
-{"total_words": 18000, "total_reading_minutes": 36}
+{
+  "total_words": 12192,
+  "total_reading_minutes": 24,
+  "course_id": "pain_alchemy",
+  "title": "痛苦炼金术",
+  "subtitle": "把铅变成金的灵魂工艺",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
+}

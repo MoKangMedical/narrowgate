@@ -1,1 +1,10 @@
-{"total_words": 15000, "total_reading_minutes": 30}
+{
+  "total_words": 12007,
+  "total_reading_minutes": 24,
+  "course_id": "systems_thinking",
+  "title": "系统思维",
+  "subtitle": "从棋子到棋手的视角切换",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
+}

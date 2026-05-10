@@ -1,4 +1,10 @@
 {
-  "total_words": 25000,
-  "total_reading_minutes": 50
+  "total_words": 12459,
+  "total_reading_minutes": 24,
+  "course_id": "antifragile",
+  "title": "反脆弱修炼",
+  "subtitle": "从失败中获益的能力",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
 }

@@ -1,4 +1,10 @@
 {
-  "total_words": 25000,
-  "total_reading_minutes": 50
+  "total_words": 12487,
+  "total_reading_minutes": 24,
+  "course_id": "meaning_construction",
+  "title": "意义建构",
+  "subtitle": "在荒谬中创造意义",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
 }

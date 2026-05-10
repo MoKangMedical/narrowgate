@@ -1,1 +1,10 @@
-{"total_words": 15000, "total_reading_minutes": 30}
+{
+  "total_words": 12021,
+  "total_reading_minutes": 24,
+  "course_id": "witness_evolution",
+  "title": "见证与进化",
+  "subtitle": "被看见是进化的开始",
+  "quality_status": "production_ready",
+  "audio_required": true,
+  "updated_at": "2026-05-10"
+}

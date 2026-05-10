@@ -1852,6 +1852,70 @@
             margin-top: 8px;
         }
 
+        .ng-gold-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.55em;
+            height: 1.55em;
+            min-width: 1.55em;
+            border-radius: 999px;
+            border: 1px solid rgba(212,175,55,0.28);
+            background:
+                radial-gradient(circle at 32% 24%, rgba(240,215,140,0.26), transparent 44%),
+                linear-gradient(145deg, rgba(180,148,46,0.18), rgba(12,12,18,0.88));
+            color: #d4af37;
+            box-shadow: 0 0 18px rgba(180,148,46,0.14), inset 0 0 12px rgba(180,148,46,0.08);
+            font-family: var(--font-display);
+            font-size: 0.72em;
+            font-weight: 700;
+            line-height: 1;
+            vertical-align: -0.18em;
+            text-shadow: 0 0 14px rgba(212,175,55,0.28);
+            flex-shrink: 0;
+        }
+
+        .ng-gold-icon + .ng-gold-icon {
+            margin-left: 0.25em;
+        }
+
+        .ambient-toggle {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 70;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px 10px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(212,175,55,0.24);
+            background: rgba(5,5,8,0.76);
+            color: #d8d2c4;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.38), 0 0 28px rgba(180,148,46,0.08);
+            transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .ambient-toggle:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212,175,55,0.48);
+            color: #f0d78c;
+            box-shadow: 0 22px 60px rgba(0,0,0,0.45), 0 0 34px rgba(180,148,46,0.16);
+        }
+
+        .ambient-toggle.is-playing .ng-gold-icon {
+            animation: ambientPulse 3.4s ease-in-out infinite;
+        }
+
+        @keyframes ambientPulse {
+            0%, 100% { box-shadow: 0 0 16px rgba(180,148,46,0.12), inset 0 0 10px rgba(180,148,46,0.08); }
+            50% { box-shadow: 0 0 28px rgba(212,175,55,0.32), inset 0 0 18px rgba(180,148,46,0.16); }
+        }
+
         </style>
 </head>
 <body class="min-h-screen">
@@ -1866,6 +1930,11 @@
 
     <!-- 粒子背景 -->
     <div class="particles-container" id="particlesContainer"></div>
+
+    <button id="ambientToggle" class="ambient-toggle" type="button" aria-pressed="false" aria-label="播放舒缓进入音乐">
+        <span class="ng-gold-icon" aria-hidden="true">♪</span>
+        <span id="ambientLabel">进入音乐</span>
+    </button>
 
     <!-- ============================================================ -->
     <!-- 导航 -->
@@ -2106,6 +2175,61 @@
                     <div class="w-1.5 h-4 bg-gray-500/40 rounded-full animate-pulse hover:bg-[#b8942e]/70 transition-colors duration-300"></div>
                 </div>
                 <p class="text-xs text-gray-500/50 mt-3 tracking-widest">探索你的进化之路</p>
+            </div>
+        </div>
+    </section>
+    <!-- 课程总提要 -->
+    <section id="course-brief" class="py-24 px-6 bg-gradient-to-b from-[#050508] via-[#080810] to-[#050508] reveal">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+                <div class="glass rounded-2xl p-8">
+                    <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">COURSE BRIEF</p>
+                    <h2 class="heading-section text-2xl sm:text-3xl md:text-4xl font-bold mb-5">十二门深度课程总提要</h2>
+                    <p class="text-gray-400 text-body mb-6">
+                        已将全部课程内容压缩成一篇约5000字的总提要，并配好自然人声朗读。适合作为首页导览、开营说明、睡前复盘或每日训练前的总地图。
+                    </p>
+                    <div class="bg-[#050508]/80 border border-[#b8942e]/20 rounded-2xl p-5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="ng-gold-icon" aria-hidden="true">♪</span>
+                            <div>
+                                <p class="text-white font-semibold">课程提要音频</p>
+                                <p class="text-xs text-gray-500">自然人声 · 约18分钟</p>
+                            </div>
+                        </div>
+                        <audio controls preload="metadata" class="w-full">
+                            <source src="data/course_summary/narrowgate_course_brief_5000.m4a" type="audio/mp4">
+                            当前浏览器不支持音频播放。
+                        </audio>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 mt-6 text-center">
+                        <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">12</p>
+                            <p class="text-xs text-gray-500 mt-1">门课程</p>
+                        </div>
+                        <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">65</p>
+                            <p class="text-xs text-gray-500 mt-1">章正文</p>
+                        </div>
+                        <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">5000</p>
+                            <p class="text-xs text-gray-500 mt-1">字提要</p>
+                        </div>
+                    </div>
+                </div>
+                <article class="glass rounded-2xl p-8">
+                    <div class="flex items-center justify-between gap-4 mb-5">
+                        <div>
+                            <p class="text-caption text-[#b8942e] tracking-[0.25em] uppercase mb-2">TEXT VERSION</p>
+                            <h3 class="font-serif text-2xl font-bold text-white">文字版提要</h3>
+                        </div>
+                        <a href="data/course_summary/narrowgate_course_brief_5000.txt" class="text-sm text-[#b8942e] hover:text-[#f0d78c] transition" target="_blank" rel="noreferrer">
+                            打开全文
+                        </a>
+                    </div>
+                    <div id="courseBriefText" class="max-h-[560px] overflow-y-auto pr-3 text-gray-300 text-sm md:text-base leading-8 whitespace-pre-wrap">
+                        正在加载课程提要...
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -2496,8 +2620,8 @@
     <!-- ============================================================ -->
     <section id="audit" class="py-30 px-6">
         <div class="max-w-2xl mx-auto">
-            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">灵魂拷问</h2>
-            <p class="text-gray-500 text-center mb-12 text-body">AI 不接受表面答案。6大维度 · 4层深度 · 持续追问直到真相浮现。</p>
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12 text-body">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
             <div id="audit-container" class="glass rounded-xl p-6 min-h-[400px]">
                 <!-- 初始状态 -->
@@ -2505,12 +2629,11 @@
                     <p class="text-4xl mb-6">🚪</p>
                     <h3 class="font-serif text-xl mb-4">准备好了吗？</h3>
                     <p class="text-gray-500 text-sm mb-8 max-w-md mx-auto">
-                        6个维度逐层剥开：认知 · 情绪 · 行为 · 关系 · 事业 · 宇宙认知。<br>
-                        AI 检测回避模式——"还好"、"都行"、"不知道"不算回答。<br>
-                        审计完成后，自动匹配你的专属穿越路线和大师引导者。
+                        灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
+                        AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
                     </p>
                     <button onclick="startAudit()" class="btn-gold-primary font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
-                        开始灵魂拷问 →
+                        开始审计
                     </button>
                 </div>
 
@@ -2932,6 +3055,226 @@
     <!-- JavaScript -->
     <!-- ============================================================ -->
     <script>
+        const GOLD_ICON_SYMBOLS = {
+            '🚪': '∩', '🔍': '⌕', '🧠': '◎', '🧙': '✦', '⚡': 'ϟ',
+            '📚': '▤', '🗺️': '⌖', '👥': '◉', '📖': '☰', '📐': '◇',
+            '😰': '◌', '🚀': '▲', '🛠️': '◆', '📊': '▦', '⏱️': '◷',
+            '🎯': '◎', '✨': '✦', '🔥': '▲', '💪': '◆', '🎭': '◐',
+            '⚠️': '!', '✅': '✓', '👑': '♛', '🦉': '◎', '🌑': '●',
+            '🪞': '◈', '🏗️': '△', '🔮': '◌', '👨‍💼': '◇', '👩‍🎨': '◇',
+            '👨‍🏫': '◇', '👩‍⚕️': '◇', '👨‍💻': '◇', '👩‍🎓': '◇'
+        };
+
+        const GOLD_ICON_REGEX = new RegExp(
+            Object.keys(GOLD_ICON_SYMBOLS)
+                .sort((a, b) => b.length - a.length)
+                .map(icon => icon.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+                .join('|'),
+            'g'
+        );
+
+        function normalizeGoldIcons(root = document.body) {
+            if (!root) return;
+
+            const walkerRoot = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
+            if (!walkerRoot) return;
+
+            const walker = document.createTreeWalker(walkerRoot, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    const parent = node.parentElement;
+                    if (!parent || parent.closest('script, style, textarea, input, select, option, .ng-gold-icon')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    GOLD_ICON_REGEX.lastIndex = 0;
+                    return GOLD_ICON_REGEX.test(node.nodeValue)
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            });
+
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            textNodes.forEach(node => {
+                GOLD_ICON_REGEX.lastIndex = 0;
+                const fragment = document.createDocumentFragment();
+                let lastIndex = 0;
+                node.nodeValue.replace(GOLD_ICON_REGEX, (match, offset) => {
+                    if (offset > lastIndex) {
+                        fragment.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex, offset)));
+                    }
+                    const icon = document.createElement('span');
+                    icon.className = 'ng-gold-icon';
+                    icon.setAttribute('aria-hidden', 'true');
+                    icon.textContent = GOLD_ICON_SYMBOLS[match] || '✦';
+                    fragment.appendChild(icon);
+                    lastIndex = offset + match.length;
+                    return match;
+                });
+                if (lastIndex < node.nodeValue.length) {
+                    fragment.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
+                }
+                node.parentNode.replaceChild(fragment, node);
+            });
+        }
+
+        function setupGoldIconObserver() {
+            normalizeGoldIcons(document.body);
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            normalizeGoldIcons(node.parentElement);
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            normalizeGoldIcons(node);
+                        }
+                    });
+                });
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+
+        const ambientMusic = {
+            ctx: null,
+            masterGain: null,
+            oscillators: [],
+            interval: null,
+            chordIndex: 0,
+            playing: false
+        };
+
+        const ambientChords = [
+            [196.00, 246.94, 293.66, 392.00],
+            [174.61, 220.00, 261.63, 349.23],
+            [164.81, 196.00, 246.94, 329.63],
+            [146.83, 196.00, 220.00, 293.66]
+        ];
+
+        function buildAmbientMusic() {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return null;
+            if (ambientMusic.ctx) return ambientMusic.ctx;
+
+            const ctx = new AudioContextClass();
+            const masterGain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            const dry = ctx.createGain();
+            const delay = ctx.createDelay(6);
+            const feedback = ctx.createGain();
+            const wet = ctx.createGain();
+
+            masterGain.gain.value = 0;
+            filter.type = 'lowpass';
+            filter.frequency.value = 920;
+            filter.Q.value = 0.55;
+            dry.gain.value = 0.72;
+            delay.delayTime.value = 1.9;
+            feedback.gain.value = 0.26;
+            wet.gain.value = 0.18;
+
+            filter.connect(dry);
+            dry.connect(masterGain);
+            filter.connect(delay);
+            delay.connect(feedback);
+            feedback.connect(delay);
+            delay.connect(wet);
+            wet.connect(masterGain);
+            masterGain.connect(ctx.destination);
+
+            ambientChords[0].forEach((frequency, index) => {
+                const oscillator = ctx.createOscillator();
+                const gain = ctx.createGain();
+                oscillator.type = index === 3 ? 'triangle' : 'sine';
+                oscillator.frequency.value = frequency;
+                oscillator.detune.value = (index - 1.5) * 3;
+                gain.gain.value = index === 3 ? 0.026 : 0.045;
+                oscillator.connect(gain);
+                gain.connect(filter);
+                oscillator.start();
+                ambientMusic.oscillators.push(oscillator);
+            });
+
+            ambientMusic.ctx = ctx;
+            ambientMusic.masterGain = masterGain;
+            return ctx;
+        }
+
+        function moveAmbientChord() {
+            if (!ambientMusic.ctx) return;
+            ambientMusic.chordIndex = (ambientMusic.chordIndex + 1) % ambientChords.length;
+            const now = ambientMusic.ctx.currentTime;
+            ambientChords[ambientMusic.chordIndex].forEach((frequency, index) => {
+                const oscillator = ambientMusic.oscillators[index];
+                oscillator.frequency.cancelScheduledValues(now);
+                oscillator.frequency.setTargetAtTime(frequency, now, 3.2);
+            });
+        }
+
+        async function startAmbientMusic() {
+            const ctx = buildAmbientMusic();
+            if (!ctx) return;
+            if (ctx.state === 'suspended') await ctx.resume();
+
+            const now = ctx.currentTime;
+            ambientMusic.masterGain.gain.cancelScheduledValues(now);
+            ambientMusic.masterGain.gain.setTargetAtTime(0.048, now, 1.8);
+            ambientMusic.interval = ambientMusic.interval || setInterval(moveAmbientChord, 9000);
+            ambientMusic.playing = true;
+            updateAmbientButton();
+        }
+
+        function stopAmbientMusic() {
+            if (!ambientMusic.ctx || !ambientMusic.masterGain) return;
+            const now = ambientMusic.ctx.currentTime;
+            ambientMusic.masterGain.gain.cancelScheduledValues(now);
+            ambientMusic.masterGain.gain.setTargetAtTime(0, now, 0.9);
+            ambientMusic.playing = false;
+            updateAmbientButton();
+        }
+
+        function updateAmbientButton() {
+            const button = document.getElementById('ambientToggle');
+            const label = document.getElementById('ambientLabel');
+            if (!button || !label) return;
+            button.classList.toggle('is-playing', ambientMusic.playing);
+            button.setAttribute('aria-pressed', ambientMusic.playing ? 'true' : 'false');
+            button.setAttribute('aria-label', ambientMusic.playing ? '暂停舒缓进入音乐' : '播放舒缓进入音乐');
+            label.textContent = ambientMusic.playing ? '音乐已开' : '进入音乐';
+        }
+
+        function setupAmbientToggle() {
+            const button = document.getElementById('ambientToggle');
+            if (!button) return;
+            button.addEventListener('click', () => {
+                if (ambientMusic.playing) {
+                    stopAmbientMusic();
+                } else {
+                    startAmbientMusic();
+                }
+            });
+        }
+
+        async function loadCourseBriefText() {
+            const container = document.getElementById('courseBriefText');
+            if (!container) return;
+            try {
+                const response = await fetch('data/course_summary/narrowgate_course_brief_5000.txt');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                container.textContent = await response.text();
+            } catch (error) {
+                container.textContent = '课程提要加载失败，请确认页面通过本地服务器或 GitHub Pages 打开。';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupGoldIconObserver();
+            setupAmbientToggle();
+            loadCourseBriefText();
+            setTimeout(() => {
+                document.getElementById('pageLoader')?.classList.add('loaded');
+            }, 900);
+        });
+
         // 标签页切换功能
         function showTab(tabName) {
             // 隐藏所有标签页内容
@@ -3181,7 +3524,9 @@
                     loadCourseDay(data.current_day);
                 }
             } catch(e) {
-                console.log('加载进度失败，使用默认进度:', e);
+                if (e.message !== 'STATIC_PAGE_MODE') {
+                    console.log('加载进度失败，使用默认进度:', e);
+                }
                 // 如果API失败，尝试从localStorage恢复
                 const saved = localStorage.getItem('narrowgate_progress');
                 if (saved) {
@@ -3448,8 +3793,8 @@
         });
 
         // 添加涟漪动画样式
-        const style = document.createElement('style');
-        style.textContent = `
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
             @keyframes rippleEffect {
                 to {
                     transform: scale(4);
@@ -3457,90 +3802,30 @@
                 }
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(rippleStyle);
 
         let currentAuditId = null;
+        const STATIC_PAGE_MODE = true;
 
         async function apiCall(url, method = 'POST', body = {}) {
+            if (STATIC_PAGE_MODE) {
+                throw new Error('STATIC_PAGE_MODE');
+            }
             const res = await fetch(url, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
                 body: method === 'GET' ? undefined : JSON.stringify(body),
             });
+            if (!res.ok) {
+                throw new Error('HTTP ' + res.status);
+            }
             return res.json();
         }
 
-        // ── 灵魂审计问题库（离线可用） ──
-        const AUDIT_QUESTIONS = {
-            '认知': [
-                {q: '你觉得自己的人生到现在，最大的成就是什么？', p: '探索表层认知', d: 1},
-                {q: '你认为成功最重要的因素是什么？', p: '探索表层认知', d: 1},
-                {q: '你最崇拜的人是谁？你崇拜TA的什么？', p: '探索表层认知', d: 1},
-                {q: '你定义"成功"的标准，是你自己定的，还是从别人那里借来的？', p: '中层挖掘', d: 2},
-                {q: '如果所有人都消失了，你还会追求你现在追求的东西吗？', p: '中层挖掘', d: 2},
-                {q: '你有没有怀疑过——你一直相信的"真实"，可能只是一个故事？', p: '深层直击', d: 3},
-                {q: '如果让你用三个词定义自己——这三个词是你选择的，还是被赋予的？', p: '深层直击', d: 3},
-                {q: '你有没有在深夜突然觉得——你一直在追逐的一切，可能根本没有意义？那一刻你看到了什么？', p: '核心直击', d: 4},
-            ],
-            '情绪': [
-                {q: '你上一次真正生气是什么时候？因为什么？', p: '探索表层', d: 1},
-                {q: '你最害怕别人发现你什么？', p: '探索表层', d: 1},
-                {q: '你允许自己在别人面前软弱吗？如果不能，为什么？', p: '中层挖掘', d: 2},
-                {q: '你有没有发现你的焦虑总是在特定时间或场景出现？', p: '中层挖掘', d: 2},
-                {q: '你最深层的恐惧是什么——不是表面的——而是那个让你夜里睡不着的？', p: '深层直击', d: 3},
-                {q: '你有没有一种感觉——觉得自己不值得被爱？这种感觉从哪里来的？', p: '核心直击', d: 4},
-            ],
-            '行为': [
-                {q: '你明知道应该做但一直没做的事情是什么？', p: '探索表层', d: 1},
-                {q: '你手机屏幕使用时间是多少？你对这个数字怎么看？', p: '探索表层', d: 1},
-                {q: '你有没有在用"完美主义"来为自己的不行动找借口？', p: '中层挖掘', d: 2},
-                {q: '你的拖延，背后真的只是懒，还是对某种结果的深层恐惧？', p: '中层挖掘', d: 2},
-                {q: '如果你今天的全部行为被拍成纪录片——你敢让你最尊重的人看吗？', p: '核心直击', d: 4},
-            ],
-            '关系': [
-                {q: '你最亲近的人，你觉得他们真正了解你吗？', p: '探索表层', d: 1},
-                {q: '你觉得你是讨好型人格吗？', p: '探索表层', d: 1},
-                {q: '你在关系中最害怕的是什么——被看见，还是不被看见？', p: '深层直击', d: 3},
-                {q: '你有没有发现你在重复父母的婚姻/关系模式？', p: '深层直击', d: 3},
-                {q: '你觉得你值得被无条件地爱吗？如果你说"是"——你真的相信吗？', p: '核心直击', d: 4},
-            ],
-            '事业': [
-                {q: '如果没有任何限制，你真正想做什么？', p: '探索表层', d: 1},
-                {q: '你觉得你做到了你能力的百分之多少？', p: '探索表层', d: 1},
-                {q: '你害怕失败，还是害怕成功？', p: '中层挖掘', d: 2},
-                {q: '你有没有在潜意识里害怕自己太成功？', p: '深层直击', d: 3},
-                {q: '你内心深处真正想要的——到底是什么？', p: '核心直击', d: 4},
-            ],
-            '宇宙认知': [
-                {q: '你觉得人生有目的吗？如果有，是什么？', p: '探索表层', d: 1},
-                {q: '你相信命运吗？还是一切都是随机的？', p: '探索表层', d: 1},
-                {q: '你觉得你的存在是偶然还是必然？', p: '中层挖掘', d: 2},
-                {q: '如果宇宙的本质是振动和能量，你觉得"你"是什么？', p: '深层直击', d: 3},
-                {q: '你有没有一种深层的直觉——关于你这辈子到底要来做什么？', p: '核心直击', d: 4},
-            ],
-        };
-        const DIMENSIONS = ['认知','情绪','行为','关系','事业','宇宙认知'];
-        let auditDimIdx = 0, auditDepth = 1, auditQIdx = {};
-
-        function getNextOfflineQuestion() {
-            const dim = DIMENSIONS[auditDimIdx % DIMENSIONS.length];
-            const qs = AUDIT_QUESTIONS[dim];
-            if (!auditQIdx[dim]) auditQIdx[dim] = 0;
-            const q = qs[auditQIdx[dim] % qs.length];
-            auditQIdx[dim]++;
-            // 每3个问题递进深度
-            const totalAnswered = Object.values(auditQIdx).reduce((a,b)=>a+b, 0);
-            if (totalAnswered % 4 === 0 && auditDimIdx < DIMENSIONS.length - 1) auditDimIdx++;
-            auditDepth = q.d;
-            return { question: q.q, dimension: dim, depth_level: q.d, purpose: q.p };
-        }
-
         async function startAudit() {
-            // 直接进入对话，跳过intro页
             document.getElementById('audit-intro').classList.add('hidden');
             document.getElementById('audit-chat').classList.remove('hidden');
             document.getElementById('audit-result').classList.add('hidden');
-            auditDimIdx = 0; auditDepth = 1; auditQIdx = {};
 
             try {
                 const data = await apiCall('/api/audit/start', 'POST', { user_id: 'user_' + Date.now() });
@@ -3548,11 +3833,9 @@
                 addMessage('ai', data.question, data.purpose);
                 document.getElementById('current-dimension').textContent = data.dimension;
             } catch(e) {
-                // 离线模式 — 本地问题库直接驱动
-                currentAuditId = 'offline_' + Date.now();
-                const q = getNextOfflineQuestion();
-                addMessage('ai', q.question, q.purpose);
-                document.getElementById('current-dimension').textContent = q.dimension;
+                // Demo模式（无后端）
+                currentAuditId = 'demo_' + Date.now();
+                addMessage('ai', '你觉得自己的人生到现在，最大的成就是什么？', '探索表层认知');
                 addDemoNote();
             }
         }
@@ -3588,16 +3871,20 @@
                 document.getElementById('conversation-count').textContent = data.conversation_count;
                 document.getElementById('shackle-count').textContent = data.shackles_found;
             } catch(e) {
-                // 离线模式 — 本地问题库+回避检测
+                // Demo模式
                 document.getElementById('typing').classList.add('hidden');
-                const evasionSignals = ['没有','不是','还好','因为','没办法','还好吧','都行','不知道'];
-                const isEvasion = evasionSignals.some(s => answer.includes(s)) || answer.length < 10;
+                const demoQuestions = [
+                    '在这背后，你真正害怕面对的是什么？',
+                    '如果满分10分你给自己打几分？扣掉的分丢在哪里了？',
+                    '你有没有一个从未告诉任何人的秘密？关于你是谁？',
+                ];
+                const evasionSignals = ['没有','不是','还好','因为','没办法'];
+                const isEvasion = evasionSignals.some(s => answer.includes(s));
                 if (isEvasion) {
-                    addEvasionAlert('回避检测', '我感觉到你在回避。没关系——但这里往往藏着最重要的东西。再试一次，更真实地说。');
+                    addEvasionAlert('否认', '我感觉到你在回避。没关系，但我们需要再试一次。');
                 }
-                const q = getNextOfflineQuestion();
-                addMessage('ai', q.question, q.purpose);
-                document.getElementById('current-dimension').textContent = q.dimension;
+                const count = document.getElementById('chat-messages').children.length;
+                addMessage('ai', demoQuestions[count % demoQuestions.length], `深度层级 ${Math.min(Math.floor(count/2)+1, 4)}`);
             }
         }
 
@@ -3610,65 +3897,15 @@
             let summary = { total_conversations: 0, evasion_count: 0, shackles_identified: 0, dimensions_explored: 0, first_gate: null };
             let message = '';
 
-            let courseRec = null;
             try {
                 const data = await apiCall('/api/audit/complete', 'POST', { user_id: currentAuditId.split('_')[1] });
                 summary = data.summary || summary;
                 message = data.message || '';
-                // 尝试获取课程推荐
-                try {
-                    courseRec = await apiCall('/api/audit/' + currentAuditId + '/recommend', 'GET');
-                } catch(_e) {}
             } catch(e) {
-                // 离线模式结果
+                // Demo模式结果
                 const msgCount = document.getElementById('chat-messages').children.length;
-                const dimSet = new Set();
-                document.querySelectorAll('#current-dimension').forEach(el => dimSet.add(el.textContent));
-                summary = {
-                    total_conversations: Math.floor(msgCount/2),
-                    evasion_count: Math.floor(msgCount/4),
-                    shackles_identified: Math.max(1, Math.floor(msgCount/6)),
-                    dimensions_explored: Math.max(3, auditDimIdx + 1),
-                    first_gate: { name: DIMENSIONS[auditDimIdx % DIMENSIONS.length] + '维度回避模式', description: '你在该维度有深层回避，需要穿越', priority: 70 + Math.floor(Math.random()*20) }
-                };
-                courseRec = {
-                    crossing_path: ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D11","D12","D13","D14"],
-                    primary_dimension: DIMENSIONS[auditDimIdx % DIMENSIONS.length],
-                    recommended_masters: ['socrates','jung','memento'],
-                    starting_day: 1,
-                    reasoning: '根据你的灵魂审计结果，我为你定制了14天穿越路线。从觉察到行动，每一天都有具体的挑战和反思。',
-                    dimension_analysis: {}
-                };
-                message = '灵魂审计完成。下面是你专属的穿越路线推荐。';
-            }
-
-            // 课程推荐HTML
-            let courseHTML = '';
-            if (courseRec && courseRec.crossing_path) {
-                const masterNames = {'socrates':'苏格拉底','jung':'荣格','memento':'清醒者','mirror':'镜像者','architect':'架构师','alchemist':'炼金术士','gatekeeper':'守门人'};
-                const masterAvatars = {'socrates':'🦉','jung':'🌑','memento':'⚡','mirror':'🪞','architect':'🏗️','alchemist':'🔮','gatekeeper':'🚪'};
-                const masterHTML = (courseRec.recommended_masters||[]).map(m =>
-                    `<span class="inline-flex items-center gap-1 bg-[#b8942e]/10 border border-[#b8942e]/30 rounded-full px-3 py-1 text-xs text-[#b8942e]">${masterAvatars[m]||'🎭'} ${masterNames[m]||m}</span>`
-                ).join(' ');
-                const pathDays = courseRec.crossing_path.slice(0,14);
-                const pathHTML = pathDays.map((d,i) =>
-                    `<div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-[#b8942e]/20 text-[#b8942e] text-xs flex items-center justify-center font-bold">${i+1}</span><span class="text-xs text-gray-400">${d}</span></div>`
-                ).join('');
-                courseHTML = `
-                    <div class="bg-[#0a0a12] border border-[#b8942e]/20 rounded-xl p-6 text-left mb-6 mt-6">
-                        <p class="text-xs text-[#b8942e] uppercase tracking-wider mb-2">🎯 为你定制的穿越路线</p>
-                        <p class="text-sm text-gray-300 mb-4">${courseRec.reasoning}</p>
-                        <div class="mb-4">
-                            <p class="text-xs text-gray-500 mb-2">推荐大师引导者</p>
-                            <div class="flex flex-wrap gap-2">${masterHTML}</div>
-                        </div>
-                        <div class="mb-4">
-                            <p class="text-xs text-gray-500 mb-2">穿越路线（${pathDays.length}天）</p>
-                            <div class="grid grid-cols-2 gap-1">${pathHTML}</div>
-                        </div>
-                        <a href="#training" onclick="closeAuditResult()" class="inline-block mt-2 text-sm text-[#b8942e] hover:text-[#d4af37] transition">开始穿越训练 →</a>
-                    </div>
-                `;
+                summary = { total_conversations: Math.floor(msgCount/2), evasion_count: Math.floor(msgCount/4), shackles_identified: 1, dimensions_explored: 3, first_gate: { name: '认知：舒适区依赖', description: '你一直在用已知的方式做事，回避未知领域', priority: 72 } };
+                message = '这是Demo审计结果。启动后端服务可获得完整AI灵魂审计体验。';
             }
 
             document.getElementById('result-content').innerHTML = `
@@ -3681,26 +3918,17 @@
                     <div class="bg-[#050508] rounded-lg p-4"><p class="text-xs text-gray-500">探索维度</p><p class="text-2xl font-bold text-gray-300">${summary.dimensions_explored}</p></div>
                 </div>
                 ${summary.first_gate ? `<div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-lg p-6 text-left mb-6"><p class="text-xs text-[#b8942e] mb-1">你的窄门</p><h4 class="text-lg font-bold text-white mb-2">${summary.first_gate.name}</h4><p class="text-sm text-gray-400">${summary.first_gate.description}</p><p class="text-sm text-[#b8942e] mt-3">窄门优先级：${Math.round(summary.first_gate.priority)}/100</p></div>` : ''}
-                ${courseHTML}
-                <p class="text-gray-400 text-sm leading-relaxed mt-4">${message.replace(/\n/g, '<br>')}</p>
-                <div class="flex gap-4 justify-center mt-8">
-                    <button onclick="resetAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">重新审计</button>
-                    <a href="#masters" class="text-xs text-[#b8942e] hover:text-[#d4af37] transition">选择大师引导者 →</a>
-                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">${message.replace(/\n/g, '<br>')}</p>
+                <button onclick="resetAudit()" class="mt-8 text-xs text-gray-600 hover:text-gray-400 transition">重新审计</button>
             `;
         }
 
         function resetAudit() {
             currentAuditId = null;
-            auditDimIdx = 0; auditDepth = 1; auditQIdx = {};
             document.getElementById('audit-intro').classList.remove('hidden');
             document.getElementById('audit-chat').classList.add('hidden');
             document.getElementById('audit-result').classList.add('hidden');
             document.getElementById('chat-messages').innerHTML = '';
-        }
-        function closeAuditResult() {
-            document.getElementById('audit-result').classList.add('hidden');
-            document.getElementById('audit-intro').classList.remove('hidden');
         }
 
         function addMessage(role, text, subtext = '') {
@@ -3731,6 +3959,7 @@
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
+    </script>
     <!-- ============================================================ -->
     <!-- 大师系统 JavaScript -->
     <!-- ============================================================ -->
@@ -3991,7 +4220,14 @@
                 updateCourseUI(data);
                 currentDay = day;
                 updateDayIndicator();
+            } catch(e) {
+                if (e.message !== 'STATIC_PAGE_MODE') {
+                    console.error('加载课程失败:', e);
+                }
+                // Demo模式
+                updateCourseUIDemo(day);
             }
+        }
         
         async function completeCurrentDay() {
             const day = currentDay;
@@ -4023,12 +4259,6 @@
                 console.error('完成失败:', e);
                 btn.disabled = false;
                 btn.textContent = '重试';
-            }
-        }
- catch(e) {
-                console.error('加载课程失败:', e);
-                // Demo模式
-                updateCourseUIDemo(day);
             }
         }
         
@@ -4453,381 +4683,5 @@
             </div>
         </div>
     </section>
-
-    <!-- 登录模态框 -->
-    <div id="login-modal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeLoginModal()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-            <div class="bg-[#0c0c12] border border-white/10 rounded-2xl p-8 shadow-2xl">
-                <!-- 关闭按钮 -->
-                <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                
-                <!-- 标题 -->
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span class="text-3xl">🚪</span>
-                    </div>
-                    <h2 class="text-2xl font-bold text-white mb-2">欢迎回到窄门</h2>
-                    <p class="text-gray-400 text-sm">登录继续你的穿越之旅</p>
-                </div>
-                
-                <!-- 登录表单 -->
-                <form id="login-form" class="space-y-4">
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">用户名或邮箱</label>
-                        <input type="text" id="login-username" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入用户名或邮箱">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">密码</label>
-                        <input type="password" id="login-password" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入密码">
-                    </div>
-                    <div id="login-error" class="text-red-400 text-sm hidden"></div>
-                    <button type="submit" 
-                        class="w-full py-3 bg-gradient-to-r from-[#b8942e] to-[#d4af37] text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/25 transition-all duration-300">
-                        登录
-                    </button>
-                </form>
-                
-                <!-- 分隔线 -->
-                <div class="flex items-center gap-4 my-6">
-                    <div class="flex-1 h-px bg-white/10"></div>
-                    <span class="text-gray-500 text-xs">或</span>
-                    <div class="flex-1 h-px bg-white/10"></div>
-                </div>
-                
-                <!-- 微信登录 -->
-                <button onclick="wechatLogin()" 
-                    class="w-full py-3 bg-[#07c160] text-white font-semibold rounded-xl hover:bg-[#06ad56] transition flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
-                    </svg>
-                    微信登录
-                </button>
-                
-                <!-- 注册链接 -->
-                <p class="text-center text-gray-400 text-sm mt-6">
-                    还没有账号？ 
-                    <button onclick="showRegisterForm()" class="text-[#b8942e] hover:underline">立即注册</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 注册模态框 -->
-    <div id="register-modal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeRegisterModal()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-            <div class="bg-[#0c0c12] border border-white/10 rounded-2xl p-8 shadow-2xl">
-                <!-- 关闭按钮 -->
-                <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                
-                <!-- 标题 -->
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span class="text-3xl">✨</span>
-                    </div>
-                    <h2 class="text-2xl font-bold text-white mb-2">开始你的穿越之旅</h2>
-                    <p class="text-gray-400 text-sm">创建账号，解锁完整功能</p>
-                </div>
-                
-                <!-- 注册表单 -->
-                <form id="register-form" class="space-y-4">
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">用户名</label>
-                        <input type="text" id="register-username" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入用户名">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">邮箱</label>
-                        <input type="email" id="register-email" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入邮箱">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">密码</label>
-                        <input type="password" id="register-password" required minlength="6"
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入密码（至少6位）">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">昵称（可选）</label>
-                        <input type="text" id="register-nickname"
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入昵称">
-                    </div>
-                    <div id="register-error" class="text-red-400 text-sm hidden"></div>
-                    <button type="submit" 
-                        class="w-full py-3 bg-gradient-to-r from-[#b8942e] to-[#d4af37] text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/25 transition-all duration-300">
-                        注册
-                    </button>
-                </form>
-                
-                <!-- 登录链接 -->
-                <p class="text-center text-gray-400 text-sm mt-6">
-                    已有账号？ 
-                    <button onclick="showLoginForm()" class="text-[#b8942e] hover:underline">立即登录</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 用户信息栏（登录后显示） -->
-    <div id="user-bar" class="hidden fixed top-20 right-6 z-40">
-        <div class="bg-[#0c0c12] border border-white/10 rounded-xl p-4 shadow-xl">
-            <div class="flex items-center gap-3 mb-3">
-                <div id="user-avatar" class="w-10 h-10 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-full flex items-center justify-center text-black font-bold">
-                    U
-                </div>
-                <div>
-                    <p id="user-nickname" class="text-white font-medium">用户</p>
-                    <p id="user-level" class="text-xs text-gray-500">睡眠层 · 0 XP</p>
-                </div>
-            </div>
-            <button onclick="logout()" class="w-full py-2 text-sm text-gray-400 hover:text-white border border-white/10 rounded-lg hover:bg-white/5 transition">
-                退出登录
-            </button>
-        </div>
-    </div>
-
-    <!-- 认证相关JavaScript -->
-    <script>
-        // 认证状态管理
-        let currentUser = null;
-        let authToken = localStorage.getItem('narrowgate_token');
-        
-        // 初始化认证状态
-        async function initAuth() {
-            if (authToken) {
-                try {
-                    const response = await fetch('/api/auth/me', {
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`
-                        }
-                    });
-                    if (response.ok) {
-                        currentUser = await response.json();
-                        updateUIForLoggedInUser();
-                    } else {
-                        localStorage.removeItem('narrowgate_token');
-                        authToken = null;
-                    }
-                } catch (error) {
-                    console.error('认证检查失败:', error);
-                }
-            }
-        }
-        
-        // 更新UI为登录状态
-        function updateUIForLoggedInUser() {
-            if (!currentUser) return;
-            
-            // 更新用户栏
-            const userBar = document.getElementById('user-bar');
-            const userAvatar = document.getElementById('user-avatar');
-            const userNickname = document.getElementById('user-nickname');
-            const userLevel = document.getElementById('user-level');
-            
-            userBar.classList.remove('hidden');
-            userAvatar.textContent = currentUser.nickname ? currentUser.nickname[0].toUpperCase() : 'U';
-            userNickname.textContent = currentUser.nickname || currentUser.username;
-            userLevel.textContent = `睡眠层 · ${currentUser.experience_points || 0} XP`;
-            
-            // 更新导航栏登录按钮
-            const loginBtn = document.querySelector('button[onclick="scrollToSection(\'audit\')"]');
-            if (loginBtn) {
-                loginBtn.textContent = currentUser.nickname || '我的账户';
-                loginBtn.onclick = () => toggleUserBar();
-            }
-        }
-        
-        // 切换用户栏显示
-        function toggleUserBar() {
-            const userBar = document.getElementById('user-bar');
-            userBar.classList.toggle('hidden');
-        }
-        
-        // 显示登录模态框
-        function showLoginModal() {
-            document.getElementById('login-modal').classList.remove('hidden');
-            document.getElementById('login-error').classList.add('hidden');
-        }
-        
-        // 关闭登录模态框
-        function closeLoginModal() {
-            document.getElementById('login-modal').classList.add('hidden');
-            document.getElementById('login-form').reset();
-        }
-        
-        // 显示注册模态框
-        function showRegisterModal() {
-            closeLoginModal();
-            document.getElementById('register-modal').classList.remove('hidden');
-            document.getElementById('register-error').classList.add('hidden');
-        }
-        
-        // 关闭注册模态框
-        function closeRegisterModal() {
-            document.getElementById('register-modal').classList.add('hidden');
-            document.getElementById('register-form').reset();
-        }
-        
-        // 显示注册表单（从登录模态框切换）
-        function showRegisterForm() {
-            closeLoginModal();
-            showRegisterModal();
-        }
-        
-        // 显示登录表单（从注册模态框切换）
-        function showLoginForm() {
-            closeRegisterModal();
-            showLoginModal();
-        }
-        
-        // 登录提交
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            const errorDiv = document.getElementById('login-error');
-            
-            try {
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, password })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    authToken = data.access_token;
-                    localStorage.setItem('narrowgate_token', authToken);
-                    currentUser = {
-                        user_id: data.user_id,
-                        username: data.username,
-                        nickname: data.nickname,
-                        avatar: data.avatar
-                    };
-                    closeLoginModal();
-                    updateUIForLoggedInUser();
-                    showNotification('登录成功！欢迎回来', 'success');
-                } else {
-                    errorDiv.textContent = data.detail || '登录失败';
-                    errorDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                errorDiv.textContent = '网络错误，请重试';
-                errorDiv.classList.remove('hidden');
-            }
-        });
-        
-        // 注册提交
-        document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('register-username').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const nickname = document.getElementById('register-nickname').value;
-            const errorDiv = document.getElementById('register-error');
-            
-            try {
-                const response = await fetch('/api/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, email, password, nickname: nickname || username })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    authToken = data.access_token;
-                    localStorage.setItem('narrowgate_token', authToken);
-                    currentUser = {
-                        user_id: data.user_id,
-                        username: data.username,
-                        nickname: data.nickname,
-                        avatar: data.avatar
-                    };
-                    closeRegisterModal();
-                    updateUIForLoggedInUser();
-                    showNotification('注册成功！欢迎来到窄门', 'success');
-                } else {
-                    errorDiv.textContent = data.detail || '注册失败';
-                    errorDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                errorDiv.textContent = '网络错误，请重试';
-                errorDiv.classList.remove('hidden');
-            }
-        });
-        
-        // 微信登录
-        function wechatLogin() {
-            showNotification('微信登录功能开发中...', 'info');
-            // TODO: 实现微信登录
-        }
-        
-        // 退出登录
-        function logout() {
-            localStorage.removeItem('narrowgate_token');
-            authToken = null;
-            currentUser = null;
-            document.getElementById('user-bar').classList.add('hidden');
-            
-            // 恢复导航栏登录按钮
-            const loginBtn = document.querySelector('button[onclick="toggleUserBar()"]');
-            if (loginBtn) {
-                loginBtn.textContent = '登录';
-                loginBtn.onclick = () => showLoginModal();
-            }
-            
-            showNotification('已退出登录', 'info');
-        }
-        
-        // 通知提示
-        function showNotification(message, type = 'info') {
-            const colors = {
-                success: 'bg-green-500',
-                error: 'bg-red-500',
-                info: 'bg-blue-500'
-            };
-            
-            const notification = document.createElement('div');
-            notification.className = `fixed top-24 right-6 ${colors[type]} text-white px-6 py-3 rounded-xl shadow-xl z-50 transform transition-all duration-300 translate-x-full`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.classList.remove('translate-x-full');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.add('translate-x-full');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-        
-        // 页面加载时初始化认证
-        document.addEventListener('DOMContentLoaded', initAuth);
-    </script>
 </body>
 </html>
