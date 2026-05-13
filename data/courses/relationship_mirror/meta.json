@@ -1,10 +1,17 @@
 {
-  "total_words": 12402,
-  "total_reading_minutes": 24,
+  "total_words": 16036,
+  "total_reading_minutes": 32,
   "course_id": "relationship_mirror",
   "title": "关系镜像",
   "subtitle": "每段关系都是灵魂的镜子",
   "quality_status": "production_ready",
   "audio_required": true,
-  "updated_at": "2026-05-10"
+  "updated_at": "2026-05-10",
+  "audio_status": "file_ready",
+  "audio_file": "audio/intro.m4a",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "Tingting",
+  "audio_duration_seconds": 107,
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "content_enhanced_at": "2026-05-13"
 }

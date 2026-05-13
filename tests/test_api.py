@@ -138,7 +138,9 @@ class TestDeepCourseLibraryAPI:
         assert len(data["courses"]) == 100
         assert all(course["chapter_count"] >= 5 for course in data["courses"])
         assert all(course["quiz_count"] >= 10 for course in data["courses"])
-        assert all(course["audio_status"] == "browser_tts_ready" for course in data["courses"])
+        assert all(course["audio_status"] == "file_ready" for course in data["courses"])
+        assert all(course["audio_file"] == "audio/intro.m4a" for course in data["courses"])
+        assert all(course["audio_duration_seconds"] >= 60 for course in data["courses"])
 
     @pytest.mark.asyncio
     async def test_deep_course_detail_chapter_and_quiz(self, client):
@@ -148,7 +150,8 @@ class TestDeepCourseLibraryAPI:
         detail_data = detail.json()
         assert detail_data["chapter_count"] == 5
         assert detail_data["quiz_count"] == 10
-        assert detail_data["audio_status"] == "browser_tts_ready"
+        assert detail_data["audio_status"] == "file_ready"
+        assert detail_data["audio_file"] == "audio/intro.m4a"
 
         chapter = await client.get("/api/courses/belief_audit/chapters/ch01")
         assert chapter.status_code == 200
@@ -162,6 +165,14 @@ class TestDeepCourseLibraryAPI:
         cover = await client.get("/api/courses/belief_audit/cover")
         assert cover.status_code == 200
         assert cover.headers["content-type"].startswith("image/svg+xml")
+
+        audio = await client.get("/api/courses/belief_audit/audio")
+        assert audio.status_code == 200
+        assert audio.headers["content-type"].startswith("audio/mp4")
+
+        audio_script = await client.get("/api/courses/belief_audit/audio-script")
+        assert audio_script.status_code == 200
+        assert "核心信念审计" in audio_script.json()["script"]
 
 
 # ============================================================

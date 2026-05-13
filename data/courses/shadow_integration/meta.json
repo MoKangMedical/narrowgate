@@ -2,9 +2,16 @@
   "course_id": "shadow_integration",
   "title": "阴影整合",
   "subtitle": "你最讨厌的，正是你最需要的",
-  "total_words": 19767,
-  "total_reading_minutes": 39,
+  "total_words": 24120,
+  "total_reading_minutes": 48,
   "quality_status": "production_ready",
   "audio_required": true,
-  "updated_at": "2026-05-10"
+  "updated_at": "2026-05-10",
+  "audio_status": "file_ready",
+  "audio_file": "audio/intro.m4a",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "Tingting",
+  "audio_duration_seconds": 109,
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "content_enhanced_at": "2026-05-13"
 }

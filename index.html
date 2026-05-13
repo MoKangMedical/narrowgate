@@ -2563,7 +2563,7 @@
                     <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">COURSE BRIEF</p>
                     <h2 class="heading-section text-2xl sm:text-3xl md:text-4xl font-bold mb-5">百门深度课程体系</h2>
                     <p class="text-gray-400 text-body mb-6">
-                        已扩展为100门深度课程库。原十二门核心课程总提要与自然人声朗读保留为入门总地图，新增课程库适合作为审计后的长期学习路径。
+                        已扩展为100门深度课程库，并为每门课程补齐导览音频。原十二门核心课程总提要与自然人声朗读保留为入门总地图，新增课程库适合作为审计后的长期学习路径。
                     </p>
                     <div class="bg-[#050508]/80 border border-[#b8942e]/20 rounded-2xl p-5">
                         <div class="flex items-center gap-3 mb-4">
@@ -2588,8 +2588,8 @@
                             <p class="text-xs text-gray-500 mt-1">章正文</p>
                         </div>
                         <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
-                            <p class="text-[#d4af37] font-serif text-2xl font-bold">5000</p>
-                            <p class="text-xs text-gray-500 mt-1">字提要</p>
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">100</p>
+                            <p class="text-xs text-gray-500 mt-1">份音频</p>
                         </div>
                     </div>
                 </div>
@@ -4016,7 +4016,7 @@
                         <h4>${index + 1}. ${ngEscapeHtml(course.title)}</h4>
                         <p>${ngEscapeHtml(course.subtitle)}</p>
                         <p class="mt-2">${ngEscapeHtml(course.reason)}</p>
-                        <a href="course-system.html">进入课程体系</a>
+                        <a href="course-system.html#course-library">进入课程体系</a>
                     </div>
                 `;
             }).join('') || '<div class="ng-course-result"><p>课程库正在加载，请稍后再试。</p></div>';
@@ -4031,7 +4031,7 @@
                     NG_COURSE_LIBRARY[course.id] = {
                         title: course.title,
                         subtitle: course.subtitle,
-                        reason: course.description || `${course.dimension}维度 · ${course.track}`
+                        reason: `${course.description || `${course.dimension}维度 · ${course.track}`} · ${course.audio_duration_seconds ? Math.round(course.audio_duration_seconds / 60) + '分钟音频' : '音频已配'}`
                     };
                 });
                 ngRecommendCourses();

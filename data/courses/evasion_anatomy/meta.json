@@ -1,10 +1,17 @@
 {
-  "total_words": 12930,
-  "total_reading_minutes": 25,
+  "total_words": 18028,
+  "total_reading_minutes": 36,
   "course_id": "evasion_anatomy",
   "title": "回避解剖",
   "subtitle": "你所有借口的完整图谱",
   "quality_status": "production_ready",
   "audio_required": true,
-  "updated_at": "2026-05-10"
+  "updated_at": "2026-05-10",
+  "audio_status": "file_ready",
+  "audio_file": "audio/intro.m4a",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "Tingting",
+  "audio_duration_seconds": 107,
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "content_enhanced_at": "2026-05-13"
 }

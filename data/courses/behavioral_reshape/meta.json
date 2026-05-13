@@ -196,8 +196,15 @@
       "year": 2008
     }
   ],
-  "total_words": 12152,
-  "total_reading_minutes": 24,
+  "total_words": 16543,
+  "total_reading_minutes": 33,
   "quality_status": "production_ready",
-  "audio_required": true
+  "audio_required": true,
+  "audio_status": "file_ready",
+  "audio_file": "audio/intro.m4a",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "Tingting",
+  "audio_duration_seconds": 135,
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "content_enhanced_at": "2026-05-13"
 }

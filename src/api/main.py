@@ -793,6 +793,9 @@ async def get_deep_course(course_id: str):
         "total_words": course.total_words,
         "total_reading_minutes": course.total_reading_minutes,
         "audio_status": course.audio_status,
+        "audio_file": course.audio_file,
+        "audio_duration_seconds": course.audio_duration_seconds,
+        "audio_voice": course.audio_voice,
         "chapters": course_engine.get_course_chapters(course_id),
     }
 
@@ -806,6 +809,32 @@ async def get_deep_course_cover(course_id: str):
     if not cover_file.exists():
         raise HTTPException(404, "课程封面不存在")
     return FileResponse(cover_file, media_type="image/svg+xml")
+
+
+@app.get("/api/courses/{course_id}/audio")
+async def get_deep_course_audio(course_id: str):
+    """获取深度课程真实导览音频。"""
+    course = course_engine.get_course(course_id)
+    if not course:
+        raise HTTPException(404, "课程不存在")
+    audio_file = course.audio_file or "audio/intro.m4a"
+    audio_path = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / audio_file
+    if not audio_path.exists():
+        raise HTTPException(404, "课程音频不存在")
+    return FileResponse(audio_path, media_type="audio/mp4")
+
+
+@app.get("/api/courses/{course_id}/audio-script")
+async def get_deep_course_audio_script(course_id: str):
+    """获取深度课程导览音频讲稿。"""
+    course = course_engine.get_course(course_id)
+    if not course:
+        raise HTTPException(404, "课程不存在")
+    script_file = course.audio_script or "audio/intro.txt"
+    script_path = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / script_file
+    if not script_path.exists():
+        raise HTTPException(404, "课程音频讲稿不存在")
+    return {"course_id": course_id, "script": script_path.read_text(encoding="utf-8")}
 
 
 @app.get("/api/courses/{course_id}/chapters")

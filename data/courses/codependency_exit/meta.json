@@ -17,11 +17,11 @@
   "difficulty": "intermediate",
   "estimated_hours": 8,
   "quality_status": "production_ready",
-  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
   "audio_required": true,
-  "audio_status": "browser_tts_ready",
-  "total_words": 10379,
-  "total_reading_minutes": 40,
+  "audio_status": "file_ready",
+  "total_words": 13863,
+  "total_reading_minutes": 27,
   "learning_objectives": [
     "识别共依赖退出对应的核心回避模式",
     "区分宽门诱惑与窄门行动",
@@ -93,5 +93,10 @@
       ],
       "estimated_minutes": 8
     }
-  ]
+  ],
+  "audio_file": "audio/intro.m4a",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "Tingting",
+  "audio_duration_seconds": 112,
+  "content_enhanced_at": "2026-05-13"
 }

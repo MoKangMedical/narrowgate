@@ -56,6 +56,10 @@ class Course:
     total_reading_minutes: int = 0
     total_words: int = 0
     audio_status: str = "browser_tts_ready"
+    audio_file: str = ""
+    audio_script: str = ""
+    audio_duration_seconds: int = 0
+    audio_voice: str = ""
 
     @property
     def chapter_count(self) -> int:
@@ -249,6 +253,10 @@ class CourseEngine:
                 course.color = meta.get("color") or course.color
                 course.level_required = level_required
                 course.audio_status = meta.get("audio_status") or course.audio_status
+                course.audio_file = meta.get("audio_file", course.audio_file)
+                course.audio_script = meta.get("audio_script", course.audio_script)
+                course.audio_duration_seconds = int(meta.get("audio_duration_seconds", course.audio_duration_seconds) or 0)
+                course.audio_voice = meta.get("audio_voice", course.audio_voice)
                 continue
 
             self.courses[course_id] = Course(
@@ -261,6 +269,10 @@ class CourseEngine:
                 color=color,
                 level_required=level_required,
                 audio_status=meta.get("audio_status", "browser_tts_ready"),
+                audio_file=meta.get("audio_file", ""),
+                audio_script=meta.get("audio_script", ""),
+                audio_duration_seconds=int(meta.get("audio_duration_seconds", 0) or 0),
+                audio_voice=meta.get("audio_voice", ""),
             )
 
     def _load_chapters(self):
@@ -282,6 +294,11 @@ class CourseEngine:
                     meta = json.load(f)
                     course.total_words = meta.get("total_words", 0)
                     course.total_reading_minutes = meta.get("total_reading_minutes", 0)
+                    course.audio_status = meta.get("audio_status", course.audio_status)
+                    course.audio_file = meta.get("audio_file", course.audio_file)
+                    course.audio_script = meta.get("audio_script", course.audio_script)
+                    course.audio_duration_seconds = int(meta.get("audio_duration_seconds", course.audio_duration_seconds) or 0)
+                    course.audio_voice = meta.get("audio_voice", course.audio_voice)
 
             # 加载章节
             if chapters_dir.exists():
@@ -351,6 +368,9 @@ class CourseEngine:
                 "total_words": course.total_words,
                 "total_reading_minutes": course.total_reading_minutes,
                 "audio_status": course.audio_status,
+                "audio_file": course.audio_file,
+                "audio_duration_seconds": course.audio_duration_seconds,
+                "audio_voice": course.audio_voice,
             })
         return result
 

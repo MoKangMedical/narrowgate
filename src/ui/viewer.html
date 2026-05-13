@@ -292,7 +292,7 @@ let synth = window.speechSynthesis;
 let ttsUtterance = null;
 let ttsRate = 1;
 let ttsPlaying = false;
-let audioPlayer = null; // HTML5 audio element for generated files
+let audioPlayer = null; // HTML5 audio element for generated course files
 
 // === DOOR ANIMATION ===
 function openDoor() {
@@ -387,7 +387,7 @@ async function showCourse(courseId) {
     <button class="audio-play-btn" onclick="playCourseAudio('${courseId}')">▶</button>
     <div class="audio-info">
       <div class="audio-title">🎧 课程语音导览</div>
-      <div class="audio-sub">点击播放浏览器语音导览，章节内可继续朗读全文</div>
+      <div class="audio-sub">${course.audio_duration_seconds ? Math.round(course.audio_duration_seconds / 60) + '分钟真实音频' : '点击播放课程导览音频'}，章节内可继续朗读全文</div>
       <div class="audio-progress"><div class="audio-progress-bar" id="audioBar"></div></div>
     </div>
   </div>`;
@@ -610,7 +610,7 @@ function setSpeed(rate) {
   if (ttsPlaying) { speakContent(); }
 }
 
-// === COURSE AUDIO (Browser Narration) ===
+// === COURSE AUDIO (Generated Files + Browser Fallback) ===
 function playCourseAudio(courseId) {
   if (audioPlayer) { audioPlayer.pause(); audioPlayer = null; }
   stopTTS();
@@ -618,9 +618,35 @@ function playCourseAudio(courseId) {
   const course = currentCourse === courseId && currentCourseDetail
     ? currentCourseDetail
     : coursesCache.find(c => c.id === courseId);
-  if (!course || !synth) return;
+  if (!course) return;
   const btn = document.querySelector('.audio-play-btn');
   const bar = document.getElementById('audioBar');
+  let fallbackStarted = false;
+
+  const fallbackToBrowserVoice = () => {
+    if (fallbackStarted || !synth) return;
+    fallbackStarted = true;
+    speakCourseIntroFallback(course, btn, bar);
+  };
+
+  audioPlayer = new Audio(`${API}/api/courses/${courseId}/audio`);
+  audioPlayer.preload = 'metadata';
+  audioPlayer.addEventListener('play', () => { if (btn) btn.textContent = '⏸'; });
+  audioPlayer.addEventListener('pause', () => { if (btn) btn.textContent = '▶'; });
+  audioPlayer.addEventListener('ended', () => {
+    if (btn) btn.textContent = '▶';
+    if (bar) bar.style.width = '0%';
+  });
+  audioPlayer.addEventListener('timeupdate', () => {
+    if (bar && audioPlayer.duration) {
+      bar.style.width = Math.round(audioPlayer.currentTime / audioPlayer.duration * 100) + '%';
+    }
+  });
+  audioPlayer.addEventListener('error', fallbackToBrowserVoice);
+  audioPlayer.play().catch(fallbackToBrowserVoice);
+}
+
+function speakCourseIntroFallback(course, btn, bar) {
   const chapters = (course.chapters || []).map(ch => ch.title).join('。');
   const text = `${course.name || course.title}。${course.subtitle || ''}。${course.description || ''}。本课程包含${course.chapter_count || 0}章，${course.quiz_count || 0}道测验。章节包括：${chapters}`;
 
