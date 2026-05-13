@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>窄门 NarrowGate — 让人看见窄门并跨越窄门</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050508'/%3E%3Cpath d='M21 54V22c0-8 5-14 11-14s11 6 11 14v32' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M32 12v42' stroke='%23b8942e' stroke-width='2' stroke-linecap='round' opacity='.75'/%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -1916,6 +1917,367 @@
             50% { box-shadow: 0 0 28px rgba(212,175,55,0.32), inset 0 0 18px rgba(180,148,46,0.16); }
         }
 
+        .ng-workbench-section {
+            padding: 112px 24px;
+            background:
+                linear-gradient(180deg, #050508 0%, #080810 48%, #050508 100%),
+                radial-gradient(ellipse at 50% 0%, rgba(184,148,46,0.08), transparent 60%);
+        }
+
+        .ng-workbench-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .ng-workbench-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ng-workbench-panel {
+            min-height: 100%;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            background: rgba(255,255,255,0.022);
+            padding: 28px;
+        }
+
+        .ng-panel-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #d4af37;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .ng-panel-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .ng-panel-copy {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .ng-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin: 22px 0;
+        }
+
+        .ng-stat-tile {
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            background: rgba(5,5,8,0.62);
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .ng-stat-value {
+            color: #d4af37;
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .ng-stat-label {
+            color: #6b7280;
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        .ng-workbench-control,
+        .ng-workbench-select,
+        .ng-workbench-textarea {
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            background: rgba(5,5,8,0.72);
+            color: #e8e4dc;
+            padding: 13px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .ng-workbench-textarea {
+            min-height: 180px;
+            resize: vertical;
+            line-height: 1.8;
+        }
+
+        .ng-action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .ng-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid rgba(212,175,55,0.28);
+            border-radius: 12px;
+            background: rgba(184,148,46,0.1);
+            color: #f0d78c;
+            padding: 11px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .ng-action-btn:hover {
+            border-color: rgba(212,175,55,0.52);
+            background: rgba(184,148,46,0.16);
+            transform: translateY(-1px);
+        }
+
+        .ng-action-btn[disabled] {
+            cursor: default;
+            opacity: 0.58;
+            transform: none;
+        }
+
+        .ng-action-btn-primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #8a6d1b, #b8942e, #d4af37);
+            color: #050508;
+        }
+
+        .ng-course-results {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .ng-course-result {
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            background: rgba(5,5,8,0.58);
+            padding: 16px;
+        }
+
+        .ng-course-result h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .ng-course-result p {
+            color: #9ca3af;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .ng-course-result a {
+            color: #d4af37;
+            display: inline-flex;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .ng-prompt-box {
+            border: 1px solid rgba(212,175,55,0.18);
+            border-radius: 14px;
+            background: rgba(184,148,46,0.06);
+            color: #d8d2c4;
+            font-family: var(--font-display);
+            font-size: 17px;
+            line-height: 1.85;
+            margin-top: 18px;
+            padding: 18px;
+        }
+
+        .ng-mood-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .ng-mood-chip {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.035);
+            color: #9ca3af;
+            padding: 8px 12px;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .ng-mood-chip.is-active,
+        .ng-mood-chip:hover {
+            border-color: rgba(212,175,55,0.4);
+            color: #f0d78c;
+            background: rgba(184,148,46,0.1);
+        }
+
+        .ng-quality-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .ng-quality-item {
+            display: grid;
+            grid-template-columns: 120px 96px 1fr;
+            gap: 12px;
+            align-items: start;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
+        }
+
+        .ng-quality-item:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .ng-quality-name {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .ng-quality-status {
+            width: fit-content;
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .ng-quality-status.keep {
+            background: rgba(16,185,129,0.12);
+            color: #6ee7b7;
+        }
+
+        .ng-quality-status.defer {
+            background: rgba(245,158,11,0.12);
+            color: #fcd34d;
+        }
+
+        .ng-quality-reason {
+            color: #8f8b82;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 640px) {
+            .ng-workbench-section {
+                padding: 80px 18px;
+            }
+
+            .ng-workbench-panel {
+                padding: 22px;
+            }
+
+            .ng-stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ng-quality-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+
+        .ng-journey-strip {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .ng-journey-link {
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.025);
+            color: #d8d2c4;
+            padding: 14px;
+            text-align: center;
+            font-size: 13px;
+            transition: all 0.25s ease;
+        }
+
+        .ng-journey-link:hover {
+            border-color: rgba(212,175,55,0.34);
+            color: #f0d78c;
+            background: rgba(184,148,46,0.08);
+        }
+
+        @media (max-width: 760px) {
+            .ng-journey-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .ng-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            background: rgba(0,0,0,0.72);
+            backdrop-filter: blur(14px);
+        }
+
+        .ng-modal.hidden {
+            display: none;
+        }
+
+        .ng-modal-dialog {
+            width: min(760px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(212,175,55,0.18);
+            border-radius: 20px;
+            background: #080810;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.62);
+            padding: 28px;
+        }
+
+        .ng-modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ng-modal-close {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            color: #9ca3af;
+            width: 36px;
+            height: 36px;
+            transition: all 0.2s ease;
+        }
+
+        .ng-modal-close:hover {
+            border-color: rgba(212,175,55,0.35);
+            color: #f0d78c;
+        }
+
         </style>
 </head>
 <body class="min-h-screen">
@@ -1983,6 +2345,13 @@
                                     <div class="text-xs text-gray-500">每日挑战系统</div>
                                 </div>
                             </a>
+                            <a href="#product-workbench" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>📊</span>
+                                <div>
+                                    <div class="font-medium">进化工作台</div>
+                                    <div class="text-xs text-gray-500">签到 · 推荐 · 独白</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -2028,6 +2397,10 @@
                     <span>📐</span>
                     <span>核心公式</span>
                 </a>
+                <a href="#product-workbench" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
+                    <span>📊</span>
+                    <span>工作台</span>
+                </a>
             </div>
             
             <!-- CTA Buttons -->
@@ -2062,6 +2435,10 @@
                 <a href="#training" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                     <span>⚡</span>
                     <span>30天训练</span>
+                </a>
+                <a href="#product-workbench" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>📊</span>
+                    <span>进化工作台</span>
                 </a>
                 <a href="#how-it-works" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                     <span>🗺️</span>
@@ -2233,6 +2610,162 @@
             </div>
         </div>
     </section>
+    <!-- 历史功能合并后的进化工作台 -->
+    <section id="product-workbench" class="ng-workbench-section reveal">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14">
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">EVOLUTION WORKBENCH</p>
+                <h2 class="heading-section text-3xl md:text-5xl font-bold mb-5">把历史功能合成一条可用路径</h2>
+                <p class="text-gray-400 text-body max-w-3xl mx-auto">
+                    从用户角度保留真正能推动改变的功能：先看见问题，再匹配课程，每天完成一个动作，晚上写下真实独白，最后交给见证人与进化系统沉淀。
+                </p>
+            </div>
+
+            <div class="ng-workbench-grid">
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">✓</span> Daily Loop</div>
+                    <h3 class="ng-panel-title">今日穿越状态</h3>
+                    <p class="ng-panel-copy">签到不单独做成任务，而是绑定课程训练和经验值，帮助用户形成回访节奏。</p>
+                    <div class="ng-stat-grid">
+                        <div class="ng-stat-tile">
+                            <div id="ngWorkbenchStreak" class="ng-stat-value">0</div>
+                            <div class="ng-stat-label">连续天数</div>
+                        </div>
+                        <div class="ng-stat-tile">
+                            <div id="ngWorkbenchXp" class="ng-stat-value">0</div>
+                            <div class="ng-stat-label">本地经验值</div>
+                        </div>
+                        <div class="ng-stat-tile">
+                            <div id="ngWorkbenchNotes" class="ng-stat-value">0</div>
+                            <div class="ng-stat-label">独白记录</div>
+                        </div>
+                    </div>
+                    <p id="ngWorkbenchLastCheckin" class="text-xs text-gray-500">尚未签到</p>
+                    <div class="ng-action-row">
+                        <button id="ngCheckinButton" type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngDoCheckin()">
+                            <span class="ng-gold-icon" aria-hidden="true">✓</span>
+                            今日签到
+                        </button>
+                        <button type="button" class="ng-action-btn" onclick="scrollToSection('training')">
+                            进入30天训练
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">⌖</span> Course Routing</div>
+                    <h3 class="ng-panel-title">课程推荐器</h3>
+                    <p class="ng-panel-copy">把灵魂审计的五维度结果直接转成课程路径，避免用户做完审计后不知道下一步。</p>
+                    <label for="ngRecommendationDimension" class="block text-xs text-gray-500 mt-5 mb-2">此刻最卡住你的维度</label>
+                    <select id="ngRecommendationDimension" class="ng-workbench-select">
+                        <option value="cognition">认知：想清楚，但总绕开真问题</option>
+                        <option value="emotion">情绪：被恐惧、羞耻、愤怒卡住</option>
+                        <option value="behavior">行为：知道要做，但迟迟不行动</option>
+                        <option value="relationship">关系：边界、讨好、亲密与孤独</option>
+                        <option value="career">事业：目标、系统、选择与执行</option>
+                        <option value="integration">整合：准备进入完整穿越路径</option>
+                    </select>
+                    <div class="ng-action-row">
+                        <button type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngRecommendCourses()">
+                            生成课程路径
+                        </button>
+                        <a href="course-system.html" class="ng-action-btn">打开课程体系</a>
+                    </div>
+                    <div id="ngRecommendationResults" class="ng-course-results" aria-live="polite"></div>
+                </div>
+
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">●</span> Night Monologue</div>
+                    <h3 class="ng-panel-title">深夜独白</h3>
+                    <p class="ng-panel-copy">这是历史分支里最有情绪价值的功能。它不打断主流程，只在用户需要安静面对自己时打开。</p>
+                    <div id="ngMonologuePromptPreview" class="ng-prompt-box">今晚的问题正在准备...</div>
+                    <div id="ngMoodPreview" class="ng-mood-row"></div>
+                    <div class="ng-action-row">
+                        <button type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngOpenMonologue()">
+                            开始独白
+                        </button>
+                        <button type="button" class="ng-action-btn" onclick="ngRefreshMonologuePrompt()">
+                            换一个问题
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">▦</span> Product QA</div>
+                    <h3 class="ng-panel-title">功能有效性评估</h3>
+                    <p class="ng-panel-copy">不是把历史分支全部堆到首页，而是按用户是否能更快完成一次真实改变来取舍。</p>
+                    <div class="ng-quality-list">
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">审计与推荐</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">解决“看见问题后下一步做什么”，直接连接课程。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">签到与XP</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">提升连续使用，不依赖后端也能保存本地进度。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">深夜独白</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">适合情绪高峰和睡前复盘，和课程音频形成互补。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">见证人网络</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">静态页走本地存储兜底，后端开启后可平滑接API。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">国际化</div>
+                            <div class="ng-quality-status defer">暂缓扩展</div>
+                            <div class="ng-quality-reason">当前课程与文案以中文深度表达为核心，半成品翻译会割裂体验。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">离线缓存</div>
+                            <div class="ng-quality-status defer">暂缓启用</div>
+                            <div class="ng-quality-reason">GitHub Pages 正在快迭代，强缓存容易让用户看到旧页面。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ng-journey-strip">
+                <a class="ng-journey-link" href="#audit">1. 灵魂审计</a>
+                <a class="ng-journey-link" href="#product-workbench">2. 课程推荐</a>
+                <a class="ng-journey-link" href="#training">3. 每日训练</a>
+                <a class="ng-journey-link" href="#social-proof">4. 见证记录</a>
+                <a class="ng-journey-link" href="#section-evolution">5. 进化沉淀</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="ngMonologueModal" class="ng-modal hidden" role="dialog" aria-modal="true" aria-labelledby="ngMonologueTitle">
+        <div class="ng-modal-dialog">
+            <div class="ng-modal-header">
+                <div>
+                    <p class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">●</span> Quiet Writing</p>
+                    <h3 id="ngMonologueTitle" class="ng-panel-title">深夜独白</h3>
+                    <p class="ng-panel-copy">不用写得漂亮，只写真实。你的内容只保存在当前浏览器。</p>
+                </div>
+                <button type="button" class="ng-modal-close" onclick="ngCloseMonologue()" aria-label="关闭深夜独白">×</button>
+            </div>
+            <div id="ngMonologuePrompt" class="ng-prompt-box mb-4"></div>
+            <div id="ngMonologueMoodChips" class="ng-mood-row mb-4"></div>
+            <textarea id="ngMonologueText" class="ng-workbench-textarea" placeholder="现在开始写。不要解释，不要表演，不要急着解决。"></textarea>
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-4 text-xs text-gray-500">
+                <span id="ngMonologueCount">0 字</span>
+                <span id="ngMonologueSaved">尚未保存</span>
+            </div>
+            <div class="ng-action-row">
+                <button type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngSaveMonologue()">
+                    保存独白
+                </button>
+                <button type="button" class="ng-action-btn" onclick="ngRefreshMonologuePrompt()">
+                    换一个问题
+                </button>
+            </div>
+        </div>
+    </div>
 <!-- 核心命题 -->
     <!-- ============================================================ --><!-- 核心命题 -->
     <!-- ============================================================ -->
@@ -3062,7 +3595,10 @@
             '🎯': '◎', '✨': '✦', '🔥': '▲', '💪': '◆', '🎭': '◐',
             '⚠️': '!', '✅': '✓', '👑': '♛', '🦉': '◎', '🌑': '●',
             '🪞': '◈', '🏗️': '△', '🔮': '◌', '👨‍💼': '◇', '👩‍🎨': '◇',
-            '👨‍🏫': '◇', '👩‍⚕️': '◇', '👨‍💻': '◇', '👩‍🎓': '◇'
+            '👨‍🏫': '◇', '👩‍⚕️': '◇', '👨‍💻': '◇', '👩‍🎓': '◇',
+            '💡': '✧', '🌟': '✦', '💬': '◉', '📝': '☰', '📅': '◷',
+            '🧭': '⌖', '🎧': '♪', '🧩': '◆', '🏢': '▦', '🔒': '◇',
+            '⭐': '✦', '🎵': '♪', '📌': '◇', '💎': '◇', '🔁': '↻'
         };
 
         const GOLD_ICON_REGEX = new RegExp(
@@ -3266,10 +3802,398 @@
             }
         }
 
+        const NG_WORKBENCH_STORAGE_KEY = 'narrowgate_workbench_v1';
+        const NG_MONOLOGUE_STORAGE_KEY = 'narrowgate_monologues_v1';
+        const NG_JOURNAL_STORAGE_KEY = 'narrowgate_journals_v1';
+        const NG_WITNESS_STORAGE_KEY = 'narrowgate_witnesses_v1';
+
+        const NG_COURSE_LIBRARY = {
+            socratic_introspection: {
+                title: '苏格拉底式自省',
+                subtitle: '学会问自己不敢问的问题',
+                reason: '适合先拆掉自我叙事，找出真正的窄门。'
+            },
+            shadow_integration: {
+                title: '阴影整合',
+                subtitle: '你最讨厌的，正是你最需要的',
+                reason: '适合处理投射、羞耻和被压下去的情绪。'
+            },
+            stoic_resilience: {
+                title: '斯多葛韧性',
+                subtitle: '在失控的世界里找到掌控',
+                reason: '适合从情绪波动回到可执行的选择。'
+            },
+            behavioral_reshape: {
+                title: '行为重塑',
+                subtitle: '用科学方法重建你的行为系统',
+                reason: '适合把认知转成每日动作和环境设计。'
+            },
+            evasion_anatomy: {
+                title: '回避解剖',
+                subtitle: '你所有借口的完整图谱',
+                reason: '适合识别拖延、合理化和最小化等借口。'
+            },
+            relationship_mirror: {
+                title: '关系镜像',
+                subtitle: '每段关系都是灵魂的镜子',
+                reason: '适合处理讨好、边界、亲密与孤独。'
+            },
+            systems_thinking: {
+                title: '系统思维',
+                subtitle: '从棋子到棋手的视角切换',
+                reason: '适合重新设计目标、资源和选择系统。'
+            },
+            pain_alchemy: {
+                title: '痛苦炼金术',
+                subtitle: '把铅变成金的灵魂工艺',
+                reason: '适合把痛苦经验转化成意义和行动燃料。'
+            },
+            antifragile: {
+                title: '反脆弱修炼',
+                subtitle: '从失败中获益的能力',
+                reason: '适合把挫折做成训练反馈，而不是自我否定。'
+            },
+            meaning_construction: {
+                title: '意义建构',
+                subtitle: '在荒谬中创造意义',
+                reason: '适合在混乱阶段重建方向感。'
+            },
+            narrow_gate_crossing: {
+                title: '窄门穿越',
+                subtitle: '从凡人到封神的完整路径',
+                reason: '适合进入完整的审计、训练、见证和进化流程。'
+            },
+            witness_evolution: {
+                title: '见证与进化',
+                subtitle: '被看见是进化的开始',
+                reason: '适合把个人改变放入关系和见证系统中。'
+            }
+        };
+
+        const NG_RECOMMENDATION_MAP = {
+            cognition: ['socratic_introspection', 'meaning_construction', 'pain_alchemy'],
+            emotion: ['shadow_integration', 'stoic_resilience', 'pain_alchemy'],
+            behavior: ['evasion_anatomy', 'behavioral_reshape', 'antifragile'],
+            relationship: ['relationship_mirror', 'witness_evolution', 'shadow_integration'],
+            career: ['systems_thinking', 'behavioral_reshape', 'antifragile'],
+            integration: ['narrow_gate_crossing', 'witness_evolution', 'meaning_construction']
+        };
+
+        const NG_MONOLOGUE_PROMPTS = [
+            '如果今晚不需要显得坚强，你最想承认的一件事是什么？',
+            '你最近最频繁回避的那个动作，背后真正保护的是什么？',
+            '如果你的恐惧会说话，它会请求你不要失去什么？',
+            '你在哪一段关系里最不像真实的自己？为什么？',
+            '你一直想证明给谁看？如果不证明，会发生什么？',
+            '今天有没有一个瞬间，你明明知道该走窄门，却选择了宽门？',
+            '你最想成为的人，正在要求你放下哪一种旧身份？',
+            '如果痛苦不是惩罚，而是提醒，它正在提醒你什么？'
+        ];
+
+        const NG_MONOLOGUE_MOODS = ['平静', '疲惫', '害怕', '羞耻', '愤怒', '清醒', '有力量'];
+        let ngCurrentPrompt = '';
+        let ngSelectedMood = '平静';
+
+        function ngReadJson(key, fallback) {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function ngWriteJson(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        function ngDateKey(date = new Date()) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function ngGetYesterdayKey() {
+            const date = new Date();
+            date.setDate(date.getDate() - 1);
+            return ngDateKey(date);
+        }
+
+        function ngGetWorkbenchState() {
+            return {
+                streak: 0,
+                xp: 0,
+                lastCheckin: '',
+                lastRecommendation: 'cognition',
+                ...ngReadJson(NG_WORKBENCH_STORAGE_KEY, {})
+            };
+        }
+
+        function ngSaveWorkbenchState(state) {
+            ngWriteJson(NG_WORKBENCH_STORAGE_KEY, state);
+        }
+
+        function ngEscapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function ngRefreshWorkbenchUI() {
+            const state = ngGetWorkbenchState();
+            const monologues = ngReadJson(NG_MONOLOGUE_STORAGE_KEY, []);
+            const today = ngDateKey();
+            const streakEl = document.getElementById('ngWorkbenchStreak');
+            const xpEl = document.getElementById('ngWorkbenchXp');
+            const notesEl = document.getElementById('ngWorkbenchNotes');
+            const lastEl = document.getElementById('ngWorkbenchLastCheckin');
+            const button = document.getElementById('ngCheckinButton');
+
+            if (streakEl) streakEl.textContent = state.streak;
+            if (xpEl) xpEl.textContent = state.xp;
+            if (notesEl) notesEl.textContent = monologues.length;
+            if (lastEl) lastEl.textContent = state.lastCheckin ? `上次签到：${state.lastCheckin}` : '尚未签到';
+            if (button) {
+                const checkedToday = state.lastCheckin === today;
+                button.disabled = checkedToday;
+                button.innerHTML = checkedToday
+                    ? '<span class="ng-gold-icon" aria-hidden="true">✓</span>今日已签到'
+                    : '<span class="ng-gold-icon" aria-hidden="true">✓</span>今日签到';
+            }
+            ngRefreshEvolutionSnapshot();
+        }
+
+        function ngRefreshEvolutionSnapshot() {
+            const stats = document.querySelectorAll('#evolution-stats .glass');
+            if (!stats.length) return;
+            const state = ngGetWorkbenchState();
+            const completed = Array.isArray(window.userProgress?.completed_days)
+                ? window.userProgress.completed_days.length
+                : (Array.isArray(userProgress?.completed_days) ? userProgress.completed_days.length : 0);
+            const level = state.xp >= 500 ? 4 : state.xp >= 250 ? 3 : state.xp >= 80 ? 2 : 1;
+            const values = [level, state.xp, completed];
+            stats.forEach((tile, index) => {
+                const value = tile.querySelector('p:first-child');
+                if (value && typeof values[index] !== 'undefined') value.textContent = values[index];
+            });
+        }
+
+        function ngDoCheckin() {
+            const state = ngGetWorkbenchState();
+            const today = ngDateKey();
+            if (state.lastCheckin === today) {
+                ngRefreshWorkbenchUI();
+                return;
+            }
+            state.streak = state.lastCheckin === ngGetYesterdayKey() ? state.streak + 1 : 1;
+            state.xp += 10;
+            state.lastCheckin = today;
+            ngSaveWorkbenchState(state);
+            ngRefreshWorkbenchUI();
+        }
+
+        function ngRecommendCourses() {
+            const select = document.getElementById('ngRecommendationDimension');
+            const result = document.getElementById('ngRecommendationResults');
+            if (!select || !result) return;
+            const dimension = select.value || 'cognition';
+            const state = ngGetWorkbenchState();
+            state.lastRecommendation = dimension;
+            ngSaveWorkbenchState(state);
+
+            const courseIds = NG_RECOMMENDATION_MAP[dimension] || NG_RECOMMENDATION_MAP.cognition;
+            result.innerHTML = courseIds.map((courseId, index) => {
+                const course = NG_COURSE_LIBRARY[courseId];
+                return `
+                    <div class="ng-course-result">
+                        <h4>${index + 1}. ${ngEscapeHtml(course.title)}</h4>
+                        <p>${ngEscapeHtml(course.subtitle)}</p>
+                        <p class="mt-2">${ngEscapeHtml(course.reason)}</p>
+                        <a href="course-system.html">进入课程体系</a>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function ngRenderMoodChips() {
+            const markup = NG_MONOLOGUE_MOODS.map((mood) => `
+                <button type="button" class="ng-mood-chip ${mood === ngSelectedMood ? 'is-active' : ''}" onclick="ngSelectMood('${mood}')">
+                    ${mood}
+                </button>
+            `).join('');
+            const preview = document.getElementById('ngMoodPreview');
+            const modal = document.getElementById('ngMonologueMoodChips');
+            if (preview) preview.innerHTML = markup;
+            if (modal) modal.innerHTML = markup;
+        }
+
+        function ngSelectMood(mood) {
+            ngSelectedMood = mood;
+            ngRenderMoodChips();
+        }
+
+        function ngRefreshMonologuePrompt() {
+            const next = NG_MONOLOGUE_PROMPTS[Math.floor(Math.random() * NG_MONOLOGUE_PROMPTS.length)];
+            ngCurrentPrompt = next;
+            const preview = document.getElementById('ngMonologuePromptPreview');
+            const modalPrompt = document.getElementById('ngMonologuePrompt');
+            if (preview) preview.textContent = next;
+            if (modalPrompt) modalPrompt.textContent = next;
+        }
+
+        function ngOpenMonologue() {
+            if (!ngCurrentPrompt) ngRefreshMonologuePrompt();
+            ngRenderMoodChips();
+            const modal = document.getElementById('ngMonologueModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => document.getElementById('ngMonologueText')?.focus(), 80);
+        }
+
+        function ngCloseMonologue() {
+            document.getElementById('ngMonologueModal')?.classList.add('hidden');
+        }
+
+        function ngUpdateMonologueCount() {
+            const input = document.getElementById('ngMonologueText');
+            const count = document.getElementById('ngMonologueCount');
+            if (input && count) count.textContent = `${input.value.trim().length} 字`;
+        }
+
+        function ngSaveMonologue() {
+            const input = document.getElementById('ngMonologueText');
+            const saved = document.getElementById('ngMonologueSaved');
+            const text = input?.value.trim() || '';
+            if (!text) {
+                alert('请先写下一段真实独白');
+                return;
+            }
+            const monologues = ngReadJson(NG_MONOLOGUE_STORAGE_KEY, []);
+            monologues.unshift({
+                id: 'mono_' + Date.now(),
+                prompt: ngCurrentPrompt,
+                mood: ngSelectedMood,
+                text,
+                created_at: new Date().toISOString()
+            });
+            ngWriteJson(NG_MONOLOGUE_STORAGE_KEY, monologues.slice(0, 50));
+            const state = ngGetWorkbenchState();
+            state.xp += 5;
+            ngSaveWorkbenchState(state);
+            input.value = '';
+            ngUpdateMonologueCount();
+            if (saved) saved.textContent = '已保存 · +5 XP';
+            ngRefreshWorkbenchUI();
+        }
+
+        function ngCompleteDayLocally(day) {
+            const numericDay = Number(day);
+            if (!Number.isFinite(numericDay)) return null;
+            if (!Array.isArray(userProgress.completed_days)) userProgress.completed_days = [];
+            const alreadyDone = userProgress.completed_days.includes(numericDay);
+            if (!alreadyDone) {
+                userProgress.completed_days.push(numericDay);
+                userProgress.current_day = Math.min(numericDay + 1, 30);
+                userProgress.has_started = true;
+                userProgress.streak = (userProgress.streak || 0) + 1;
+                userProgress.max_streak = Math.max(userProgress.max_streak || 0, userProgress.streak);
+                localStorage.setItem('narrowgate_progress', JSON.stringify(userProgress));
+
+                const state = ngGetWorkbenchState();
+                state.xp += 10;
+                ngSaveWorkbenchState(state);
+                updateProgressUI();
+                showCompletionAnimation(numericDay, {
+                    xp_breakdown: { total: 10, streak_bonus: 0, week_bonus: 0, special_bonus: 0 },
+                    badges: []
+                });
+                if (numericDay === 30) showFinalCeremony();
+            }
+            ngRefreshWorkbenchUI();
+            return { course: { local: true }, reward: { xp_breakdown: { total: alreadyDone ? 0 : 10 } } };
+        }
+
+        function ngSaveJournalLocally(day, content, mood, tags) {
+            const journals = ngReadJson(NG_JOURNAL_STORAGE_KEY, []);
+            journals.unshift({
+                id: 'journal_' + Date.now(),
+                day,
+                content,
+                mood,
+                tags,
+                created_at: new Date().toISOString()
+            });
+            ngWriteJson(NG_JOURNAL_STORAGE_KEY, journals.slice(0, 100));
+            const state = ngGetWorkbenchState();
+            state.xp += 5;
+            ngSaveWorkbenchState(state);
+            ngRefreshWorkbenchUI();
+            return { xp_earned: 5 };
+        }
+
+        function ngGetLocalWitnesses() {
+            return ngReadJson(NG_WITNESS_STORAGE_KEY, []);
+        }
+
+        function ngSaveLocalWitnesses(witnesses) {
+            ngWriteJson(NG_WITNESS_STORAGE_KEY, witnesses);
+        }
+
+        function ngRenderWitnesses(witnesses) {
+            const el = document.getElementById('witness-list');
+            if (!el) return;
+            if (!witnesses.length) {
+                el.innerHTML = '<p class="witness-list-empty">还没有添加见证人</p>';
+                return;
+            }
+            el.innerHTML = witnesses.map((witness) => `
+                <div class="glass rounded-lg p-4 flex items-center justify-between">
+                    <div>
+                        <p class="font-semibold">${ngEscapeHtml(witness.name)}</p>
+                        <p class="text-xs text-gray-500">${ngEscapeHtml(witness.relationship || '见证人')}</p>
+                    </div>
+                    <span class="text-xs ${witness.verified ? 'text-green-400' : 'text-gray-500'}">${witness.verified ? '已验证' : '本地保存'}</span>
+                </div>
+            `).join('');
+        }
+
+        function ngAddWitnessLocally(name, email, relationship) {
+            const witnesses = ngGetLocalWitnesses();
+            witnesses.unshift({
+                id: 'witness_' + Date.now(),
+                name,
+                email,
+                relationship,
+                verified: false,
+                created_at: new Date().toISOString()
+            });
+            ngSaveLocalWitnesses(witnesses.slice(0, 30));
+            ngRenderWitnesses(witnesses.slice(0, 30));
+        }
+
+        function ngInitWorkbench() {
+            const state = ngGetWorkbenchState();
+            const select = document.getElementById('ngRecommendationDimension');
+            if (select) select.value = state.lastRecommendation || 'cognition';
+            ngRefreshMonologuePrompt();
+            ngRenderMoodChips();
+            ngRecommendCourses();
+            ngRefreshWorkbenchUI();
+            document.getElementById('ngMonologueText')?.addEventListener('input', ngUpdateMonologueCount);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') ngCloseMonologue();
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             setupGoldIconObserver();
             setupAmbientToggle();
             loadCourseBriefText();
+            ngInitWorkbench();
             setTimeout(() => {
                 document.getElementById('pageLoader')?.classList.add('loaded');
             }, 900);
@@ -3611,6 +4535,9 @@
                 
                 return { course: courseResponse, reward: rewardResponse };
             } catch(e) {
+                if (e.message === 'STATIC_PAGE_MODE') {
+                    return ngCompleteDayLocally(day);
+                }
                 console.error('保存进度失败:', e);
                 alert('保存进度失败，请重试');
                 return null;
@@ -4185,15 +5112,25 @@
                 alert(name + ' 已添加为见证人！');
                 loadWitnesses();
                 document.getElementById('witness-name').value = '';
-            } catch(e) { alert('添加失败'); }
+                document.getElementById('witness-email').value = '';
+            } catch(e) {
+                if (e.message === 'STATIC_PAGE_MODE') {
+                    ngAddWitnessLocally(name, email, rel);
+                    alert(name + ' 已本地保存为见证人。后端开启后可接入正式验证。');
+                    document.getElementById('witness-name').value = '';
+                    document.getElementById('witness-email').value = '';
+                    return;
+                }
+                alert('添加失败');
+            }
         }
         async function loadWitnesses() {
             try {
                 const list = await apiCall('/api/witness/list', 'GET');
-                const el = document.getElementById('witness-list');
-                if (!list.length) { el.innerHTML = '<p class="text-gray-500 text-sm">还没有添加见证人</p>'; return; }
-                el.innerHTML = list.map(w => '<div class="glass rounded-lg p-4 flex items-center justify-between"><div><p class="font-semibold">' + w.name + '</p><p class="text-xs text-gray-500">' + w.relationship + '</p></div><span class="text-xs ' + (w.verified ? 'text-green-400' : 'text-gray-500') + '">' + (w.verified ? '已验证' : '待验证') + '</span></div>').join('');
-            } catch(e) {}
+                ngRenderWitnesses(list);
+            } catch(e) {
+                ngRenderWitnesses(ngGetLocalWitnesses());
+            }
         }
 
         // Evolution Pyramid
@@ -4394,6 +5331,21 @@
                 }, 3000);
                 
             } catch(e) {
+                if (e.message === 'STATIC_PAGE_MODE') {
+                    const response = ngSaveJournalLocally(currentDay, journalText, mood, tags);
+                    alert(`日记已本地保存！+${response.xp_earned || 5} XP`);
+                    document.getElementById('learning-journal').value = '';
+                    if (moodSelect) moodSelect.value = '';
+                    if (tagsInput) tagsInput.value = '';
+                    btn.textContent = '已保存 ✓';
+                    btn.classList.add('completed');
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = '保存日记';
+                        btn.classList.remove('completed');
+                    }, 3000);
+                    return;
+                }
                 console.error('保存日记失败:', e);
                 alert('保存失败，请重试');
                 btn.disabled = false;

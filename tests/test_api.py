@@ -84,6 +84,21 @@ class TestHealthEndpoints:
         assert resp.status_code == 200
         assert "text/html" in resp.headers.get("content-type", "")
 
+    @pytest.mark.asyncio
+    async def test_frontend_assets_are_served(self, client):
+        """Frontend asset URLs referenced by index.html should resolve."""
+        css_resp = await client.get("/tailwind.css")
+        assert css_resp.status_code == 200
+        assert "text/css" in css_resp.headers.get("content-type", "")
+
+        manifest_resp = await client.get("/manifest.json")
+        assert manifest_resp.status_code == 200
+        assert "json" in manifest_resp.headers.get("content-type", "")
+
+        favicon_resp = await client.get("/favicon.svg")
+        assert favicon_resp.status_code == 200
+        assert "image/svg+xml" in favicon_resp.headers.get("content-type", "")
+
 
 # ============================================================
 # User API

@@ -12,11 +12,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from core.soul_audit import SoulAuditEngine, AUDIT_DIMENSIONS
 from core.gate_finder import GateFinder
@@ -26,7 +26,7 @@ from core.database import Database
 from core.mimo_client import MIMOClient, MIMOConfig
 from core.witness import WitnessNetwork
 from core.evolution import EvolutionPyramid
-from core.auth import create_auth_routes
+from core.auth import SessionManager, create_auth_routes
 from expert_routes import router as expert_router
 from core.course_content import get_all_days, get_day, get_week, COURSE_CONTENT
 from core.payment import create_payment_routes, PaymentConfig
@@ -64,6 +64,7 @@ db = Database()
 mimo = MIMOClient()
 witness_network = WitnessNetwork()
 evolution_pyramid = EvolutionPyramid()
+session_manager = SessionManager()
 
 # 认证系统
 auth_manager = create_auth_routes(app, db)
@@ -132,6 +133,24 @@ async def index():
     return HTMLResponse(content="<h1>窄门 NarrowGate</h1><p>界面加载中...</p>")
 
 
+@app.get("/tailwind.css")
+async def tailwind_css():
+    """返回编译后的 Tailwind 样式"""
+    return FileResponse(Path(__file__).parent.parent / "ui" / "tailwind.css", media_type="text/css")
+
+
+@app.get("/manifest.json")
+async def manifest_json():
+    """返回 PWA manifest"""
+    return FileResponse(Path(__file__).parent.parent / "ui" / "manifest.json", media_type="application/manifest+json")
+
+
+@app.get("/favicon.svg")
+async def favicon_svg():
+    """返回站点图标"""
+    return FileResponse(Path(__file__).parent.parent / "ui" / "favicon.svg", media_type="image/svg+xml")
+
+
 @app.get("/health")
 async def health():
     """健康检查"""
@@ -146,6 +165,7 @@ async def health():
 async def register_user(req: StartAuditRequest):
     """注册用户"""
     user = db.create_user(req.username or None)
+    user["token"] = session_manager.create_session(user["id"])
     return user
 
 @app.get("/api/user/{user_id}")
@@ -1227,7 +1247,7 @@ async def complete_daily_training(user_id: str):
     return {
         "streak": streak,
         "milestone": milestone,
-        "message": milestone["message"] if milestone else f"连续{streak["current"]}天，继续穿越！"
+        "message": milestone["message"] if milestone else f"连续{streak['current']}天，继续穿越！"
     }
 
 

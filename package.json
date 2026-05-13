@@ -1,13 +1,15 @@
 {
   "name": "narrowgate",
-  "version": "1.0.0",
-  "description": "> **\"引到永生，那门是窄的，路是小的，找着的人也少。\"**",
-  "main": "index.js",
+  "version": "3.0.0",
+  "description": "窄门 NarrowGate — AI-driven soul evolution platform",
+  "private": true,
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "PYTHONPATH=src python3 -m pytest tests/ -v",
+    "build:css": "tailwindcss -i ./src/input.css -o ./src/ui/tailwind.css --minify",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./src/ui/tailwind.css --watch"
   },
   "repository": {
     "type": "git",
@@ -15,7 +17,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/MoKangMedical/narrowgate/issues"
   },
