@@ -2093,6 +2093,186 @@
             margin-top: 10px;
         }
 
+        .ng-course-logic {
+            margin-top: 72px;
+        }
+
+        .ng-logic-header {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+            gap: 32px;
+            align-items: end;
+            padding: 34px 0 28px;
+            border-top: 1px solid rgba(212,175,55,0.16);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .ng-logic-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.25rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        .ng-logic-copy {
+            color: #9ca3af;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .ng-logic-summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin: 28px 0 30px;
+        }
+
+        .ng-logic-summary-item {
+            border-left: 1px solid rgba(212,175,55,0.3);
+            padding-left: 14px;
+        }
+
+        .ng-logic-summary-value {
+            color: #d4af37;
+            display: block;
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .ng-logic-summary-label {
+            color: #77736b;
+            display: block;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .ng-logic-stages {
+            display: grid;
+            gap: 14px;
+        }
+
+        .ng-logic-stage {
+            display: grid;
+            grid-template-columns: 184px minmax(0, 1fr);
+            gap: 24px;
+            border: 1px solid rgba(255,255,255,0.065);
+            border-radius: 18px;
+            background:
+                linear-gradient(90deg, rgba(184,148,46,0.085), rgba(255,255,255,0.018) 38%, rgba(5,5,8,0.18)),
+                rgba(255,255,255,0.018);
+            padding: 22px;
+        }
+
+        .ng-logic-stage-meta {
+            border-right: 1px solid rgba(255,255,255,0.06);
+            padding-right: 18px;
+        }
+
+        .ng-logic-stage-number {
+            color: rgba(212,175,55,0.58);
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .ng-logic-stage-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.28;
+            margin-top: 10px;
+        }
+
+        .ng-logic-stage-range {
+            color: #d4af37;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-top: 12px;
+        }
+
+        .ng-logic-stage-purpose {
+            color: #9ca3af;
+            font-size: 13px;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+
+        .ng-logic-stage-flow {
+            color: #d8d2c4;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .ng-logic-course-list {
+            columns: 2;
+            column-gap: 28px;
+            color: #b9b3a6;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .ng-logic-course-list li {
+            break-inside: avoid;
+            margin-bottom: 2px;
+        }
+
+        .ng-logic-loading {
+            color: #77736b;
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .ng-logic-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .ng-logic-header,
+            .ng-logic-stage {
+                grid-template-columns: 1fr;
+            }
+
+            .ng-logic-stage-meta {
+                border-right: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                padding-right: 0;
+                padding-bottom: 16px;
+            }
+
+            .ng-logic-summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .ng-course-logic {
+                margin-top: 52px;
+            }
+
+            .ng-logic-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .ng-logic-course-list {
+                columns: 1;
+            }
+        }
+
         .ng-prompt-box {
             border: 1px solid rgba(212,175,55,0.18);
             border-radius: 14px;
@@ -2607,6 +2787,46 @@
                         正在加载课程提要...
                     </div>
                 </article>
+            </div>
+
+            <div id="course-logic" class="ng-course-logic">
+                <div class="ng-logic-header">
+                    <div>
+                        <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">COURSE LOGIC</p>
+                        <h3 id="courseLogicTitle" class="ng-logic-title">100门课程的进化逻辑线</h3>
+                    </div>
+                    <p class="ng-logic-copy">
+                        窄门课程不是按兴趣随便学习，而是先用核心课建立共同语言，再进入认知、情绪、行为、关系、事业五个现实维度，最后回到整合通道，把个人改变沉淀为长期生命证据。
+                    </p>
+                </div>
+
+                <div class="ng-logic-summary" aria-label="课程体系摘要">
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">12</span>
+                        <span class="ng-logic-summary-label">核心课先建立窄门语言</span>
+                    </div>
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">5</span>
+                        <span class="ng-logic-summary-label">现实维度逐层训练</span>
+                    </div>
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">14</span>
+                        <span class="ng-logic-summary-label">整合通道收束成生命实践</span>
+                    </div>
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">100</span>
+                        <span class="ng-logic-summary-label">每门课都有章节、测验与音频</span>
+                    </div>
+                </div>
+
+                <div id="ngCourseLogicStages" class="ng-logic-stages" aria-live="polite">
+                    <p class="ng-logic-loading">正在加载100门课程逻辑线...</p>
+                </div>
+
+                <div class="ng-logic-cta">
+                    <a href="course-system.html#course-library" class="ng-action-btn ng-action-btn-primary">打开完整课程库</a>
+                    <a href="#product-workbench" class="ng-action-btn">按当前卡点推荐课程</a>
+                </div>
             </div>
         </div>
     </section>
@@ -3879,6 +4099,58 @@
             integration: ['narrow_gate_crossing', 'spiritual_discernment', 'life_review', 'ethical_action', 'guardian_training']
         };
 
+        const NG_COURSE_LOGIC_TRACKS = [
+            {
+                track: '核心课',
+                step: '01',
+                title: '先建立共同语言',
+                purpose: '让学习者知道什么是宽门、什么是窄门，以及改变为什么必须被行动和见证验证。',
+                flow: '看见问题 -> 识别回避 -> 承受痛苦 -> 行动验证 -> 进入见证'
+            },
+            {
+                track: '认知觉察',
+                step: '02',
+                title: '校准看见系统',
+                purpose: '处理信念、叙事、注意力、偏差和自欺，让人先看清自己正在怎样解释世界。',
+                flow: '信念审计 -> 偏差识别 -> 叙事重写 -> 决策清明 -> 认知谦卑'
+            },
+            {
+                track: '情绪阴影',
+                step: '03',
+                title: '承接被压下的情绪',
+                purpose: '把恐惧、羞耻、愤怒、哀伤和焦虑从敌人变成信号，避免用麻木和攻击绕开真实。',
+                flow: '情绪命名 -> 身体觉察 -> 阴影整合 -> 安全容量 -> 调节训练'
+            },
+            {
+                track: '行为执行',
+                step: '04',
+                title: '把知道变成证据',
+                purpose: '修复从理解到行动之间的断裂，用习惯、问责、节律和微勇气形成可持续执行。',
+                flow: '拖延突破 -> 习惯架构 -> 微行动 -> 问责系统 -> 复发重启'
+            },
+            {
+                track: '关系真实',
+                step: '05',
+                title: '把真实带入关系',
+                purpose: '处理边界、投射、依恋、亲密、冲突和见证，让改变不只停留在个人内心。',
+                flow: '依恋修复 -> 边界语言 -> 清洁冲突 -> 真实沟通 -> 见证小组'
+            },
+            {
+                track: '事业系统',
+                step: '06',
+                title: '让选择进入现实系统',
+                purpose: '把天职、金钱、资源、权力、反馈和长期复利放进同一张现实地图里。',
+                flow: '天职发现 -> 战略聚焦 -> 创造输出 -> 反馈系统 -> 长期复利'
+            },
+            {
+                track: '整合通道',
+                step: '07',
+                title: '沉淀成生命实践',
+                purpose: '把认知、情绪、行为、关系和事业的改变整合为临在、服务、伦理和守门人责任。',
+                flow: '灵性分辨 -> 死亡觉察 -> 生命复盘 -> 服务之路 -> 守门人训练'
+            }
+        ];
+
         const NG_MONOLOGUE_PROMPTS = [
             '如果今晚不需要显得坚强，你最想承认的一件事是什么？',
             '你最近最频繁回避的那个动作，背后真正保护的是什么？',
@@ -4022,11 +4294,54 @@
             }).join('') || '<div class="ng-course-result"><p>课程库正在加载，请稍后再试。</p></div>';
         }
 
+        function ngRenderCourseLogic() {
+            const container = document.getElementById('ngCourseLogicStages');
+            if (!container) return;
+            if (!Array.isArray(ngCourseCatalog) || !ngCourseCatalog.length) {
+                container.innerHTML = '<p class="ng-logic-loading">正在加载100门课程逻辑线...</p>';
+                return;
+            }
+
+            const grouped = ngCourseCatalog.reduce((map, course) => {
+                const key = course.track || '未分组';
+                if (!map[key]) map[key] = [];
+                map[key].push(course);
+                return map;
+            }, {});
+
+            container.innerHTML = NG_COURSE_LOGIC_TRACKS.map((stage) => {
+                const courses = (grouped[stage.track] || []).sort((a, b) => Number(a.order) - Number(b.order));
+                const first = courses[0]?.order || '';
+                const last = courses[courses.length - 1]?.order || '';
+                const range = first && last
+                    ? `${String(first).padStart(2, '0')}-${String(last).padStart(2, '0')} · ${courses.length}门`
+                    : `${courses.length}门`;
+                const courseList = courses.map((course) => `
+                    <li>${String(course.order).padStart(2, '0')}. ${ngEscapeHtml(course.title)}</li>
+                `).join('');
+                return `
+                    <section class="ng-logic-stage" aria-label="${ngEscapeHtml(stage.title)}">
+                        <div class="ng-logic-stage-meta">
+                            <div class="ng-logic-stage-number">STEP ${ngEscapeHtml(stage.step)}</div>
+                            <h4 class="ng-logic-stage-title">${ngEscapeHtml(stage.title)}</h4>
+                            <div class="ng-logic-stage-range">${ngEscapeHtml(range)}</div>
+                        </div>
+                        <div>
+                            <p class="ng-logic-stage-purpose">${ngEscapeHtml(stage.purpose)}</p>
+                            <p class="ng-logic-stage-flow">${ngEscapeHtml(stage.flow)}</p>
+                            <ol class="ng-logic-course-list">${courseList}</ol>
+                        </div>
+                    </section>
+                `;
+            }).join('');
+        }
+
         async function ngLoadCourseCatalog() {
             try {
                 const response = await fetch('data/course_catalog_100.json');
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 ngCourseCatalog = await response.json();
+                ngRenderCourseLogic();
                 ngCourseCatalog.forEach((course) => {
                     NG_COURSE_LIBRARY[course.id] = {
                         title: course.title,
@@ -4037,6 +4352,8 @@
                 ngRecommendCourses();
             } catch (error) {
                 // 首页仍保留12门核心课程推荐，课程库页面会提示加载状态。
+                const container = document.getElementById('ngCourseLogicStages');
+                if (container) container.innerHTML = '<p class="ng-logic-loading">课程逻辑线加载失败，请通过本地服务器或 GitHub Pages 打开页面。</p>';
             }
         }
 
@@ -4203,6 +4520,7 @@
             ngRefreshMonologuePrompt();
             ngRenderMoodChips();
             ngRecommendCourses();
+            ngRenderCourseLogic();
             ngLoadCourseCatalog();
             ngRefreshWorkbenchUI();
             document.getElementById('ngMonologueText')?.addEventListener('input', ngUpdateMonologueCount);
