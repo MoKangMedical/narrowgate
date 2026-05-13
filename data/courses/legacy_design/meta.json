@@ -1,0 +1,97 @@
+{
+  "course_id": "legacy_design",
+  "order": 97,
+  "title": "遗产设计",
+  "subtitle": "你想留下什么证据",
+  "description": "训练学习者从作品、关系、服务和精神影响四个层面设计自己想留下的证据。",
+  "dimension": "整合",
+  "track": "整合通道",
+  "icon": "✦",
+  "color": "#d4af37",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10323,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别遗产设计对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "如果我离开，什么能证明我认真活过？",
+  "wide_gate": "只追求即时认可。",
+  "narrow_gate": "建设可留下的真实证据。",
+  "daily_challenge": "写下三个你想留下的长期作品。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么遗产设计是窄门训练",
+      "subtitle": "遗产设计第1章",
+      "keywords": [
+        "遗产清单",
+        "作品路线",
+        "关系影响"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "遗产设计第2章",
+      "keywords": [
+        "遗产清单",
+        "作品路线",
+        "关系影响"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "遗产设计第3章",
+      "keywords": [
+        "遗产清单",
+        "作品路线",
+        "关系影响"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "遗产设计第4章",
+      "keywords": [
+        "遗产清单",
+        "作品路线",
+        "关系影响"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "遗产设计第5章",
+      "keywords": [
+        "遗产清单",
+        "作品路线",
+        "关系影响"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

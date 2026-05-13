@@ -1,0 +1,97 @@
+{
+  "course_id": "vocation_discovery",
+  "order": 72,
+  "title": "天职发现",
+  "subtitle": "找到你愿意长期服务的问题",
+  "description": "帮助学习者从兴趣、能力、痛点和服务对象中识别天职线索，而不是只追逐热门机会。",
+  "dimension": "事业",
+  "track": "事业系统",
+  "icon": "△",
+  "color": "#b8942e",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10283,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别天职发现对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我愿意长期服务哪个真实问题？",
+  "wide_gate": "追逐外部热门身份。",
+  "narrow_gate": "用服务对象和问题定义方向。",
+  "daily_challenge": "访谈一个你想服务的人。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么天职发现是窄门训练",
+      "subtitle": "天职发现第1章",
+      "keywords": [
+        "痛点地图",
+        "服务对象",
+        "能力交集"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "天职发现第2章",
+      "keywords": [
+        "痛点地图",
+        "服务对象",
+        "能力交集"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "天职发现第3章",
+      "keywords": [
+        "痛点地图",
+        "服务对象",
+        "能力交集"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "天职发现第4章",
+      "keywords": [
+        "痛点地图",
+        "服务对象",
+        "能力交集"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "天职发现第5章",
+      "keywords": [
+        "痛点地图",
+        "服务对象",
+        "能力交集"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

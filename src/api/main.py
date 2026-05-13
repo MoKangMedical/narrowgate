@@ -29,6 +29,7 @@ from core.evolution import EvolutionPyramid
 from core.auth import SessionManager, create_auth_routes
 from expert_routes import router as expert_router
 from core.course_content import get_all_days, get_day, get_week, COURSE_CONTENT
+from core.courses import course_engine
 from core.payment import create_payment_routes, PaymentConfig
 from core.logger import setup_logger, get_logger
 from core.analytics import AnalyticsManager, create_analytics_routes
@@ -761,6 +762,74 @@ async def record_evolution_crossing(req: EvolutionRequest):
 # ============================================================
 # 课程内容 API
 # ============================================================
+
+@app.get("/api/courses")
+async def list_deep_courses(user_level: int = 1):
+    """获取100门深度课程库"""
+    courses = course_engine.get_all_courses(user_level=user_level)
+    return {
+        "total": len(courses),
+        "courses": courses,
+    }
+
+
+@app.get("/api/courses/{course_id}")
+async def get_deep_course(course_id: str):
+    """获取单门深度课程详情"""
+    course = course_engine.get_course(course_id)
+    if not course:
+        raise HTTPException(404, "课程不存在")
+    return {
+        "id": course.id,
+        "name": course.name,
+        "subtitle": course.subtitle,
+        "dimension": course.dimension,
+        "description": course.description,
+        "icon": course.icon,
+        "color": course.color,
+        "level_required": course.level_required,
+        "chapter_count": course.chapter_count,
+        "quiz_count": course.quiz_count,
+        "total_words": course.total_words,
+        "total_reading_minutes": course.total_reading_minutes,
+        "chapters": course_engine.get_course_chapters(course_id),
+    }
+
+
+@app.get("/api/courses/{course_id}/chapters")
+async def list_deep_course_chapters(course_id: str):
+    """获取深度课程章节列表"""
+    if not course_engine.get_course(course_id):
+        raise HTTPException(404, "课程不存在")
+    return {
+        "course_id": course_id,
+        "chapters": course_engine.get_course_chapters(course_id),
+    }
+
+
+@app.get("/api/courses/{course_id}/chapters/{chapter_id}")
+async def get_deep_course_chapter(course_id: str, chapter_id: str):
+    """获取深度课程章节正文"""
+    content = course_engine.get_chapter_content(course_id, chapter_id)
+    if content is None:
+        raise HTTPException(404, "章节不存在")
+    return {
+        "course_id": course_id,
+        "chapter_id": chapter_id,
+        "content": content,
+    }
+
+
+@app.get("/api/courses/{course_id}/chapters/{chapter_id}/quiz")
+async def get_deep_course_chapter_quiz(course_id: str, chapter_id: str):
+    """获取深度课程章节测验"""
+    if not course_engine.get_course(course_id):
+        raise HTTPException(404, "课程不存在")
+    return {
+        "course_id": course_id,
+        "chapter_id": chapter_id,
+        "questions": course_engine.get_chapter_quiz(course_id, chapter_id),
+    }
 
 @app.get("/api/course/overview")
 async def get_course_overview():

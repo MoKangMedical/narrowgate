@@ -80,6 +80,100 @@
             background: linear-gradient(90deg, var(--gold), var(--gold-light));
             transition: width 0.5s;
         }
+
+        .library-toolbar {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr 0.8fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .library-toolbar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .library-input,
+        .library-select {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            color: #e8e4dc;
+            padding: 12px 14px;
+            outline: none;
+        }
+
+        .library-input:focus,
+        .library-select:focus {
+            border-color: rgba(212,175,55,0.45);
+        }
+
+        .course-library-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        @media (max-width: 1024px) {
+            .course-library-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .course-library-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .deep-course-card {
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+        }
+
+        .deep-course-card:hover {
+            border-color: rgba(212,175,55,0.34);
+            transform: translateY(-2px);
+        }
+
+        .deep-course-icon {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(212,175,55,0.28);
+            color: #d4af37;
+            background: rgba(184,148,46,0.08);
+            font-family: serif;
+            font-weight: 700;
+        }
+
+        .deep-course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 18px;
+            color: #777166;
+            font-size: 12px;
+        }
+
+        .deep-course-pill {
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 999px;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.03);
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -101,9 +195,9 @@
             <!-- 标题 -->
             <div class="text-center mb-16">
                 <p class="text-gold text-sm tracking-[0.3em] uppercase mb-4">COURSE SYSTEM</p>
-                <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">30天穿越课程体系</h1>
+                <h1 class="font-serif text-4xl md:text-5xl font-bold mb-6">100门深度课程库</h1>
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    每一天的课程都与理论体系精确匹配，确保你的成长有章可循
+                    百门深度课程承接30天训练路径：先看见窄门，再按维度深入学习，最后用行动和见证沉淀改变。
                 </p>
             </div>
 
@@ -111,25 +205,46 @@
             <div class="grid md:grid-cols-4 gap-6 mb-16">
                 <div class="card text-center">
                     <div class="text-4xl mb-3">📚</div>
-                    <h3 class="text-xl font-bold mb-2">30天</h3>
-                    <p class="text-gray-500 text-sm">完整课程</p>
+                    <h3 class="text-xl font-bold mb-2">100门</h3>
+                    <p class="text-gray-500 text-sm">深度课程库</p>
                 </div>
                 <div class="card text-center">
                     <div class="text-4xl mb-3">🎯</div>
-                    <h3 class="text-xl font-bold mb-2">5维度</h3>
+                    <h3 class="text-xl font-bold mb-2">6轨道</h3>
                     <p class="text-gray-500 text-sm">全面覆盖</p>
                 </div>
                 <div class="card text-center">
                     <div class="text-4xl mb-3">🧙</div>
-                    <h3 class="text-xl font-bold mb-2">7大师</h3>
-                    <p class="text-gray-500 text-sm">专业引导</p>
+                    <h3 class="text-xl font-bold mb-2">500章</h3>
+                    <p class="text-gray-500 text-sm">正文训练</p>
                 </div>
                 <div class="card text-center">
                     <div class="text-4xl mb-3">📊</div>
-                    <h3 class="text-xl font-bold mb-2">5层级</h3>
-                    <p class="text-gray-500 text-sm">进化路径</p>
+                    <h3 class="text-xl font-bold mb-2">1000题</h3>
+                    <p class="text-gray-500 text-sm">测验与复盘</p>
                 </div>
             </div>
+
+            <!-- 百门课程库 -->
+            <section id="course-library" class="mb-16">
+                <div class="text-center mb-10">
+                    <h2 class="font-serif text-3xl font-bold mb-4">百门深度课程库</h2>
+                    <p class="text-gray-400 max-w-3xl mx-auto">
+                        每门课程包含5章正文、宽门/窄门辨析、行动练习和测验题。原12门课程作为核心课保留，新88门扩展为认知、情绪、行为、关系、事业、整合六条训练轨道。
+                    </p>
+                </div>
+                <div class="library-toolbar">
+                    <input id="catalog-search" class="library-input" type="search" placeholder="搜索课程、关键词或描述">
+                    <select id="catalog-dimension" class="library-select">
+                        <option value="">全部维度</option>
+                    </select>
+                    <select id="catalog-track" class="library-select">
+                        <option value="">全部轨道</option>
+                    </select>
+                </div>
+                <div id="catalog-count" class="text-sm text-gray-500 mb-4">正在加载课程库...</div>
+                <div id="catalog-grid" class="course-library-grid"></div>
+            </section>
 
             <!-- 五维度模型 -->
             <section class="mb-16">
@@ -279,14 +394,81 @@
             <!-- CTA -->
             <div class="text-center mt-16">
                 <a href="/" class="inline-block px-8 py-4 bg-gold text-black font-semibold rounded-xl hover:opacity-90 transition">
-                    开始你的穿越之旅 →
+                    回到首页开始穿越 →
                 </a>
             </div>
         </div>
     </main>
 
     <script>
-        // 课程数据
+        // 百门课程库
+        let courseCatalog = [];
+
+        function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function buildCatalogFilters() {
+            const dimensionSelect = document.getElementById('catalog-dimension');
+            const trackSelect = document.getElementById('catalog-track');
+            const dimensions = [...new Set(courseCatalog.map(course => course.dimension).filter(Boolean))];
+            const tracks = [...new Set(courseCatalog.map(course => course.track).filter(Boolean))];
+            dimensionSelect.innerHTML = '<option value="">全部维度</option>' + dimensions.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
+            trackSelect.innerHTML = '<option value="">全部轨道</option>' + tracks.map(item => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`).join('');
+        }
+
+        function generateCatalogCard(course) {
+            return `
+                <article class="deep-course-card">
+                    <div class="flex items-start justify-between gap-3 mb-5">
+                        <span class="deep-course-icon" style="border-color:${course.color || '#d4af37'}55;color:${course.color || '#d4af37'}">${escapeHtml(course.icon || '✦')}</span>
+                        <span class="text-xs text-gray-600">#${String(course.order || '').padStart(2, '0')}</span>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-2">${escapeHtml(course.title)}</h3>
+                    <p class="text-gold text-sm mb-3">${escapeHtml(course.subtitle)}</p>
+                    <p class="text-sm text-gray-400 leading-6 mb-4">${escapeHtml(course.description).slice(0, 116)}${course.description && course.description.length > 116 ? '...' : ''}</p>
+                    <div class="deep-course-meta">
+                        <span class="deep-course-pill">${escapeHtml(course.dimension)}</span>
+                        <span class="deep-course-pill">${escapeHtml(course.track)}</span>
+                        <span class="deep-course-pill">${course.chapter_count || 0}章</span>
+                        <span class="deep-course-pill">${course.quiz_count || 0}题</span>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderCatalog() {
+            const search = document.getElementById('catalog-search').value.trim().toLowerCase();
+            const dimension = document.getElementById('catalog-dimension').value;
+            const track = document.getElementById('catalog-track').value;
+            const filtered = courseCatalog.filter(course => {
+                const haystack = `${course.title} ${course.subtitle} ${course.description} ${course.dimension} ${course.track}`.toLowerCase();
+                return (!search || haystack.includes(search)) &&
+                    (!dimension || course.dimension === dimension) &&
+                    (!track || course.track === track);
+            });
+            document.getElementById('catalog-count').textContent = `已显示 ${filtered.length} / ${courseCatalog.length} 门课程`;
+            document.getElementById('catalog-grid').innerHTML = filtered.map(generateCatalogCard).join('');
+        }
+
+        async function loadCatalog() {
+            try {
+                const response = await fetch('data/course_catalog_100.json');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                courseCatalog = await response.json();
+                buildCatalogFilters();
+                renderCatalog();
+            } catch (error) {
+                document.getElementById('catalog-count').textContent = '课程库加载失败，请通过本地服务器或 GitHub Pages 打开页面。';
+            }
+        }
+
+        // 30天训练数据
         const courseData = [
             { day: 1, title: "承认自己在逃避", dimension: "认知", master: "苏格拉底", difficulty: 3, xp: 10 },
             { day: 2, title: "感受逃避的代价", dimension: "认知", master: "苏格拉底", difficulty: 4, xp: 10 },
@@ -371,7 +553,13 @@
         }
 
         // 页面加载时渲染
-        document.addEventListener('DOMContentLoaded', renderCourse);
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCourse();
+            loadCatalog();
+            document.getElementById('catalog-search').addEventListener('input', renderCatalog);
+            document.getElementById('catalog-dimension').addEventListener('change', renderCatalog);
+            document.getElementById('catalog-track').addEventListener('change', renderCatalog);
+        });
     </script>
 </body>
 </html>

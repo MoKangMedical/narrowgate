@@ -1,0 +1,97 @@
+{
+  "course_id": "metacognition_training",
+  "order": 17,
+  "title": "元认知训练",
+  "subtitle": "学会观察自己的思考",
+  "description": "建立观察念头、区分事实与评价、识别思维循环的能力，让学习者从被念头牵引转为能选择回应。",
+  "dimension": "认知",
+  "track": "认知觉察",
+  "icon": "◎",
+  "color": "#6366f1",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10394,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别元认知训练对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我是在思考，还是被思考拖走？",
+  "wide_gate": "把每个念头都当命令。",
+  "narrow_gate": "把念头当作可观察对象。",
+  "daily_challenge": "记录今天最强的三个念头及其触发点。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么元认知训练是窄门训练",
+      "subtitle": "元认知训练第1章",
+      "keywords": [
+        "念头标记",
+        "事实评价分离",
+        "观察者位置"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "元认知训练第2章",
+      "keywords": [
+        "念头标记",
+        "事实评价分离",
+        "观察者位置"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "元认知训练第3章",
+      "keywords": [
+        "念头标记",
+        "事实评价分离",
+        "观察者位置"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "元认知训练第4章",
+      "keywords": [
+        "念头标记",
+        "事实评价分离",
+        "观察者位置"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "元认知训练第5章",
+      "keywords": [
+        "念头标记",
+        "事实评价分离",
+        "观察者位置"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

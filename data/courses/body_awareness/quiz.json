@@ -1,0 +1,169 @@
+{
+  "course_id": "body_awareness",
+  "title": "身体觉察课程测验",
+  "description": "测试你对身体觉察核心概念、宽门/窄门和实践方法的理解。",
+  "total_questions": 10,
+  "passing_score": 7,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "这门课最核心的问题是什么？",
+      "options": [
+        "A. 我的身体正在说什么？",
+        "B. 怎样让所有人赞同我？",
+        "C. 怎样避免任何不舒服？",
+        "D. 怎样证明我没有问题？"
+      ],
+      "correct_index": 0,
+      "answer": "A",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 3
+    },
+    {
+      "id": 2,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "这门课识别出的宽门是什么？",
+      "options": [
+        "A. 只相信头脑解释。",
+        "B. 主动承担现实反馈",
+        "C. 把行动变成证据",
+        "D. 邀请见证人参与"
+      ],
+      "correct_index": 0,
+      "answer": "A",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 4
+    },
+    {
+      "id": 3,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "这门课要求学习者走向的窄门是什么？",
+      "options": [
+        "A. 继续解释旧模式",
+        "B. 让身体成为反馈入口。",
+        "C. 避免所有冲突",
+        "D. 只做心理安慰"
+      ],
+      "correct_index": 1,
+      "answer": "B",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 2
+    },
+    {
+      "id": 4,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "哪一项最符合窄门课程的质量标准？",
+      "options": [
+        "A. 有感动即可",
+        "B. 只要概念足够多",
+        "C. 看见、命名、行动、见证必须连在一起",
+        "D. 越痛苦越有效"
+      ],
+      "correct_index": 2,
+      "answer": "C",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 3
+    },
+    {
+      "id": 5,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "学习者完成本课后最应该留下什么？",
+      "options": [
+        "A. 新的生活证据",
+        "B. 一套漂亮笔记",
+        "C. 对别人的评价",
+        "D. 更多自我攻击"
+      ],
+      "correct_index": 0,
+      "answer": "A",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 4
+    },
+    {
+      "id": 6,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "“内感受记录”在课程中的作用是什么？",
+      "options": [
+        "A. 制造羞耻",
+        "B. 把混乱经验变成可观察对象",
+        "C. 证明别人有问题",
+        "D. 替代所有行动"
+      ],
+      "correct_index": 1,
+      "answer": "B",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 2
+    },
+    {
+      "id": 7,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "本课建议的标准动作是？",
+      "options": [
+        "A. 记录三次身体信号与对应情境。",
+        "B. 等待灵感出现",
+        "C. 反复阅读不行动",
+        "D. 转移到其他课程"
+      ],
+      "correct_index": 0,
+      "answer": "A",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 3
+    },
+    {
+      "id": 8,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "当练习失败时，最成熟的回应是什么？",
+      "options": [
+        "A. 说明我不适合改变",
+        "B. 把失败当作数据，复盘并重启",
+        "C. 立刻换一个目标",
+        "D. 责怪见证人"
+      ],
+      "correct_index": 1,
+      "answer": "B",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 4
+    },
+    {
+      "id": 9,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "为什么本课需要见证？",
+      "options": [
+        "A. 为了表演",
+        "B. 为了让改变从想象进入关系和现实",
+        "C. 为了让别人替我负责",
+        "D. 为了获得赞美"
+      ],
+      "correct_index": 1,
+      "answer": "B",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 2
+    },
+    {
+      "id": 10,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "以下哪项是本课要避免的陷阱？",
+      "options": [
+        "A. 让理解变成行动",
+        "B. 记录现实反馈",
+        "C. 把课程当成知识消费",
+        "D. 进行二十四小时练习"
+      ],
+      "correct_index": 2,
+      "answer": "C",
+      "explanation": "窄门课程的判断标准是：是否更真实、更具体、更能落到行动和见证。",
+      "difficulty": 3
+    }
+  ]
+}

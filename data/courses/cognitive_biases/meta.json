@@ -1,0 +1,97 @@
+{
+  "course_id": "cognitive_biases",
+  "order": 14,
+  "title": "认知偏差地图",
+  "subtitle": "看见大脑如何悄悄扭曲现实",
+  "description": "系统讲解确认偏误、归因错误、损失厌恶等常见偏差，并把它们转成每日决策前的检查清单。",
+  "dimension": "认知",
+  "track": "认知觉察",
+  "icon": "◎",
+  "color": "#6366f1",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10430,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别认知偏差地图对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我最近的判断里，哪里可能只是偏差？",
+  "wide_gate": "把自己的第一反应当真相。",
+  "narrow_gate": "建立判断前的延迟和校验。",
+  "daily_challenge": "对一个重要判断写出三种替代解释。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么认知偏差地图是窄门训练",
+      "subtitle": "认知偏差地图第1章",
+      "keywords": [
+        "偏差命名",
+        "替代解释",
+        "决策复盘"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "认知偏差地图第2章",
+      "keywords": [
+        "偏差命名",
+        "替代解释",
+        "决策复盘"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "认知偏差地图第3章",
+      "keywords": [
+        "偏差命名",
+        "替代解释",
+        "决策复盘"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "认知偏差地图第4章",
+      "keywords": [
+        "偏差命名",
+        "替代解释",
+        "决策复盘"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "认知偏差地图第5章",
+      "keywords": [
+        "偏差命名",
+        "替代解释",
+        "决策复盘"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

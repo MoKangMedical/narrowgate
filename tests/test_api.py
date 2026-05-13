@@ -122,6 +122,42 @@ class TestUserAPI:
 
 
 # ============================================================
+# Deep Course Library API
+# ============================================================
+
+class TestDeepCourseLibraryAPI:
+    """Tests for the 100-course deep course library."""
+
+    @pytest.mark.asyncio
+    async def test_list_deep_courses_has_100_quality_courses(self, client):
+        """GET /api/courses should expose the full 100-course library."""
+        resp = await client.get("/api/courses")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["total"] == 100
+        assert len(data["courses"]) == 100
+        assert all(course["chapter_count"] >= 5 for course in data["courses"])
+        assert all(course["quiz_count"] >= 10 for course in data["courses"])
+
+    @pytest.mark.asyncio
+    async def test_deep_course_detail_chapter_and_quiz(self, client):
+        """A generated deep course should expose detail, chapter content and quiz."""
+        detail = await client.get("/api/courses/belief_audit")
+        assert detail.status_code == 200
+        detail_data = detail.json()
+        assert detail_data["chapter_count"] == 5
+        assert detail_data["quiz_count"] == 10
+
+        chapter = await client.get("/api/courses/belief_audit/chapters/ch01")
+        assert chapter.status_code == 200
+        assert "核心信念审计" in chapter.json()["content"]
+
+        quiz = await client.get("/api/courses/belief_audit/chapters/ch01/quiz")
+        assert quiz.status_code == 200
+        assert len(quiz.json()["questions"]) >= 1
+
+
+# ============================================================
 # Soul Audit API
 # ============================================================
 

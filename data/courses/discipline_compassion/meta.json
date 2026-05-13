@@ -1,0 +1,97 @@
+{
+  "course_id": "discipline_compassion",
+  "order": 55,
+  "title": "纪律与慈悲",
+  "subtitle": "既不纵容，也不自虐",
+  "description": "整合高标准与自我接纳，让学习者摆脱自我攻击式自律和无限宽容式停滞。",
+  "dimension": "行为",
+  "track": "行为执行",
+  "icon": "ϟ",
+  "color": "#dc2626",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10349,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别纪律与慈悲对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我是在训练自己，还是惩罚自己？",
+  "wide_gate": "在苛责和放纵间摆动。",
+  "narrow_gate": "用清醒慈悲执行纪律。",
+  "daily_challenge": "写下一个温和但不可谈判的承诺。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么纪律与慈悲是窄门训练",
+      "subtitle": "纪律与慈悲第1章",
+      "keywords": [
+        "标准澄清",
+        "自我对话",
+        "温和重启"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "纪律与慈悲第2章",
+      "keywords": [
+        "标准澄清",
+        "自我对话",
+        "温和重启"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "纪律与慈悲第3章",
+      "keywords": [
+        "标准澄清",
+        "自我对话",
+        "温和重启"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "纪律与慈悲第4章",
+      "keywords": [
+        "标准澄清",
+        "自我对话",
+        "温和重启"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "纪律与慈悲第5章",
+      "keywords": [
+        "标准澄清",
+        "自我对话",
+        "温和重启"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "course_id": "digital_boundaries",
+  "order": 51,
+  "title": "数字边界",
+  "subtitle": "停止把生命交给屏幕",
+  "description": "识别手机、社交媒体和信息流对情绪与行动的劫持，建立可执行的数字边界。",
+  "dimension": "行为",
+  "track": "行为执行",
+  "icon": "ϟ",
+  "color": "#dc2626",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10263,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别数字边界对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我用屏幕逃离了什么？",
+  "wide_gate": "用信息流麻醉自己。",
+  "narrow_gate": "设定数字边界并把时间还给行动。",
+  "daily_challenge": "完成半天通知关闭实验。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么数字边界是窄门训练",
+      "subtitle": "数字边界第1章",
+      "keywords": [
+        "应用清点",
+        "通知断舍离",
+        "替代动作"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "数字边界第2章",
+      "keywords": [
+        "应用清点",
+        "通知断舍离",
+        "替代动作"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "数字边界第3章",
+      "keywords": [
+        "应用清点",
+        "通知断舍离",
+        "替代动作"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "数字边界第4章",
+      "keywords": [
+        "应用清点",
+        "通知断舍离",
+        "替代动作"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "数字边界第5章",
+      "keywords": [
+        "应用清点",
+        "通知断舍离",
+        "替代动作"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

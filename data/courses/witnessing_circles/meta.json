@@ -1,0 +1,97 @@
+{
+  "course_id": "witnessing_circles",
+  "order": 68,
+  "title": "见证小组",
+  "subtitle": "让成长被稳定看见",
+  "description": "指导学习者建立三到五人的见证小组，设计规则、节奏和反馈方式，让改变获得关系容器。",
+  "dimension": "关系",
+  "track": "关系真实",
+  "icon": "◉",
+  "color": "#059669",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10273,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别见证小组对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "谁能稳定见证我的穿越？",
+  "wide_gate": "独自改变然后独自放弃。",
+  "narrow_gate": "建立有规则的见证关系。",
+  "daily_challenge": "邀请一个人参与7天见证。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么见证小组是窄门训练",
+      "subtitle": "见证小组第1章",
+      "keywords": [
+        "小组规则",
+        "证据提交",
+        "反馈边界"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "见证小组第2章",
+      "keywords": [
+        "小组规则",
+        "证据提交",
+        "反馈边界"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "见证小组第3章",
+      "keywords": [
+        "小组规则",
+        "证据提交",
+        "反馈边界"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "见证小组第4章",
+      "keywords": [
+        "小组规则",
+        "证据提交",
+        "反馈边界"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "见证小组第5章",
+      "keywords": [
+        "小组规则",
+        "证据提交",
+        "反馈边界"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

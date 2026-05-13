@@ -1,0 +1,97 @@
+{
+  "course_id": "fear_work",
+  "order": 28,
+  "title": "恐惧工作",
+  "subtitle": "把恐惧从敌人变成信使",
+  "description": "帮助学习者识别恐惧的身体信号、保护功能和真实请求，用分级暴露和见证行动恢复选择能力。",
+  "dimension": "情绪",
+  "track": "情绪阴影",
+  "icon": "●",
+  "color": "#7c3aed",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10288,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别恐惧工作对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我的恐惧正在保护什么？",
+  "wide_gate": "把恐惧当停止的命令。",
+  "narrow_gate": "听懂恐惧并小步靠近。",
+  "daily_challenge": "靠近一个轻度恐惧场景10分钟。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么恐惧工作是窄门训练",
+      "subtitle": "恐惧工作第1章",
+      "keywords": [
+        "恐惧命名",
+        "身体定位",
+        "分级靠近"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "恐惧工作第2章",
+      "keywords": [
+        "恐惧命名",
+        "身体定位",
+        "分级靠近"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "恐惧工作第3章",
+      "keywords": [
+        "恐惧命名",
+        "身体定位",
+        "分级靠近"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "恐惧工作第4章",
+      "keywords": [
+        "恐惧命名",
+        "身体定位",
+        "分级靠近"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "恐惧工作第5章",
+      "keywords": [
+        "恐惧命名",
+        "身体定位",
+        "分级靠近"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

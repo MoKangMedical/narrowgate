@@ -1,0 +1,97 @@
+{
+  "course_id": "receiving_love",
+  "order": 71,
+  "title": "接受爱与支持",
+  "subtitle": "不再只会付出，不会接收",
+  "description": "训练学习者识别接受困难背后的羞耻、控制和不配得感，练习真实接收而不立刻偿还。",
+  "dimension": "关系",
+  "track": "关系真实",
+  "icon": "◉",
+  "color": "#059669",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
+  "audio_required": false,
+  "audio_status": "pending",
+  "total_words": 10265,
+  "total_reading_minutes": 40,
+  "learning_objectives": [
+    "识别接受爱与支持对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我为什么难以接收？",
+  "wide_gate": "用付出逃避被爱。",
+  "narrow_gate": "允许自己接收支持。",
+  "daily_challenge": "接受一次帮助，只说谢谢。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么接受爱与支持是窄门训练",
+      "subtitle": "接受爱与支持第1章",
+      "keywords": [
+        "接收练习",
+        "不配得信念",
+        "感谢表达"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "接受爱与支持第2章",
+      "keywords": [
+        "接收练习",
+        "不配得信念",
+        "感谢表达"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "接受爱与支持第3章",
+      "keywords": [
+        "接收练习",
+        "不配得信念",
+        "感谢表达"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "接受爱与支持第4章",
+      "keywords": [
+        "接收练习",
+        "不配得信念",
+        "感谢表达"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "接受爱与支持第5章",
+      "keywords": [
+        "接收练习",
+        "不配得信念",
+        "感谢表达"
+      ],
+      "estimated_minutes": 8
+    }
+  ]
+}

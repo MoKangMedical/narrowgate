@@ -2561,9 +2561,9 @@
             <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
                 <div class="glass rounded-2xl p-8">
                     <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">COURSE BRIEF</p>
-                    <h2 class="heading-section text-2xl sm:text-3xl md:text-4xl font-bold mb-5">十二门深度课程总提要</h2>
+                    <h2 class="heading-section text-2xl sm:text-3xl md:text-4xl font-bold mb-5">百门深度课程体系</h2>
                     <p class="text-gray-400 text-body mb-6">
-                        已将全部课程内容压缩成一篇约5000字的总提要，并配好自然人声朗读。适合作为首页导览、开营说明、睡前复盘或每日训练前的总地图。
+                        已扩展为100门深度课程库。原十二门核心课程总提要与自然人声朗读保留为入门总地图，新增课程库适合作为审计后的长期学习路径。
                     </p>
                     <div class="bg-[#050508]/80 border border-[#b8942e]/20 rounded-2xl p-5">
                         <div class="flex items-center gap-3 mb-4">
@@ -2580,11 +2580,11 @@
                     </div>
                     <div class="grid grid-cols-3 gap-3 mt-6 text-center">
                         <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
-                            <p class="text-[#d4af37] font-serif text-2xl font-bold">12</p>
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">100</p>
                             <p class="text-xs text-gray-500 mt-1">门课程</p>
                         </div>
                         <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
-                            <p class="text-[#d4af37] font-serif text-2xl font-bold">65</p>
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">500+</p>
                             <p class="text-xs text-gray-500 mt-1">章正文</p>
                         </div>
                         <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
@@ -3871,12 +3871,12 @@
         };
 
         const NG_RECOMMENDATION_MAP = {
-            cognition: ['socratic_introspection', 'meaning_construction', 'pain_alchemy'],
-            emotion: ['shadow_integration', 'stoic_resilience', 'pain_alchemy'],
-            behavior: ['evasion_anatomy', 'behavioral_reshape', 'antifragile'],
-            relationship: ['relationship_mirror', 'witness_evolution', 'shadow_integration'],
-            career: ['systems_thinking', 'behavioral_reshape', 'antifragile'],
-            integration: ['narrow_gate_crossing', 'witness_evolution', 'meaning_construction']
+            cognition: ['socratic_introspection', 'belief_audit', 'cognitive_biases', 'self_deception_detection', 'value_clarification'],
+            emotion: ['shadow_integration', 'fear_work', 'shame_release', 'anxiety_grounding', 'affect_regulation'],
+            behavior: ['evasion_anatomy', 'procrastination_breakthrough', 'habit_architecture', 'micro_courage', 'relapse_recovery'],
+            relationship: ['relationship_mirror', 'boundary_language', 'attachment_repair', 'authentic_communication', 'witnessing_circles'],
+            career: ['systems_thinking', 'vocation_discovery', 'career_leverage', 'strategic_focus', 'feedback_systems'],
+            integration: ['narrow_gate_crossing', 'spiritual_discernment', 'life_review', 'ethical_action', 'guardian_training']
         };
 
         const NG_MONOLOGUE_PROMPTS = [
@@ -3891,6 +3891,7 @@
         ];
 
         const NG_MONOLOGUE_MOODS = ['平静', '疲惫', '害怕', '羞耻', '愤怒', '清醒', '有力量'];
+        let ngCourseCatalog = [];
         let ngCurrentPrompt = '';
         let ngSelectedMood = '平静';
 
@@ -4006,8 +4007,10 @@
             ngSaveWorkbenchState(state);
 
             const courseIds = NG_RECOMMENDATION_MAP[dimension] || NG_RECOMMENDATION_MAP.cognition;
-            result.innerHTML = courseIds.map((courseId, index) => {
-                const course = NG_COURSE_LIBRARY[courseId];
+            const availableCourses = courseIds
+                .map((courseId) => ({ courseId, course: NG_COURSE_LIBRARY[courseId] }))
+                .filter((item) => item.course);
+            result.innerHTML = availableCourses.map(({ courseId, course }, index) => {
                 return `
                     <div class="ng-course-result">
                         <h4>${index + 1}. ${ngEscapeHtml(course.title)}</h4>
@@ -4016,7 +4019,25 @@
                         <a href="course-system.html">进入课程体系</a>
                     </div>
                 `;
-            }).join('');
+            }).join('') || '<div class="ng-course-result"><p>课程库正在加载，请稍后再试。</p></div>';
+        }
+
+        async function ngLoadCourseCatalog() {
+            try {
+                const response = await fetch('data/course_catalog_100.json');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                ngCourseCatalog = await response.json();
+                ngCourseCatalog.forEach((course) => {
+                    NG_COURSE_LIBRARY[course.id] = {
+                        title: course.title,
+                        subtitle: course.subtitle,
+                        reason: course.description || `${course.dimension}维度 · ${course.track}`
+                    };
+                });
+                ngRecommendCourses();
+            } catch (error) {
+                // 首页仍保留12门核心课程推荐，课程库页面会提示加载状态。
+            }
         }
 
         function ngRenderMoodChips() {
@@ -4182,6 +4203,7 @@
             ngRefreshMonologuePrompt();
             ngRenderMoodChips();
             ngRecommendCourses();
+            ngLoadCourseCatalog();
             ngRefreshWorkbenchUI();
             document.getElementById('ngMonologueText')?.addEventListener('input', ngUpdateMonologueCount);
             document.addEventListener('keydown', (event) => {
