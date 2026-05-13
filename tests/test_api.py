@@ -138,6 +138,7 @@ class TestDeepCourseLibraryAPI:
         assert len(data["courses"]) == 100
         assert all(course["chapter_count"] >= 5 for course in data["courses"])
         assert all(course["quiz_count"] >= 10 for course in data["courses"])
+        assert all(course["audio_status"] == "browser_tts_ready" for course in data["courses"])
 
     @pytest.mark.asyncio
     async def test_deep_course_detail_chapter_and_quiz(self, client):
@@ -147,6 +148,7 @@ class TestDeepCourseLibraryAPI:
         detail_data = detail.json()
         assert detail_data["chapter_count"] == 5
         assert detail_data["quiz_count"] == 10
+        assert detail_data["audio_status"] == "browser_tts_ready"
 
         chapter = await client.get("/api/courses/belief_audit/chapters/ch01")
         assert chapter.status_code == 200
@@ -155,6 +157,11 @@ class TestDeepCourseLibraryAPI:
         quiz = await client.get("/api/courses/belief_audit/chapters/ch01/quiz")
         assert quiz.status_code == 200
         assert len(quiz.json()["questions"]) >= 1
+        assert quiz.json()["questions"][0]["answer"] in {"A", "B", "C", "D"}
+
+        cover = await client.get("/api/courses/belief_audit/cover")
+        assert cover.status_code == 200
+        assert cover.headers["content-type"].startswith("image/svg+xml")
 
 
 # ============================================================

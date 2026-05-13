@@ -792,8 +792,20 @@ async def get_deep_course(course_id: str):
         "quiz_count": course.quiz_count,
         "total_words": course.total_words,
         "total_reading_minutes": course.total_reading_minutes,
+        "audio_status": course.audio_status,
         "chapters": course_engine.get_course_chapters(course_id),
     }
+
+
+@app.get("/api/courses/{course_id}/cover")
+async def get_deep_course_cover(course_id: str):
+    """获取深度课程封面图。"""
+    if not course_engine.get_course(course_id):
+        raise HTTPException(404, "课程不存在")
+    cover_file = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / "cover.svg"
+    if not cover_file.exists():
+        raise HTTPException(404, "课程封面不存在")
+    return FileResponse(cover_file, media_type="image/svg+xml")
 
 
 @app.get("/api/courses/{course_id}/chapters")

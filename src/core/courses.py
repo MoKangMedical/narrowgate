@@ -55,6 +55,7 @@ class Course:
     chapters: List[Chapter] = field(default_factory=list)
     total_reading_minutes: int = 0
     total_words: int = 0
+    audio_status: str = "browser_tts_ready"
 
     @property
     def chapter_count(self) -> int:
@@ -247,6 +248,7 @@ class CourseEngine:
                 course.icon = meta.get("icon") or course.icon
                 course.color = meta.get("color") or course.color
                 course.level_required = level_required
+                course.audio_status = meta.get("audio_status") or course.audio_status
                 continue
 
             self.courses[course_id] = Course(
@@ -258,6 +260,7 @@ class CourseEngine:
                 icon=icon,
                 color=color,
                 level_required=level_required,
+                audio_status=meta.get("audio_status", "browser_tts_ready"),
             )
 
     def _load_chapters(self):
@@ -347,6 +350,7 @@ class CourseEngine:
                 "quiz_count": course.quiz_count,
                 "total_words": course.total_words,
                 "total_reading_minutes": course.total_reading_minutes,
+                "audio_status": course.audio_status,
             })
         return result
 
@@ -394,6 +398,8 @@ class CourseEngine:
                         "id": q.id,
                         "question": q.question,
                         "options": q.options,
+                        "answer": chr(ord("A") + q.correct_index),
+                        "correct_index": q.correct_index,
                         "difficulty": q.difficulty,
                         "explanation": q.explanation,  # 作答后显示
                     }

@@ -18,8 +18,8 @@
   "estimated_hours": 8,
   "quality_status": "production_ready",
   "quality_standard": "5章正文 + 宽门/窄门辨析 + 行动练习 + 10题测验",
-  "audio_required": false,
-  "audio_status": "pending",
+  "audio_required": true,
+  "audio_status": "browser_tts_ready",
   "total_words": 10323,
   "total_reading_minutes": 40,
   "learning_objectives": [
