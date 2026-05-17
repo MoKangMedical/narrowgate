@@ -1,0 +1,115 @@
+{
+  "course_id": "assumption_testing",
+  "order": 21,
+  "title": "假设检验实验室",
+  "subtitle": "把想当然变成可验证的问题",
+  "description": "训练学习者把“我不行”“别人会否定我”等内在假设转成可观察、可验证、可修正的现实实验。",
+  "dimension": "认知",
+  "track": "认知觉察",
+  "icon": "◎",
+  "color": "#6366f1",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "audio_required": true,
+  "audio_status": "file_ready",
+  "total_words": 13950,
+  "total_reading_minutes": 27,
+  "learning_objectives": [
+    "识别假设检验实验室对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我现在把哪个假设当成了事实？",
+  "wide_gate": "根据未经验证的想法停止行动。",
+  "narrow_gate": "设计一个小实验收集证据。",
+  "daily_challenge": "验证一个你关于自己的消极假设。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么假设检验实验室是窄门训练",
+      "subtitle": "假设检验实验室第1章",
+      "keywords": [
+        "假设命名",
+        "证据等级",
+        "实验设计"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "假设检验实验室第2章",
+      "keywords": [
+        "假设命名",
+        "证据等级",
+        "实验设计"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "假设检验实验室第3章",
+      "keywords": [
+        "假设命名",
+        "证据等级",
+        "实验设计"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "假设检验实验室第4章",
+      "keywords": [
+        "假设命名",
+        "证据等级",
+        "实验设计"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "假设检验实验室第5章",
+      "keywords": [
+        "假设命名",
+        "证据等级",
+        "实验设计"
+      ],
+      "estimated_minutes": 8
+    }
+  ],
+  "audio_file": "audio/intro.mp3",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "zh-CN-YunyangNeural",
+  "audio_duration_seconds": 45,
+  "content_enhanced_at": "2026-05-13",
+  "audio_provider": "edge_tts",
+  "audio_model": "edge_tts",
+  "audio_rate": "-8%",
+  "audio_pitch": "-2Hz",
+  "audio_format": "mp3",
+  "audio_bitrate": "48k",
+  "audio_sample_rate": 24000,
+  "audio_channels": 1,
+  "audio_loudnorm": "loudnorm=I=-16:TP=-1.5:LRA=9",
+  "audio_script_provider": "local",
+  "audio_min_duration_seconds": 25,
+  "audio_generation_standard": "150-230字课程口播稿 + zh-CN-YunyangNeural + 慢速低音调 + ffmpeg loudnorm=I=-16:TP=-1.5:LRA=9 + 24000Hz mono MP3",
+  "audio_enhanced_at": "2026-05-17"
+}
