@@ -1,0 +1,908 @@
+{
+  "standard": "MP3, 24000Hz, mono, 48-64kbps, ffmpeg loudnorm=I=-16:TP=-1.5:LRA=9",
+  "summary": {
+    "A": 100
+  },
+  "courses": [
+    {
+      "course_id": "accountability_system",
+      "audio_file": "data/courses/accountability_system/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.024
+    },
+    {
+      "course_id": "affect_regulation",
+      "audio_file": "data/courses/affect_regulation/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.384
+    },
+    {
+      "course_id": "anger_boundaries",
+      "audio_file": "data/courses/anger_boundaries/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.168
+    },
+    {
+      "course_id": "antifragile",
+      "audio_file": "data/courses/antifragile/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 38.112
+    },
+    {
+      "course_id": "anxiety_grounding",
+      "audio_file": "data/courses/anxiety_grounding/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.648
+    },
+    {
+      "course_id": "assumption_testing",
+      "audio_file": "data/courses/assumption_testing/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.432
+    },
+    {
+      "course_id": "attachment_repair",
+      "audio_file": "data/courses/attachment_repair/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.096
+    },
+    {
+      "course_id": "attention_sovereignty",
+      "audio_file": "data/courses/attention_sovereignty/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.8
+    },
+    {
+      "course_id": "authentic_communication",
+      "audio_file": "data/courses/authentic_communication/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.728
+    },
+    {
+      "course_id": "behavioral_reshape",
+      "audio_file": "data/courses/behavioral_reshape/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.408
+    },
+    {
+      "course_id": "belief_audit",
+      "audio_file": "data/courses/belief_audit/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.056
+    },
+    {
+      "course_id": "body_awareness",
+      "audio_file": "data/courses/body_awareness/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.872
+    },
+    {
+      "course_id": "boundary_language",
+      "audio_file": "data/courses/boundary_language/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 40.872
+    },
+    {
+      "course_id": "career_leverage",
+      "audio_file": "data/courses/career_leverage/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.376
+    },
+    {
+      "course_id": "codependency_exit",
+      "audio_file": "data/courses/codependency_exit/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.32
+    },
+    {
+      "course_id": "cognitive_biases",
+      "audio_file": "data/courses/cognitive_biases/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.08
+    },
+    {
+      "course_id": "conflict_clean_fighting",
+      "audio_file": "data/courses/conflict_clean_fighting/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.616
+    },
+    {
+      "course_id": "constraint_design",
+      "audio_file": "data/courses/constraint_design/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.576
+    },
+    {
+      "course_id": "cosmic_perspective",
+      "audio_file": "data/courses/cosmic_perspective/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.128
+    },
+    {
+      "course_id": "craft_mastery",
+      "audio_file": "data/courses/craft_mastery/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.888
+    },
+    {
+      "course_id": "creative_output",
+      "audio_file": "data/courses/creative_output/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.52
+    },
+    {
+      "course_id": "decision_clarity",
+      "audio_file": "data/courses/decision_clarity/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.44
+    },
+    {
+      "course_id": "decision_systems",
+      "audio_file": "data/courses/decision_systems/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.176
+    },
+    {
+      "course_id": "deep_work_discipline",
+      "audio_file": "data/courses/deep_work_discipline/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.832
+    },
+    {
+      "course_id": "desire_decoding",
+      "audio_file": "data/courses/desire_decoding/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.712
+    },
+    {
+      "course_id": "digital_boundaries",
+      "audio_file": "data/courses/digital_boundaries/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.784
+    },
+    {
+      "course_id": "discipline_compassion",
+      "audio_file": "data/courses/discipline_compassion/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.888
+    },
+    {
+      "course_id": "discomfort_training",
+      "audio_file": "data/courses/discomfort_training/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.72
+    },
+    {
+      "course_id": "embodied_action",
+      "audio_file": "data/courses/embodied_action/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.272
+    },
+    {
+      "course_id": "emotional_granularity",
+      "audio_file": "data/courses/emotional_granularity/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.976
+    },
+    {
+      "course_id": "entrepreneur_resilience",
+      "audio_file": "data/courses/entrepreneur_resilience/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.776
+    },
+    {
+      "course_id": "envy_compass",
+      "audio_file": "data/courses/envy_compass/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.008
+    },
+    {
+      "course_id": "epistemic_humility",
+      "audio_file": "data/courses/epistemic_humility/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.304
+    },
+    {
+      "course_id": "ethical_action",
+      "audio_file": "data/courses/ethical_action/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 47.64
+    },
+    {
+      "course_id": "evasion_anatomy",
+      "audio_file": "data/courses/evasion_anatomy/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.272
+    },
+    {
+      "course_id": "faith_doubt",
+      "audio_file": "data/courses/faith_doubt/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.688
+    },
+    {
+      "course_id": "family_systems",
+      "audio_file": "data/courses/family_systems/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.904
+    },
+    {
+      "course_id": "fear_work",
+      "audio_file": "data/courses/fear_work/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.04
+    },
+    {
+      "course_id": "feedback_systems",
+      "audio_file": "data/courses/feedback_systems/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.088
+    },
+    {
+      "course_id": "forgiveness_without_erasure",
+      "audio_file": "data/courses/forgiveness_without_erasure/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.848
+    },
+    {
+      "course_id": "grief_transformation",
+      "audio_file": "data/courses/grief_transformation/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.312
+    },
+    {
+      "course_id": "group_shadow",
+      "audio_file": "data/courses/group_shadow/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.584
+    },
+    {
+      "course_id": "guardian_training",
+      "audio_file": "data/courses/guardian_training/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.008
+    },
+    {
+      "course_id": "guilt_responsibility",
+      "audio_file": "data/courses/guilt_responsibility/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.76
+    },
+    {
+      "course_id": "habit_architecture",
+      "audio_file": "data/courses/habit_architecture/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.432
+    },
+    {
+      "course_id": "identity_deconstruction",
+      "audio_file": "data/courses/identity_deconstruction/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.528
+    },
+    {
+      "course_id": "inner_child_work",
+      "audio_file": "data/courses/inner_child_work/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 47.256
+    },
+    {
+      "course_id": "integrative_retreat",
+      "audio_file": "data/courses/integrative_retreat/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.288
+    },
+    {
+      "course_id": "intimacy_capacity",
+      "audio_file": "data/courses/intimacy_capacity/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.472
+    },
+    {
+      "course_id": "legacy_design",
+      "audio_file": "data/courses/legacy_design/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.384
+    },
+    {
+      "course_id": "life_review",
+      "audio_file": "data/courses/life_review/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.92
+    },
+    {
+      "course_id": "loneliness_companionship",
+      "audio_file": "data/courses/loneliness_companionship/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.064
+    },
+    {
+      "course_id": "long_term_compounding",
+      "audio_file": "data/courses/long_term_compounding/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.88
+    },
+    {
+      "course_id": "meaning_construction",
+      "audio_file": "data/courses/meaning_construction/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.08
+    },
+    {
+      "course_id": "mental_models",
+      "audio_file": "data/courses/mental_models/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.32
+    },
+    {
+      "course_id": "mentoring_others",
+      "audio_file": "data/courses/mentoring_others/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.664
+    },
+    {
+      "course_id": "metacognition_training",
+      "audio_file": "data/courses/metacognition_training/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.312
+    },
+    {
+      "course_id": "micro_courage",
+      "audio_file": "data/courses/micro_courage/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.928
+    },
+    {
+      "course_id": "money_shadow",
+      "audio_file": "data/courses/money_shadow/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.632
+    },
+    {
+      "course_id": "mortality_practice",
+      "audio_file": "data/courses/mortality_practice/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.736
+    },
+    {
+      "course_id": "narrative_identity",
+      "audio_file": "data/courses/narrative_identity/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 48.048
+    },
+    {
+      "course_id": "narrow_gate_crossing",
+      "audio_file": "data/courses/narrow_gate_crossing/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.32
+    },
+    {
+      "course_id": "negotiation_truth",
+      "audio_file": "data/courses/negotiation_truth/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.6
+    },
+    {
+      "course_id": "pain_alchemy",
+      "audio_file": "data/courses/pain_alchemy/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 38.04
+    },
+    {
+      "course_id": "paradox_thinking",
+      "audio_file": "data/courses/paradox_thinking/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.48
+    },
+    {
+      "course_id": "power_responsibility",
+      "audio_file": "data/courses/power_responsibility/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.392
+    },
+    {
+      "course_id": "prayer_as_presence",
+      "audio_file": "data/courses/prayer_as_presence/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.096
+    },
+    {
+      "course_id": "procrastination_breakthrough",
+      "audio_file": "data/courses/procrastination_breakthrough/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.816
+    },
+    {
+      "course_id": "projection_withdrawal",
+      "audio_file": "data/courses/projection_withdrawal/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.728
+    },
+    {
+      "course_id": "public_voice",
+      "audio_file": "data/courses/public_voice/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.592
+    },
+    {
+      "course_id": "receiving_love",
+      "audio_file": "data/courses/receiving_love/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.24
+    },
+    {
+      "course_id": "relapse_recovery",
+      "audio_file": "data/courses/relapse_recovery/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.88
+    },
+    {
+      "course_id": "relationship_mirror",
+      "audio_file": "data/courses/relationship_mirror/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.584
+    },
+    {
+      "course_id": "resource_ecology",
+      "audio_file": "data/courses/resource_ecology/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.768
+    },
+    {
+      "course_id": "ritual_design",
+      "audio_file": "data/courses/ritual_design/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.44
+    },
+    {
+      "course_id": "sacred_ordinary",
+      "audio_file": "data/courses/sacred_ordinary/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.464
+    },
+    {
+      "course_id": "safety_capacity",
+      "audio_file": "data/courses/safety_capacity/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.936
+    },
+    {
+      "course_id": "self_deception_detection",
+      "audio_file": "data/courses/self_deception_detection/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.24
+    },
+    {
+      "course_id": "service_path",
+      "audio_file": "data/courses/service_path/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 40.944
+    },
+    {
+      "course_id": "shadow_integration",
+      "audio_file": "data/courses/shadow_integration/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.776
+    },
+    {
+      "course_id": "shame_release",
+      "audio_file": "data/courses/shame_release/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.904
+    },
+    {
+      "course_id": "silence_training",
+      "audio_file": "data/courses/silence_training/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.44
+    },
+    {
+      "course_id": "skill_deliberate_practice",
+      "audio_file": "data/courses/skill_deliberate_practice/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.184
+    },
+    {
+      "course_id": "sleep_energy_rhythm",
+      "audio_file": "data/courses/sleep_energy_rhythm/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.96
+    },
+    {
+      "course_id": "social_courage",
+      "audio_file": "data/courses/social_courage/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 42.24
+    },
+    {
+      "course_id": "socratic_introspection",
+      "audio_file": "data/courses/socratic_introspection/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 39.144
+    },
+    {
+      "course_id": "spiritual_discernment",
+      "audio_file": "data/courses/spiritual_discernment/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.664
+    },
+    {
+      "course_id": "stoic_resilience",
+      "audio_file": "data/courses/stoic_resilience/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.92
+    },
+    {
+      "course_id": "strategic_focus",
+      "audio_file": "data/courses/strategic_focus/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 40.752
+    },
+    {
+      "course_id": "systems_thinking",
+      "audio_file": "data/courses/systems_thinking/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 37.536
+    },
+    {
+      "course_id": "team_trust",
+      "audio_file": "data/courses/team_trust/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 41.952
+    },
+    {
+      "course_id": "trauma_informed_presence",
+      "audio_file": "data/courses/trauma_informed_presence/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 47.232
+    },
+    {
+      "course_id": "trust_repair",
+      "audio_file": "data/courses/trust_repair/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.872
+    },
+    {
+      "course_id": "truth_practice",
+      "audio_file": "data/courses/truth_practice/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 46.464
+    },
+    {
+      "course_id": "uncertainty_tolerance",
+      "audio_file": "data/courses/uncertainty_tolerance/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 44.688
+    },
+    {
+      "course_id": "value_clarification",
+      "audio_file": "data/courses/value_clarification/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.36
+    },
+    {
+      "course_id": "vocation_discovery",
+      "audio_file": "data/courses/vocation_discovery/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.392
+    },
+    {
+      "course_id": "willpower_energy",
+      "audio_file": "data/courses/willpower_energy/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 45.552
+    },
+    {
+      "course_id": "witness_evolution",
+      "audio_file": "data/courses/witness_evolution/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 38.136
+    },
+    {
+      "course_id": "witnessing_circles",
+      "audio_file": "data/courses/witnessing_circles/audio/intro.mp3",
+      "grade": "A",
+      "sample_rate": 24000,
+      "channels": 1,
+      "bit_rate": 48000,
+      "duration": 43.032
+    }
+  ]
+}

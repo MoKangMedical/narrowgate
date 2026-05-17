@@ -1,0 +1,177 @@
+{
+  "course_id": "stoic_resilience",
+  "title": "斯多葛韧性课程测验",
+  "description": "测试你对斯多葛哲学核心概念的理解和应用",
+  "total_questions": 12,
+  "passing_score": 8,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "斯多葛学派的创始人是谁？",
+      "options": [
+        "A. 苏格拉底",
+        "B. 芝诺",
+        "C. 亚里士多德",
+        "D. 伊壁鸠鲁"
+      ],
+      "answer": "B",
+      "explanation": "斯多葛学派由芝诺（Zeno of Citium）在公元前300年左右创立于雅典。"
+    },
+    {
+      "id": 2,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "控制二分法的核心是什么？",
+      "options": [
+        "A. 控制一切",
+        "B. 区分可控和不可控的事情，把精力投入可控的部分",
+        "C. 放弃所有控制",
+        "D. 只控制他人"
+      ],
+      "answer": "B",
+      "explanation": "控制二分法的核心是区分哪些在你的控制之内（你的判断、选择、态度），哪些不在（结果、他人看法、过去）。"
+    },
+    {
+      "id": 3,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "当杏仁核检测到威胁时，它对前额叶皮层的影响是什么？",
+      "options": [
+        "A. 增强其活动",
+        "B. 没有影响",
+        "C. 抑制其活动",
+        "D. 改变其形状"
+      ],
+      "answer": "C",
+      "explanation": "在回避状态下，杏仁核抑制前额叶皮层活动，降低理性思维能力——这是生理层面的变化。"
+    },
+    {
+      "id": 4,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "控制二分法的第一个效果是什么？",
+      "options": [
+        "A. 更多焦虑",
+        "B. 认知卸载——停止向不可控的事情投入注意力",
+        "C. 失去动力",
+        "D. 变得冷漠"
+      ],
+      "answer": "B",
+      "explanation": "认知卸载是停止向有漏洞的杯子（不可控事情）倒水，把有限的注意力资源投入完整杯子（可控事情）。"
+    },
+    {
+      "id": 5,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "消极想象（Premeditatio Malorum）的目的是什么？",
+      "options": [
+        "A. 让自己更焦虑",
+        "B. 预演最坏情况以增强心理韧性",
+        "C. 预测未来",
+        "D. 避免所有风险"
+      ],
+      "answer": "B",
+      "explanation": "消极想象通过提前想象失去珍贵事物的可能性，来增强对当前拥有的感恩和面对失去的心理准备。"
+    },
+    {
+      "id": 6,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "现代心理学中哪个概念与消极想象最相似？",
+      "options": [
+        "A. 积极思考",
+        "B. 心理对照（Mental Contrasting）",
+        "C. 催眠",
+        "D. 自我暗示"
+      ],
+      "answer": "B",
+      "explanation": "心理对照技术通过同时想象目标和障碍来增强动力和准备，与斯多葛消极想象有相似原理。"
+    },
+    {
+      "id": 7,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "命运之爱（Amor Fati）的核心含义是什么？",
+      "options": [
+        "A. 相信命运",
+        "B. 拥抱和热爱一切发生的事情，包括苦难",
+        "C. 等待命运安排",
+        "D. 改变命运"
+      ],
+      "answer": "B",
+      "explanation": "命运之爱不是被动接受，而是主动拥抱一切发生的事——包括痛苦——作为成长的必要材料。"
+    },
+    {
+      "id": 8,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "尼采对命运之爱的贡献是什么？",
+      "options": [
+        "A. 发明了这个概念",
+        "B. 将其发展为'永恒轮回'的终极测试",
+        "C. 否定了这个概念",
+        "D. 没有贡献"
+      ],
+      "answer": "B",
+      "explanation": "尼采的'永恒轮回'思想实验问：如果你的人生将无限重复，你愿意吗？命运之爱就是对此说'是'的能力。"
+    },
+    {
+      "id": 9,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "马可·奥勒留的《沉思录》是什么类型的文本？",
+      "options": [
+        "A. 公开演讲",
+        "B. 给自己的私人日记和哲学练习",
+        "C. 教科书",
+        "D. 小说"
+      ],
+      "answer": "B",
+      "explanation": "《沉思录》是马可·奥勒留给自己写的私人日记，记录了他如何应用斯多葛哲学处理日常挑战。"
+    },
+    {
+      "id": 10,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "斯多葛冥想与佛教冥想的主要区别是什么？",
+      "options": [
+        "A. 没有区别",
+        "B. 斯多葛冥想强调理性反思和主动思维训练，而非清空思维",
+        "C. 佛教更好",
+        "D. 斯多葛不需要冥想"
+      ],
+      "answer": "B",
+      "explanation": "斯多葛冥想是主动的思维训练——反思、预演、价值澄清，而非试图清空思维或达到无念状态。"
+    },
+    {
+      "id": 11,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "爱比克泰德的个人经历如何影响了他的哲学？",
+      "options": [
+        "A. 没有影响",
+        "B. 作为奴隶被打伤的经历让他深刻理解了什么在控制之内",
+        "C. 他从未受苦",
+        "D. 他只关注理论"
+      ],
+      "answer": "B",
+      "explanation": "爱比克泰德作为奴隶的经历让他亲身体验到：即使身体被虐待，你的态度和判断仍在你的控制之内。"
+    },
+    {
+      "id": 12,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "控制三分法中'部分可控'的例子是什么？",
+      "options": [
+        "A. 天气",
+        "B. 过去",
+        "C. 你的健康（通过生活方式影响但不完全控制）",
+        "D. 他人的思想"
+      ],
+      "answer": "C",
+      "explanation": "健康属于部分可控——你可以通过饮食、运动、睡眠影响它，但不能完全控制（基因、意外等因素）。"
+    }
+  ]
+}

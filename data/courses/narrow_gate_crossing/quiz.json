@@ -1,0 +1,170 @@
+{
+  "course_id": "narrow_gate_crossing",
+  "title": "narrow_gate_crossing 课程测验",
+  "description": "测试你对narrow_gate_crossing课程内容的理解",
+  "total_questions": 10,
+  "passing_score": 7,
+  "questions": [
+    {
+      "id": 1,
+      "chapter": 1,
+      "type": "multiple_choice",
+      "question": "关于第1章的核心概念，以下哪项最准确地描述了其本质？",
+      "options": [
+        "A. 它主要关注外在行为的改变",
+        "B. 它强调内在认知和态度的转化",
+        "C. 它是一种纯粹的理论研究",
+        "D. 它只适用于特定人群"
+      ],
+      "answer": "B",
+      "explanation": "第1章的核心在于理解内在认知和态度的转化，这是实践的基础。"
+    },
+    {
+      "id": 2,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "关于第2章的核心概念，以下哪项最准确地描述了其本质？",
+      "options": [
+        "A. 它主要关注外在行为的改变",
+        "B. 它强调内在认知和态度的转化",
+        "C. 它是一种纯粹的理论研究",
+        "D. 它只适用于特定人群"
+      ],
+      "answer": "B",
+      "explanation": "第2章的核心在于理解内在认知和态度的转化，这是实践的基础。"
+    },
+    {
+      "id": 3,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "关于第3章的核心概念，以下哪项最准确地描述了其本质？",
+      "options": [
+        "A. 它主要关注外在行为的改变",
+        "B. 它强调内在认知和态度的转化",
+        "C. 它是一种纯粹的理论研究",
+        "D. 它只适用于特定人群"
+      ],
+      "answer": "B",
+      "explanation": "第3章的核心在于理解内在认知和态度的转化，这是实践的基础。"
+    },
+    {
+      "id": 4,
+      "chapter": 2,
+      "type": "multiple_choice",
+      "question": "为什么课程中反复强调见证？",
+      "options": [
+        "A. 为了表演成长",
+        "B. 为了获得别人许可",
+        "C. 为了把改变放入现实关系接受反馈",
+        "D. 为了让别人替自己负责"
+      ],
+      "correct_index": 2,
+      "answer": "C",
+      "explanation": "见证让成长从私密感受进入现实关系，更难继续自欺。",
+      "difficulty": 3,
+      "generated_for": "narrow_gate_crossing"
+    },
+    {
+      "id": 5,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "当学习中出现不舒服，较成熟的回应是什么？",
+      "options": [
+        "A. 立刻退出",
+        "B. 用自我攻击证明诚实",
+        "C. 观察它保护了什么，再选择一个小行动",
+        "D. 换一门更轻松的课"
+      ],
+      "correct_index": 2,
+      "answer": "C",
+      "explanation": "不舒服不一定是危险，它常常提示窄门所在。",
+      "difficulty": 4,
+      "generated_for": "narrow_gate_crossing"
+    },
+    {
+      "id": 6,
+      "chapter": 3,
+      "type": "multiple_choice",
+      "question": "完成本课后最应该复盘什么？",
+      "options": [
+        "A. 我做了什么新行动，现实给了什么反馈",
+        "B. 我读了多快",
+        "C. 我是否完全没有情绪",
+        "D. 别人哪里还不够好"
+      ],
+      "correct_index": 0,
+      "answer": "A",
+      "explanation": "复盘应回到行动和现实反馈，而不是停在评价。",
+      "difficulty": 2,
+      "generated_for": "narrow_gate_crossing"
+    },
+    {
+      "id": 7,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "学习《窄门穿越》时，最重要的判断标准是什么？",
+      "options": [
+        "A. 是否产生新的生活证据",
+        "B. 是否记住所有概念",
+        "C. 是否感觉自己更特别",
+        "D. 是否能批评别人"
+      ],
+      "correct_index": 0,
+      "answer": "A",
+      "explanation": "窄门课程以现实中的新证据衡量质量，而不是以概念数量衡量。",
+      "difficulty": 3,
+      "generated_for": "narrow_gate_crossing"
+    },
+    {
+      "id": 8,
+      "chapter": 4,
+      "type": "multiple_choice",
+      "question": "《窄门穿越》中的练习为什么需要行动？",
+      "options": [
+        "A. 行动会替代理解",
+        "B. 没有行动，觉察容易变成新的自我安慰",
+        "C. 行动越冲动越好",
+        "D. 行动只为了获得称赞"
+      ],
+      "correct_index": 1,
+      "answer": "B",
+      "explanation": "觉察必须进入行动，才会真正改变旧模式。",
+      "difficulty": 4,
+      "generated_for": "narrow_gate_crossing"
+    },
+    {
+      "id": 9,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "宽门最常见的表现是什么？",
+      "options": [
+        "A. 选择更真实的表达",
+        "B. 邀请见证人反馈",
+        "C. 用熟悉解释保护旧身份",
+        "D. 完成可验证行动"
+      ],
+      "correct_index": 2,
+      "answer": "C",
+      "explanation": "宽门通常以舒服、熟悉、容易解释的方式保护旧身份。",
+      "difficulty": 2,
+      "generated_for": "narrow_gate_crossing"
+    },
+    {
+      "id": 10,
+      "chapter": 5,
+      "type": "multiple_choice",
+      "question": "为什么课程中反复强调见证？",
+      "options": [
+        "A. 为了表演成长",
+        "B. 为了获得别人许可",
+        "C. 为了把改变放入现实关系接受反馈",
+        "D. 为了让别人替自己负责"
+      ],
+      "correct_index": 2,
+      "answer": "C",
+      "explanation": "见证让成长从私密感受进入现实关系，更难继续自欺。",
+      "difficulty": 3,
+      "generated_for": "narrow_gate_crossing"
+    }
+  ]
+}

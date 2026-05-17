@@ -1,0 +1,115 @@
+{
+  "course_id": "desire_decoding",
+  "order": 40,
+  "title": "欲望解码",
+  "subtitle": "看见欲望背后的生命方向",
+  "description": "训练学习者区分冲动、补偿性欲望和深层愿望，让欲望成为理解生命力的入口而非羞耻来源。",
+  "dimension": "情绪",
+  "track": "情绪阴影",
+  "icon": "●",
+  "color": "#7c3aed",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "audio_required": true,
+  "audio_status": "file_ready",
+  "total_words": 13797,
+  "total_reading_minutes": 27,
+  "learning_objectives": [
+    "识别欲望解码对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "这个欲望真正想带我去哪里？",
+  "wide_gate": "压抑欲望或被欲望拖走。",
+  "narrow_gate": "解码欲望并选择表达方式。",
+  "daily_challenge": "追问一个强烈欲望背后的需要。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么欲望解码是窄门训练",
+      "subtitle": "欲望解码第1章",
+      "keywords": [
+        "欲望分层",
+        "替代表达",
+        "价值对齐"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "欲望解码第2章",
+      "keywords": [
+        "欲望分层",
+        "替代表达",
+        "价值对齐"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "欲望解码第3章",
+      "keywords": [
+        "欲望分层",
+        "替代表达",
+        "价值对齐"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "欲望解码第4章",
+      "keywords": [
+        "欲望分层",
+        "替代表达",
+        "价值对齐"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "欲望解码第5章",
+      "keywords": [
+        "欲望分层",
+        "替代表达",
+        "价值对齐"
+      ],
+      "estimated_minutes": 8
+    }
+  ],
+  "audio_file": "audio/intro.mp3",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "zh-CN-YunyangNeural",
+  "audio_duration_seconds": 45,
+  "content_enhanced_at": "2026-05-13",
+  "audio_provider": "edge_tts",
+  "audio_model": "edge_tts",
+  "audio_rate": "-8%",
+  "audio_pitch": "-2Hz",
+  "audio_format": "mp3",
+  "audio_bitrate": "48k",
+  "audio_sample_rate": 24000,
+  "audio_channels": 1,
+  "audio_loudnorm": "loudnorm=I=-16:TP=-1.5:LRA=9",
+  "audio_script_provider": "local",
+  "audio_min_duration_seconds": 25,
+  "audio_generation_standard": "150-230字课程口播稿 + zh-CN-YunyangNeural + 慢速低音调 + ffmpeg loudnorm=I=-16:TP=-1.5:LRA=9 + 24000Hz mono MP3",
+  "audio_enhanced_at": "2026-05-17"
+}
