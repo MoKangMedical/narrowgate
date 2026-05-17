@@ -54,6 +54,24 @@ class Database:
                     settings TEXT DEFAULT '{}'
                 );
 
+                CREATE TABLE IF NOT EXISTS witnesses (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT NOT NULL,
+                    name TEXT NOT NULL,
+                    email TEXT,
+                    relationship TEXT,
+                    created_at TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+
+                CREATE TABLE IF NOT EXISTS evolution_states (
+                    user_id TEXT PRIMARY KEY,
+                    current_level INTEGER DEFAULT 1,
+                    experience_points INTEGER DEFAULT 0,
+                    updated_at TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id)
+                );
+
                 CREATE TABLE IF NOT EXISTS audits (
                     id TEXT PRIMARY KEY,
                     user_id TEXT,
@@ -171,6 +189,7 @@ class Database:
                 );
 
                 CREATE INDEX IF NOT EXISTS idx_audits_user ON audits(user_id);
+                CREATE INDEX IF NOT EXISTS idx_witnesses_user ON witnesses(user_id);
                 CREATE INDEX IF NOT EXISTS idx_responses_audit ON audit_responses(audit_id);
                 CREATE INDEX IF NOT EXISTS idx_crossings_user ON crossings(user_id);
                 CREATE INDEX IF NOT EXISTS idx_daily_crossing ON daily_records(crossing_id);
@@ -269,6 +288,60 @@ class Database:
         """更新用户层级"""
         with self._connect() as conn:
             conn.execute("UPDATE users SET level = ? WHERE id = ?", (level, user_id))
+
+    # ============================================================
+    # 见证人
+    # ============================================================
+
+    def create_witness(self, user_id: str, name: str, email: str = "", relationship: str = "") -> str:
+        """为用户创建见证人"""
+        witness_id = f"witness_{uuid.uuid4().hex[:12]}"
+        now = datetime.now().isoformat()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO witnesses (id, user_id, name, email, relationship, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (witness_id, user_id, name, email, relationship, now),
+            )
+        return witness_id
+
+    def get_user_witnesses(self, user_id: str) -> List[dict]:
+        """获取用户的见证人列表"""
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM witnesses WHERE user_id = ? ORDER BY created_at",
+                (user_id,),
+            ).fetchall()
+            return [dict(row) for row in rows]
+
+    # ============================================================
+    # 进化状态
+    # ============================================================
+
+    def upsert_evolution_state(self, user_id: str, current_level: int = 1, experience_points: int = 0) -> None:
+        """创建或更新用户进化状态"""
+        now = datetime.now().isoformat()
+        with self._connect() as conn:
+            conn.execute(
+                """INSERT INTO evolution_states (user_id, current_level, experience_points, updated_at)
+                   VALUES (?, ?, ?, ?)
+                   ON CONFLICT(user_id) DO UPDATE SET
+                       current_level = excluded.current_level,
+                       experience_points = excluded.experience_points,
+                       updated_at = excluded.updated_at""",
+                (user_id, current_level, experience_points, now),
+            )
+
+    def get_evolution_state(self, user_id: str) -> Optional[dict]:
+        """获取用户进化状态；不存在时返回默认状态"""
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM evolution_states WHERE user_id = ?",
+                (user_id,),
+            ).fetchone()
+            if row:
+                return dict(row)
+        return {"user_id": user_id, "current_level": 1, "experience_points": 0, "updated_at": None}
 
     # ============================================================
     # 审计
@@ -657,9 +730,8 @@ class Database:
     def add_user_xp(self, user_id: str, xp_amount: int) -> bool:
         """增加用户经验值"""
         with self._connect() as conn:
-            # 更新用户经验值
             cursor = conn.execute(
-                "UPDATE users SET level = level + ? WHERE id = ?",
+                "UPDATE users SET experience_points = experience_points + ? WHERE id = ?",
                 (xp_amount, user_id)
             )
             return cursor.rowcount > 0
@@ -668,10 +740,10 @@ class Database:
         """获取用户经验值"""
         with self._connect() as conn:
             result = conn.execute(
-                "SELECT level FROM users WHERE id = ?",
+                "SELECT experience_points FROM users WHERE id = ?",
                 (user_id,)
             ).fetchone()
-            return result["level"] if result else 0
+            return result["experience_points"] if result else 0
 
     def get_user_level(self, user_id: str) -> dict:
         """获取用户等级信息"""

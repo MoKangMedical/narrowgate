@@ -84,6 +84,40 @@ class TestHealthEndpoints:
         assert resp.status_code == 200
         assert "text/html" in resp.headers.get("content-type", "")
 
+    @pytest.mark.asyncio
+    async def test_frontend_assets_are_served(self, client):
+        """Frontend asset URLs referenced by index.html should resolve."""
+        css_resp = await client.get("/tailwind.css")
+        assert css_resp.status_code == 200
+        assert "text/css" in css_resp.headers.get("content-type", "")
+
+        manifest_resp = await client.get("/manifest.json")
+        assert manifest_resp.status_code == 200
+        assert "json" in manifest_resp.headers.get("content-type", "")
+
+        favicon_resp = await client.get("/favicon.svg")
+        assert favicon_resp.status_code == 200
+        assert "image/svg+xml" in favicon_resp.headers.get("content-type", "")
+
+    @pytest.mark.asyncio
+    async def test_course_static_page_and_public_data_are_served(self, client):
+        """Production routes should serve the static course page and public data files."""
+        page_resp = await client.get("/course-system.html")
+        assert page_resp.status_code == 200
+        assert "text/html" in page_resp.headers.get("content-type", "")
+
+        catalog_resp = await client.get("/data/course_catalog_100.json")
+        assert catalog_resp.status_code == 200
+        assert "json" in catalog_resp.headers.get("content-type", "")
+        assert len(catalog_resp.json()) == 100
+
+        audio_resp = await client.get("/data/courses/belief_audit/audio/intro.mp3")
+        assert audio_resp.status_code == 200
+        assert audio_resp.headers["content-type"].startswith("audio/mpeg")
+
+        db_resp = await client.get("/data/narrowgate.db")
+        assert db_resp.status_code == 404
+
 
 # ============================================================
 # User API
@@ -104,6 +138,60 @@ class TestUserAPI:
         assert "id" in data
         # Username may get suffix if duplicate exists in DB from prior test
         assert "testuser" in data["username"]
+
+
+# ============================================================
+# Deep Course Library API
+# ============================================================
+
+class TestDeepCourseLibraryAPI:
+    """Tests for the 100-course deep course library."""
+
+    @pytest.mark.asyncio
+    async def test_list_deep_courses_has_100_quality_courses(self, client):
+        """GET /api/courses should expose the full 100-course library."""
+        resp = await client.get("/api/courses")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["total"] == 100
+        assert len(data["courses"]) == 100
+        assert all(course["chapter_count"] >= 5 for course in data["courses"])
+        assert all(course["quiz_count"] >= 10 for course in data["courses"])
+        assert all(course["audio_status"] == "file_ready" for course in data["courses"])
+        assert all(course["audio_file"] in {"audio/intro.m4a", "audio/intro.mp3"} for course in data["courses"])
+        assert all(course["audio_duration_seconds"] >= 25 for course in data["courses"])
+
+    @pytest.mark.asyncio
+    async def test_deep_course_detail_chapter_and_quiz(self, client):
+        """A generated deep course should expose detail, chapter content and quiz."""
+        detail = await client.get("/api/courses/belief_audit")
+        assert detail.status_code == 200
+        detail_data = detail.json()
+        assert detail_data["chapter_count"] == 5
+        assert detail_data["quiz_count"] == 10
+        assert detail_data["audio_status"] == "file_ready"
+        assert detail_data["audio_file"] in {"audio/intro.m4a", "audio/intro.mp3"}
+
+        chapter = await client.get("/api/courses/belief_audit/chapters/ch01")
+        assert chapter.status_code == 200
+        assert "核心信念审计" in chapter.json()["content"]
+
+        quiz = await client.get("/api/courses/belief_audit/chapters/ch01/quiz")
+        assert quiz.status_code == 200
+        assert len(quiz.json()["questions"]) >= 1
+        assert quiz.json()["questions"][0]["answer"] in {"A", "B", "C", "D"}
+
+        cover = await client.get("/api/courses/belief_audit/cover")
+        assert cover.status_code == 200
+        assert cover.headers["content-type"].startswith("image/svg+xml")
+
+        audio = await client.get("/api/courses/belief_audit/audio")
+        assert audio.status_code == 200
+        assert audio.headers["content-type"].startswith(("audio/mp4", "audio/mpeg"))
+
+        audio_script = await client.get("/api/courses/belief_audit/audio-script")
+        assert audio_script.status_code == 200
+        assert "核心信念审计" in audio_script.json()["script"]
 
 
 # ============================================================

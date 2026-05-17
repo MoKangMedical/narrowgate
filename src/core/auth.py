@@ -8,18 +8,21 @@
 - 微信登录支持
 """
 
-import jwt
 import hashlib
+import os
 import secrets
-from datetime import datetime, timedelta
-from typing import Optional, Dict
-from fastapi import HTTPException, Depends, Header
+from datetime import UTC, datetime, timedelta
+from typing import Dict, Optional
+
+import jwt
+from fastapi import Header, HTTPException
 from pydantic import BaseModel
 
 # JWT配置
-SECRET_KEY = "narrowgate_secret_key_2026"  # 生产环境应使用环境变量
+SECRET_KEY = os.getenv("NARROWGATE_SECRET_KEY", "narrowgate_secret_key_2026")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7天
+SESSION_EXPIRE_MINUTES = 60 * 24 * 7  # 7天
 
 
 class UserRegister(BaseModel):
@@ -54,6 +57,46 @@ class TokenResponse(BaseModel):
     avatar: Optional[str] = None
 
 
+class SessionManager:
+    """轻量级内存会话管理器。
+
+    主要用于无需数据库的本地会话和测试场景；正式账号认证仍由 AuthManager 的 JWT 流程负责。
+    """
+
+    def __init__(self, expire_minutes: int = SESSION_EXPIRE_MINUTES):
+        self.expire_minutes = expire_minutes
+        self._sessions: dict[str, dict] = {}
+
+    def create_session(self, user_id: str) -> str:
+        """创建会话并返回不可预测的 token。"""
+        token = secrets.token_urlsafe(32)
+        expires_at = datetime.now(UTC) + timedelta(minutes=self.expire_minutes)
+        self._sessions[token] = {"user_id": user_id, "expires_at": expires_at}
+        return token
+
+    def validate_token(self, token: str) -> Optional[str]:
+        """验证 token，成功时返回 user_id，失败或过期时返回 None。"""
+        session = self._sessions.get(token)
+        if not session:
+            return None
+        if session["expires_at"] <= datetime.now(UTC):
+            self._sessions.pop(token, None)
+            return None
+        return session["user_id"]
+
+    def revoke_session(self, token: str) -> None:
+        """撤销会话。"""
+        self._sessions.pop(token, None)
+
+    def refresh_token(self, token: str) -> Optional[str]:
+        """刷新 token，旧 token 立即失效。"""
+        user_id = self.validate_token(token)
+        if not user_id:
+            return None
+        self.revoke_session(token)
+        return self.create_session(user_id)
+
+
 class AuthManager:
     """认证管理器"""
     
@@ -72,17 +115,18 @@ class AuthManager:
             salt, hash_value = hashed.split(":")
             hash_obj = hashlib.sha256((password + salt).encode())
             return hash_obj.hexdigest() == hash_value
-        except:
+        except ValueError:
             return False
     
     def create_access_token(self, user_id: str, username: str) -> str:
         """创建JWT token"""
-        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        now = datetime.now(UTC)
+        expire = now + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
         payload = {
             "sub": user_id,
             "username": username,
             "exp": expire,
-            "iat": datetime.utcnow()
+            "iat": now
         }
         return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
     

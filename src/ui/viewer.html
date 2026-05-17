@@ -286,12 +286,13 @@ const API = location.origin;
 let coursesCache = null;
 let booksCache = null;
 let currentCourse = null;
+let currentCourseDetail = null;
 let currentChapter = null;
 let synth = window.speechSynthesis;
 let ttsUtterance = null;
 let ttsRate = 1;
 let ttsPlaying = false;
-let audioPlayer = null; // HTML5 audio element for generated files
+let audioPlayer = null; // HTML5 audio element for generated course files
 
 // === DOOR ANIMATION ===
 function openDoor() {
@@ -323,7 +324,12 @@ async function init() {
   ]);
   coursesCache = (courses.courses || courses);
   booksCache = books;
-  showHome();
+  const courseId = new URLSearchParams(location.search).get('course');
+  if (courseId && coursesCache.some(c => c.id === courseId)) {
+    showCourse(courseId);
+  } else {
+    showHome();
+  }
 }
 
 // === HOME: COURSE LIST ===
@@ -331,7 +337,7 @@ function showHome() {
   stopTTS();
   document.getElementById('ttsBar').style.display = 'none';
   let html = `<div class="page-title">🚪 窄门课程</div>
-    <div class="page-sub">AI灵魂进化平台 · 12门课程 · 认知觉醒到行动穿越</div>
+    <div class="page-sub">AI灵魂进化平台 · 100门课程 · 认知觉醒到行动穿越</div>
     <div class="course-grid">`;
   coursesCache.forEach(c => {
     html += `<div class="course-card" onclick="showCourse('${c.id}')">
@@ -359,6 +365,7 @@ async function showCourse(courseId) {
   const data = await resp.json();
   const course = data.course || data;
   currentCourse = courseId;
+  currentCourseDetail = course;
   const books = booksCache[courseId] || [];
 
   let html = `<div class="detail-header">
@@ -380,7 +387,7 @@ async function showCourse(courseId) {
     <button class="audio-play-btn" onclick="playCourseAudio('${courseId}')">▶</button>
     <div class="audio-info">
       <div class="audio-title">🎧 课程语音导览</div>
-      <div class="audio-sub">点击播放课程讲解音频</div>
+      <div class="audio-sub">${course.audio_duration_seconds ? Math.round(course.audio_duration_seconds / 60) + '分钟真实音频' : '点击播放课程导览音频'}，章节内可继续朗读全文</div>
       <div class="audio-progress"><div class="audio-progress-bar" id="audioBar"></div></div>
     </div>
   </div>`;
@@ -453,11 +460,18 @@ async function showChapter(courseId, chapterId) {
 async function showQuiz(courseId) {
   stopTTS();
   document.getElementById('ttsBar').style.display = 'none';
-  let quizData;
+  let quizData = { questions: [] };
   try {
-    const resp = await fetch(`${API}/api/courses/${courseId}/chapters/x/quiz`);
-    // If chapter-specific quiz fails, we'll handle it
-    quizData = await resp.json();
+    const chaptersResp = await fetch(`${API}/api/courses/${courseId}/chapters`);
+    const chaptersData = await chaptersResp.json();
+    const chapters = chaptersData.chapters || [];
+    const questionSets = await Promise.all(chapters.map(ch =>
+      fetch(`${API}/api/courses/${courseId}/chapters/${ch.id}/quiz`)
+        .then(r => r.json())
+        .then(data => data.questions || [])
+        .catch(() => [])
+    ));
+    quizData.questions = questionSets.flat();
   } catch(e) {
     quizData = { questions: [] };
   }
@@ -596,25 +610,60 @@ function setSpeed(rate) {
   if (ttsPlaying) { speakContent(); }
 }
 
-// === COURSE AUDIO (Generated Files) ===
+// === COURSE AUDIO (Generated Files + Browser Fallback) ===
 function playCourseAudio(courseId) {
   if (audioPlayer) { audioPlayer.pause(); audioPlayer = null; }
   stopTTS();
-  
-  audioPlayer = new Audio(`${API}/api/courses/${courseId}/audio/audio_intro.mp3`);
+
+  const course = currentCourse === courseId && currentCourseDetail
+    ? currentCourseDetail
+    : coursesCache.find(c => c.id === courseId);
+  if (!course) return;
   const btn = document.querySelector('.audio-play-btn');
   const bar = document.getElementById('audioBar');
-  
-  audioPlayer.addEventListener('play', () => { if(btn) btn.textContent = '⏸'; });
-  audioPlayer.addEventListener('pause', () => { if(btn) btn.textContent = '▶'; });
-  audioPlayer.addEventListener('ended', () => { if(btn) btn.textContent = '▶'; if(bar) bar.style.width = '0%'; });
+  let fallbackStarted = false;
+
+  const fallbackToBrowserVoice = () => {
+    if (fallbackStarted || !synth) return;
+    fallbackStarted = true;
+    speakCourseIntroFallback(course, btn, bar);
+  };
+
+  audioPlayer = new Audio(`${API}/api/courses/${courseId}/audio`);
+  audioPlayer.preload = 'metadata';
+  audioPlayer.addEventListener('play', () => { if (btn) btn.textContent = '⏸'; });
+  audioPlayer.addEventListener('pause', () => { if (btn) btn.textContent = '▶'; });
+  audioPlayer.addEventListener('ended', () => {
+    if (btn) btn.textContent = '▶';
+    if (bar) bar.style.width = '0%';
+  });
   audioPlayer.addEventListener('timeupdate', () => {
     if (bar && audioPlayer.duration) {
-      bar.style.width = (audioPlayer.currentTime / audioPlayer.duration * 100) + '%';
+      bar.style.width = Math.round(audioPlayer.currentTime / audioPlayer.duration * 100) + '%';
     }
   });
-  
-  audioPlayer.play().catch(e => console.log('Audio play failed:', e));
+  audioPlayer.addEventListener('error', fallbackToBrowserVoice);
+  audioPlayer.play().catch(fallbackToBrowserVoice);
+}
+
+function speakCourseIntroFallback(course, btn, bar) {
+  const chapters = (course.chapters || []).map(ch => ch.title).join('。');
+  const text = `${course.name || course.title}。${course.subtitle || ''}。${course.description || ''}。本课程包含${course.chapter_count || 0}章，${course.quiz_count || 0}道测验。章节包括：${chapters}`;
+
+  ttsUtterance = new SpeechSynthesisUtterance(text);
+  ttsUtterance.lang = 'zh-CN';
+  ttsUtterance.rate = ttsRate;
+  ttsUtterance.onend = () => {
+    ttsPlaying = false;
+    if (btn) btn.textContent = '▶';
+    if (bar) bar.style.width = '0%';
+  };
+  ttsUtterance.onboundary = e => {
+    if (bar) bar.style.width = Math.round(e.charIndex / text.length * 100) + '%';
+  };
+  synth.speak(ttsUtterance);
+  ttsPlaying = true;
+  if (btn) btn.textContent = '⏸';
 }
 
 // === MARKDOWN PARSER (simplified) ===

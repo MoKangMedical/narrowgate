@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>窄门 NarrowGate — 让人看见窄门并跨越窄门</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050508'/%3E%3Cpath d='M21 54V22c0-8 5-14 11-14s11 6 11 14v32' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M32 12v42' stroke='%23b8942e' stroke-width='2' stroke-linecap='round' opacity='.75'/%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -1852,6 +1853,611 @@
             margin-top: 8px;
         }
 
+        .ng-gold-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.55em;
+            height: 1.55em;
+            min-width: 1.55em;
+            border-radius: 999px;
+            border: 1px solid rgba(212,175,55,0.28);
+            background:
+                radial-gradient(circle at 32% 24%, rgba(240,215,140,0.26), transparent 44%),
+                linear-gradient(145deg, rgba(180,148,46,0.18), rgba(12,12,18,0.88));
+            color: #d4af37;
+            box-shadow: 0 0 18px rgba(180,148,46,0.14), inset 0 0 12px rgba(180,148,46,0.08);
+            font-family: var(--font-display);
+            font-size: 0.72em;
+            font-weight: 700;
+            line-height: 1;
+            vertical-align: -0.18em;
+            text-shadow: 0 0 14px rgba(212,175,55,0.28);
+            flex-shrink: 0;
+        }
+
+        .ng-gold-icon + .ng-gold-icon {
+            margin-left: 0.25em;
+        }
+
+        .ambient-toggle {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 70;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px 10px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(212,175,55,0.24);
+            background: rgba(5,5,8,0.76);
+            color: #d8d2c4;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.38), 0 0 28px rgba(180,148,46,0.08);
+            transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .ambient-toggle:hover {
+            transform: translateY(-2px);
+            border-color: rgba(212,175,55,0.48);
+            color: #f0d78c;
+            box-shadow: 0 22px 60px rgba(0,0,0,0.45), 0 0 34px rgba(180,148,46,0.16);
+        }
+
+        .ambient-toggle.is-playing .ng-gold-icon {
+            animation: ambientPulse 3.4s ease-in-out infinite;
+        }
+
+        @keyframes ambientPulse {
+            0%, 100% { box-shadow: 0 0 16px rgba(180,148,46,0.12), inset 0 0 10px rgba(180,148,46,0.08); }
+            50% { box-shadow: 0 0 28px rgba(212,175,55,0.32), inset 0 0 18px rgba(180,148,46,0.16); }
+        }
+
+        .ng-workbench-section {
+            padding: 112px 24px;
+            background:
+                linear-gradient(180deg, #050508 0%, #080810 48%, #050508 100%),
+                radial-gradient(ellipse at 50% 0%, rgba(184,148,46,0.08), transparent 60%);
+        }
+
+        .ng-workbench-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .ng-workbench-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ng-workbench-panel {
+            min-height: 100%;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            background: rgba(255,255,255,0.022);
+            padding: 28px;
+        }
+
+        .ng-panel-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #d4af37;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .ng-panel-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .ng-panel-copy {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .ng-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin: 22px 0;
+        }
+
+        .ng-stat-tile {
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            background: rgba(5,5,8,0.62);
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .ng-stat-value {
+            color: #d4af37;
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .ng-stat-label {
+            color: #6b7280;
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        .ng-workbench-control,
+        .ng-workbench-select,
+        .ng-workbench-textarea {
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            background: rgba(5,5,8,0.72);
+            color: #e8e4dc;
+            padding: 13px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .ng-workbench-textarea {
+            min-height: 180px;
+            resize: vertical;
+            line-height: 1.8;
+        }
+
+        .ng-action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .ng-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid rgba(212,175,55,0.28);
+            border-radius: 12px;
+            background: rgba(184,148,46,0.1);
+            color: #f0d78c;
+            padding: 11px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .ng-action-btn:hover {
+            border-color: rgba(212,175,55,0.52);
+            background: rgba(184,148,46,0.16);
+            transform: translateY(-1px);
+        }
+
+        .ng-action-btn[disabled] {
+            cursor: default;
+            opacity: 0.58;
+            transform: none;
+        }
+
+        .ng-action-btn-primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #8a6d1b, #b8942e, #d4af37);
+            color: #050508;
+        }
+
+        .ng-course-results {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .ng-course-result {
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            background: rgba(5,5,8,0.58);
+            padding: 16px;
+        }
+
+        .ng-course-result h4 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .ng-course-result p {
+            color: #9ca3af;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .ng-course-result a {
+            color: #d4af37;
+            display: inline-flex;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .ng-course-logic {
+            margin-top: 72px;
+        }
+
+        .ng-logic-header {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+            gap: 32px;
+            align-items: end;
+            padding: 34px 0 28px;
+            border-top: 1px solid rgba(212,175,55,0.16);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .ng-logic-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.25rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        .ng-logic-copy {
+            color: #9ca3af;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .ng-logic-summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin: 28px 0 30px;
+        }
+
+        .ng-logic-summary-item {
+            border-left: 1px solid rgba(212,175,55,0.3);
+            padding-left: 14px;
+        }
+
+        .ng-logic-summary-value {
+            color: #d4af37;
+            display: block;
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .ng-logic-summary-label {
+            color: #77736b;
+            display: block;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        .ng-logic-stages {
+            display: grid;
+            gap: 14px;
+        }
+
+        .ng-logic-stage {
+            display: grid;
+            grid-template-columns: 184px minmax(0, 1fr);
+            gap: 24px;
+            border: 1px solid rgba(255,255,255,0.065);
+            border-radius: 18px;
+            background:
+                linear-gradient(90deg, rgba(184,148,46,0.085), rgba(255,255,255,0.018) 38%, rgba(5,5,8,0.18)),
+                rgba(255,255,255,0.018);
+            padding: 22px;
+        }
+
+        .ng-logic-stage-meta {
+            border-right: 1px solid rgba(255,255,255,0.06);
+            padding-right: 18px;
+        }
+
+        .ng-logic-stage-number {
+            color: rgba(212,175,55,0.58);
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .ng-logic-stage-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.28;
+            margin-top: 10px;
+        }
+
+        .ng-logic-stage-range {
+            color: #d4af37;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-top: 12px;
+        }
+
+        .ng-logic-stage-purpose {
+            color: #9ca3af;
+            font-size: 13px;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+
+        .ng-logic-stage-flow {
+            color: #d8d2c4;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .ng-logic-course-list {
+            columns: 2;
+            column-gap: 28px;
+            color: #b9b3a6;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .ng-logic-course-list li {
+            break-inside: avoid;
+            margin-bottom: 2px;
+        }
+
+        .ng-logic-loading {
+            color: #77736b;
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .ng-logic-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .ng-logic-header,
+            .ng-logic-stage {
+                grid-template-columns: 1fr;
+            }
+
+            .ng-logic-stage-meta {
+                border-right: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+                padding-right: 0;
+                padding-bottom: 16px;
+            }
+
+            .ng-logic-summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .ng-course-logic {
+                margin-top: 52px;
+            }
+
+            .ng-logic-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .ng-logic-course-list {
+                columns: 1;
+            }
+        }
+
+        .ng-prompt-box {
+            border: 1px solid rgba(212,175,55,0.18);
+            border-radius: 14px;
+            background: rgba(184,148,46,0.06);
+            color: #d8d2c4;
+            font-family: var(--font-display);
+            font-size: 17px;
+            line-height: 1.85;
+            margin-top: 18px;
+            padding: 18px;
+        }
+
+        .ng-mood-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .ng-mood-chip {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.035);
+            color: #9ca3af;
+            padding: 8px 12px;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .ng-mood-chip.is-active,
+        .ng-mood-chip:hover {
+            border-color: rgba(212,175,55,0.4);
+            color: #f0d78c;
+            background: rgba(184,148,46,0.1);
+        }
+
+        .ng-quality-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .ng-quality-item {
+            display: grid;
+            grid-template-columns: 120px 96px 1fr;
+            gap: 12px;
+            align-items: start;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
+        }
+
+        .ng-quality-item:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .ng-quality-name {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .ng-quality-status {
+            width: fit-content;
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .ng-quality-status.keep {
+            background: rgba(16,185,129,0.12);
+            color: #6ee7b7;
+        }
+
+        .ng-quality-status.defer {
+            background: rgba(245,158,11,0.12);
+            color: #fcd34d;
+        }
+
+        .ng-quality-reason {
+            color: #8f8b82;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 640px) {
+            .ng-workbench-section {
+                padding: 80px 18px;
+            }
+
+            .ng-workbench-panel {
+                padding: 22px;
+            }
+
+            .ng-stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ng-quality-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+
+        .ng-journey-strip {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .ng-journey-link {
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.025);
+            color: #d8d2c4;
+            padding: 14px;
+            text-align: center;
+            font-size: 13px;
+            transition: all 0.25s ease;
+        }
+
+        .ng-journey-link:hover {
+            border-color: rgba(212,175,55,0.34);
+            color: #f0d78c;
+            background: rgba(184,148,46,0.08);
+        }
+
+        @media (max-width: 760px) {
+            .ng-journey-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .ng-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            background: rgba(0,0,0,0.72);
+            backdrop-filter: blur(14px);
+        }
+
+        .ng-modal.hidden {
+            display: none;
+        }
+
+        .ng-modal-dialog {
+            width: min(760px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(212,175,55,0.18);
+            border-radius: 20px;
+            background: #080810;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.62);
+            padding: 28px;
+        }
+
+        .ng-modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ng-modal-close {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 999px;
+            color: #9ca3af;
+            width: 36px;
+            height: 36px;
+            transition: all 0.2s ease;
+        }
+
+        .ng-modal-close:hover {
+            border-color: rgba(212,175,55,0.35);
+            color: #f0d78c;
+        }
+
         </style>
 </head>
 <body class="min-h-screen">
@@ -1866,6 +2472,11 @@
 
     <!-- 粒子背景 -->
     <div class="particles-container" id="particlesContainer"></div>
+
+    <button id="ambientToggle" class="ambient-toggle" type="button" aria-pressed="false" aria-label="播放舒缓进入音乐">
+        <span class="ng-gold-icon" aria-hidden="true">♪</span>
+        <span id="ambientLabel">进入音乐</span>
+    </button>
 
     <!-- ============================================================ -->
     <!-- 导航 -->
@@ -1914,6 +2525,13 @@
                                     <div class="text-xs text-gray-500">每日挑战系统</div>
                                 </div>
                             </a>
+                            <a href="#product-workbench" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>📊</span>
+                                <div>
+                                    <div class="font-medium">进化工作台</div>
+                                    <div class="text-xs text-gray-500">签到 · 推荐 · 独白</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1959,6 +2577,10 @@
                     <span>📐</span>
                     <span>核心公式</span>
                 </a>
+                <a href="#product-workbench" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
+                    <span>📊</span>
+                    <span>工作台</span>
+                </a>
             </div>
             
             <!-- CTA Buttons -->
@@ -1993,6 +2615,10 @@
                 <a href="#training" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                     <span>⚡</span>
                     <span>30天训练</span>
+                </a>
+                <a href="#product-workbench" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>📊</span>
+                    <span>进化工作台</span>
                 </a>
                 <a href="#how-it-works" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                     <span>🗺️</span>
@@ -2109,6 +2735,257 @@
             </div>
         </div>
     </section>
+    <!-- 课程总提要 -->
+    <section id="course-brief" class="py-24 px-6 bg-gradient-to-b from-[#050508] via-[#080810] to-[#050508] reveal">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+                <div class="glass rounded-2xl p-8">
+                    <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">COURSE BRIEF</p>
+                    <h2 class="heading-section text-2xl sm:text-3xl md:text-4xl font-bold mb-5">百门深度课程体系</h2>
+                    <p class="text-gray-400 text-body mb-6">
+                        已扩展为100门深度课程库，并为每门课程补齐导览音频。原十二门核心课程总提要与自然人声朗读保留为入门总地图，新增课程库适合作为审计后的长期学习路径。
+                    </p>
+                    <div class="bg-[#050508]/80 border border-[#b8942e]/20 rounded-2xl p-5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="ng-gold-icon" aria-hidden="true">♪</span>
+                            <div>
+                                <p class="text-white font-semibold">课程提要音频</p>
+                                <p class="text-xs text-gray-500">自然人声 · 约18分钟</p>
+                            </div>
+                        </div>
+                        <audio controls preload="metadata" class="w-full">
+                            <source src="data/course_summary/narrowgate_course_brief_5000.m4a" type="audio/mp4">
+                            当前浏览器不支持音频播放。
+                        </audio>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 mt-6 text-center">
+                        <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">100</p>
+                            <p class="text-xs text-gray-500 mt-1">门课程</p>
+                        </div>
+                        <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">500+</p>
+                            <p class="text-xs text-gray-500 mt-1">章正文</p>
+                        </div>
+                        <div class="bg-white/[0.03] border border-white/5 rounded-xl p-4">
+                            <p class="text-[#d4af37] font-serif text-2xl font-bold">100</p>
+                            <p class="text-xs text-gray-500 mt-1">份音频</p>
+                        </div>
+                    </div>
+                </div>
+                <article class="glass rounded-2xl p-8">
+                    <div class="flex items-center justify-between gap-4 mb-5">
+                        <div>
+                            <p class="text-caption text-[#b8942e] tracking-[0.25em] uppercase mb-2">TEXT VERSION</p>
+                            <h3 class="font-serif text-2xl font-bold text-white">文字版提要</h3>
+                        </div>
+                        <a href="data/course_summary/narrowgate_course_brief_5000.txt" class="text-sm text-[#b8942e] hover:text-[#f0d78c] transition" target="_blank" rel="noreferrer">
+                            打开全文
+                        </a>
+                    </div>
+                    <div id="courseBriefText" class="max-h-[560px] overflow-y-auto pr-3 text-gray-300 text-sm md:text-base leading-8 whitespace-pre-wrap">
+                        正在加载课程提要...
+                    </div>
+                </article>
+            </div>
+
+            <div id="course-logic" class="ng-course-logic">
+                <div class="ng-logic-header">
+                    <div>
+                        <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">COURSE LOGIC</p>
+                        <h3 id="courseLogicTitle" class="ng-logic-title">100门课程的进化逻辑线</h3>
+                    </div>
+                    <p class="ng-logic-copy">
+                        窄门课程不是按兴趣随便学习，而是先用核心课建立共同语言，再进入认知、情绪、行为、关系、事业五个现实维度，最后回到整合通道，把个人改变沉淀为长期生命证据。
+                    </p>
+                </div>
+
+                <div class="ng-logic-summary" aria-label="课程体系摘要">
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">12</span>
+                        <span class="ng-logic-summary-label">核心课先建立窄门语言</span>
+                    </div>
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">5</span>
+                        <span class="ng-logic-summary-label">现实维度逐层训练</span>
+                    </div>
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">14</span>
+                        <span class="ng-logic-summary-label">整合通道收束成生命实践</span>
+                    </div>
+                    <div class="ng-logic-summary-item">
+                        <span class="ng-logic-summary-value">100</span>
+                        <span class="ng-logic-summary-label">每门课都有章节、测验与音频</span>
+                    </div>
+                </div>
+
+                <div id="ngCourseLogicStages" class="ng-logic-stages" aria-live="polite">
+                    <p class="ng-logic-loading">正在加载100门课程逻辑线...</p>
+                </div>
+
+                <div class="ng-logic-cta">
+                    <a href="course-system.html#course-library" class="ng-action-btn ng-action-btn-primary">打开完整课程库</a>
+                    <a href="#product-workbench" class="ng-action-btn">按当前卡点推荐课程</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 历史功能合并后的进化工作台 -->
+    <section id="product-workbench" class="ng-workbench-section reveal">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14">
+                <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">EVOLUTION WORKBENCH</p>
+                <h2 class="heading-section text-3xl md:text-5xl font-bold mb-5">把历史功能合成一条可用路径</h2>
+                <p class="text-gray-400 text-body max-w-3xl mx-auto">
+                    从用户角度保留真正能推动改变的功能：先看见问题，再匹配课程，每天完成一个动作，晚上写下真实独白，最后交给见证人与进化系统沉淀。
+                </p>
+            </div>
+
+            <div class="ng-workbench-grid">
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">✓</span> Daily Loop</div>
+                    <h3 class="ng-panel-title">今日穿越状态</h3>
+                    <p class="ng-panel-copy">签到不单独做成任务，而是绑定课程训练和经验值，帮助用户形成回访节奏。</p>
+                    <div class="ng-stat-grid">
+                        <div class="ng-stat-tile">
+                            <div id="ngWorkbenchStreak" class="ng-stat-value">0</div>
+                            <div class="ng-stat-label">连续天数</div>
+                        </div>
+                        <div class="ng-stat-tile">
+                            <div id="ngWorkbenchXp" class="ng-stat-value">0</div>
+                            <div class="ng-stat-label">本地经验值</div>
+                        </div>
+                        <div class="ng-stat-tile">
+                            <div id="ngWorkbenchNotes" class="ng-stat-value">0</div>
+                            <div class="ng-stat-label">独白记录</div>
+                        </div>
+                    </div>
+                    <p id="ngWorkbenchLastCheckin" class="text-xs text-gray-500">尚未签到</p>
+                    <div class="ng-action-row">
+                        <button id="ngCheckinButton" type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngDoCheckin()">
+                            <span class="ng-gold-icon" aria-hidden="true">✓</span>
+                            今日签到
+                        </button>
+                        <button type="button" class="ng-action-btn" onclick="scrollToSection('training')">
+                            进入30天训练
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">⌖</span> Course Routing</div>
+                    <h3 class="ng-panel-title">课程推荐器</h3>
+                    <p class="ng-panel-copy">把灵魂审计的五维度结果直接转成课程路径，避免用户做完审计后不知道下一步。</p>
+                    <label for="ngRecommendationDimension" class="block text-xs text-gray-500 mt-5 mb-2">此刻最卡住你的维度</label>
+                    <select id="ngRecommendationDimension" class="ng-workbench-select">
+                        <option value="cognition">认知：想清楚，但总绕开真问题</option>
+                        <option value="emotion">情绪：被恐惧、羞耻、愤怒卡住</option>
+                        <option value="behavior">行为：知道要做，但迟迟不行动</option>
+                        <option value="relationship">关系：边界、讨好、亲密与孤独</option>
+                        <option value="career">事业：目标、系统、选择与执行</option>
+                        <option value="integration">整合：准备进入完整穿越路径</option>
+                    </select>
+                    <div class="ng-action-row">
+                        <button type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngRecommendCourses()">
+                            生成课程路径
+                        </button>
+                        <a href="course-system.html" class="ng-action-btn">打开课程体系</a>
+                    </div>
+                    <div id="ngRecommendationResults" class="ng-course-results" aria-live="polite"></div>
+                </div>
+
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">●</span> Night Monologue</div>
+                    <h3 class="ng-panel-title">深夜独白</h3>
+                    <p class="ng-panel-copy">这是历史分支里最有情绪价值的功能。它不打断主流程，只在用户需要安静面对自己时打开。</p>
+                    <div id="ngMonologuePromptPreview" class="ng-prompt-box">今晚的问题正在准备...</div>
+                    <div id="ngMoodPreview" class="ng-mood-row"></div>
+                    <div class="ng-action-row">
+                        <button type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngOpenMonologue()">
+                            开始独白
+                        </button>
+                        <button type="button" class="ng-action-btn" onclick="ngRefreshMonologuePrompt()">
+                            换一个问题
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ng-workbench-panel">
+                    <div class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">▦</span> Product QA</div>
+                    <h3 class="ng-panel-title">功能有效性评估</h3>
+                    <p class="ng-panel-copy">不是把历史分支全部堆到首页，而是按用户是否能更快完成一次真实改变来取舍。</p>
+                    <div class="ng-quality-list">
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">审计与推荐</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">解决“看见问题后下一步做什么”，直接连接课程。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">签到与XP</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">提升连续使用，不依赖后端也能保存本地进度。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">深夜独白</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">适合情绪高峰和睡前复盘，和课程音频形成互补。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">见证人网络</div>
+                            <div class="ng-quality-status keep">已接入</div>
+                            <div class="ng-quality-reason">静态页走本地存储兜底，后端开启后可平滑接API。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">国际化</div>
+                            <div class="ng-quality-status defer">暂缓扩展</div>
+                            <div class="ng-quality-reason">当前课程与文案以中文深度表达为核心，半成品翻译会割裂体验。</div>
+                        </div>
+                        <div class="ng-quality-item">
+                            <div class="ng-quality-name">离线缓存</div>
+                            <div class="ng-quality-status defer">暂缓启用</div>
+                            <div class="ng-quality-reason">GitHub Pages 正在快迭代，强缓存容易让用户看到旧页面。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ng-journey-strip">
+                <a class="ng-journey-link" href="#audit">1. 灵魂审计</a>
+                <a class="ng-journey-link" href="#product-workbench">2. 课程推荐</a>
+                <a class="ng-journey-link" href="#training">3. 每日训练</a>
+                <a class="ng-journey-link" href="#social-proof">4. 见证记录</a>
+                <a class="ng-journey-link" href="#section-evolution">5. 进化沉淀</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="ngMonologueModal" class="ng-modal hidden" role="dialog" aria-modal="true" aria-labelledby="ngMonologueTitle">
+        <div class="ng-modal-dialog">
+            <div class="ng-modal-header">
+                <div>
+                    <p class="ng-panel-kicker"><span class="ng-gold-icon" aria-hidden="true">●</span> Quiet Writing</p>
+                    <h3 id="ngMonologueTitle" class="ng-panel-title">深夜独白</h3>
+                    <p class="ng-panel-copy">不用写得漂亮，只写真实。你的内容只保存在当前浏览器。</p>
+                </div>
+                <button type="button" class="ng-modal-close" onclick="ngCloseMonologue()" aria-label="关闭深夜独白">×</button>
+            </div>
+            <div id="ngMonologuePrompt" class="ng-prompt-box mb-4"></div>
+            <div id="ngMonologueMoodChips" class="ng-mood-row mb-4"></div>
+            <textarea id="ngMonologueText" class="ng-workbench-textarea" placeholder="现在开始写。不要解释，不要表演，不要急着解决。"></textarea>
+            <div class="flex flex-wrap items-center justify-between gap-3 mt-4 text-xs text-gray-500">
+                <span id="ngMonologueCount">0 字</span>
+                <span id="ngMonologueSaved">尚未保存</span>
+            </div>
+            <div class="ng-action-row">
+                <button type="button" class="ng-action-btn ng-action-btn-primary" onclick="ngSaveMonologue()">
+                    保存独白
+                </button>
+                <button type="button" class="ng-action-btn" onclick="ngRefreshMonologuePrompt()">
+                    换一个问题
+                </button>
+            </div>
+        </div>
+    </div>
 <!-- 核心命题 -->
     <!-- ============================================================ --><!-- 核心命题 -->
     <!-- ============================================================ -->
@@ -2496,8 +3373,8 @@
     <!-- ============================================================ -->
     <section id="audit" class="py-30 px-6">
         <div class="max-w-2xl mx-auto">
-            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">灵魂拷问</h2>
-            <p class="text-gray-500 text-center mb-12 text-body">AI 不接受表面答案。6大维度 · 4层深度 · 持续追问直到真相浮现。</p>
+            <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">灵魂审计</h2>
+            <p class="text-gray-500 text-center mb-12 text-body">AI 不接受表面答案。持续追问，直到你看见真相。</p>
 
             <div id="audit-container" class="glass rounded-xl p-6 min-h-[400px]">
                 <!-- 初始状态 -->
@@ -2505,12 +3382,11 @@
                     <p class="text-4xl mb-6">🚪</p>
                     <h3 class="font-serif text-xl mb-4">准备好了吗？</h3>
                     <p class="text-gray-500 text-sm mb-8 max-w-md mx-auto">
-                        6个维度逐层剥开：认知 · 情绪 · 行为 · 关系 · 事业 · 宇宙认知。<br>
-                        AI 检测回避模式——"还好"、"都行"、"不知道"不算回答。<br>
-                        审计完成后，自动匹配你的专属穿越路线和大师引导者。
+                        灵魂审计会在5个维度深度追问你：认知、情绪、行为、关系、事业。<br>
+                        AI 会检测你的回避模式，不让你用"还好"、"都行"糊弄过去。
                     </p>
                     <button onclick="startAudit()" class="btn-gold-primary font-semibold px-6 py-3 rounded-lg hover:bg-[#d4af37] transition">
-                        开始灵魂拷问 →
+                        开始审计
                     </button>
                 </div>
 
@@ -2932,6 +3808,737 @@
     <!-- JavaScript -->
     <!-- ============================================================ -->
     <script>
+        const GOLD_ICON_SYMBOLS = {
+            '🚪': '∩', '🔍': '⌕', '🧠': '◎', '🧙': '✦', '⚡': 'ϟ',
+            '📚': '▤', '🗺️': '⌖', '👥': '◉', '📖': '☰', '📐': '◇',
+            '😰': '◌', '🚀': '▲', '🛠️': '◆', '📊': '▦', '⏱️': '◷',
+            '🎯': '◎', '✨': '✦', '🔥': '▲', '💪': '◆', '🎭': '◐',
+            '⚠️': '!', '✅': '✓', '👑': '♛', '🦉': '◎', '🌑': '●',
+            '🪞': '◈', '🏗️': '△', '🔮': '◌', '👨‍💼': '◇', '👩‍🎨': '◇',
+            '👨‍🏫': '◇', '👩‍⚕️': '◇', '👨‍💻': '◇', '👩‍🎓': '◇',
+            '💡': '✧', '🌟': '✦', '💬': '◉', '📝': '☰', '📅': '◷',
+            '🧭': '⌖', '🎧': '♪', '🧩': '◆', '🏢': '▦', '🔒': '◇',
+            '⭐': '✦', '🎵': '♪', '📌': '◇', '💎': '◇', '🔁': '↻'
+        };
+
+        const GOLD_ICON_REGEX = new RegExp(
+            Object.keys(GOLD_ICON_SYMBOLS)
+                .sort((a, b) => b.length - a.length)
+                .map(icon => icon.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+                .join('|'),
+            'g'
+        );
+
+        function normalizeGoldIcons(root = document.body) {
+            if (!root) return;
+
+            const walkerRoot = root.nodeType === Node.TEXT_NODE ? root.parentElement : root;
+            if (!walkerRoot) return;
+
+            const walker = document.createTreeWalker(walkerRoot, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    const parent = node.parentElement;
+                    if (!parent || parent.closest('script, style, textarea, input, select, option, .ng-gold-icon')) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    GOLD_ICON_REGEX.lastIndex = 0;
+                    return GOLD_ICON_REGEX.test(node.nodeValue)
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            });
+
+            const textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            textNodes.forEach(node => {
+                GOLD_ICON_REGEX.lastIndex = 0;
+                const fragment = document.createDocumentFragment();
+                let lastIndex = 0;
+                node.nodeValue.replace(GOLD_ICON_REGEX, (match, offset) => {
+                    if (offset > lastIndex) {
+                        fragment.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex, offset)));
+                    }
+                    const icon = document.createElement('span');
+                    icon.className = 'ng-gold-icon';
+                    icon.setAttribute('aria-hidden', 'true');
+                    icon.textContent = GOLD_ICON_SYMBOLS[match] || '✦';
+                    fragment.appendChild(icon);
+                    lastIndex = offset + match.length;
+                    return match;
+                });
+                if (lastIndex < node.nodeValue.length) {
+                    fragment.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
+                }
+                node.parentNode.replaceChild(fragment, node);
+            });
+        }
+
+        function setupGoldIconObserver() {
+            normalizeGoldIcons(document.body);
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            normalizeGoldIcons(node.parentElement);
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            normalizeGoldIcons(node);
+                        }
+                    });
+                });
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+
+        const ambientMusic = {
+            ctx: null,
+            masterGain: null,
+            oscillators: [],
+            interval: null,
+            chordIndex: 0,
+            playing: false
+        };
+
+        const ambientChords = [
+            [196.00, 246.94, 293.66, 392.00],
+            [174.61, 220.00, 261.63, 349.23],
+            [164.81, 196.00, 246.94, 329.63],
+            [146.83, 196.00, 220.00, 293.66]
+        ];
+
+        function buildAmbientMusic() {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return null;
+            if (ambientMusic.ctx) return ambientMusic.ctx;
+
+            const ctx = new AudioContextClass();
+            const masterGain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            const dry = ctx.createGain();
+            const delay = ctx.createDelay(6);
+            const feedback = ctx.createGain();
+            const wet = ctx.createGain();
+
+            masterGain.gain.value = 0;
+            filter.type = 'lowpass';
+            filter.frequency.value = 920;
+            filter.Q.value = 0.55;
+            dry.gain.value = 0.72;
+            delay.delayTime.value = 1.9;
+            feedback.gain.value = 0.26;
+            wet.gain.value = 0.18;
+
+            filter.connect(dry);
+            dry.connect(masterGain);
+            filter.connect(delay);
+            delay.connect(feedback);
+            feedback.connect(delay);
+            delay.connect(wet);
+            wet.connect(masterGain);
+            masterGain.connect(ctx.destination);
+
+            ambientChords[0].forEach((frequency, index) => {
+                const oscillator = ctx.createOscillator();
+                const gain = ctx.createGain();
+                oscillator.type = index === 3 ? 'triangle' : 'sine';
+                oscillator.frequency.value = frequency;
+                oscillator.detune.value = (index - 1.5) * 3;
+                gain.gain.value = index === 3 ? 0.026 : 0.045;
+                oscillator.connect(gain);
+                gain.connect(filter);
+                oscillator.start();
+                ambientMusic.oscillators.push(oscillator);
+            });
+
+            ambientMusic.ctx = ctx;
+            ambientMusic.masterGain = masterGain;
+            return ctx;
+        }
+
+        function moveAmbientChord() {
+            if (!ambientMusic.ctx) return;
+            ambientMusic.chordIndex = (ambientMusic.chordIndex + 1) % ambientChords.length;
+            const now = ambientMusic.ctx.currentTime;
+            ambientChords[ambientMusic.chordIndex].forEach((frequency, index) => {
+                const oscillator = ambientMusic.oscillators[index];
+                oscillator.frequency.cancelScheduledValues(now);
+                oscillator.frequency.setTargetAtTime(frequency, now, 3.2);
+            });
+        }
+
+        async function startAmbientMusic() {
+            const ctx = buildAmbientMusic();
+            if (!ctx) return;
+            if (ctx.state === 'suspended') await ctx.resume();
+
+            const now = ctx.currentTime;
+            ambientMusic.masterGain.gain.cancelScheduledValues(now);
+            ambientMusic.masterGain.gain.setTargetAtTime(0.048, now, 1.8);
+            ambientMusic.interval = ambientMusic.interval || setInterval(moveAmbientChord, 9000);
+            ambientMusic.playing = true;
+            updateAmbientButton();
+        }
+
+        function stopAmbientMusic() {
+            if (!ambientMusic.ctx || !ambientMusic.masterGain) return;
+            const now = ambientMusic.ctx.currentTime;
+            ambientMusic.masterGain.gain.cancelScheduledValues(now);
+            ambientMusic.masterGain.gain.setTargetAtTime(0, now, 0.9);
+            ambientMusic.playing = false;
+            updateAmbientButton();
+        }
+
+        function updateAmbientButton() {
+            const button = document.getElementById('ambientToggle');
+            const label = document.getElementById('ambientLabel');
+            if (!button || !label) return;
+            button.classList.toggle('is-playing', ambientMusic.playing);
+            button.setAttribute('aria-pressed', ambientMusic.playing ? 'true' : 'false');
+            button.setAttribute('aria-label', ambientMusic.playing ? '暂停舒缓进入音乐' : '播放舒缓进入音乐');
+            label.textContent = ambientMusic.playing ? '音乐已开' : '进入音乐';
+        }
+
+        function setupAmbientToggle() {
+            const button = document.getElementById('ambientToggle');
+            if (!button) return;
+            button.addEventListener('click', () => {
+                if (ambientMusic.playing) {
+                    stopAmbientMusic();
+                } else {
+                    startAmbientMusic();
+                }
+            });
+        }
+
+        async function loadCourseBriefText() {
+            const container = document.getElementById('courseBriefText');
+            if (!container) return;
+            try {
+                const response = await fetch('data/course_summary/narrowgate_course_brief_5000.txt');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                container.textContent = await response.text();
+            } catch (error) {
+                container.textContent = '课程提要加载失败，请确认页面通过本地服务器或 GitHub Pages 打开。';
+            }
+        }
+
+        const NG_WORKBENCH_STORAGE_KEY = 'narrowgate_workbench_v1';
+        const NG_MONOLOGUE_STORAGE_KEY = 'narrowgate_monologues_v1';
+        const NG_JOURNAL_STORAGE_KEY = 'narrowgate_journals_v1';
+        const NG_WITNESS_STORAGE_KEY = 'narrowgate_witnesses_v1';
+
+        const NG_COURSE_LIBRARY = {
+            socratic_introspection: {
+                title: '苏格拉底式自省',
+                subtitle: '学会问自己不敢问的问题',
+                reason: '适合先拆掉自我叙事，找出真正的窄门。'
+            },
+            shadow_integration: {
+                title: '阴影整合',
+                subtitle: '你最讨厌的，正是你最需要的',
+                reason: '适合处理投射、羞耻和被压下去的情绪。'
+            },
+            stoic_resilience: {
+                title: '斯多葛韧性',
+                subtitle: '在失控的世界里找到掌控',
+                reason: '适合从情绪波动回到可执行的选择。'
+            },
+            behavioral_reshape: {
+                title: '行为重塑',
+                subtitle: '用科学方法重建你的行为系统',
+                reason: '适合把认知转成每日动作和环境设计。'
+            },
+            evasion_anatomy: {
+                title: '回避解剖',
+                subtitle: '你所有借口的完整图谱',
+                reason: '适合识别拖延、合理化和最小化等借口。'
+            },
+            relationship_mirror: {
+                title: '关系镜像',
+                subtitle: '每段关系都是灵魂的镜子',
+                reason: '适合处理讨好、边界、亲密与孤独。'
+            },
+            systems_thinking: {
+                title: '系统思维',
+                subtitle: '从棋子到棋手的视角切换',
+                reason: '适合重新设计目标、资源和选择系统。'
+            },
+            pain_alchemy: {
+                title: '痛苦炼金术',
+                subtitle: '把铅变成金的灵魂工艺',
+                reason: '适合把痛苦经验转化成意义和行动燃料。'
+            },
+            antifragile: {
+                title: '反脆弱修炼',
+                subtitle: '从失败中获益的能力',
+                reason: '适合把挫折做成训练反馈，而不是自我否定。'
+            },
+            meaning_construction: {
+                title: '意义建构',
+                subtitle: '在荒谬中创造意义',
+                reason: '适合在混乱阶段重建方向感。'
+            },
+            narrow_gate_crossing: {
+                title: '窄门穿越',
+                subtitle: '从凡人到封神的完整路径',
+                reason: '适合进入完整的审计、训练、见证和进化流程。'
+            },
+            witness_evolution: {
+                title: '见证与进化',
+                subtitle: '被看见是进化的开始',
+                reason: '适合把个人改变放入关系和见证系统中。'
+            }
+        };
+
+        const NG_RECOMMENDATION_MAP = {
+            cognition: ['socratic_introspection', 'belief_audit', 'cognitive_biases', 'self_deception_detection', 'value_clarification'],
+            emotion: ['shadow_integration', 'fear_work', 'shame_release', 'anxiety_grounding', 'affect_regulation'],
+            behavior: ['evasion_anatomy', 'procrastination_breakthrough', 'habit_architecture', 'micro_courage', 'relapse_recovery'],
+            relationship: ['relationship_mirror', 'boundary_language', 'attachment_repair', 'authentic_communication', 'witnessing_circles'],
+            career: ['systems_thinking', 'vocation_discovery', 'career_leverage', 'strategic_focus', 'feedback_systems'],
+            integration: ['narrow_gate_crossing', 'spiritual_discernment', 'life_review', 'ethical_action', 'guardian_training']
+        };
+
+        const NG_COURSE_LOGIC_TRACKS = [
+            {
+                track: '核心课',
+                step: '01',
+                title: '先建立共同语言',
+                purpose: '让学习者知道什么是宽门、什么是窄门，以及改变为什么必须被行动和见证验证。',
+                flow: '看见问题 -> 识别回避 -> 承受痛苦 -> 行动验证 -> 进入见证'
+            },
+            {
+                track: '认知觉察',
+                step: '02',
+                title: '校准看见系统',
+                purpose: '处理信念、叙事、注意力、偏差和自欺，让人先看清自己正在怎样解释世界。',
+                flow: '信念审计 -> 偏差识别 -> 叙事重写 -> 决策清明 -> 认知谦卑'
+            },
+            {
+                track: '情绪阴影',
+                step: '03',
+                title: '承接被压下的情绪',
+                purpose: '把恐惧、羞耻、愤怒、哀伤和焦虑从敌人变成信号，避免用麻木和攻击绕开真实。',
+                flow: '情绪命名 -> 身体觉察 -> 阴影整合 -> 安全容量 -> 调节训练'
+            },
+            {
+                track: '行为执行',
+                step: '04',
+                title: '把知道变成证据',
+                purpose: '修复从理解到行动之间的断裂，用习惯、问责、节律和微勇气形成可持续执行。',
+                flow: '拖延突破 -> 习惯架构 -> 微行动 -> 问责系统 -> 复发重启'
+            },
+            {
+                track: '关系真实',
+                step: '05',
+                title: '把真实带入关系',
+                purpose: '处理边界、投射、依恋、亲密、冲突和见证，让改变不只停留在个人内心。',
+                flow: '依恋修复 -> 边界语言 -> 清洁冲突 -> 真实沟通 -> 见证小组'
+            },
+            {
+                track: '事业系统',
+                step: '06',
+                title: '让选择进入现实系统',
+                purpose: '把天职、金钱、资源、权力、反馈和长期复利放进同一张现实地图里。',
+                flow: '天职发现 -> 战略聚焦 -> 创造输出 -> 反馈系统 -> 长期复利'
+            },
+            {
+                track: '整合通道',
+                step: '07',
+                title: '沉淀成生命实践',
+                purpose: '把认知、情绪、行为、关系和事业的改变整合为临在、服务、伦理和守门人责任。',
+                flow: '灵性分辨 -> 死亡觉察 -> 生命复盘 -> 服务之路 -> 守门人训练'
+            }
+        ];
+
+        const NG_MONOLOGUE_PROMPTS = [
+            '如果今晚不需要显得坚强，你最想承认的一件事是什么？',
+            '你最近最频繁回避的那个动作，背后真正保护的是什么？',
+            '如果你的恐惧会说话，它会请求你不要失去什么？',
+            '你在哪一段关系里最不像真实的自己？为什么？',
+            '你一直想证明给谁看？如果不证明，会发生什么？',
+            '今天有没有一个瞬间，你明明知道该走窄门，却选择了宽门？',
+            '你最想成为的人，正在要求你放下哪一种旧身份？',
+            '如果痛苦不是惩罚，而是提醒，它正在提醒你什么？'
+        ];
+
+        const NG_MONOLOGUE_MOODS = ['平静', '疲惫', '害怕', '羞耻', '愤怒', '清醒', '有力量'];
+        let ngCourseCatalog = [];
+        let ngCurrentPrompt = '';
+        let ngSelectedMood = '平静';
+
+        function ngReadJson(key, fallback) {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function ngWriteJson(key, value) {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+
+        function ngDateKey(date = new Date()) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function ngGetYesterdayKey() {
+            const date = new Date();
+            date.setDate(date.getDate() - 1);
+            return ngDateKey(date);
+        }
+
+        function ngGetWorkbenchState() {
+            return {
+                streak: 0,
+                xp: 0,
+                lastCheckin: '',
+                lastRecommendation: 'cognition',
+                ...ngReadJson(NG_WORKBENCH_STORAGE_KEY, {})
+            };
+        }
+
+        function ngSaveWorkbenchState(state) {
+            ngWriteJson(NG_WORKBENCH_STORAGE_KEY, state);
+        }
+
+        function ngEscapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function ngRefreshWorkbenchUI() {
+            const state = ngGetWorkbenchState();
+            const monologues = ngReadJson(NG_MONOLOGUE_STORAGE_KEY, []);
+            const today = ngDateKey();
+            const streakEl = document.getElementById('ngWorkbenchStreak');
+            const xpEl = document.getElementById('ngWorkbenchXp');
+            const notesEl = document.getElementById('ngWorkbenchNotes');
+            const lastEl = document.getElementById('ngWorkbenchLastCheckin');
+            const button = document.getElementById('ngCheckinButton');
+
+            if (streakEl) streakEl.textContent = state.streak;
+            if (xpEl) xpEl.textContent = state.xp;
+            if (notesEl) notesEl.textContent = monologues.length;
+            if (lastEl) lastEl.textContent = state.lastCheckin ? `上次签到：${state.lastCheckin}` : '尚未签到';
+            if (button) {
+                const checkedToday = state.lastCheckin === today;
+                button.disabled = checkedToday;
+                button.innerHTML = checkedToday
+                    ? '<span class="ng-gold-icon" aria-hidden="true">✓</span>今日已签到'
+                    : '<span class="ng-gold-icon" aria-hidden="true">✓</span>今日签到';
+            }
+            ngRefreshEvolutionSnapshot();
+        }
+
+        function ngRefreshEvolutionSnapshot() {
+            const stats = document.querySelectorAll('#evolution-stats .glass');
+            if (!stats.length) return;
+            const state = ngGetWorkbenchState();
+            const completed = Array.isArray(window.userProgress?.completed_days)
+                ? window.userProgress.completed_days.length
+                : (Array.isArray(userProgress?.completed_days) ? userProgress.completed_days.length : 0);
+            const level = state.xp >= 500 ? 4 : state.xp >= 250 ? 3 : state.xp >= 80 ? 2 : 1;
+            const values = [level, state.xp, completed];
+            stats.forEach((tile, index) => {
+                const value = tile.querySelector('p:first-child');
+                if (value && typeof values[index] !== 'undefined') value.textContent = values[index];
+            });
+        }
+
+        function ngDoCheckin() {
+            const state = ngGetWorkbenchState();
+            const today = ngDateKey();
+            if (state.lastCheckin === today) {
+                ngRefreshWorkbenchUI();
+                return;
+            }
+            state.streak = state.lastCheckin === ngGetYesterdayKey() ? state.streak + 1 : 1;
+            state.xp += 10;
+            state.lastCheckin = today;
+            ngSaveWorkbenchState(state);
+            ngRefreshWorkbenchUI();
+        }
+
+        function ngRecommendCourses() {
+            const select = document.getElementById('ngRecommendationDimension');
+            const result = document.getElementById('ngRecommendationResults');
+            if (!select || !result) return;
+            const dimension = select.value || 'cognition';
+            const state = ngGetWorkbenchState();
+            state.lastRecommendation = dimension;
+            ngSaveWorkbenchState(state);
+
+            const courseIds = NG_RECOMMENDATION_MAP[dimension] || NG_RECOMMENDATION_MAP.cognition;
+            const availableCourses = courseIds
+                .map((courseId) => ({ courseId, course: NG_COURSE_LIBRARY[courseId] }))
+                .filter((item) => item.course);
+            result.innerHTML = availableCourses.map(({ courseId, course }, index) => {
+                return `
+                    <div class="ng-course-result">
+                        <h4>${index + 1}. ${ngEscapeHtml(course.title)}</h4>
+                        <p>${ngEscapeHtml(course.subtitle)}</p>
+                        <p class="mt-2">${ngEscapeHtml(course.reason)}</p>
+                        <a href="course-system.html#course-library">进入课程体系</a>
+                    </div>
+                `;
+            }).join('') || '<div class="ng-course-result"><p>课程库正在加载，请稍后再试。</p></div>';
+        }
+
+        function ngRenderCourseLogic() {
+            const container = document.getElementById('ngCourseLogicStages');
+            if (!container) return;
+            if (!Array.isArray(ngCourseCatalog) || !ngCourseCatalog.length) {
+                container.innerHTML = '<p class="ng-logic-loading">正在加载100门课程逻辑线...</p>';
+                return;
+            }
+
+            const grouped = ngCourseCatalog.reduce((map, course) => {
+                const key = course.track || '未分组';
+                if (!map[key]) map[key] = [];
+                map[key].push(course);
+                return map;
+            }, {});
+
+            container.innerHTML = NG_COURSE_LOGIC_TRACKS.map((stage) => {
+                const courses = (grouped[stage.track] || []).sort((a, b) => Number(a.order) - Number(b.order));
+                const first = courses[0]?.order || '';
+                const last = courses[courses.length - 1]?.order || '';
+                const range = first && last
+                    ? `${String(first).padStart(2, '0')}-${String(last).padStart(2, '0')} · ${courses.length}门`
+                    : `${courses.length}门`;
+                const courseList = courses.map((course) => `
+                    <li>${String(course.order).padStart(2, '0')}. ${ngEscapeHtml(course.title)}</li>
+                `).join('');
+                return `
+                    <section class="ng-logic-stage" aria-label="${ngEscapeHtml(stage.title)}">
+                        <div class="ng-logic-stage-meta">
+                            <div class="ng-logic-stage-number">STEP ${ngEscapeHtml(stage.step)}</div>
+                            <h4 class="ng-logic-stage-title">${ngEscapeHtml(stage.title)}</h4>
+                            <div class="ng-logic-stage-range">${ngEscapeHtml(range)}</div>
+                        </div>
+                        <div>
+                            <p class="ng-logic-stage-purpose">${ngEscapeHtml(stage.purpose)}</p>
+                            <p class="ng-logic-stage-flow">${ngEscapeHtml(stage.flow)}</p>
+                            <ol class="ng-logic-course-list">${courseList}</ol>
+                        </div>
+                    </section>
+                `;
+            }).join('');
+        }
+
+        async function ngLoadCourseCatalog() {
+            try {
+                const response = await fetch(`data/course_catalog_100.json?v=${Date.now()}`, { cache: 'no-store' });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                ngCourseCatalog = await response.json();
+                ngRenderCourseLogic();
+                ngCourseCatalog.forEach((course) => {
+                    NG_COURSE_LIBRARY[course.id] = {
+                        title: course.title,
+                        subtitle: course.subtitle,
+                        reason: `${course.description || `${course.dimension}维度 · ${course.track}`} · ${course.audio_duration_seconds ? Math.round(course.audio_duration_seconds / 60) + '分钟音频' : '音频已配'}`
+                    };
+                });
+                ngRecommendCourses();
+            } catch (error) {
+                // 首页仍保留12门核心课程推荐，课程库页面会提示加载状态。
+                const container = document.getElementById('ngCourseLogicStages');
+                if (container) container.innerHTML = '<p class="ng-logic-loading">课程逻辑线加载失败，请通过本地服务器或 GitHub Pages 打开页面。</p>';
+            }
+        }
+
+        function ngRenderMoodChips() {
+            const markup = NG_MONOLOGUE_MOODS.map((mood) => `
+                <button type="button" class="ng-mood-chip ${mood === ngSelectedMood ? 'is-active' : ''}" onclick="ngSelectMood('${mood}')">
+                    ${mood}
+                </button>
+            `).join('');
+            const preview = document.getElementById('ngMoodPreview');
+            const modal = document.getElementById('ngMonologueMoodChips');
+            if (preview) preview.innerHTML = markup;
+            if (modal) modal.innerHTML = markup;
+        }
+
+        function ngSelectMood(mood) {
+            ngSelectedMood = mood;
+            ngRenderMoodChips();
+        }
+
+        function ngRefreshMonologuePrompt() {
+            const next = NG_MONOLOGUE_PROMPTS[Math.floor(Math.random() * NG_MONOLOGUE_PROMPTS.length)];
+            ngCurrentPrompt = next;
+            const preview = document.getElementById('ngMonologuePromptPreview');
+            const modalPrompt = document.getElementById('ngMonologuePrompt');
+            if (preview) preview.textContent = next;
+            if (modalPrompt) modalPrompt.textContent = next;
+        }
+
+        function ngOpenMonologue() {
+            if (!ngCurrentPrompt) ngRefreshMonologuePrompt();
+            ngRenderMoodChips();
+            const modal = document.getElementById('ngMonologueModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => document.getElementById('ngMonologueText')?.focus(), 80);
+        }
+
+        function ngCloseMonologue() {
+            document.getElementById('ngMonologueModal')?.classList.add('hidden');
+        }
+
+        function ngUpdateMonologueCount() {
+            const input = document.getElementById('ngMonologueText');
+            const count = document.getElementById('ngMonologueCount');
+            if (input && count) count.textContent = `${input.value.trim().length} 字`;
+        }
+
+        function ngSaveMonologue() {
+            const input = document.getElementById('ngMonologueText');
+            const saved = document.getElementById('ngMonologueSaved');
+            const text = input?.value.trim() || '';
+            if (!text) {
+                alert('请先写下一段真实独白');
+                return;
+            }
+            const monologues = ngReadJson(NG_MONOLOGUE_STORAGE_KEY, []);
+            monologues.unshift({
+                id: 'mono_' + Date.now(),
+                prompt: ngCurrentPrompt,
+                mood: ngSelectedMood,
+                text,
+                created_at: new Date().toISOString()
+            });
+            ngWriteJson(NG_MONOLOGUE_STORAGE_KEY, monologues.slice(0, 50));
+            const state = ngGetWorkbenchState();
+            state.xp += 5;
+            ngSaveWorkbenchState(state);
+            input.value = '';
+            ngUpdateMonologueCount();
+            if (saved) saved.textContent = '已保存 · +5 XP';
+            ngRefreshWorkbenchUI();
+        }
+
+        function ngCompleteDayLocally(day) {
+            const numericDay = Number(day);
+            if (!Number.isFinite(numericDay)) return null;
+            if (!Array.isArray(userProgress.completed_days)) userProgress.completed_days = [];
+            const alreadyDone = userProgress.completed_days.includes(numericDay);
+            if (!alreadyDone) {
+                userProgress.completed_days.push(numericDay);
+                userProgress.current_day = Math.min(numericDay + 1, 30);
+                userProgress.has_started = true;
+                userProgress.streak = (userProgress.streak || 0) + 1;
+                userProgress.max_streak = Math.max(userProgress.max_streak || 0, userProgress.streak);
+                localStorage.setItem('narrowgate_progress', JSON.stringify(userProgress));
+
+                const state = ngGetWorkbenchState();
+                state.xp += 10;
+                ngSaveWorkbenchState(state);
+                updateProgressUI();
+                showCompletionAnimation(numericDay, {
+                    xp_breakdown: { total: 10, streak_bonus: 0, week_bonus: 0, special_bonus: 0 },
+                    badges: []
+                });
+                if (numericDay === 30) showFinalCeremony();
+            }
+            ngRefreshWorkbenchUI();
+            return { course: { local: true }, reward: { xp_breakdown: { total: alreadyDone ? 0 : 10 } } };
+        }
+
+        function ngSaveJournalLocally(day, content, mood, tags) {
+            const journals = ngReadJson(NG_JOURNAL_STORAGE_KEY, []);
+            journals.unshift({
+                id: 'journal_' + Date.now(),
+                day,
+                content,
+                mood,
+                tags,
+                created_at: new Date().toISOString()
+            });
+            ngWriteJson(NG_JOURNAL_STORAGE_KEY, journals.slice(0, 100));
+            const state = ngGetWorkbenchState();
+            state.xp += 5;
+            ngSaveWorkbenchState(state);
+            ngRefreshWorkbenchUI();
+            return { xp_earned: 5 };
+        }
+
+        function ngGetLocalWitnesses() {
+            return ngReadJson(NG_WITNESS_STORAGE_KEY, []);
+        }
+
+        function ngSaveLocalWitnesses(witnesses) {
+            ngWriteJson(NG_WITNESS_STORAGE_KEY, witnesses);
+        }
+
+        function ngRenderWitnesses(witnesses) {
+            const el = document.getElementById('witness-list');
+            if (!el) return;
+            if (!witnesses.length) {
+                el.innerHTML = '<p class="witness-list-empty">还没有添加见证人</p>';
+                return;
+            }
+            el.innerHTML = witnesses.map((witness) => `
+                <div class="glass rounded-lg p-4 flex items-center justify-between">
+                    <div>
+                        <p class="font-semibold">${ngEscapeHtml(witness.name)}</p>
+                        <p class="text-xs text-gray-500">${ngEscapeHtml(witness.relationship || '见证人')}</p>
+                    </div>
+                    <span class="text-xs ${witness.verified ? 'text-green-400' : 'text-gray-500'}">${witness.verified ? '已验证' : '本地保存'}</span>
+                </div>
+            `).join('');
+        }
+
+        function ngAddWitnessLocally(name, email, relationship) {
+            const witnesses = ngGetLocalWitnesses();
+            witnesses.unshift({
+                id: 'witness_' + Date.now(),
+                name,
+                email,
+                relationship,
+                verified: false,
+                created_at: new Date().toISOString()
+            });
+            ngSaveLocalWitnesses(witnesses.slice(0, 30));
+            ngRenderWitnesses(witnesses.slice(0, 30));
+        }
+
+        function ngInitWorkbench() {
+            const state = ngGetWorkbenchState();
+            const select = document.getElementById('ngRecommendationDimension');
+            if (select) select.value = state.lastRecommendation || 'cognition';
+            ngRefreshMonologuePrompt();
+            ngRenderMoodChips();
+            ngRecommendCourses();
+            ngRenderCourseLogic();
+            ngLoadCourseCatalog();
+            ngRefreshWorkbenchUI();
+            document.getElementById('ngMonologueText')?.addEventListener('input', ngUpdateMonologueCount);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') ngCloseMonologue();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupGoldIconObserver();
+            setupAmbientToggle();
+            loadCourseBriefText();
+            ngInitWorkbench();
+            setTimeout(() => {
+                document.getElementById('pageLoader')?.classList.add('loaded');
+            }, 900);
+        });
+
         // 标签页切换功能
         function showTab(tabName) {
             // 隐藏所有标签页内容
@@ -3181,7 +4788,9 @@
                     loadCourseDay(data.current_day);
                 }
             } catch(e) {
-                console.log('加载进度失败，使用默认进度:', e);
+                if (e.message !== 'STATIC_PAGE_MODE') {
+                    console.log('加载进度失败，使用默认进度:', e);
+                }
                 // 如果API失败，尝试从localStorage恢复
                 const saved = localStorage.getItem('narrowgate_progress');
                 if (saved) {
@@ -3266,6 +4875,9 @@
                 
                 return { course: courseResponse, reward: rewardResponse };
             } catch(e) {
+                if (e.message === 'STATIC_PAGE_MODE') {
+                    return ngCompleteDayLocally(day);
+                }
                 console.error('保存进度失败:', e);
                 alert('保存进度失败，请重试');
                 return null;
@@ -3448,8 +5060,8 @@
         });
 
         // 添加涟漪动画样式
-        const style = document.createElement('style');
-        style.textContent = `
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
             @keyframes rippleEffect {
                 to {
                     transform: scale(4);
@@ -3457,90 +5069,30 @@
                 }
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(rippleStyle);
 
         let currentAuditId = null;
+        const STATIC_PAGE_MODE = true;
 
         async function apiCall(url, method = 'POST', body = {}) {
+            if (STATIC_PAGE_MODE) {
+                throw new Error('STATIC_PAGE_MODE');
+            }
             const res = await fetch(url, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
                 body: method === 'GET' ? undefined : JSON.stringify(body),
             });
+            if (!res.ok) {
+                throw new Error('HTTP ' + res.status);
+            }
             return res.json();
         }
 
-        // ── 灵魂审计问题库（离线可用） ──
-        const AUDIT_QUESTIONS = {
-            '认知': [
-                {q: '你觉得自己的人生到现在，最大的成就是什么？', p: '探索表层认知', d: 1},
-                {q: '你认为成功最重要的因素是什么？', p: '探索表层认知', d: 1},
-                {q: '你最崇拜的人是谁？你崇拜TA的什么？', p: '探索表层认知', d: 1},
-                {q: '你定义"成功"的标准，是你自己定的，还是从别人那里借来的？', p: '中层挖掘', d: 2},
-                {q: '如果所有人都消失了，你还会追求你现在追求的东西吗？', p: '中层挖掘', d: 2},
-                {q: '你有没有怀疑过——你一直相信的"真实"，可能只是一个故事？', p: '深层直击', d: 3},
-                {q: '如果让你用三个词定义自己——这三个词是你选择的，还是被赋予的？', p: '深层直击', d: 3},
-                {q: '你有没有在深夜突然觉得——你一直在追逐的一切，可能根本没有意义？那一刻你看到了什么？', p: '核心直击', d: 4},
-            ],
-            '情绪': [
-                {q: '你上一次真正生气是什么时候？因为什么？', p: '探索表层', d: 1},
-                {q: '你最害怕别人发现你什么？', p: '探索表层', d: 1},
-                {q: '你允许自己在别人面前软弱吗？如果不能，为什么？', p: '中层挖掘', d: 2},
-                {q: '你有没有发现你的焦虑总是在特定时间或场景出现？', p: '中层挖掘', d: 2},
-                {q: '你最深层的恐惧是什么——不是表面的——而是那个让你夜里睡不着的？', p: '深层直击', d: 3},
-                {q: '你有没有一种感觉——觉得自己不值得被爱？这种感觉从哪里来的？', p: '核心直击', d: 4},
-            ],
-            '行为': [
-                {q: '你明知道应该做但一直没做的事情是什么？', p: '探索表层', d: 1},
-                {q: '你手机屏幕使用时间是多少？你对这个数字怎么看？', p: '探索表层', d: 1},
-                {q: '你有没有在用"完美主义"来为自己的不行动找借口？', p: '中层挖掘', d: 2},
-                {q: '你的拖延，背后真的只是懒，还是对某种结果的深层恐惧？', p: '中层挖掘', d: 2},
-                {q: '如果你今天的全部行为被拍成纪录片——你敢让你最尊重的人看吗？', p: '核心直击', d: 4},
-            ],
-            '关系': [
-                {q: '你最亲近的人，你觉得他们真正了解你吗？', p: '探索表层', d: 1},
-                {q: '你觉得你是讨好型人格吗？', p: '探索表层', d: 1},
-                {q: '你在关系中最害怕的是什么——被看见，还是不被看见？', p: '深层直击', d: 3},
-                {q: '你有没有发现你在重复父母的婚姻/关系模式？', p: '深层直击', d: 3},
-                {q: '你觉得你值得被无条件地爱吗？如果你说"是"——你真的相信吗？', p: '核心直击', d: 4},
-            ],
-            '事业': [
-                {q: '如果没有任何限制，你真正想做什么？', p: '探索表层', d: 1},
-                {q: '你觉得你做到了你能力的百分之多少？', p: '探索表层', d: 1},
-                {q: '你害怕失败，还是害怕成功？', p: '中层挖掘', d: 2},
-                {q: '你有没有在潜意识里害怕自己太成功？', p: '深层直击', d: 3},
-                {q: '你内心深处真正想要的——到底是什么？', p: '核心直击', d: 4},
-            ],
-            '宇宙认知': [
-                {q: '你觉得人生有目的吗？如果有，是什么？', p: '探索表层', d: 1},
-                {q: '你相信命运吗？还是一切都是随机的？', p: '探索表层', d: 1},
-                {q: '你觉得你的存在是偶然还是必然？', p: '中层挖掘', d: 2},
-                {q: '如果宇宙的本质是振动和能量，你觉得"你"是什么？', p: '深层直击', d: 3},
-                {q: '你有没有一种深层的直觉——关于你这辈子到底要来做什么？', p: '核心直击', d: 4},
-            ],
-        };
-        const DIMENSIONS = ['认知','情绪','行为','关系','事业','宇宙认知'];
-        let auditDimIdx = 0, auditDepth = 1, auditQIdx = {};
-
-        function getNextOfflineQuestion() {
-            const dim = DIMENSIONS[auditDimIdx % DIMENSIONS.length];
-            const qs = AUDIT_QUESTIONS[dim];
-            if (!auditQIdx[dim]) auditQIdx[dim] = 0;
-            const q = qs[auditQIdx[dim] % qs.length];
-            auditQIdx[dim]++;
-            // 每3个问题递进深度
-            const totalAnswered = Object.values(auditQIdx).reduce((a,b)=>a+b, 0);
-            if (totalAnswered % 4 === 0 && auditDimIdx < DIMENSIONS.length - 1) auditDimIdx++;
-            auditDepth = q.d;
-            return { question: q.q, dimension: dim, depth_level: q.d, purpose: q.p };
-        }
-
         async function startAudit() {
-            // 直接进入对话，跳过intro页
             document.getElementById('audit-intro').classList.add('hidden');
             document.getElementById('audit-chat').classList.remove('hidden');
             document.getElementById('audit-result').classList.add('hidden');
-            auditDimIdx = 0; auditDepth = 1; auditQIdx = {};
 
             try {
                 const data = await apiCall('/api/audit/start', 'POST', { user_id: 'user_' + Date.now() });
@@ -3548,11 +5100,9 @@
                 addMessage('ai', data.question, data.purpose);
                 document.getElementById('current-dimension').textContent = data.dimension;
             } catch(e) {
-                // 离线模式 — 本地问题库直接驱动
-                currentAuditId = 'offline_' + Date.now();
-                const q = getNextOfflineQuestion();
-                addMessage('ai', q.question, q.purpose);
-                document.getElementById('current-dimension').textContent = q.dimension;
+                // Demo模式（无后端）
+                currentAuditId = 'demo_' + Date.now();
+                addMessage('ai', '你觉得自己的人生到现在，最大的成就是什么？', '探索表层认知');
                 addDemoNote();
             }
         }
@@ -3588,16 +5138,20 @@
                 document.getElementById('conversation-count').textContent = data.conversation_count;
                 document.getElementById('shackle-count').textContent = data.shackles_found;
             } catch(e) {
-                // 离线模式 — 本地问题库+回避检测
+                // Demo模式
                 document.getElementById('typing').classList.add('hidden');
-                const evasionSignals = ['没有','不是','还好','因为','没办法','还好吧','都行','不知道'];
-                const isEvasion = evasionSignals.some(s => answer.includes(s)) || answer.length < 10;
+                const demoQuestions = [
+                    '在这背后，你真正害怕面对的是什么？',
+                    '如果满分10分你给自己打几分？扣掉的分丢在哪里了？',
+                    '你有没有一个从未告诉任何人的秘密？关于你是谁？',
+                ];
+                const evasionSignals = ['没有','不是','还好','因为','没办法'];
+                const isEvasion = evasionSignals.some(s => answer.includes(s));
                 if (isEvasion) {
-                    addEvasionAlert('回避检测', '我感觉到你在回避。没关系——但这里往往藏着最重要的东西。再试一次，更真实地说。');
+                    addEvasionAlert('否认', '我感觉到你在回避。没关系，但我们需要再试一次。');
                 }
-                const q = getNextOfflineQuestion();
-                addMessage('ai', q.question, q.purpose);
-                document.getElementById('current-dimension').textContent = q.dimension;
+                const count = document.getElementById('chat-messages').children.length;
+                addMessage('ai', demoQuestions[count % demoQuestions.length], `深度层级 ${Math.min(Math.floor(count/2)+1, 4)}`);
             }
         }
 
@@ -3610,65 +5164,15 @@
             let summary = { total_conversations: 0, evasion_count: 0, shackles_identified: 0, dimensions_explored: 0, first_gate: null };
             let message = '';
 
-            let courseRec = null;
             try {
                 const data = await apiCall('/api/audit/complete', 'POST', { user_id: currentAuditId.split('_')[1] });
                 summary = data.summary || summary;
                 message = data.message || '';
-                // 尝试获取课程推荐
-                try {
-                    courseRec = await apiCall('/api/audit/' + currentAuditId + '/recommend', 'GET');
-                } catch(_e) {}
             } catch(e) {
-                // 离线模式结果
+                // Demo模式结果
                 const msgCount = document.getElementById('chat-messages').children.length;
-                const dimSet = new Set();
-                document.querySelectorAll('#current-dimension').forEach(el => dimSet.add(el.textContent));
-                summary = {
-                    total_conversations: Math.floor(msgCount/2),
-                    evasion_count: Math.floor(msgCount/4),
-                    shackles_identified: Math.max(1, Math.floor(msgCount/6)),
-                    dimensions_explored: Math.max(3, auditDimIdx + 1),
-                    first_gate: { name: DIMENSIONS[auditDimIdx % DIMENSIONS.length] + '维度回避模式', description: '你在该维度有深层回避，需要穿越', priority: 70 + Math.floor(Math.random()*20) }
-                };
-                courseRec = {
-                    crossing_path: ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","D11","D12","D13","D14"],
-                    primary_dimension: DIMENSIONS[auditDimIdx % DIMENSIONS.length],
-                    recommended_masters: ['socrates','jung','memento'],
-                    starting_day: 1,
-                    reasoning: '根据你的灵魂审计结果，我为你定制了14天穿越路线。从觉察到行动，每一天都有具体的挑战和反思。',
-                    dimension_analysis: {}
-                };
-                message = '灵魂审计完成。下面是你专属的穿越路线推荐。';
-            }
-
-            // 课程推荐HTML
-            let courseHTML = '';
-            if (courseRec && courseRec.crossing_path) {
-                const masterNames = {'socrates':'苏格拉底','jung':'荣格','memento':'清醒者','mirror':'镜像者','architect':'架构师','alchemist':'炼金术士','gatekeeper':'守门人'};
-                const masterAvatars = {'socrates':'🦉','jung':'🌑','memento':'⚡','mirror':'🪞','architect':'🏗️','alchemist':'🔮','gatekeeper':'🚪'};
-                const masterHTML = (courseRec.recommended_masters||[]).map(m =>
-                    `<span class="inline-flex items-center gap-1 bg-[#b8942e]/10 border border-[#b8942e]/30 rounded-full px-3 py-1 text-xs text-[#b8942e]">${masterAvatars[m]||'🎭'} ${masterNames[m]||m}</span>`
-                ).join(' ');
-                const pathDays = courseRec.crossing_path.slice(0,14);
-                const pathHTML = pathDays.map((d,i) =>
-                    `<div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-[#b8942e]/20 text-[#b8942e] text-xs flex items-center justify-center font-bold">${i+1}</span><span class="text-xs text-gray-400">${d}</span></div>`
-                ).join('');
-                courseHTML = `
-                    <div class="bg-[#0a0a12] border border-[#b8942e]/20 rounded-xl p-6 text-left mb-6 mt-6">
-                        <p class="text-xs text-[#b8942e] uppercase tracking-wider mb-2">🎯 为你定制的穿越路线</p>
-                        <p class="text-sm text-gray-300 mb-4">${courseRec.reasoning}</p>
-                        <div class="mb-4">
-                            <p class="text-xs text-gray-500 mb-2">推荐大师引导者</p>
-                            <div class="flex flex-wrap gap-2">${masterHTML}</div>
-                        </div>
-                        <div class="mb-4">
-                            <p class="text-xs text-gray-500 mb-2">穿越路线（${pathDays.length}天）</p>
-                            <div class="grid grid-cols-2 gap-1">${pathHTML}</div>
-                        </div>
-                        <a href="#training" onclick="closeAuditResult()" class="inline-block mt-2 text-sm text-[#b8942e] hover:text-[#d4af37] transition">开始穿越训练 →</a>
-                    </div>
-                `;
+                summary = { total_conversations: Math.floor(msgCount/2), evasion_count: Math.floor(msgCount/4), shackles_identified: 1, dimensions_explored: 3, first_gate: { name: '认知：舒适区依赖', description: '你一直在用已知的方式做事，回避未知领域', priority: 72 } };
+                message = '这是Demo审计结果。启动后端服务可获得完整AI灵魂审计体验。';
             }
 
             document.getElementById('result-content').innerHTML = `
@@ -3681,26 +5185,17 @@
                     <div class="bg-[#050508] rounded-lg p-4"><p class="text-xs text-gray-500">探索维度</p><p class="text-2xl font-bold text-gray-300">${summary.dimensions_explored}</p></div>
                 </div>
                 ${summary.first_gate ? `<div class="bg-[#2a1a0a] border border-[#b8942e]/30 rounded-lg p-6 text-left mb-6"><p class="text-xs text-[#b8942e] mb-1">你的窄门</p><h4 class="text-lg font-bold text-white mb-2">${summary.first_gate.name}</h4><p class="text-sm text-gray-400">${summary.first_gate.description}</p><p class="text-sm text-[#b8942e] mt-3">窄门优先级：${Math.round(summary.first_gate.priority)}/100</p></div>` : ''}
-                ${courseHTML}
-                <p class="text-gray-400 text-sm leading-relaxed mt-4">${message.replace(/\n/g, '<br>')}</p>
-                <div class="flex gap-4 justify-center mt-8">
-                    <button onclick="resetAudit()" class="text-xs text-gray-600 hover:text-gray-400 transition">重新审计</button>
-                    <a href="#masters" class="text-xs text-[#b8942e] hover:text-[#d4af37] transition">选择大师引导者 →</a>
-                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">${message.replace(/\n/g, '<br>')}</p>
+                <button onclick="resetAudit()" class="mt-8 text-xs text-gray-600 hover:text-gray-400 transition">重新审计</button>
             `;
         }
 
         function resetAudit() {
             currentAuditId = null;
-            auditDimIdx = 0; auditDepth = 1; auditQIdx = {};
             document.getElementById('audit-intro').classList.remove('hidden');
             document.getElementById('audit-chat').classList.add('hidden');
             document.getElementById('audit-result').classList.add('hidden');
             document.getElementById('chat-messages').innerHTML = '';
-        }
-        function closeAuditResult() {
-            document.getElementById('audit-result').classList.add('hidden');
-            document.getElementById('audit-intro').classList.remove('hidden');
         }
 
         function addMessage(role, text, subtext = '') {
@@ -3731,6 +5226,7 @@
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
         }
+    </script>
     <!-- ============================================================ -->
     <!-- 大师系统 JavaScript -->
     <!-- ============================================================ -->
@@ -3956,15 +5452,25 @@
                 alert(name + ' 已添加为见证人！');
                 loadWitnesses();
                 document.getElementById('witness-name').value = '';
-            } catch(e) { alert('添加失败'); }
+                document.getElementById('witness-email').value = '';
+            } catch(e) {
+                if (e.message === 'STATIC_PAGE_MODE') {
+                    ngAddWitnessLocally(name, email, rel);
+                    alert(name + ' 已本地保存为见证人。后端开启后可接入正式验证。');
+                    document.getElementById('witness-name').value = '';
+                    document.getElementById('witness-email').value = '';
+                    return;
+                }
+                alert('添加失败');
+            }
         }
         async function loadWitnesses() {
             try {
                 const list = await apiCall('/api/witness/list', 'GET');
-                const el = document.getElementById('witness-list');
-                if (!list.length) { el.innerHTML = '<p class="text-gray-500 text-sm">还没有添加见证人</p>'; return; }
-                el.innerHTML = list.map(w => '<div class="glass rounded-lg p-4 flex items-center justify-between"><div><p class="font-semibold">' + w.name + '</p><p class="text-xs text-gray-500">' + w.relationship + '</p></div><span class="text-xs ' + (w.verified ? 'text-green-400' : 'text-gray-500') + '">' + (w.verified ? '已验证' : '待验证') + '</span></div>').join('');
-            } catch(e) {}
+                ngRenderWitnesses(list);
+            } catch(e) {
+                ngRenderWitnesses(ngGetLocalWitnesses());
+            }
         }
 
         // Evolution Pyramid
@@ -3991,7 +5497,14 @@
                 updateCourseUI(data);
                 currentDay = day;
                 updateDayIndicator();
+            } catch(e) {
+                if (e.message !== 'STATIC_PAGE_MODE') {
+                    console.error('加载课程失败:', e);
+                }
+                // Demo模式
+                updateCourseUIDemo(day);
             }
+        }
         
         async function completeCurrentDay() {
             const day = currentDay;
@@ -4023,12 +5536,6 @@
                 console.error('完成失败:', e);
                 btn.disabled = false;
                 btn.textContent = '重试';
-            }
-        }
- catch(e) {
-                console.error('加载课程失败:', e);
-                // Demo模式
-                updateCourseUIDemo(day);
             }
         }
         
@@ -4164,6 +5671,21 @@
                 }, 3000);
                 
             } catch(e) {
+                if (e.message === 'STATIC_PAGE_MODE') {
+                    const response = ngSaveJournalLocally(currentDay, journalText, mood, tags);
+                    alert(`日记已本地保存！+${response.xp_earned || 5} XP`);
+                    document.getElementById('learning-journal').value = '';
+                    if (moodSelect) moodSelect.value = '';
+                    if (tagsInput) tagsInput.value = '';
+                    btn.textContent = '已保存 ✓';
+                    btn.classList.add('completed');
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = '保存日记';
+                        btn.classList.remove('completed');
+                    }, 3000);
+                    return;
+                }
                 console.error('保存日记失败:', e);
                 alert('保存失败，请重试');
                 btn.disabled = false;
@@ -4453,381 +5975,5 @@
             </div>
         </div>
     </section>
-
-    <!-- 登录模态框 -->
-    <div id="login-modal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeLoginModal()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-            <div class="bg-[#0c0c12] border border-white/10 rounded-2xl p-8 shadow-2xl">
-                <!-- 关闭按钮 -->
-                <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                
-                <!-- 标题 -->
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span class="text-3xl">🚪</span>
-                    </div>
-                    <h2 class="text-2xl font-bold text-white mb-2">欢迎回到窄门</h2>
-                    <p class="text-gray-400 text-sm">登录继续你的穿越之旅</p>
-                </div>
-                
-                <!-- 登录表单 -->
-                <form id="login-form" class="space-y-4">
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">用户名或邮箱</label>
-                        <input type="text" id="login-username" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入用户名或邮箱">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">密码</label>
-                        <input type="password" id="login-password" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入密码">
-                    </div>
-                    <div id="login-error" class="text-red-400 text-sm hidden"></div>
-                    <button type="submit" 
-                        class="w-full py-3 bg-gradient-to-r from-[#b8942e] to-[#d4af37] text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/25 transition-all duration-300">
-                        登录
-                    </button>
-                </form>
-                
-                <!-- 分隔线 -->
-                <div class="flex items-center gap-4 my-6">
-                    <div class="flex-1 h-px bg-white/10"></div>
-                    <span class="text-gray-500 text-xs">或</span>
-                    <div class="flex-1 h-px bg-white/10"></div>
-                </div>
-                
-                <!-- 微信登录 -->
-                <button onclick="wechatLogin()" 
-                    class="w-full py-3 bg-[#07c160] text-white font-semibold rounded-xl hover:bg-[#06ad56] transition flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
-                    </svg>
-                    微信登录
-                </button>
-                
-                <!-- 注册链接 -->
-                <p class="text-center text-gray-400 text-sm mt-6">
-                    还没有账号？ 
-                    <button onclick="showRegisterForm()" class="text-[#b8942e] hover:underline">立即注册</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 注册模态框 -->
-    <div id="register-modal" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeRegisterModal()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-            <div class="bg-[#0c0c12] border border-white/10 rounded-2xl p-8 shadow-2xl">
-                <!-- 关闭按钮 -->
-                <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                
-                <!-- 标题 -->
-                <div class="text-center mb-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <span class="text-3xl">✨</span>
-                    </div>
-                    <h2 class="text-2xl font-bold text-white mb-2">开始你的穿越之旅</h2>
-                    <p class="text-gray-400 text-sm">创建账号，解锁完整功能</p>
-                </div>
-                
-                <!-- 注册表单 -->
-                <form id="register-form" class="space-y-4">
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">用户名</label>
-                        <input type="text" id="register-username" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入用户名">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">邮箱</label>
-                        <input type="email" id="register-email" required
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入邮箱">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">密码</label>
-                        <input type="password" id="register-password" required minlength="6"
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入密码（至少6位）">
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">昵称（可选）</label>
-                        <input type="text" id="register-nickname"
-                            class="w-full bg-[#050508] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#b8942e] focus:outline-none transition"
-                            placeholder="请输入昵称">
-                    </div>
-                    <div id="register-error" class="text-red-400 text-sm hidden"></div>
-                    <button type="submit" 
-                        class="w-full py-3 bg-gradient-to-r from-[#b8942e] to-[#d4af37] text-black font-semibold rounded-xl hover:shadow-lg hover:shadow-[#b8942e]/25 transition-all duration-300">
-                        注册
-                    </button>
-                </form>
-                
-                <!-- 登录链接 -->
-                <p class="text-center text-gray-400 text-sm mt-6">
-                    已有账号？ 
-                    <button onclick="showLoginForm()" class="text-[#b8942e] hover:underline">立即登录</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 用户信息栏（登录后显示） -->
-    <div id="user-bar" class="hidden fixed top-20 right-6 z-40">
-        <div class="bg-[#0c0c12] border border-white/10 rounded-xl p-4 shadow-xl">
-            <div class="flex items-center gap-3 mb-3">
-                <div id="user-avatar" class="w-10 h-10 bg-gradient-to-br from-[#b8942e] to-[#d4af37] rounded-full flex items-center justify-center text-black font-bold">
-                    U
-                </div>
-                <div>
-                    <p id="user-nickname" class="text-white font-medium">用户</p>
-                    <p id="user-level" class="text-xs text-gray-500">睡眠层 · 0 XP</p>
-                </div>
-            </div>
-            <button onclick="logout()" class="w-full py-2 text-sm text-gray-400 hover:text-white border border-white/10 rounded-lg hover:bg-white/5 transition">
-                退出登录
-            </button>
-        </div>
-    </div>
-
-    <!-- 认证相关JavaScript -->
-    <script>
-        // 认证状态管理
-        let currentUser = null;
-        let authToken = localStorage.getItem('narrowgate_token');
-        
-        // 初始化认证状态
-        async function initAuth() {
-            if (authToken) {
-                try {
-                    const response = await fetch('/api/auth/me', {
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`
-                        }
-                    });
-                    if (response.ok) {
-                        currentUser = await response.json();
-                        updateUIForLoggedInUser();
-                    } else {
-                        localStorage.removeItem('narrowgate_token');
-                        authToken = null;
-                    }
-                } catch (error) {
-                    console.error('认证检查失败:', error);
-                }
-            }
-        }
-        
-        // 更新UI为登录状态
-        function updateUIForLoggedInUser() {
-            if (!currentUser) return;
-            
-            // 更新用户栏
-            const userBar = document.getElementById('user-bar');
-            const userAvatar = document.getElementById('user-avatar');
-            const userNickname = document.getElementById('user-nickname');
-            const userLevel = document.getElementById('user-level');
-            
-            userBar.classList.remove('hidden');
-            userAvatar.textContent = currentUser.nickname ? currentUser.nickname[0].toUpperCase() : 'U';
-            userNickname.textContent = currentUser.nickname || currentUser.username;
-            userLevel.textContent = `睡眠层 · ${currentUser.experience_points || 0} XP`;
-            
-            // 更新导航栏登录按钮
-            const loginBtn = document.querySelector('button[onclick="scrollToSection(\'audit\')"]');
-            if (loginBtn) {
-                loginBtn.textContent = currentUser.nickname || '我的账户';
-                loginBtn.onclick = () => toggleUserBar();
-            }
-        }
-        
-        // 切换用户栏显示
-        function toggleUserBar() {
-            const userBar = document.getElementById('user-bar');
-            userBar.classList.toggle('hidden');
-        }
-        
-        // 显示登录模态框
-        function showLoginModal() {
-            document.getElementById('login-modal').classList.remove('hidden');
-            document.getElementById('login-error').classList.add('hidden');
-        }
-        
-        // 关闭登录模态框
-        function closeLoginModal() {
-            document.getElementById('login-modal').classList.add('hidden');
-            document.getElementById('login-form').reset();
-        }
-        
-        // 显示注册模态框
-        function showRegisterModal() {
-            closeLoginModal();
-            document.getElementById('register-modal').classList.remove('hidden');
-            document.getElementById('register-error').classList.add('hidden');
-        }
-        
-        // 关闭注册模态框
-        function closeRegisterModal() {
-            document.getElementById('register-modal').classList.add('hidden');
-            document.getElementById('register-form').reset();
-        }
-        
-        // 显示注册表单（从登录模态框切换）
-        function showRegisterForm() {
-            closeLoginModal();
-            showRegisterModal();
-        }
-        
-        // 显示登录表单（从注册模态框切换）
-        function showLoginForm() {
-            closeRegisterModal();
-            showLoginModal();
-        }
-        
-        // 登录提交
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            const errorDiv = document.getElementById('login-error');
-            
-            try {
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, password })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    authToken = data.access_token;
-                    localStorage.setItem('narrowgate_token', authToken);
-                    currentUser = {
-                        user_id: data.user_id,
-                        username: data.username,
-                        nickname: data.nickname,
-                        avatar: data.avatar
-                    };
-                    closeLoginModal();
-                    updateUIForLoggedInUser();
-                    showNotification('登录成功！欢迎回来', 'success');
-                } else {
-                    errorDiv.textContent = data.detail || '登录失败';
-                    errorDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                errorDiv.textContent = '网络错误，请重试';
-                errorDiv.classList.remove('hidden');
-            }
-        });
-        
-        // 注册提交
-        document.getElementById('register-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('register-username').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const nickname = document.getElementById('register-nickname').value;
-            const errorDiv = document.getElementById('register-error');
-            
-            try {
-                const response = await fetch('/api/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username, email, password, nickname: nickname || username })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    authToken = data.access_token;
-                    localStorage.setItem('narrowgate_token', authToken);
-                    currentUser = {
-                        user_id: data.user_id,
-                        username: data.username,
-                        nickname: data.nickname,
-                        avatar: data.avatar
-                    };
-                    closeRegisterModal();
-                    updateUIForLoggedInUser();
-                    showNotification('注册成功！欢迎来到窄门', 'success');
-                } else {
-                    errorDiv.textContent = data.detail || '注册失败';
-                    errorDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                errorDiv.textContent = '网络错误，请重试';
-                errorDiv.classList.remove('hidden');
-            }
-        });
-        
-        // 微信登录
-        function wechatLogin() {
-            showNotification('微信登录功能开发中...', 'info');
-            // TODO: 实现微信登录
-        }
-        
-        // 退出登录
-        function logout() {
-            localStorage.removeItem('narrowgate_token');
-            authToken = null;
-            currentUser = null;
-            document.getElementById('user-bar').classList.add('hidden');
-            
-            // 恢复导航栏登录按钮
-            const loginBtn = document.querySelector('button[onclick="toggleUserBar()"]');
-            if (loginBtn) {
-                loginBtn.textContent = '登录';
-                loginBtn.onclick = () => showLoginModal();
-            }
-            
-            showNotification('已退出登录', 'info');
-        }
-        
-        // 通知提示
-        function showNotification(message, type = 'info') {
-            const colors = {
-                success: 'bg-green-500',
-                error: 'bg-red-500',
-                info: 'bg-blue-500'
-            };
-            
-            const notification = document.createElement('div');
-            notification.className = `fixed top-24 right-6 ${colors[type]} text-white px-6 py-3 rounded-xl shadow-xl z-50 transform transition-all duration-300 translate-x-full`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.classList.remove('translate-x-full');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.add('translate-x-full');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
-        }
-        
-        // 页面加载时初始化认证
-        document.addEventListener('DOMContentLoaded', initAuth);
-    </script>
 </body>
 </html>

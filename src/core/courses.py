@@ -1,8 +1,8 @@
 """
 窄门 (NarrowGate) — 课程引擎 (Courses Engine)
 
-12门灵魂进化课程，每门至少5万字阅读量 + 测试题。
-课程覆盖五大维度，从认知觉醒到行动穿越。
+100门灵魂进化课程库，每门包含结构化章节 + 测试题。
+课程覆盖五大维度与整合路径，从认知觉醒到行动穿越。
 
 架构师：贾维斯 (Jarvis) for 小林医生
 """
@@ -55,6 +55,11 @@ class Course:
     chapters: List[Chapter] = field(default_factory=list)
     total_reading_minutes: int = 0
     total_words: int = 0
+    audio_status: str = "browser_tts_ready"
+    audio_file: str = ""
+    audio_script: str = ""
+    audio_duration_seconds: int = 0
+    audio_voice: str = ""
 
     @property
     def chapter_count(self) -> int:
@@ -66,7 +71,7 @@ class Course:
 
 
 # ============================================================
-# 12门课程定义
+# 种子课程定义：兼容早期12门核心课程；新增课程从 data/courses/*/meta.json 动态发现。
 # ============================================================
 
 COURSE_DEFINITIONS = [
@@ -202,7 +207,73 @@ class CourseEngine:
 
     def __init__(self):
         self.courses = {c.id: c for c in COURSE_DEFINITIONS}
+        self._discover_courses_from_meta()
         self._load_chapters()
+
+    def _discover_courses_from_meta(self):
+        """从课程目录的 meta.json 动态发现课程，避免课程扩展时重复维护代码列表。"""
+        if not COURSES_DIR.exists():
+            return
+
+        dimension_defaults = {
+            "认知": {"icon": "◎", "color": "#6366f1"},
+            "情绪": {"icon": "●", "color": "#7c3aed"},
+            "行为": {"icon": "ϟ", "color": "#dc2626"},
+            "关系": {"icon": "◉", "color": "#059669"},
+            "事业": {"icon": "△", "color": "#b8942e"},
+            "整合": {"icon": "✦", "color": "#d4af37"},
+            "全部": {"icon": "∩", "color": "#b8942e"},
+        }
+
+        for meta_file in sorted(COURSES_DIR.glob("*/meta.json")):
+            course_id = meta_file.parent.name
+            try:
+                with open(meta_file, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
+            except (OSError, json.JSONDecodeError):
+                continue
+
+            meta_dimension = meta.get("dimension")
+            dimension = meta_dimension or "整合"
+            defaults = dimension_defaults.get(dimension, dimension_defaults["整合"])
+            title = meta.get("title") or meta.get("name") or course_id
+            subtitle = meta.get("subtitle", "")
+            description = meta.get("description") or subtitle or f"{title}是窄门课程库中的深度训练课程。"
+            icon = meta.get("icon") or defaults["icon"]
+            color = meta.get("color") or defaults["color"]
+            level_required = int(meta.get("level_required", 1) or 1)
+
+            if course_id in self.courses:
+                course = self.courses[course_id]
+                course.name = title
+                course.subtitle = subtitle or course.subtitle
+                course.dimension = meta_dimension or course.dimension
+                course.description = description or course.description
+                course.icon = meta.get("icon") or course.icon
+                course.color = meta.get("color") or course.color
+                course.level_required = level_required
+                course.audio_status = meta.get("audio_status") or course.audio_status
+                course.audio_file = meta.get("audio_file", course.audio_file)
+                course.audio_script = meta.get("audio_script", course.audio_script)
+                course.audio_duration_seconds = int(meta.get("audio_duration_seconds", course.audio_duration_seconds) or 0)
+                course.audio_voice = meta.get("audio_voice", course.audio_voice)
+                continue
+
+            self.courses[course_id] = Course(
+                id=course_id,
+                name=title,
+                subtitle=subtitle,
+                dimension=dimension,
+                description=description,
+                icon=icon,
+                color=color,
+                level_required=level_required,
+                audio_status=meta.get("audio_status", "browser_tts_ready"),
+                audio_file=meta.get("audio_file", ""),
+                audio_script=meta.get("audio_script", ""),
+                audio_duration_seconds=int(meta.get("audio_duration_seconds", 0) or 0),
+                audio_voice=meta.get("audio_voice", ""),
+            )
 
     def _load_chapters(self):
         """从文件系统加载章节"""
@@ -215,6 +286,7 @@ class CourseEngine:
             chapters_dir = course_dir / "chapters"
             quiz_file = course_dir / "quiz.json"
             meta_file = course_dir / "meta.json"
+            course.chapters = []
 
             # 加载元数据
             if meta_file.exists():
@@ -222,6 +294,11 @@ class CourseEngine:
                     meta = json.load(f)
                     course.total_words = meta.get("total_words", 0)
                     course.total_reading_minutes = meta.get("total_reading_minutes", 0)
+                    course.audio_status = meta.get("audio_status", course.audio_status)
+                    course.audio_file = meta.get("audio_file", course.audio_file)
+                    course.audio_script = meta.get("audio_script", course.audio_script)
+                    course.audio_duration_seconds = int(meta.get("audio_duration_seconds", course.audio_duration_seconds) or 0)
+                    course.audio_voice = meta.get("audio_voice", course.audio_voice)
 
             # 加载章节
             if chapters_dir.exists():
@@ -255,11 +332,15 @@ class CourseEngine:
                 for q in questions_list:
                     if not isinstance(q, dict):
                         continue
+                    correct_index = q.get("correct_index")
+                    if correct_index is None and isinstance(q.get("answer"), str):
+                        answer = q["answer"].strip().upper()
+                        correct_index = max(0, min(3, ord(answer[:1]) - ord("A"))) if answer[:1] else 0
                     question = QuizQuestion(
                         id=str(q.get("id", "")),
                         question=q.get("question", ""),
                         options=q.get("options", []),
-                        correct_index=q.get("correct_index", 0),
+                        correct_index=correct_index if correct_index is not None else 0,
                         explanation=q.get("explanation", ""),
                         difficulty=q.get("difficulty", 1),
                     )
@@ -286,6 +367,10 @@ class CourseEngine:
                 "quiz_count": course.quiz_count,
                 "total_words": course.total_words,
                 "total_reading_minutes": course.total_reading_minutes,
+                "audio_status": course.audio_status,
+                "audio_file": course.audio_file,
+                "audio_duration_seconds": course.audio_duration_seconds,
+                "audio_voice": course.audio_voice,
             })
         return result
 
@@ -333,6 +418,8 @@ class CourseEngine:
                         "id": q.id,
                         "question": q.question,
                         "options": q.options,
+                        "answer": chr(ord("A") + q.correct_index),
+                        "correct_index": q.correct_index,
                         "difficulty": q.difficulty,
                         "explanation": q.explanation,  # 作答后显示
                     }

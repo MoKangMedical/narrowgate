@@ -12,11 +12,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from core.soul_audit import SoulAuditEngine, AUDIT_DIMENSIONS
 from core.gate_finder import GateFinder
@@ -26,13 +26,47 @@ from core.database import Database
 from core.mimo_client import MIMOClient, MIMOConfig
 from core.witness import WitnessNetwork
 from core.evolution import EvolutionPyramid
-from core.auth import create_auth_routes
+from core.auth import SessionManager, create_auth_routes
 from expert_routes import router as expert_router
 from core.course_content import get_all_days, get_day, get_week, COURSE_CONTENT
+from core.courses import course_engine
 from core.payment import create_payment_routes, PaymentConfig
 from core.logger import setup_logger, get_logger
 from core.analytics import AnalyticsManager, create_analytics_routes
 from api.middleware import RequestLoggingMiddleware, ErrorTrackingMiddleware
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+UI_ROOT = PROJECT_ROOT / "src" / "ui"
+DATA_ROOT = PROJECT_ROOT / "data"
+ALLOWED_DATA_ROOT_FILES = {
+    "audio_quality_report.json",
+    "books.json",
+    "course_catalog_100.json",
+    "course_quality_report.json",
+}
+ALLOWED_DATA_EXTENSIONS = {".json", ".md", ".m4a", ".mp3", ".svg", ".txt"}
+
+
+def _safe_file_response(base_dir: Path, file_path: str, media_type: str = None) -> FileResponse:
+    """Return a file under base_dir while blocking path traversal."""
+    base_dir = base_dir.resolve()
+    target = (base_dir / file_path).resolve()
+    try:
+        target.relative_to(base_dir)
+    except ValueError:
+        raise HTTPException(404, "文件不存在")
+    if not target.is_file():
+        raise HTTPException(404, "文件不存在")
+    return FileResponse(target, media_type=media_type)
+
+
+def _is_public_data_file(file_path: str, target: Path) -> bool:
+    normalized = Path(file_path).as_posix()
+    if normalized in ALLOWED_DATA_ROOT_FILES:
+        return True
+    if normalized.startswith(("course_summary/", "courses/")):
+        return target.suffix.lower() in ALLOWED_DATA_EXTENSIONS
+    return False
 
 # ============================================================
 # App
@@ -64,6 +98,7 @@ db = Database()
 mimo = MIMOClient()
 witness_network = WitnessNetwork()
 evolution_pyramid = EvolutionPyramid()
+session_manager = SessionManager()
 
 # 认证系统
 auth_manager = create_auth_routes(app, db)
@@ -126,10 +161,46 @@ class AddDivinityRequest(BaseModel):
 @app.get("/", response_class=HTMLResponse)
 async def index():
     """返回前端页面"""
-    ui_path = Path(__file__).parent.parent / "ui" / "index.html"
-    if ui_path.exists():
-        return HTMLResponse(content=ui_path.read_text(encoding="utf-8"))
+    for ui_path in (PROJECT_ROOT / "index.html", UI_ROOT / "index.html"):
+        if ui_path.exists():
+            return HTMLResponse(content=ui_path.read_text(encoding="utf-8"))
     return HTMLResponse(content="<h1>窄门 NarrowGate</h1><p>界面加载中...</p>")
+
+
+@app.get("/course-system.html", response_class=HTMLResponse)
+async def course_system_page():
+    """返回100门课程体系页面。"""
+    course_page = PROJECT_ROOT / "course-system.html"
+    if not course_page.exists():
+        raise HTTPException(404, "课程体系页面不存在")
+    return HTMLResponse(content=course_page.read_text(encoding="utf-8"))
+
+
+@app.get("/data/{file_path:path}")
+async def public_data_file(file_path: str):
+    """返回公开课程数据、讲稿和音频资源。"""
+    target = (DATA_ROOT / file_path).resolve()
+    if not _is_public_data_file(file_path, target):
+        raise HTTPException(404, "文件不存在")
+    return _safe_file_response(DATA_ROOT, file_path)
+
+
+@app.get("/tailwind.css")
+async def tailwind_css():
+    """返回编译后的 Tailwind 样式"""
+    return FileResponse(UI_ROOT / "tailwind.css", media_type="text/css")
+
+
+@app.get("/manifest.json")
+async def manifest_json():
+    """返回 PWA manifest"""
+    return FileResponse(UI_ROOT / "manifest.json", media_type="application/manifest+json")
+
+
+@app.get("/favicon.svg")
+async def favicon_svg():
+    """返回站点图标"""
+    return FileResponse(UI_ROOT / "favicon.svg", media_type="image/svg+xml")
 
 
 @app.get("/health")
@@ -146,6 +217,7 @@ async def health():
 async def register_user(req: StartAuditRequest):
     """注册用户"""
     user = db.create_user(req.username or None)
+    user["token"] = session_manager.create_session(user["id"])
     return user
 
 @app.get("/api/user/{user_id}")
@@ -742,6 +814,116 @@ async def record_evolution_crossing(req: EvolutionRequest):
 # 课程内容 API
 # ============================================================
 
+@app.get("/api/courses")
+async def list_deep_courses(user_level: int = 1):
+    """获取100门深度课程库"""
+    courses = course_engine.get_all_courses(user_level=user_level)
+    return {
+        "total": len(courses),
+        "courses": courses,
+    }
+
+
+@app.get("/api/courses/{course_id}")
+async def get_deep_course(course_id: str):
+    """获取单门深度课程详情"""
+    course = course_engine.get_course(course_id)
+    if not course:
+        raise HTTPException(404, "课程不存在")
+    return {
+        "id": course.id,
+        "name": course.name,
+        "subtitle": course.subtitle,
+        "dimension": course.dimension,
+        "description": course.description,
+        "icon": course.icon,
+        "color": course.color,
+        "level_required": course.level_required,
+        "chapter_count": course.chapter_count,
+        "quiz_count": course.quiz_count,
+        "total_words": course.total_words,
+        "total_reading_minutes": course.total_reading_minutes,
+        "audio_status": course.audio_status,
+        "audio_file": course.audio_file,
+        "audio_duration_seconds": course.audio_duration_seconds,
+        "audio_voice": course.audio_voice,
+        "chapters": course_engine.get_course_chapters(course_id),
+    }
+
+
+@app.get("/api/courses/{course_id}/cover")
+async def get_deep_course_cover(course_id: str):
+    """获取深度课程封面图。"""
+    if not course_engine.get_course(course_id):
+        raise HTTPException(404, "课程不存在")
+    cover_file = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / "cover.svg"
+    if not cover_file.exists():
+        raise HTTPException(404, "课程封面不存在")
+    return FileResponse(cover_file, media_type="image/svg+xml")
+
+
+@app.get("/api/courses/{course_id}/audio")
+async def get_deep_course_audio(course_id: str):
+    """获取深度课程真实导览音频。"""
+    course = course_engine.get_course(course_id)
+    if not course:
+        raise HTTPException(404, "课程不存在")
+    audio_file = course.audio_file or "audio/intro.m4a"
+    audio_path = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / audio_file
+    if not audio_path.exists():
+        raise HTTPException(404, "课程音频不存在")
+    media_type = "audio/mpeg" if audio_path.suffix.lower() == ".mp3" else "audio/mp4"
+    return FileResponse(audio_path, media_type=media_type)
+
+
+@app.get("/api/courses/{course_id}/audio-script")
+async def get_deep_course_audio_script(course_id: str):
+    """获取深度课程导览音频讲稿。"""
+    course = course_engine.get_course(course_id)
+    if not course:
+        raise HTTPException(404, "课程不存在")
+    script_file = course.audio_script or "audio/intro.txt"
+    script_path = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / script_file
+    if not script_path.exists():
+        raise HTTPException(404, "课程音频讲稿不存在")
+    return {"course_id": course_id, "script": script_path.read_text(encoding="utf-8")}
+
+
+@app.get("/api/courses/{course_id}/chapters")
+async def list_deep_course_chapters(course_id: str):
+    """获取深度课程章节列表"""
+    if not course_engine.get_course(course_id):
+        raise HTTPException(404, "课程不存在")
+    return {
+        "course_id": course_id,
+        "chapters": course_engine.get_course_chapters(course_id),
+    }
+
+
+@app.get("/api/courses/{course_id}/chapters/{chapter_id}")
+async def get_deep_course_chapter(course_id: str, chapter_id: str):
+    """获取深度课程章节正文"""
+    content = course_engine.get_chapter_content(course_id, chapter_id)
+    if content is None:
+        raise HTTPException(404, "章节不存在")
+    return {
+        "course_id": course_id,
+        "chapter_id": chapter_id,
+        "content": content,
+    }
+
+
+@app.get("/api/courses/{course_id}/chapters/{chapter_id}/quiz")
+async def get_deep_course_chapter_quiz(course_id: str, chapter_id: str):
+    """获取深度课程章节测验"""
+    if not course_engine.get_course(course_id):
+        raise HTTPException(404, "课程不存在")
+    return {
+        "course_id": course_id,
+        "chapter_id": chapter_id,
+        "questions": course_engine.get_chapter_quiz(course_id, chapter_id),
+    }
+
 @app.get("/api/course/overview")
 async def get_course_overview():
     """获取全部30天课程概览"""
@@ -1227,7 +1409,7 @@ async def complete_daily_training(user_id: str):
     return {
         "streak": streak,
         "milestone": milestone,
-        "message": milestone["message"] if milestone else f"连续{streak["current"]}天，继续穿越！"
+        "message": milestone["message"] if milestone else f"连续{streak['current']}天，继续穿越！"
     }
 
 
