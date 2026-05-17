@@ -821,7 +821,8 @@ async def get_deep_course_audio(course_id: str):
     audio_path = Path(__file__).parent.parent.parent / "data" / "courses" / course_id / audio_file
     if not audio_path.exists():
         raise HTTPException(404, "课程音频不存在")
-    return FileResponse(audio_path, media_type="audio/mp4")
+    media_type = "audio/mpeg" if audio_path.suffix.lower() == ".mp3" else "audio/mp4"
+    return FileResponse(audio_path, media_type=media_type)
 
 
 @app.get("/api/courses/{course_id}/audio-script")

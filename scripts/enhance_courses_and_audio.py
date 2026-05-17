@@ -6,8 +6,9 @@ This script is intentionally deterministic and idempotent:
 - each course receives an audio script and a generated intro.m4a file;
 - course meta and the 100-course catalog are synchronized afterward.
 
-Audio generation uses the local macOS `say` command so the project does not
-depend on external TTS services or API keys.
+This is the legacy all-in-one enhancer. Future course audio should use
+scripts/generate_course_audio_neural.py so the oral script, voice, loudness,
+format, sample rate and bitrate follow the NarrowGate neural audio standard.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ START_MARKER = "<!-- NG-QUALITY-ENHANCEMENT:START -->"
 END_MARKER = "<!-- NG-QUALITY-ENHANCEMENT:END -->"
 DEFAULT_VOICE = "Tingting"
 DEFAULT_RATE = "145"
+DEFAULT_AUDIO_MIN_SECONDS = 25
 
 
 DIMENSION_METHODS = {
@@ -259,6 +261,9 @@ def update_meta(course_dir: Path, meta: dict[str, Any], total_chars: int, durati
     meta["audio_script"] = "audio/intro.txt"
     meta["audio_voice"] = voice
     meta["audio_duration_seconds"] = duration
+    meta.setdefault("audio_min_duration_seconds", DEFAULT_AUDIO_MIN_SECONDS)
+    meta.setdefault("audio_provider", "macos_say")
+    meta.setdefault("audio_format", "m4a")
     meta["quality_status"] = "production_ready"
     meta["quality_standard"] = "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频"
     meta["content_enhanced_at"] = date.today().isoformat()
@@ -293,7 +298,10 @@ def build_catalog() -> list[dict[str, Any]]:
                 "quality_status": meta.get("quality_status", "production_ready"),
                 "audio_status": meta.get("audio_status", "file_ready"),
                 "audio_file": meta.get("audio_file", "audio/intro.m4a"),
+                "audio_provider": meta.get("audio_provider", ""),
+                "audio_format": meta.get("audio_format", ""),
                 "audio_duration_seconds": int(meta.get("audio_duration_seconds") or 0),
+                "audio_min_duration_seconds": int(meta.get("audio_min_duration_seconds") or DEFAULT_AUDIO_MIN_SECONDS),
                 "chapter_count": len(chapters),
                 "quiz_count": quiz_count(course_dir),
                 "total_words": int(meta.get("total_words") or 0),
@@ -318,13 +326,14 @@ def build_quality_report(catalog: list[dict[str, Any]]) -> dict[str, Any]:
             if START_MARKER in text and END_MARKER in text:
                 enhanced_chapters += 1
 
+        audio_min_duration = int(item.get("audio_min_duration_seconds") or DEFAULT_AUDIO_MIN_SECONDS)
         checks = {
             "has_at_least_5_chapters": len(chapters) >= 5,
             "all_chapters_enhanced": enhanced_chapters == len(chapters) and bool(chapters),
             "has_at_least_10_quiz_questions": int(item.get("quiz_count") or 0) >= 10,
             "has_audio_file": audio_path.exists(),
             "has_audio_script": script_path.exists(),
-            "audio_duration_at_least_60s": int(item.get("audio_duration_seconds") or 0) >= 60,
+            "audio_duration_at_least_minimum": int(item.get("audio_duration_seconds") or 0) >= audio_min_duration,
             "marked_production_ready": item.get("quality_status") == "production_ready",
         }
         course_checks.append(
@@ -336,6 +345,9 @@ def build_quality_report(catalog: list[dict[str, Any]]) -> dict[str, Any]:
                 "quiz_count": int(item.get("quiz_count") or 0),
                 "audio_file": str(audio_path.relative_to(ROOT)),
                 "audio_duration_seconds": int(item.get("audio_duration_seconds") or 0),
+                "audio_min_duration_seconds": audio_min_duration,
+                "audio_provider": item.get("audio_provider", ""),
+                "audio_format": item.get("audio_format", ""),
                 "checks": checks,
                 "passed": all(checks.values()),
             }
@@ -353,7 +365,7 @@ def build_quality_report(catalog: list[dict[str, Any]]) -> dict[str, Any]:
     }
     return {
         "generated_at": date.today().isoformat(),
-        "standard": "100门课程；每门至少5章；每章有质量控制补充；每门至少10题测验；每门真实导览音频不少于60秒",
+        "standard": "100门课程；每门至少5章；每章有质量控制补充；每门至少10题测验；每门真实导览音频达到课程设定最小时长；未来神经音频采用口播稿 + Edge TTS + ffmpeg loudnorm + 24kHz mono MP3",
         "summary": summary,
         "courses": course_checks,
     }

@@ -2,6 +2,8 @@
 
 窄门课程语音建议使用 `qwen3-tts-instruct-flash` 生成课程导师式音频。本文只记录本地配置方式，不保存真实密钥。
 
+> 当前未来课程音频主标准已调整为 `DeepSeek 口播稿 + edge_tts + zh-CN-YunyangNeural + ffmpeg loudnorm + MP3`。Qwen TTS 保留为可选方案或后续对比方案。主标准见 `docs/AUDIO_GENERATION_STANDARD.md`。
+
 ## 1. 已安装的本地依赖
 
 项目需要：

@@ -436,6 +436,7 @@
 
         function generateCatalogCard(course) {
             const audioSrc = `${course.path || 'data/courses/' + course.id}/${course.audio_file || 'audio/intro.m4a'}`;
+            const audioType = audioSrc.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/mp4';
             return `
                 <article class="deep-course-card">
                     <div class="flex items-start justify-between gap-3 mb-5">
@@ -453,7 +454,7 @@
                         <span class="deep-course-pill">🎧${course.audio_duration_seconds ? Math.round(course.audio_duration_seconds / 60) + '分钟' : '语音'}</span>
                     </div>
                     <audio class="deep-course-audio" controls preload="none">
-                        <source src="${escapeHtml(audioSrc)}" type="audio/mp4">
+                        <source src="${escapeHtml(audioSrc)}" type="${audioType}">
                     </audio>
                 </article>
             `;
