@@ -1,0 +1,115 @@
+{
+  "course_id": "inner_child_work",
+  "order": 36,
+  "title": "内在小孩工作",
+  "subtitle": "理解早年需求，不被它暗中驾驶",
+  "description": "帮助学习者识别早年未被满足的需要如何影响成人选择，以温和而清醒的方式重新照顾内在部分。",
+  "dimension": "情绪",
+  "track": "情绪阴影",
+  "icon": "●",
+  "color": "#7c3aed",
+  "level_required": 1,
+  "version": "1.0.0",
+  "created_at": "2026-05-13",
+  "updated_at": "2026-05-13",
+  "author": "窄门项目组",
+  "category": "soul_evolution",
+  "difficulty": "intermediate",
+  "estimated_hours": 8,
+  "quality_status": "production_ready",
+  "quality_standard": "5章以上正文 + 每章质量控制补充 + 10题以上测验 + 每课真实导览音频",
+  "audio_required": true,
+  "audio_status": "file_ready",
+  "total_words": 13914,
+  "total_reading_minutes": 27,
+  "learning_objectives": [
+    "识别内在小孩工作对应的核心回避模式",
+    "区分宽门诱惑与窄门行动",
+    "完成至少一次二十四小时真实行动",
+    "建立可复盘、可见证的个人练习记录"
+  ],
+  "core_question": "我现在的反应像几岁的自己？",
+  "wide_gate": "让旧需求暗中掌控关系。",
+  "narrow_gate": "看见旧需求并由成人自我回应。",
+  "daily_challenge": "写下一个童年需要和今天的成人回应。",
+  "chapters": [
+    {
+      "id": 1,
+      "file": "ch01.md",
+      "title": "为什么内在小孩工作是窄门训练",
+      "subtitle": "内在小孩工作第1章",
+      "keywords": [
+        "年龄回溯",
+        "需要命名",
+        "成人回应"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 2,
+      "file": "ch02.md",
+      "title": "回避机制与宽门诱惑",
+      "subtitle": "内在小孩工作第2章",
+      "keywords": [
+        "年龄回溯",
+        "需要命名",
+        "成人回应"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 3,
+      "file": "ch03.md",
+      "title": "核心练习：从看见到命名",
+      "subtitle": "内在小孩工作第3章",
+      "keywords": [
+        "年龄回溯",
+        "需要命名",
+        "成人回应"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 4,
+      "file": "ch04.md",
+      "title": "行动整合：让现实给出证据",
+      "subtitle": "内在小孩工作第4章",
+      "keywords": [
+        "年龄回溯",
+        "需要命名",
+        "成人回应"
+      ],
+      "estimated_minutes": 8
+    },
+    {
+      "id": 5,
+      "file": "ch05.md",
+      "title": "七日穿越协议与复盘",
+      "subtitle": "内在小孩工作第5章",
+      "keywords": [
+        "年龄回溯",
+        "需要命名",
+        "成人回应"
+      ],
+      "estimated_minutes": 8
+    }
+  ],
+  "audio_file": "audio/intro.mp3",
+  "audio_script": "audio/intro.txt",
+  "audio_voice": "zh-CN-YunyangNeural",
+  "audio_duration_seconds": 47,
+  "content_enhanced_at": "2026-05-13",
+  "audio_provider": "edge_tts",
+  "audio_model": "edge_tts",
+  "audio_rate": "-8%",
+  "audio_pitch": "-2Hz",
+  "audio_format": "mp3",
+  "audio_bitrate": "48k",
+  "audio_sample_rate": 24000,
+  "audio_channels": 1,
+  "audio_loudnorm": "loudnorm=I=-16:TP=-1.5:LRA=9",
+  "audio_script_provider": "local",
+  "audio_min_duration_seconds": 25,
+  "audio_generation_standard": "150-230字课程口播稿 + zh-CN-YunyangNeural + 慢速低音调 + ffmpeg loudnorm=I=-16:TP=-1.5:LRA=9 + 24000Hz mono MP3",
+  "audio_enhanced_at": "2026-05-17"
+}

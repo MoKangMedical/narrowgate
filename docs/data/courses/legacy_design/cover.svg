@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="遗产设计">
+  <rect width="960" height="540" rx="32" fill="#050508"/>
+  <rect x="28" y="28" width="904" height="484" rx="28" fill="none" stroke="#d4af37" stroke-opacity=".34" stroke-width="2"/>
+  <circle cx="760" cy="92" r="170" fill="#d4af37" opacity=".10"/>
+  <circle cx="160" cy="420" r="220" fill="#d4af37" opacity=".07"/>
+  <text x="82" y="128" fill="#d4af37" font-size="58" font-family="serif">✦</text>
+  <text x="82" y="250" fill="#f4efe3" font-size="58" font-family="serif" font-weight="700">遗产设计</text>
+  <text x="82" y="318" fill="#b8b0a2" font-size="28" font-family="sans-serif">你想留下什么证据</text>
+  <text x="82" y="438" fill="#d4af37" font-size="22" font-family="monospace">NARROWGATE · 整合 · 整合通道</text>
+</svg>
