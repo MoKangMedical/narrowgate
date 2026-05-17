@@ -4338,7 +4338,7 @@
 
         async function ngLoadCourseCatalog() {
             try {
-                const response = await fetch('data/course_catalog_100.json');
+                const response = await fetch(`data/course_catalog_100.json?v=${Date.now()}`, { cache: 'no-store' });
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 ngCourseCatalog = await response.json();
                 ngRenderCourseLogic();
