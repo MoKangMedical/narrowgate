@@ -99,6 +99,25 @@ class TestHealthEndpoints:
         assert favicon_resp.status_code == 200
         assert "image/svg+xml" in favicon_resp.headers.get("content-type", "")
 
+    @pytest.mark.asyncio
+    async def test_course_static_page_and_public_data_are_served(self, client):
+        """Production routes should serve the static course page and public data files."""
+        page_resp = await client.get("/course-system.html")
+        assert page_resp.status_code == 200
+        assert "text/html" in page_resp.headers.get("content-type", "")
+
+        catalog_resp = await client.get("/data/course_catalog_100.json")
+        assert catalog_resp.status_code == 200
+        assert "json" in catalog_resp.headers.get("content-type", "")
+        assert len(catalog_resp.json()) == 100
+
+        audio_resp = await client.get("/data/courses/belief_audit/audio/intro.mp3")
+        assert audio_resp.status_code == 200
+        assert audio_resp.headers["content-type"].startswith("audio/mpeg")
+
+        db_resp = await client.get("/data/narrowgate.db")
+        assert db_resp.status_code == 404
+
 
 # ============================================================
 # User API

@@ -52,12 +52,16 @@ else
     print_info "未找到requirements.txt，跳过依赖安装"
 fi
 
-# 步骤4: 复制前端文件到web目录
+# 步骤4: 复制前端文件和课程资源到web目录
 print_info "步骤4: 部署前端文件"
 WEB_DIR="/var/www/narrowgate"
 if [ -d "$WEB_DIR" ]; then
-    cp index.html $WEB_DIR/
-    cp course-system.html $WEB_DIR/ 2>/dev/null || true
+    rsync -a --delete \
+        index.html \
+        course-system.html \
+        404.html \
+        data/ \
+        "$WEB_DIR"/
     print_success "前端文件已部署到 $WEB_DIR"
 else
     print_info "Web目录不存在，使用项目根目录的index.html"
