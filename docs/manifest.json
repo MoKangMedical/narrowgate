@@ -1,0 +1,34 @@
+{
+    "name": "窄门 NarrowGate",
+    "short_name": "窄门",
+    "description": "AI驱动的灵魂进化平台，做你最不想做的事，穿越窄门。",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050508",
+    "theme_color": "#b8942e",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "zh-CN",
+    "categories": ["health", "lifestyle", "education"],
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "灵魂审计",
+            "short_name": "审计",
+            "description": "开始灵魂审计",
+            "url": "/#audit"
+        },
+        {
+            "name": "30天训练",
+            "short_name": "训练",
+            "description": "查看30天穿越训练",
+            "url": "/#training"
+        }
+    ]
+}
