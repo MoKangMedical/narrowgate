@@ -2168,6 +2168,13 @@
                                     <div class="text-xs text-gray-500">每日挑战系统</div>
                                 </div>
                             </a>
+                            <a href="course-system.html" class="flex items-center gap-3 px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                                <span>🎧</span>
+                                <div>
+                                    <div class="font-medium">百门课程</div>
+                                    <div class="text-xs text-gray-500">100门深度课与音频</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -2255,6 +2262,10 @@
                 <a href="#training" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                     <span>⚡</span>
                     <span>30天训练</span>
+                </a>
+                <a href="course-system.html" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                    <span>🎧</span>
+                    <span>百门课程</span>
                 </a>
                 <a href="#how-it-works" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                     <span>🗺️</span>
@@ -2530,7 +2541,7 @@
                 <p class="text-caption text-[#b8942e] tracking-[0.3em] uppercase mb-4">CORE FEATURES & JOURNEY</p>
                 <h2 class="heading-section text-3xl md:text-4xl font-bold mb-4">穿越窄门的工具与旅程</h2>
                 <p class="text-gray-400 text-lg max-w-2xl mx-auto text-body">
-                    我们提供完整的工具链和清晰的旅程，帮助你从看见到穿越，从穿越到觉醒
+                    审计、课程、音频、见证与进化记录连成一条路径，帮助你从看见问题到完成行动
                 </p>
             </div>
             
@@ -2553,15 +2564,15 @@
                             <div class="feature-icon-wrapper feature-icon-audit">
                                 <div class="feature-icon">🧠</div>
                             </div>
-                            <h3 class="feature-title">灵魂拷问</h3>
+                            <h3 class="feature-title">灵魂审计</h3>
                             <p class="feature-desc">
-                                苏格拉底式追问 + AI回避检测。五维度深度排查你的枷锁，
-                                发现你最不想面对但最需要穿越的窄门。
+                                用苏格拉底式追问识别真实卡点。平台从五个现实维度排查回避模式，
+                                把用户最需要面对的窄门明确出来。
                             </p>
                             <ul class="feature-list">
-                                <li>认知 · 情绪 · 行为 · 关系 · 事业</li>
-                                <li>AI实时检测回避模式</li>
-                                <li>量化痛苦回避度和成长杠杆率</li>
+                                <li>认知、情绪、行为、关系、事业五维诊断</li>
+                                <li>识别否认、合理化、转移、讨好等回避</li>
+                                <li>输出窄门方向，并连接后续课程路径</li>
                             </ul>
                             <button class="feature-btn" onclick="startAudit()">
                                 开始审计 →
@@ -2575,13 +2586,13 @@
                             </div>
                             <h3 class="feature-title">大师引导</h3>
                             <p class="feature-desc">
-                                7位大师各有性格和哲学，MIMO AI实时生成追问。
-                                选择与你共鸣的引路人，开始你的穿越之旅。
+                                7位大师对应不同的洞察方式。用户可以选择苏格拉底、荣格、
+                                斯多葛等引导者，用不同语言进入同一个真实问题。
                             </p>
                             <ul class="feature-list">
                                 <li>苏格拉底 · 荣格 · 斯多葛 · 阿德勒</li>
-                                <li>个性化引导风格</li>
-                                <li>深度对话体验</li>
+                                <li>追问、阴影、韧性、关系和行动风格分明</li>
+                                <li>适合审计前启发，也适合课程后复盘</li>
                             </ul>
                             <button class="feature-btn" onclick="scrollToSection('masters')">
                                 选择大师 →
@@ -2593,18 +2604,18 @@
                             <div class="feature-icon-wrapper feature-icon-training">
                                 <div class="feature-icon">⚡</div>
                             </div>
-                            <h3 class="feature-title">30天穿越训练</h3>
+                            <h3 class="feature-title">课程训练体系</h3>
                             <p class="feature-desc">
-                                从看见到穿越，每天做你最不想做的事。
-                                难度渐进，见证人验证，经验值累积。
+                                30天穿越训练负责建立行动节奏，100门深度课程负责长期学习。
+                                每门课包含正文、测验和导览音频。
                             </p>
                             <ul class="feature-list">
-                                <li>四周渐进式训练计划</li>
-                                <li>每日挑战 + 反思问题</li>
-                                <li>见证人验证系统</li>
+                                <li>30天主线：看见、行动、突破、巩固</li>
+                                <li>100门课程：核心课 + 五维度 + 整合通道</li>
+                                <li>100条MP3导览音频，适合网页直接播放</li>
                             </ul>
-                            <button class="feature-btn" onclick="scrollToSection('training')">
-                                开始训练 →
+                            <button class="feature-btn" onclick="window.location.href='course-system.html'">
+                                查看课程 →
                             </button>
                         </div>
                         
@@ -2615,13 +2626,13 @@
                             </div>
                             <h3 class="feature-title">进化量化</h3>
                             <p class="feature-desc">
-                                五层进化金字塔 + 经验值系统。
-                                可视化你的灵魂成长路径，从凡人到封神。
+                                用经验值、连续行动、见证人和里程碑记录变化。
+                                用户不是只听懂道理，而是留下可回看的行动证据。
                             </p>
                             <ul class="feature-list">
                                 <li>凡人 → 看见 → 穿越 → 觉醒 → 封神</li>
-                                <li>经验值累积系统</li>
-                                <li>进化里程碑记录</li>
+                                <li>课程完成、挑战完成、见证反馈统一记录</li>
+                                <li>深夜独白保留为低打扰的自我觉察入口</li>
                             </ul>
                             <button class="feature-btn" onclick="scrollToSection('evolution')">
                                 查看进化 →
@@ -2926,8 +2937,8 @@
     <section id="training" class="py-6 px-6 reveal">
         <div class="max-w-5xl mx-auto">
             <h2 class="heading-section text-4xl md:text-5xl font-bold text-center mb-4 heading-section">30天穿越训练</h2>
-            <p class="text-gray-500 text-center mb-4 text-body">从看见到穿越，每天做你最不想做的事</p>
-            <p class="text-gray-600 text-center text-sm mb-6 text-caption">难度渐进 · 每日挑战 · 见证人验证 · 经验值累积</p>
+            <p class="text-gray-500 text-center mb-4 text-body">30天训练建立行动节奏，100门深度课程承接长期学习</p>
+            <p class="text-gray-600 text-center text-sm mb-6 text-caption">每日挑战 · 课程正文 · 测验题 · 导览音频 · 见证人验证 · 经验值累积</p>
 
             <!-- 进度条 -->
             <div class="mb-6">
@@ -2952,13 +2963,13 @@
                         <span class="bg-red-900/30 text-red-400 text-xs font-semibold px-2 py-1 rounded">D1-D7</span>
                         <span class="text-xs text-gray-500">难度 3-5</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">🔥 第一周：面对恐惧</h3>
-                    <p class="text-gray-500 text-sm mb-4">承认它存在，然后第一次尝试</p>
+                    <h3 class="font-bold text-lg mb-2">🔥 第一周：看见问题</h3>
+                    <p class="text-gray-500 text-sm mb-4">先识别逃避，不急着修饰自己</p>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 写下你最不想承认的一个弱点</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 5:30起床（连续3天）</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 找一个你不同意的观点，写下它的合理之处</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 给一个疏远的朋友发消息</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 承认一个长期回避的问题</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 记录恐惧带来的现实代价</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 找到一个最小可执行动作</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">·</span> 用核心课程建立共同语言</li>
                     </ul>
                 </div>
 
@@ -2968,13 +2979,13 @@
                         <span class="bg-orange-900/30 text-orange-400 text-xs font-semibold px-2 py-1 rounded">D8-D14</span>
                         <span class="text-xs text-gray-500">难度 5-7</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">⚡ 第二周：建立节奏</h3>
-                    <p class="text-gray-500 text-sm mb-4">每日挑战形成习惯回路</p>
+                    <h3 class="font-bold text-lg mb-2">⚡ 第二周：建立行动</h3>
+                    <p class="text-gray-500 text-sm mb-4">把洞察变成每天能完成的动作</p>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 24小时不刷社交媒体</li>
-                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 每天跑步30分钟（连续7天）</li>
-                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 问3个人"你觉得我最大的盲点是什么"</li>
-                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 对一个不合理的要求说"不"</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 训练注意力、边界和身体觉察</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 连续完成一项低难度挑战</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 把课程测验转成复盘问题</li>
+                        <li class="flex items-start gap-2"><span class="text-orange-400">·</span> 开始记录XP和行动证据</li>
                     </ul>
                 </div>
 
@@ -2984,13 +2995,13 @@
                         <span class="bg-yellow-900/30 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">D15-D21</span>
                         <span class="text-xs text-gray-500">难度 7-8</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">🔥 第三周：突破瓶颈</h3>
-                    <p class="text-gray-500 text-sm mb-4">难度升级，直面核心恐惧</p>
+                    <h3 class="font-bold text-lg mb-2">🔥 第三周：突破关系与情绪</h3>
+                    <p class="text-gray-500 text-sm mb-4">从自我解释进入真实表达</p>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 公开分享一次你的失败经历</li>
-                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 向最在意的人表达从未说过的真实感受</li>
-                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 结束一段你知道有毒的关系</li>
-                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 连续7天每天做一件让你不舒服的事</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 练习羞耻、愤怒和焦虑的命名</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 用关系课程看见投射与依附</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 完成一次真实沟通或拒绝</li>
+                        <li class="flex items-start gap-2"><span class="text-yellow-400">·</span> 邀请见证人确认行动发生</li>
                     </ul>
                 </div>
 
@@ -3000,13 +3011,13 @@
                         <span class="bg-[#b8942e]/20 text-[#b8942e] text-xs font-semibold px-2 py-1 rounded">D22-D30</span>
                         <span class="text-xs text-gray-500">难度 8-回顾</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">✨ 第四周：巩固穿越</h3>
-                    <p class="text-gray-500 text-sm mb-4">从刻意到自然，内化新身份</p>
+                    <h3 class="font-bold text-lg mb-2">✨ 第四周：整合为系统</h3>
+                    <p class="text-gray-500 text-sm mb-4">把一次穿越沉淀成长期结构</p>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 写一封信给你一直回避面对的人</li>
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 原谅一个你一直恨着的人</li>
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 写穿越旅程总结：恐惧 vs 现实</li>
-                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 帮助另一个人开始他的穿越</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 复盘恐惧、行动和结果的差距</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 选择下一组长期课程路径</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 用独白整理真实感受</li>
+                        <li class="flex items-start gap-2"><span class="text-[#b8942e]">·</span> 把改变沉淀为见证和里程碑</li>
                     </ul>
                 </div>
             </div>
@@ -3058,6 +3069,49 @@
                     </table>
                 </div>
                 <p class="text-center text-xs text-gray-600 mt-3">总经验值：540 XP · 30天完成即可解锁L2穿越者等级</p>
+            </details>
+
+            <!-- 100门课程逻辑线 -->
+            <details class="glass rounded-xl p-4 mb-4">
+                <summary class="cursor-pointer font-bold text-[#b8942e] text-sm">🎧 查看100门深度课程逻辑线 ▸</summary>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 text-sm">
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">核心课 · 12门</p>
+                        <p class="text-gray-500 leading-6">苏格拉底式自省、阴影整合、行为重塑、关系镜像、系统思维、窄门穿越，建立共同语言。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">认知觉察 · 15门</p>
+                        <p class="text-gray-500 leading-6">信念审计、认知偏误、假设检验、决策清晰，把“我以为”拆成可以验证的事实。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">情绪阴影 · 15门</p>
+                        <p class="text-gray-500 leading-6">焦虑落地、羞耻释放、愤怒边界、情绪颗粒度，让用户能看见并承受真实感受。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">行为执行 · 14门</p>
+                        <p class="text-gray-500 leading-6">注意力主权、深度工作、反拖延、刻意练习，把觉知落实为稳定行动。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">关系真实 · 15门</p>
+                        <p class="text-gray-500 leading-6">依附修复、边界语言、冲突清理、信任修复，帮助用户在关系里不再表演。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">事业系统 · 15门</p>
+                        <p class="text-gray-500 leading-6">职业杠杆、战略专注、团队信任、创业韧性，把内在改变放进现实结构。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">整合通道 · 14门</p>
+                        <p class="text-gray-500 leading-6">精神辨别、服务路径、神圣日常、见证圈，把个人突破沉淀为生命方向。</p>
+                    </div>
+                    <div class="bg-[#050508] border border-white/5 rounded-lg p-4">
+                        <p class="text-[#b8942e] font-semibold mb-2">音频与质量</p>
+                        <p class="text-gray-500 leading-6">100门均配MP3导览音频，YunyangNeural男声、慢速低音调、响度统一，网页可直接播放。</p>
+                    </div>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-3">
+                    <a href="course-system.html#course-library" class="px-4 py-2 bg-[#b8942e] text-black rounded-lg text-sm font-semibold hover:bg-[#d4af37] transition">打开完整课程库</a>
+                    <a href="data/course_catalog_100.json" class="px-4 py-2 border border-white/10 text-gray-300 rounded-lg text-sm hover:text-white hover:border-[#b8942e]/50 transition">查看课程数据</a>
+                </div>
             </details>
 
             <!-- 当前课程卡片 -->
@@ -3721,8 +3775,8 @@
         });
         
         // 添加标签页样式
-        const style = document.createElement('style');
-        style.textContent = `
+        const tabStyles = document.createElement('style');
+        tabStyles.textContent = `
             .tab-btn {
                 background: transparent;
                 border: 1px solid rgba(255,255,255,0.1);
@@ -3751,7 +3805,7 @@
                 to { opacity: 1; transform: translateY(0); }
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(tabStyles);
         
         // 旅程步骤样式
         const journeyStyles = document.createElement('style');
@@ -3992,14 +4046,14 @@
             `;
             
             // 添加动画样式
-            const style = document.createElement('style');
-            style.textContent = `
+            const loaderStyles = document.createElement('style');
+            loaderStyles.textContent = `
                 @keyframes spin {
                     0% { transform: rotate(0deg); }
                     100% { transform: rotate(360deg); }
                 }
             `;
-            document.head.appendChild(style);
+            document.head.appendChild(loaderStyles);
             document.body.appendChild(loader);
             
             // 页面加载完成后隐藏加载动画
@@ -4140,31 +4194,31 @@
         };
         
         async function loadUserProgress() {
-            try {
-                const data = await apiCall('/api/course/progress/' + userId, 'GET');
-                userProgress = data;
-                updateProgressUI();
-                
-                // 如果模式已开始，加载当前天数
-                if (data.has_started && data.current_day) {
-                    loadCourseDay(data.current_day);
+            const saved = localStorage.getItem('narrowgate_progress');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed.completed_days)) {
+                        userProgress = parsed;
+                    }
+                } catch(e) {
+                    localStorage.removeItem('narrowgate_progress');
                 }
-            } catch(e) {
-                console.log('加载进度失败，使用默认进度:', e);
-                // 如果API失败，尝试从localStorage恢复
-                const saved = localStorage.getItem('narrowgate_progress');
-                if (saved) {
-                    userProgress = JSON.parse(saved);
-                    updateProgressUI();
-                }
+            }
+            updateProgressUI();
+            if (userProgress.has_started && userProgress.current_day) {
+                loadCourseDay(userProgress.current_day);
             }
         }
         
         function updateProgressUI() {
             // 更新进度条
-            const progressPercent = (userProgress.completed_days.length / 30) * 100;
-            document.getElementById('course-progress-bar').style.width = progressPercent + '%';
-            document.getElementById('course-progress-text').textContent = Math.round(progressPercent) + '%';
+            const completedDays = Array.isArray(userProgress.completed_days) ? userProgress.completed_days : [];
+            const progressPercent = (completedDays.length / 30) * 100;
+            const progressBar = document.getElementById('course-progress-bar');
+            const progressText = document.getElementById('course-progress-text');
+            if (progressBar) progressBar.style.width = progressPercent + '%';
+            if (progressText) progressText.textContent = Math.round(progressPercent) + '%';
             
             // 更新连续天数显示
             const streakDisplay = document.getElementById('streak-display');
@@ -4181,7 +4235,8 @@
             for (let day = 1; day <= 30; day++) {
                 const dayElement = document.getElementById('day-marker-' + day);
                 if (dayElement) {
-                    if (userProgress.completed_days.includes(day)) {
+                    const completedDays = Array.isArray(userProgress.completed_days) ? userProgress.completed_days : [];
+                    if (completedDays.includes(day)) {
                         dayElement.classList.add('completed');
                     } else {
                         dayElement.classList.remove('completed');
@@ -4207,6 +4262,9 @@
                 });
                 
                 // 更新本地进度
+                if (!Array.isArray(userProgress.completed_days)) {
+                    userProgress.completed_days = [];
+                }
                 if (!userProgress.completed_days.includes(day)) {
                     userProgress.completed_days.push(day);
                     userProgress.current_day = day + 1;
@@ -4412,8 +4470,8 @@
         });
 
         // 添加涟漪动画样式
-        const style = document.createElement('style');
-        style.textContent = `
+        const rippleStyles = document.createElement('style');
+        rippleStyles.textContent = `
             @keyframes rippleEffect {
                 to {
                     transform: scale(4);
@@ -4421,9 +4479,7 @@
                 }
             }
         `;
-        document.head.appendChild(style);
-
-        let currentAuditId = null;
+        document.head.appendChild(rippleStyles);
 
         async function apiCall(url, method = 'POST', body = {}) {
             const res = await fetch(url, {
@@ -5051,9 +5107,9 @@
             document.getElementById('current-day-theme').textContent = content.theme;
             document.getElementById('current-day-content').innerHTML = '<p>' + (content.teaching || content.content || '').replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>') + '</p>';
             document.getElementById('current-day-challenge').textContent = content.challenge;
-            document.getElementById('current-day-quote').textContent = content.quote;
+            document.getElementById('current-day-quote').textContent = content.quote || content.golden_quote || '';
             document.getElementById('current-day-difficulty').textContent = '难度 ' + content.difficulty;
-            document.getElementById('current-day-xp').textContent = '+' + (content.xp || content.xp_reward || 10) + ' XP';
+            document.getElementById('current-day-xp').textContent = '+' + (content.xp || content.xp_reward || content.exp_reward || 10) + ' XP';
             
             // 更新反思问题
             const questionsContainer = document.getElementById('reflection-questions');
@@ -5104,14 +5160,20 @@
         }
         
         function updateDayIndicator() {
-            document.getElementById('day-indicator').textContent = '第 ' + currentDay + ' 天 / 共 ' + totalDays + ' 天';
+            const indicator = document.getElementById('day-indicator');
+            if (indicator) {
+                indicator.textContent = '第 ' + currentDay + ' 天 / 共 ' + totalDays + ' 天';
+            }
             
             // 更新导航按钮状态
-            document.getElementById('prev-day-btn').disabled = currentDay <= 1;
-            document.getElementById('next-day-btn').disabled = currentDay >= totalDays;
+            const prevBtn = document.getElementById('prev-day-btn');
+            const nextBtn = document.getElementById('next-day-btn');
+            if (!prevBtn || !nextBtn) return;
+            prevBtn.disabled = currentDay <= 1;
+            nextBtn.disabled = currentDay >= totalDays;
             
-            document.getElementById('prev-day-btn').classList.toggle('opacity-50', currentDay <= 1);
-            document.getElementById('next-day-btn').classList.toggle('opacity-50', currentDay >= totalDays);
+            prevBtn.classList.toggle('opacity-50', currentDay <= 1);
+            nextBtn.classList.toggle('opacity-50', currentDay >= totalDays);
         }
         
         function prevDay() {
