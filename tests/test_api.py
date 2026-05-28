@@ -106,10 +106,20 @@ class TestHealthEndpoints:
         assert page_resp.status_code == 200
         assert "text/html" in page_resp.headers.get("content-type", "")
 
+        launch_resp = await client.get("/commercial-launch.html")
+        assert launch_resp.status_code == 200
+        assert "text/html" in launch_resp.headers.get("content-type", "")
+        assert "商业落地" in launch_resp.text
+
         catalog_resp = await client.get("/data/course_catalog_100.json")
         assert catalog_resp.status_code == 200
         assert "json" in catalog_resp.headers.get("content-type", "")
         assert len(catalog_resp.json()) == 100
+
+        campaign_resp = await client.get("/data/marketing/launch_campaign_30d.json")
+        assert campaign_resp.status_code == 200
+        assert "json" in campaign_resp.headers.get("content-type", "")
+        assert len(campaign_resp.json()["items"]) == 30
 
         audio_resp = await client.get("/data/courses/belief_audit/audio/intro.mp3")
         assert audio_resp.status_code == 200
@@ -138,6 +148,43 @@ class TestUserAPI:
         assert "id" in data
         # Username may get suffix if duplicate exists in DB from prior test
         assert "testuser" in data["username"]
+
+
+# ============================================================
+# Marketing Lead API
+# ============================================================
+
+class TestMarketingLeadAPI:
+    """Tests for commercial launch lead capture."""
+
+    @pytest.mark.asyncio
+    async def test_create_marketing_lead(self, client):
+        """POST /api/marketing/leads should capture a channel lead."""
+        resp = await client.post(
+            "/api/marketing/leads",
+            json={
+                "source": "pytest",
+                "channel": "xiaohongshu",
+                "intent": "institution",
+                "name": "测试机构",
+                "contact": "test@example.com",
+                "organization": "窄门测试机构",
+                "note": "希望了解机构合作",
+            },
+        )
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["success"] is True
+        assert data["lead_id"].startswith("lead_")
+
+    @pytest.mark.asyncio
+    async def test_create_marketing_lead_requires_contact(self, client):
+        """Lead capture should require contact info."""
+        resp = await client.post(
+            "/api/marketing/leads",
+            json={"channel": "douyin", "intent": "trial"},
+        )
+        assert resp.status_code == 400
 
 
 # ============================================================

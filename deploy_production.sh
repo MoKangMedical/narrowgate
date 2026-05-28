@@ -59,7 +59,11 @@ if [ -d "$WEB_DIR" ]; then
     rsync -a --delete \
         index.html \
         course-system.html \
+        commercial-launch.html \
         404.html \
+        tailwind.css \
+        favicon.svg \
+        manifest.json \
         data/ \
         "$WEB_DIR"/
     print_success "前端文件已部署到 $WEB_DIR"
