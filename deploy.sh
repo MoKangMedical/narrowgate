@@ -38,6 +38,7 @@ git checkout main -- \
     index.html \
     course-system.html \
     commercial-launch.html \
+    marketing-ops.html \
     404.html \
     tailwind.css \
     favicon.svg \
@@ -47,7 +48,7 @@ git checkout main -- \
 
 # 提交更改
 echo "💾 提交gh-pages更改..."
-git add index.html course-system.html commercial-launch.html 404.html tailwind.css favicon.svg manifest.json data CNAME
+git add index.html course-system.html commercial-launch.html marketing-ops.html 404.html tailwind.css favicon.svg manifest.json data CNAME
 git commit -m "deploy: 更新首页 $(date '+%Y-%m-%d %H:%M:%S')"
 
 # 推送gh-pages分支

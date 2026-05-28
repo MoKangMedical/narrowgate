@@ -360,6 +360,77 @@ class Database:
             )
         return payload
 
+    def list_marketing_leads(
+        self,
+        limit: int = 100,
+        channel: str = "",
+        intent: str = "",
+        status: str = "",
+    ) -> List[dict]:
+        """列出商业落地和渠道推广线索，用于运营跟进。"""
+        limit = max(1, min(int(limit or 100), 500))
+        filters = []
+        params = []
+        if channel:
+            filters.append("channel = ?")
+            params.append(channel)
+        if intent:
+            filters.append("intent = ?")
+            params.append(intent)
+        if status:
+            filters.append("status = ?")
+            params.append(status)
+        where_clause = f"WHERE {' AND '.join(filters)}" if filters else ""
+        query = f"""
+            SELECT * FROM marketing_leads
+            {where_clause}
+            ORDER BY created_at DESC
+            LIMIT ?
+        """
+        params.append(limit)
+        with self._connect() as conn:
+            rows = conn.execute(query, params).fetchall()
+            leads = []
+            for row in rows:
+                lead = dict(row)
+                try:
+                    lead["metadata"] = json.loads(lead.get("metadata") or "{}")
+                except json.JSONDecodeError:
+                    lead["metadata"] = {}
+                leads.append(lead)
+            return leads
+
+    def get_marketing_lead_summary(self) -> dict:
+        """返回不含联系方式的线索汇总，便于公开运营看板展示。"""
+        with self._connect() as conn:
+            total = conn.execute("SELECT COUNT(*) FROM marketing_leads").fetchone()[0]
+            by_channel = {
+                row["channel"] or "unknown": row["count"]
+                for row in conn.execute(
+                    "SELECT channel, COUNT(*) AS count FROM marketing_leads GROUP BY channel"
+                ).fetchall()
+            }
+            by_intent = {
+                row["intent"] or "unknown": row["count"]
+                for row in conn.execute(
+                    "SELECT intent, COUNT(*) AS count FROM marketing_leads GROUP BY intent"
+                ).fetchall()
+            }
+            recent_rows = conn.execute(
+                """
+                SELECT source, channel, intent, organization, status, created_at
+                FROM marketing_leads
+                ORDER BY created_at DESC
+                LIMIT 10
+                """
+            ).fetchall()
+        return {
+            "total": total,
+            "by_channel": by_channel,
+            "by_intent": by_intent,
+            "recent": [dict(row) for row in recent_rows],
+        }
+
     # ============================================================
     # 见证人
     # ============================================================

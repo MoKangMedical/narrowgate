@@ -111,6 +111,11 @@ class TestHealthEndpoints:
         assert "text/html" in launch_resp.headers.get("content-type", "")
         assert "商业落地" in launch_resp.text
 
+        ops_resp = await client.get("/marketing-ops.html")
+        assert ops_resp.status_code == 200
+        assert "text/html" in ops_resp.headers.get("content-type", "")
+        assert "增长执行台" in ops_resp.text
+
         catalog_resp = await client.get("/data/course_catalog_100.json")
         assert catalog_resp.status_code == 200
         assert "json" in catalog_resp.headers.get("content-type", "")
@@ -120,6 +125,15 @@ class TestHealthEndpoints:
         assert campaign_resp.status_code == 200
         assert "json" in campaign_resp.headers.get("content-type", "")
         assert len(campaign_resp.json()["items"]) == 30
+
+        assets_resp = await client.get("/data/marketing/publishing_assets.json")
+        assert assets_resp.status_code == 200
+        assert "json" in assets_resp.headers.get("content-type", "")
+        assert len(assets_resp.json()["items"]) == 30
+
+        csv_resp = await client.get("/data/marketing/publishing_assets.csv")
+        assert csv_resp.status_code == 200
+        assert "text/csv" in csv_resp.headers.get("content-type", "")
 
         audio_resp = await client.get("/data/courses/belief_audit/audio/intro.mp3")
         assert audio_resp.status_code == 200
@@ -185,6 +199,57 @@ class TestMarketingLeadAPI:
             json={"channel": "douyin", "intent": "trial"},
         )
         assert resp.status_code == 400
+
+    @pytest.mark.asyncio
+    async def test_marketing_campaign_api_has_tracking_links(self, client):
+        """GET /api/marketing/campaign should expose publish-ready UTM links."""
+        resp = await client.get("/api/marketing/campaign")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["total"] == 30
+        first = data["items"][0]
+        assert first["status"] == "ready_to_publish"
+        assert "utm_source=" in first["landing_url"]
+        assert "quality_gate" in first
+
+    @pytest.mark.asyncio
+    async def test_marketing_lead_summary_hides_contacts(self, client):
+        """Public summary should not expose personal contact fields."""
+        await client.post(
+            "/api/marketing/leads",
+            json={
+                "source": "pytest_summary",
+                "channel": "digital_human",
+                "intent": "trial",
+                "contact": "summary@example.com",
+            },
+        )
+        resp = await client.get("/api/marketing/leads/summary")
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["total"] >= 1
+        assert "contact" not in str(data)
+
+    @pytest.mark.asyncio
+    async def test_marketing_lead_export_requires_admin_token(self, client):
+        """Lead detail export should require the configured admin token."""
+        resp = await client.get("/api/marketing/leads")
+        assert resp.status_code == 403
+
+        with patch.dict(os.environ, {"NARROWGATE_ADMIN_TOKEN": "pytest-admin"}):
+            ok_resp = await client.get(
+                "/api/marketing/leads",
+                headers={"X-Admin-Token": "pytest-admin"},
+            )
+            assert ok_resp.status_code == 200
+            assert "leads" in ok_resp.json()
+
+            csv_resp = await client.get(
+                "/api/marketing/leads.csv",
+                headers={"X-Admin-Token": "pytest-admin"},
+            )
+            assert csv_resp.status_code == 200
+            assert "text/csv" in csv_resp.headers.get("content-type", "")
 
 
 # ============================================================

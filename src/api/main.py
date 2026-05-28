@@ -12,10 +12,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from pydantic import BaseModel
 from typing import Optional, List, Dict
+import csv
+import io
 import json
+import os
 from datetime import datetime, timedelta
 
 from core.soul_audit import SoulAuditEngine, AUDIT_DIMENSIONS
@@ -44,7 +47,7 @@ ALLOWED_DATA_ROOT_FILES = {
     "course_catalog_100.json",
     "course_quality_report.json",
 }
-ALLOWED_DATA_EXTENSIONS = {".json", ".md", ".m4a", ".mp3", ".svg", ".txt"}
+ALLOWED_DATA_EXTENSIONS = {".json", ".md", ".csv", ".m4a", ".mp3", ".svg", ".txt"}
 
 
 def _safe_file_response(base_dir: Path, file_path: str, media_type: str = None) -> FileResponse:
@@ -164,6 +167,68 @@ class MarketingLeadRequest(BaseModel):
     metadata: Dict = {}
 
 
+def _require_marketing_admin(request: Request) -> None:
+    """Require an operator token before exposing contact details."""
+    expected = os.getenv("NARROWGATE_ADMIN_TOKEN", "").strip()
+    supplied = (
+        request.headers.get("X-Admin-Token", "").strip()
+        or request.query_params.get("admin_token", "").strip()
+    )
+    if not expected:
+        raise HTTPException(403, "营销管理令牌未配置")
+    if supplied != expected:
+        raise HTTPException(403, "营销管理令牌无效")
+
+
+def _campaign_asset_from_item(item: dict, base_url: str) -> dict:
+    """Attach publish-ready fields to a campaign item."""
+    channel = item.get("channel", "site")
+    day = item.get("day", 0)
+    content_id = f"day{day:02d}_{channel}"
+    tags = item.get("tags", [])
+    hashtags = " ".join(f"#{tag}" for tag in tags)
+    landing_url = (
+        f"{base_url}/?utm_source={channel}"
+        f"&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content={content_id}"
+    )
+    caption = "\n".join(
+        part
+        for part in [
+            item.get("hook", ""),
+            item.get("body", ""),
+            item.get("cta", ""),
+            hashtags,
+        ]
+        if part
+    )
+    return {
+        "id": content_id,
+        "day": day,
+        "channel": channel,
+        "title": item.get("title", ""),
+        "hook": item.get("hook", ""),
+        "caption": caption,
+        "cta": item.get("cta", ""),
+        "tags": tags,
+        "asset_brief": item.get("asset", ""),
+        "landing_url": landing_url,
+        "status": "ready_to_publish",
+        "quality_gate": [
+            "标题不夸大疗效，不承诺治愈或保证改变",
+            "正文只引导自我觉察与行动训练，不替代医疗或心理治疗",
+            "评论区引导进入官网审计，不诱导私下交易",
+        ],
+    }
+
+
+def _load_campaign_assets(base_url: str) -> List[dict]:
+    campaign_file = DATA_ROOT / "marketing" / "launch_campaign_30d.json"
+    if not campaign_file.exists():
+        raise HTTPException(404, "宣传排期不存在")
+    campaign = json.loads(campaign_file.read_text(encoding="utf-8"))
+    return [_campaign_asset_from_item(item, base_url) for item in campaign.get("items", [])]
+
+
 # ============================================================
 # 首页
 # ============================================================
@@ -193,6 +258,15 @@ async def commercial_launch_page():
     if not launch_page.exists():
         raise HTTPException(404, "商业落地页面不存在")
     return HTMLResponse(content=launch_page.read_text(encoding="utf-8"))
+
+
+@app.get("/marketing-ops.html", response_class=HTMLResponse)
+async def marketing_ops_page():
+    """返回小红书、抖音和数字人增长执行台。"""
+    ops_page = PROJECT_ROOT / "marketing-ops.html"
+    if not ops_page.exists():
+        raise HTTPException(404, "增长执行台不存在")
+    return HTMLResponse(content=ops_page.read_text(encoding="utf-8"))
 
 
 @app.get("/data/{file_path:path}")
@@ -283,6 +357,74 @@ async def create_marketing_lead(req: MarketingLeadRequest, request: Request):
         "status": lead["status"],
         "message": "已收到你的申请，我们会优先跟进适合的试点与合作。",
     }
+
+
+@app.get("/api/marketing/campaign")
+async def get_marketing_campaign(request: Request):
+    """返回带UTM追踪链接的30天宣传执行包。"""
+    base_url = str(request.base_url).rstrip("/")
+    assets = _load_campaign_assets(base_url)
+    return {
+        "campaign": "narrowgate_launch_30d",
+        "channels": ["xiaohongshu", "douyin", "digital_human"],
+        "total": len(assets),
+        "items": assets,
+    }
+
+
+@app.get("/api/marketing/leads/summary")
+async def get_marketing_lead_summary():
+    """返回不含联系方式的渠道线索汇总。"""
+    return db.get_marketing_lead_summary()
+
+
+@app.get("/api/marketing/leads")
+async def list_marketing_leads(
+    request: Request,
+    limit: int = 100,
+    channel: str = "",
+    intent: str = "",
+    status: str = "",
+):
+    """返回线索明细；联系方式只对持有管理令牌的运营者开放。"""
+    _require_marketing_admin(request)
+    leads = db.list_marketing_leads(limit=limit, channel=channel, intent=intent, status=status)
+    return {"total": len(leads), "leads": leads}
+
+
+@app.get("/api/marketing/leads.csv")
+async def export_marketing_leads_csv(
+    request: Request,
+    limit: int = 500,
+    channel: str = "",
+    intent: str = "",
+    status: str = "",
+):
+    """导出运营跟进CSV；需要管理令牌。"""
+    _require_marketing_admin(request)
+    leads = db.list_marketing_leads(limit=limit, channel=channel, intent=intent, status=status)
+    output = io.StringIO()
+    fieldnames = [
+        "id",
+        "created_at",
+        "source",
+        "channel",
+        "intent",
+        "name",
+        "contact",
+        "organization",
+        "note",
+        "status",
+    ]
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    for lead in leads:
+        writer.writerow({field: lead.get(field, "") for field in fieldnames})
+    return Response(
+        output.getvalue(),
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": "attachment; filename=narrowgate_marketing_leads.csv"},
+    )
 
 
 # ============================================================

@@ -48,7 +48,8 @@ cd /root/narrowgate
 git fetch origin
 git reset --hard origin/main
 
-# 4. 重启服务
+# 4. 设置运营导出令牌并重启服务
+export NARROWGATE_ADMIN_TOKEN="替换为强随机管理令牌"
 sudo systemctl restart narrowgate
 
 # 5. 验证
@@ -68,6 +69,7 @@ curl http://127.0.0.1:8090/health
 | 首页 | https://narrowgatemind.top | 主页，包含社会证明、用户旅程 |
 | 课程体系 | https://narrowgatemind.top/course-system.html | 30天训练与100门课程库 |
 | 商业落地 | https://narrowgatemind.top/commercial-launch.html | 商业模式、小红书、抖音、数字人宣传与预约合作 |
+| 增长执行台 | https://narrowgatemind.top/marketing-ops.html | 发布素材、UTM追踪、线索汇总 |
 
 ### API端点
 
@@ -79,6 +81,7 @@ curl http://127.0.0.1:8090/health
 | 灵魂审计 | https://narrowgatemind.top/api/audit/start | 开始灵魂审计 |
 | 大师列表 | https://narrowgatemind.top/api/masters | 获取大师列表 |
 | 营销线索 | https://narrowgatemind.top/api/marketing/leads | 官网预约、渠道来源与机构合作线索 |
+| 宣传排期 | https://narrowgatemind.top/api/marketing/campaign | 30天宣传素材与UTM链接 |
 
 ---
 
@@ -276,6 +279,7 @@ git log --oneline -10
 git checkout <commit-hash>
 
 # 4. 重启服务
+export NARROWGATE_ADMIN_TOKEN="替换为强随机管理令牌"
 sudo systemctl restart narrowgate
 
 # 5. 验证
