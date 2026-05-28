@@ -50,29 +50,56 @@ CHANNEL_OPERATIONS = {
     "xiaohongshu": {
         "label": "小红书",
         "account": "小红书｜窄门 NarrowGate（待绑定）",
+        "account_status": "needs_binding",
         "owner": "内容运营",
         "support_owner": "设计/长图",
         "publish_time": time(21, 30),
         "asset_required": ["封面图", "长图正文", "首评引导", "UTM链接"],
+        "asset_status": "copy_ready_visual_pending",
         "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+        "primary_conversion": "评论/私信进入灵魂审计",
+        "account_setup_checklist": [
+            "完成头像、简介、官网链接和置顶笔记",
+            "准备3套黑金长图模板",
+            "设置评论区关键词回复：窄门、7天、审计",
+            "发布前确认平台敏感词和心理健康表达边界",
+        ],
     },
     "douyin": {
         "label": "抖音",
         "account": "抖音｜窄门 NarrowGate（待绑定）",
+        "account_status": "needs_binding",
         "owner": "短视频运营",
         "support_owner": "剪辑/字幕",
         "publish_time": time(19, 30),
         "asset_required": ["9:16视频", "强钩子字幕", "封面标题", "置顶评论"],
+        "asset_status": "script_ready_video_pending",
         "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+        "primary_conversion": "评论区互动进入主页链接",
+        "account_setup_checklist": [
+            "完成头像、简介、主页链接和合集分类",
+            "准备9:16字幕模板和3秒强钩子封面",
+            "设置置顶评论：评论“门”领取7天行动清单",
+            "发布前确认口播不夸大承诺、不替代咨询治疗",
+        ],
     },
     "digital_human": {
         "label": "数字人",
         "account": "数字人｜窄门导师（待绑定）",
+        "account_status": "needs_binding",
         "owner": "数字人制作",
         "support_owner": "音频/后期",
         "publish_time": time(12, 20),
         "asset_required": ["数字人口播视频", "中文字幕", "金色关键词", "课程/审计CTA"],
+        "asset_status": "storyboard_ready_render_pending",
         "metric_target": "完播率>30%，私信/线索>=3，脚本可复用",
+        "primary_conversion": "课程导览试听和机构演示预约",
+        "account_setup_checklist": [
+            "确定数字人形象、服装、背景和字幕风格",
+            "沿用YunyangNeural慢速低音调音频标准",
+            "准备黑金门线背景和课程入口收尾画面",
+            "渲染后检查口播、字幕、响度和CTA一致",
+        ],
     },
 }
 
@@ -137,7 +164,7 @@ def write_csv(path: Path, assets: list[dict]) -> None:
         "publish_status",
     ]
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for asset in assets:
             row = dict(asset)
@@ -148,7 +175,7 @@ def write_csv(path: Path, assets: list[dict]) -> None:
 def write_rows_csv(path: Path, rows: list[dict], fieldnames: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             normalized = {}
@@ -381,7 +408,28 @@ def build_week1_publish_scripts(assets: list[dict]) -> tuple[dict, str]:
     )
 
 
-def build_launch_production_calendar(assets: list[dict], days: int = 14) -> tuple[dict, str]:
+def build_channel_readiness() -> list[dict]:
+    readiness = []
+    for channel, ops in CHANNEL_OPERATIONS.items():
+        readiness.append(
+            {
+                "channel": channel,
+                "channel_label": ops["label"],
+                "account": ops["account"],
+                "account_status": ops["account_status"],
+                "owner": ops["owner"],
+                "support_owner": ops["support_owner"],
+                "publish_time": ops["publish_time"].isoformat(timespec="minutes"),
+                "primary_conversion": ops["primary_conversion"],
+                "asset_status": ops["asset_status"],
+                "account_setup_checklist": ops["account_setup_checklist"],
+                "metric_target": ops["metric_target"],
+            }
+        )
+    return readiness
+
+
+def build_launch_production_calendar(assets: list[dict], days: int = 30) -> tuple[dict, str]:
     scheduled_assets = [asset for asset in assets if int(asset["day"]) <= days]
     calendar = []
     for asset in scheduled_assets:
@@ -399,6 +447,7 @@ def build_launch_production_calendar(assets: list[dict], days: int = 14) -> tupl
                 "channel": asset["channel"],
                 "channel_label": ops["label"],
                 "account": ops["account"],
+                "account_status": ops["account_status"],
                 "owner": ops["owner"],
                 "support_owner": ops["support_owner"],
                 "publish_at": publish_at.isoformat(timespec="minutes"),
@@ -407,8 +456,10 @@ def build_launch_production_calendar(assets: list[dict], days: int = 14) -> tupl
                 "timezone": TIMEZONE,
                 "title": asset["title"],
                 "asset_required": ops["asset_required"],
+                "asset_status": ops["asset_status"],
                 "landing_url": asset["landing_url"],
                 "metric_target": ops["metric_target"],
+                "primary_conversion": ops["primary_conversion"],
                 "status": "scheduled",
                 "pre_publish_checklist": [
                     "封面/第一帧在3秒内读懂",
@@ -419,24 +470,51 @@ def build_launch_production_calendar(assets: list[dict], days: int = 14) -> tupl
             }
         )
     markdown_lines = [
-        "# 窄门14天发布作战表",
+        "# 窄门30天发布作战表",
         "",
         f"- 启动日期：{LAUNCH_START_DATE.isoformat()}",
         f"- 时区：{TIMEZONE}",
-        "- 用途：把小红书、抖音、数字人内容从素材库推进到账号、负责人、发布时间和复盘动作。",
+        "- 用途：把小红书、抖音、数字人内容从素材库推进到账号、负责人、发布时间、素材制作和复盘动作。",
         "",
-        "| 天 | 日期 | 渠道 | 账号 | 负责人 | 发布时间 | 素材 | 指标目标 |",
-        "|---|---|---|---|---|---|---|---|",
+        "## 账号准备状态",
+        "",
+        "| 渠道 | 账号 | 状态 | 负责人 | 主转化动作 | 素材状态 |",
+        "|---|---|---|---|---|---|",
     ]
-    for item in calendar:
+    for item in build_channel_readiness():
         markdown_lines.append(
-            "| {day} | {date} {weekday} | {channel_label} | {account} | {owner}/{support_owner} | {publish_at} | {title} | {metric_target} |".format(
+            "| {channel_label} | {account} | {account_status} | {owner}/{support_owner} | {primary_conversion} | {asset_status} |".format(
                 **item
             )
         )
     markdown_lines.extend(
         [
             "",
+            "## 30天排期",
+            "",
+            "| 天 | 日期 | 渠道 | 账号 | 负责人 | 发布时间 | 素材 | 素材状态 | 指标目标 |",
+            "|---|---|---|---|---|---|---|---|---|",
+        ]
+    )
+    for item in calendar:
+        markdown_lines.append(
+            "| {day} | {date} {weekday} | {channel_label} | {account} | {owner}/{support_owner} | {publish_at} | {title} | {asset_status} | {metric_target} |".format(
+                **item
+            )
+        )
+    markdown_lines.extend(
+        [
+            "",
+            "## 账号上线前必做",
+            "",
+        ]
+    )
+    for item in build_channel_readiness():
+        markdown_lines.append(f"### {item['channel_label']}")
+        markdown_lines.extend(f"- {task}" for task in item["account_setup_checklist"])
+        markdown_lines.append("")
+    markdown_lines.extend(
+        [
             "## 每日闭环",
             "",
             "1. 发布前6小时锁定封面、脚本、字幕、链接。",
@@ -448,10 +526,11 @@ def build_launch_production_calendar(assets: list[dict], days: int = 14) -> tupl
     )
     payload = {
         "campaign": CAMPAIGN,
-        "scope": "launch_first_14_days",
+        "scope": "launch_first_30_days",
         "start_date": LAUNCH_START_DATE.isoformat(),
         "timezone": TIMEZONE,
-        "purpose": "明确小红书、抖音、数字人的账号、负责人、发布时间、素材要求和复盘指标。",
+        "purpose": "明确小红书、抖音、数字人的账号、负责人、发布时间、素材要求、素材状态和复盘指标。",
+        "channel_readiness": build_channel_readiness(),
         "calendar": calendar,
     }
     return payload, "\n".join(markdown_lines)
@@ -494,6 +573,7 @@ def main() -> None:
         "weekday",
         "channel_label",
         "account",
+        "account_status",
         "owner",
         "support_owner",
         "publish_at",
@@ -501,7 +581,9 @@ def main() -> None:
         "review_at",
         "title",
         "asset_required",
+        "asset_status",
         "metric_target",
+        "primary_conversion",
         "status",
         "landing_url",
     ]

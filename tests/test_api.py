@@ -115,7 +115,7 @@ class TestHealthEndpoints:
         assert ops_resp.status_code == 200
         assert "text/html" in ops_resp.headers.get("content-type", "")
         assert "增长执行台" in ops_resp.text
-        assert "14天发布作战表" in ops_resp.text
+        assert "30天发布作战表" in ops_resp.text
 
         catalog_resp = await client.get("/data/course_catalog_100.json")
         assert catalog_resp.status_code == 200
@@ -139,13 +139,16 @@ class TestHealthEndpoints:
         calendar_resp = await client.get("/data/marketing/launch_production_calendar.json")
         assert calendar_resp.status_code == 200
         calendar = calendar_resp.json()
-        assert len(calendar["calendar"]) == 14
+        assert len(calendar["calendar"]) == 30
+        assert len(calendar["channel_readiness"]) == 3
         assert calendar["calendar"][0]["account"].startswith("小红书")
         assert calendar["calendar"][0]["publish_at"] == "2026-06-01T21:30"
+        assert calendar["calendar"][-1]["publish_at"] == "2026-06-30T12:20"
+        assert calendar["channel_readiness"][0]["account_status"] == "needs_binding"
 
         calendar_md_resp = await client.get("/data/marketing/launch_production_calendar.md")
         assert calendar_md_resp.status_code == 200
-        assert "窄门14天发布作战表" in calendar_md_resp.text
+        assert "窄门30天发布作战表" in calendar_md_resp.text
 
         calendar_csv_resp = await client.get("/data/marketing/launch_production_calendar.csv")
         assert calendar_csv_resp.status_code == 200
