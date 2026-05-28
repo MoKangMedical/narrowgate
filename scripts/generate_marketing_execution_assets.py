@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import json
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
 
 
@@ -13,6 +14,8 @@ MARKETING_DIR = PROJECT_ROOT / "data" / "marketing"
 DOCS_MARKETING_DIR = PROJECT_ROOT / "docs" / "data" / "marketing"
 BASE_URL = "https://narrowgatemind.top"
 CAMPAIGN = "narrowgate_launch_30d"
+LAUNCH_START_DATE = date(2026, 6, 1)
+TIMEZONE = "Asia/Shanghai"
 
 
 QUALITY_GATE = [
@@ -39,6 +42,37 @@ DIGITAL_HUMAN_PROFILE = {
         "duration_seconds": "20-45",
         "subtitle": "全程中文字幕，关键句用金色强调",
         "opening_frame": "第一帧必须出现问题句或冲突句",
+    },
+}
+
+
+CHANNEL_OPERATIONS = {
+    "xiaohongshu": {
+        "label": "小红书",
+        "account": "小红书｜窄门 NarrowGate（待绑定）",
+        "owner": "内容运营",
+        "support_owner": "设计/长图",
+        "publish_time": time(21, 30),
+        "asset_required": ["封面图", "长图正文", "首评引导", "UTM链接"],
+        "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+    },
+    "douyin": {
+        "label": "抖音",
+        "account": "抖音｜窄门 NarrowGate（待绑定）",
+        "owner": "短视频运营",
+        "support_owner": "剪辑/字幕",
+        "publish_time": time(19, 30),
+        "asset_required": ["9:16视频", "强钩子字幕", "封面标题", "置顶评论"],
+        "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+    },
+    "digital_human": {
+        "label": "数字人",
+        "account": "数字人｜窄门导师（待绑定）",
+        "owner": "数字人制作",
+        "support_owner": "音频/后期",
+        "publish_time": time(12, 20),
+        "asset_required": ["数字人口播视频", "中文字幕", "金色关键词", "课程/审计CTA"],
+        "metric_target": "完播率>30%，私信/线索>=3，脚本可复用",
     },
 }
 
@@ -109,6 +143,21 @@ def write_csv(path: Path, assets: list[dict]) -> None:
             row = dict(asset)
             row["tags"] = " ".join(asset.get("tags", []))
             writer.writerow({field: row.get(field, "") for field in fieldnames})
+
+
+def write_rows_csv(path: Path, rows: list[dict], fieldnames: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            normalized = {}
+            for field in fieldnames:
+                value = row.get(field, "")
+                if isinstance(value, list):
+                    value = "；".join(str(item) for item in value)
+                normalized[field] = value
+            writer.writerow(normalized)
 
 
 def build_digital_human_package(assets: list[dict]) -> dict:
@@ -332,6 +381,82 @@ def build_week1_publish_scripts(assets: list[dict]) -> tuple[dict, str]:
     )
 
 
+def build_launch_production_calendar(assets: list[dict], days: int = 14) -> tuple[dict, str]:
+    scheduled_assets = [asset for asset in assets if int(asset["day"]) <= days]
+    calendar = []
+    for asset in scheduled_assets:
+        ops = CHANNEL_OPERATIONS[asset["channel"]]
+        publish_date = LAUNCH_START_DATE + timedelta(days=int(asset["day"]) - 1)
+        publish_at = datetime.combine(publish_date, ops["publish_time"])
+        production_deadline = publish_at - timedelta(hours=6)
+        review_at = publish_at + timedelta(days=1)
+        calendar.append(
+            {
+                "asset_id": asset["id"],
+                "day": asset["day"],
+                "date": publish_date.isoformat(),
+                "weekday": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"][publish_date.weekday()],
+                "channel": asset["channel"],
+                "channel_label": ops["label"],
+                "account": ops["account"],
+                "owner": ops["owner"],
+                "support_owner": ops["support_owner"],
+                "publish_at": publish_at.isoformat(timespec="minutes"),
+                "production_deadline": production_deadline.isoformat(timespec="minutes"),
+                "review_at": review_at.isoformat(timespec="minutes"),
+                "timezone": TIMEZONE,
+                "title": asset["title"],
+                "asset_required": ops["asset_required"],
+                "landing_url": asset["landing_url"],
+                "metric_target": ops["metric_target"],
+                "status": "scheduled",
+                "pre_publish_checklist": [
+                    "封面/第一帧在3秒内读懂",
+                    "正文或口播不承诺疗效、不制造恐吓",
+                    "评论区引导只保留一个动作",
+                    "发布后24小时回填浏览、互动、评论、收藏、线索",
+                ],
+            }
+        )
+    markdown_lines = [
+        "# 窄门14天发布作战表",
+        "",
+        f"- 启动日期：{LAUNCH_START_DATE.isoformat()}",
+        f"- 时区：{TIMEZONE}",
+        "- 用途：把小红书、抖音、数字人内容从素材库推进到账号、负责人、发布时间和复盘动作。",
+        "",
+        "| 天 | 日期 | 渠道 | 账号 | 负责人 | 发布时间 | 素材 | 指标目标 |",
+        "|---|---|---|---|---|---|---|---|",
+    ]
+    for item in calendar:
+        markdown_lines.append(
+            "| {day} | {date} {weekday} | {channel_label} | {account} | {owner}/{support_owner} | {publish_at} | {title} | {metric_target} |".format(
+                **item
+            )
+        )
+    markdown_lines.extend(
+        [
+            "",
+            "## 每日闭环",
+            "",
+            "1. 发布前6小时锁定封面、脚本、字幕、链接。",
+            "2. 发布后30分钟检查链接、评论区引导和平台审核状态。",
+            "3. 发布后24小时回填数据到增长执行台。",
+            "4. 每周保留高评论、高收藏、高线索题材，扩写成数字人口播或小红书长图。",
+            "",
+        ]
+    )
+    payload = {
+        "campaign": CAMPAIGN,
+        "scope": "launch_first_14_days",
+        "start_date": LAUNCH_START_DATE.isoformat(),
+        "timezone": TIMEZONE,
+        "purpose": "明确小红书、抖音、数字人的账号、负责人、发布时间、素材要求和复盘指标。",
+        "calendar": calendar,
+    }
+    return payload, "\n".join(markdown_lines)
+
+
 def main() -> None:
     campaign = json.loads((MARKETING_DIR / "launch_campaign_30d.json").read_text(encoding="utf-8"))
     assets = build_assets(campaign)
@@ -351,14 +476,37 @@ def main() -> None:
         "week1_publish_checklist.json": build_week1_checklist(assets),
     }
     week1_scripts, week1_markdown = build_week1_publish_scripts(assets)
+    production_calendar, production_calendar_markdown = build_launch_production_calendar(assets)
     outputs["week1_publish_scripts.json"] = week1_scripts
+    outputs["launch_production_calendar.json"] = production_calendar
     for filename, payload in outputs.items():
         write_json(MARKETING_DIR / filename, payload)
         write_json(DOCS_MARKETING_DIR / filename, payload)
     for base_dir in (MARKETING_DIR, DOCS_MARKETING_DIR):
         (base_dir / "week1_publish_scripts.md").write_text(week1_markdown, encoding="utf-8")
+        (base_dir / "launch_production_calendar.md").write_text(production_calendar_markdown, encoding="utf-8")
     write_csv(MARKETING_DIR / "publishing_assets.csv", assets)
     write_csv(DOCS_MARKETING_DIR / "publishing_assets.csv", assets)
+    calendar_fields = [
+        "asset_id",
+        "day",
+        "date",
+        "weekday",
+        "channel_label",
+        "account",
+        "owner",
+        "support_owner",
+        "publish_at",
+        "production_deadline",
+        "review_at",
+        "title",
+        "asset_required",
+        "metric_target",
+        "status",
+        "landing_url",
+    ]
+    write_rows_csv(MARKETING_DIR / "launch_production_calendar.csv", production_calendar["calendar"], calendar_fields)
+    write_rows_csv(DOCS_MARKETING_DIR / "launch_production_calendar.csv", production_calendar["calendar"], calendar_fields)
     print(f"Generated {len(assets)} publish-ready assets")
 
 

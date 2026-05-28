@@ -4,9 +4,10 @@
 
 每天只执行三件事：
 
-1. 从 `data/marketing/publishing_assets.csv` 取当天素材。
-2. 按渠道发布小红书、抖音或数字人视频，并使用对应 `landing_url`。
-3. 在次日记录曝光、完播、收藏、评论、私信、官网审计开始数和预约线索数。
+1. 从 `data/marketing/launch_production_calendar.md` 确认当天账号、负责人、发布时间和素材要求。
+2. 从 `data/marketing/publishing_assets.csv` 取当天素材。
+3. 按渠道发布小红书、抖音或数字人视频，并使用对应 `landing_url`。
+4. 在次日记录曝光、完播、收藏、评论、私信、官网审计开始数和预约线索数。
 
 ## 2. 渠道分工
 
@@ -28,6 +29,8 @@ https://narrowgatemind.top/?utm_source={channel}&utm_medium=social&utm_campaign=
 
 - `data/marketing/utm_links.json`
 - `data/marketing/publishing_assets.csv`
+- `data/marketing/launch_production_calendar.md`
+- `data/marketing/launch_production_calendar.csv`
 - `data/marketing/week1_publish_checklist.json`
 - `data/marketing/week1_publish_scripts.md`
 - `data/marketing/digital_human_storyboards.json`

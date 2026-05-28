@@ -115,6 +115,7 @@ class TestHealthEndpoints:
         assert ops_resp.status_code == 200
         assert "text/html" in ops_resp.headers.get("content-type", "")
         assert "增长执行台" in ops_resp.text
+        assert "14天发布作战表" in ops_resp.text
 
         catalog_resp = await client.get("/data/course_catalog_100.json")
         assert catalog_resp.status_code == 200
@@ -134,6 +135,21 @@ class TestHealthEndpoints:
         checklist_resp = await client.get("/data/marketing/week1_publish_checklist.json")
         assert checklist_resp.status_code == 200
         assert len(checklist_resp.json()["tasks"]) == 14
+
+        calendar_resp = await client.get("/data/marketing/launch_production_calendar.json")
+        assert calendar_resp.status_code == 200
+        calendar = calendar_resp.json()
+        assert len(calendar["calendar"]) == 14
+        assert calendar["calendar"][0]["account"].startswith("小红书")
+        assert calendar["calendar"][0]["publish_at"] == "2026-06-01T21:30"
+
+        calendar_md_resp = await client.get("/data/marketing/launch_production_calendar.md")
+        assert calendar_md_resp.status_code == 200
+        assert "窄门14天发布作战表" in calendar_md_resp.text
+
+        calendar_csv_resp = await client.get("/data/marketing/launch_production_calendar.csv")
+        assert calendar_csv_resp.status_code == 200
+        assert "text/csv" in calendar_csv_resp.headers.get("content-type", "")
 
         scripts_resp = await client.get("/data/marketing/week1_publish_scripts.md")
         assert scripts_resp.status_code == 200
