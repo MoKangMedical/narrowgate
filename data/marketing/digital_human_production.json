@@ -1,0 +1,162 @@
+{
+  "project": "NarrowGate digital human launch package",
+  "profile": {
+    "name": "窄门导师",
+    "persona": "平静、清醒、克制，不鸡血，不许诺，用一个问题推动行动。",
+    "visual_style": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+    "voice_style": {
+      "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+      "rate": "-6% 到 -8%",
+      "pitch": "-2Hz",
+      "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+    },
+    "video_spec": {
+      "aspect_ratio": "9:16",
+      "duration_seconds": "20-45",
+      "subtitle": "全程中文字幕，关键句用金色强调",
+      "opening_frame": "第一帧必须出现问题句或冲突句"
+    }
+  },
+  "scripts": [
+    {
+      "id": "day03_digital_human",
+      "day": 3,
+      "title": "数字人导师：你在等准备好，还是在等不用害怕？",
+      "spoken_script": "你说你还没准备好，但你真正等的可能是没有恐惧。\n\n数字人正视镜头：准备好不是恐惧消失，而是你愿意带着恐惧做一个小动作。今天的问题：你一直拖延的事，如果只做10分钟，第一步是什么？\n\n进入窄门，完成第1次审计。\n\n#数字人 #AI导师 #窄门 #自我觉察",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day03_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day06_digital_human",
+      "day": 6,
+      "title": "数字人导师：你今天的窄门问题",
+      "spoken_script": "今天别问怎么变好，先问哪里不真。\n\n你最近最常对别人说的那句解释是什么？如果这句话不能再用了，你必须面对哪个事实？把答案写下来，不发给任何人也可以，但不要再骗自己。\n\n打开窄门，记录你的第一条觉察。\n\n#每日一问 #数字人导师 #灵魂审计",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day06_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day09_digital_human",
+      "day": 9,
+      "title": "数字人导师：你的情绪不是敌人",
+      "spoken_script": "情绪不是问题，不承认情绪才是问题。\n\n当你说“我没事”，身体可能已经替你说了真话。今天只做一件事：给情绪命名。不是我很烦，而是我害怕被否定；不是我生气，而是我的边界被踩了。\n\n去情绪阴影课程路径，听一条导览音频。\n\n#情绪觉察 #数字人 #课程导览",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day09_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day12_digital_human",
+      "day": 12,
+      "title": "数字人导师：把目标切到无法推脱",
+      "spoken_script": "目标越大，越容易继续不动。\n\n不要说我要改变人生。说：今晚10点前，我只打开课程，听3分钟音频，写下一个问题。窄门不是宏大口号，是一个无法继续推脱的小动作。\n\n今天从一条3分钟课程音频开始。\n\n#最小行动 #数字人导师 #音频课程",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day12_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day15_digital_human",
+      "day": 15,
+      "title": "数字人导师：关系里的窄门",
+      "spoken_script": "你以为你在维持和平，其实可能在积累怨气。\n\n今天的练习：选一个你一直不敢表达的小需要，用一句不攻击的话说出来：我需要____，如果可以，我希望____。真实表达不是伤害关系，是停止表演。\n\n进入关系真实课程路径。\n\n#真实表达 #关系 #数字人宣传",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day15_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day18_digital_human",
+      "day": 18,
+      "title": "数字人导师：事业里的窄门",
+      "spoken_script": "你不是没有机会，你可能没有系统。\n\n如果你一直忙但没有推进，今天不要加任务，先画系统：输入是什么，输出是什么，卡点在哪里，哪个动作最有杠杆。努力不等于进展。\n\n打开事业系统课程路径。\n\n#事业成长 #系统思维 #数字人",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day18_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day21_digital_human",
+      "day": 21,
+      "title": "数字人导师：你不是情绪太多，是语言太少",
+      "spoken_script": "说不清的情绪，最容易变成攻击或沉默。\n\n今天练习情绪颗粒度：把“烦”拆成失望、羞耻、恐惧、委屈、愤怒。命名越准确，行动越清晰。\n\n听一条情绪阴影课程导览。\n\n#情绪颗粒度 #数字人 #自我觉察",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day21_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day24_digital_human",
+      "day": 24,
+      "title": "数字人机构版口播",
+      "spoken_script": "如果你的课程很有价值，别让学员在课后断掉。\n\n窄门可以成为你的AI课后助教：每天追问、提醒行动、记录证据、支持见证。老师负责点燃，系统负责陪跑。\n\n预约机构演示。\n\n#数字人销售 #机构版 #AI助教",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day24_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day27_digital_human",
+      "day": 27,
+      "title": "数字人导师：给旧自己的告别",
+      "spoken_script": "改变不是讨厌旧自己，而是不再让旧模式掌舵。\n\n今天写一句告别：谢谢你曾经保护我，但现在我不需要继续用____来保护自己了。我会用____替代它。\n\n进入整合通道课程路径。\n\n#身份转变 #数字人导师 #整合",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day27_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    },
+    {
+      "id": "day30_digital_human",
+      "day": 30,
+      "title": "数字人导师：下一扇门",
+      "spoken_script": "穿过一扇门，不代表旅程结束。\n\n你已经看见了一部分自己。现在的问题不是你有没有改变，而是你愿不愿意继续选择真实。下一扇门在哪里？从今天的一个动作开始。\n\n进入窄门，开始下一轮30天训练。\n\n#数字人 #30天训练 #下一扇门",
+      "scene": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day30_digital_human",
+      "quality_gate": [
+        "口播时长控制在45秒以内",
+        "开头3秒必须提出一个清晰问题",
+        "字幕和口播一致，避免过度营销语气",
+        "结尾只给一个行动：做审计、听课程或预约演示"
+      ]
+    }
+  ]
+}
