@@ -105,6 +105,9 @@ class TestHealthEndpoints:
         page_resp = await client.get("/course-system.html")
         assert page_resp.status_code == 200
         assert "text/html" in page_resp.headers.get("content-type", "")
+        assert "7轨道" in page_resp.text
+        assert "506章" in page_resp.text
+        assert "1049题" in page_resp.text
 
         launch_resp = await client.get("/commercial-launch.html")
         assert launch_resp.status_code == 200
