@@ -1,0 +1,443 @@
+{
+  "campaign": "narrowgate_launch_30d",
+  "scope": "launch_first_14_days",
+  "start_date": "2026-06-01",
+  "timezone": "Asia/Shanghai",
+  "purpose": "明确小红书、抖音、数字人的账号、负责人、发布时间、素材要求和复盘指标。",
+  "calendar": [
+    {
+      "asset_id": "day01_xiaohongshu",
+      "day": 1,
+      "date": "2026-06-01",
+      "weekday": "周一",
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "account": "小红书｜窄门 NarrowGate（待绑定）",
+      "owner": "内容运营",
+      "support_owner": "设计/长图",
+      "publish_at": "2026-06-01T21:30",
+      "production_deadline": "2026-06-01T15:30",
+      "review_at": "2026-06-02T21:30",
+      "timezone": "Asia/Shanghai",
+      "title": "你不是不自律，你是在逃避一个真问题",
+      "asset_required": [
+        "封面图",
+        "长图正文",
+        "首评引导",
+        "UTM链接"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day01_xiaohongshu",
+      "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day02_douyin",
+      "day": 2,
+      "date": "2026-06-02",
+      "weekday": "周二",
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "account": "抖音｜窄门 NarrowGate（待绑定）",
+      "owner": "短视频运营",
+      "support_owner": "剪辑/字幕",
+      "publish_at": "2026-06-02T19:30",
+      "production_deadline": "2026-06-02T13:30",
+      "review_at": "2026-06-03T19:30",
+      "timezone": "Asia/Shanghai",
+      "title": "30秒测出你的宽门",
+      "asset_required": [
+        "9:16视频",
+        "强钩子字幕",
+        "封面标题",
+        "置顶评论"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day02_douyin",
+      "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day03_digital_human",
+      "day": 3,
+      "date": "2026-06-03",
+      "weekday": "周三",
+      "channel": "digital_human",
+      "channel_label": "数字人",
+      "account": "数字人｜窄门导师（待绑定）",
+      "owner": "数字人制作",
+      "support_owner": "音频/后期",
+      "publish_at": "2026-06-03T12:20",
+      "production_deadline": "2026-06-03T06:20",
+      "review_at": "2026-06-04T12:20",
+      "timezone": "Asia/Shanghai",
+      "title": "数字人导师：你在等准备好，还是在等不用害怕？",
+      "asset_required": [
+        "数字人口播视频",
+        "中文字幕",
+        "金色关键词",
+        "课程/审计CTA"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day03_digital_human",
+      "metric_target": "完播率>30%，私信/线索>=3，脚本可复用",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day04_xiaohongshu",
+      "day": 4,
+      "date": "2026-06-04",
+      "weekday": "周四",
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "account": "小红书｜窄门 NarrowGate（待绑定）",
+      "owner": "内容运营",
+      "support_owner": "设计/长图",
+      "publish_at": "2026-06-04T21:30",
+      "production_deadline": "2026-06-04T15:30",
+      "review_at": "2026-06-05T21:30",
+      "timezone": "Asia/Shanghai",
+      "title": "一个成年人最危险的状态：什么都懂，但没有证据",
+      "asset_required": [
+        "封面图",
+        "长图正文",
+        "首评引导",
+        "UTM链接"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day04_xiaohongshu",
+      "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day05_douyin",
+      "day": 5,
+      "date": "2026-06-05",
+      "weekday": "周五",
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "account": "抖音｜窄门 NarrowGate（待绑定）",
+      "owner": "短视频运营",
+      "support_owner": "剪辑/字幕",
+      "publish_at": "2026-06-05T19:30",
+      "production_deadline": "2026-06-05T13:30",
+      "review_at": "2026-06-06T19:30",
+      "timezone": "Asia/Shanghai",
+      "title": "你为什么总在关系里委屈自己",
+      "asset_required": [
+        "9:16视频",
+        "强钩子字幕",
+        "封面标题",
+        "置顶评论"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day05_douyin",
+      "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day06_digital_human",
+      "day": 6,
+      "date": "2026-06-06",
+      "weekday": "周六",
+      "channel": "digital_human",
+      "channel_label": "数字人",
+      "account": "数字人｜窄门导师（待绑定）",
+      "owner": "数字人制作",
+      "support_owner": "音频/后期",
+      "publish_at": "2026-06-06T12:20",
+      "production_deadline": "2026-06-06T06:20",
+      "review_at": "2026-06-07T12:20",
+      "timezone": "Asia/Shanghai",
+      "title": "数字人导师：你今天的窄门问题",
+      "asset_required": [
+        "数字人口播视频",
+        "中文字幕",
+        "金色关键词",
+        "课程/审计CTA"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day06_digital_human",
+      "metric_target": "完播率>30%，私信/线索>=3，脚本可复用",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day07_xiaohongshu",
+      "day": 7,
+      "date": "2026-06-07",
+      "weekday": "周日",
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "account": "小红书｜窄门 NarrowGate（待绑定）",
+      "owner": "内容运营",
+      "support_owner": "设计/长图",
+      "publish_at": "2026-06-07T21:30",
+      "production_deadline": "2026-06-07T15:30",
+      "review_at": "2026-06-08T21:30",
+      "timezone": "Asia/Shanghai",
+      "title": "窄门7天体验：每天做一点最不想做但最需要做的事",
+      "asset_required": [
+        "封面图",
+        "长图正文",
+        "首评引导",
+        "UTM链接"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day07_xiaohongshu",
+      "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day08_douyin",
+      "day": 8,
+      "date": "2026-06-08",
+      "weekday": "周一",
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "account": "抖音｜窄门 NarrowGate（待绑定）",
+      "owner": "短视频运营",
+      "support_owner": "剪辑/字幕",
+      "publish_at": "2026-06-08T19:30",
+      "production_deadline": "2026-06-08T13:30",
+      "review_at": "2026-06-09T19:30",
+      "timezone": "Asia/Shanghai",
+      "title": "一个问题判断你是否在自欺",
+      "asset_required": [
+        "9:16视频",
+        "强钩子字幕",
+        "封面标题",
+        "置顶评论"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day08_douyin",
+      "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day09_digital_human",
+      "day": 9,
+      "date": "2026-06-09",
+      "weekday": "周二",
+      "channel": "digital_human",
+      "channel_label": "数字人",
+      "account": "数字人｜窄门导师（待绑定）",
+      "owner": "数字人制作",
+      "support_owner": "音频/后期",
+      "publish_at": "2026-06-09T12:20",
+      "production_deadline": "2026-06-09T06:20",
+      "review_at": "2026-06-10T12:20",
+      "timezone": "Asia/Shanghai",
+      "title": "数字人导师：你的情绪不是敌人",
+      "asset_required": [
+        "数字人口播视频",
+        "中文字幕",
+        "金色关键词",
+        "课程/审计CTA"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day09_digital_human",
+      "metric_target": "完播率>30%，私信/线索>=3，脚本可复用",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day10_xiaohongshu",
+      "day": 10,
+      "date": "2026-06-10",
+      "weekday": "周三",
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "account": "小红书｜窄门 NarrowGate（待绑定）",
+      "owner": "内容运营",
+      "support_owner": "设计/长图",
+      "publish_at": "2026-06-10T21:30",
+      "production_deadline": "2026-06-10T15:30",
+      "review_at": "2026-06-11T21:30",
+      "timezone": "Asia/Shanghai",
+      "title": "真正有效的成长工具，都不太舒服",
+      "asset_required": [
+        "封面图",
+        "长图正文",
+        "首评引导",
+        "UTM链接"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day10_xiaohongshu",
+      "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day11_douyin",
+      "day": 11,
+      "date": "2026-06-11",
+      "weekday": "周四",
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "account": "抖音｜窄门 NarrowGate（待绑定）",
+      "owner": "短视频运营",
+      "support_owner": "剪辑/字幕",
+      "publish_at": "2026-06-11T19:30",
+      "production_deadline": "2026-06-11T13:30",
+      "review_at": "2026-06-12T19:30",
+      "timezone": "Asia/Shanghai",
+      "title": "你缺的不是目标，是见证",
+      "asset_required": [
+        "9:16视频",
+        "强钩子字幕",
+        "封面标题",
+        "置顶评论"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day11_douyin",
+      "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day12_digital_human",
+      "day": 12,
+      "date": "2026-06-12",
+      "weekday": "周五",
+      "channel": "digital_human",
+      "channel_label": "数字人",
+      "account": "数字人｜窄门导师（待绑定）",
+      "owner": "数字人制作",
+      "support_owner": "音频/后期",
+      "publish_at": "2026-06-12T12:20",
+      "production_deadline": "2026-06-12T06:20",
+      "review_at": "2026-06-13T12:20",
+      "timezone": "Asia/Shanghai",
+      "title": "数字人导师：把目标切到无法推脱",
+      "asset_required": [
+        "数字人口播视频",
+        "中文字幕",
+        "金色关键词",
+        "课程/审计CTA"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day12_digital_human",
+      "metric_target": "完播率>30%，私信/线索>=3，脚本可复用",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day13_xiaohongshu",
+      "day": 13,
+      "date": "2026-06-13",
+      "weekday": "周六",
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "account": "小红书｜窄门 NarrowGate（待绑定）",
+      "owner": "内容运营",
+      "support_owner": "设计/长图",
+      "publish_at": "2026-06-13T21:30",
+      "production_deadline": "2026-06-13T15:30",
+      "review_at": "2026-06-14T21:30",
+      "timezone": "Asia/Shanghai",
+      "title": "100门课程怎么学：不要从感兴趣开始，从最痛的地方开始",
+      "asset_required": [
+        "封面图",
+        "长图正文",
+        "首评引导",
+        "UTM链接"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day13_xiaohongshu",
+      "metric_target": "收藏率>6%，评论>=8，官网点击>=20",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    },
+    {
+      "asset_id": "day14_douyin",
+      "day": 14,
+      "date": "2026-06-14",
+      "weekday": "周日",
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "account": "抖音｜窄门 NarrowGate（待绑定）",
+      "owner": "短视频运营",
+      "support_owner": "剪辑/字幕",
+      "publish_at": "2026-06-14T19:30",
+      "production_deadline": "2026-06-14T13:30",
+      "review_at": "2026-06-15T19:30",
+      "timezone": "Asia/Shanghai",
+      "title": "3句话拆掉拖延的伪装",
+      "asset_required": [
+        "9:16视频",
+        "强钩子字幕",
+        "封面标题",
+        "置顶评论"
+      ],
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day14_douyin",
+      "metric_target": "3秒留存>55%，评论>=10，主页点击>=25",
+      "status": "scheduled",
+      "pre_publish_checklist": [
+        "封面/第一帧在3秒内读懂",
+        "正文或口播不承诺疗效、不制造恐吓",
+        "评论区引导只保留一个动作",
+        "发布后24小时回填浏览、互动、评论、收藏、线索"
+      ]
+    }
+  ]
+}
