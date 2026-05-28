@@ -64,7 +64,7 @@ def _is_public_data_file(file_path: str, target: Path) -> bool:
     normalized = Path(file_path).as_posix()
     if normalized in ALLOWED_DATA_ROOT_FILES:
         return True
-    if normalized.startswith(("course_summary/", "courses/")):
+    if normalized.startswith(("course_summary/", "courses/", "marketing/")):
         return target.suffix.lower() in ALLOWED_DATA_EXTENSIONS
     return False
 
@@ -153,6 +153,16 @@ class AddDivinityRequest(BaseModel):
     evidence: str = ""
     dimension: str = ""
 
+class MarketingLeadRequest(BaseModel):
+    source: str = "commercial_launch"
+    channel: str = "site"
+    intent: str = "trial"
+    name: str = ""
+    contact: str = ""
+    organization: str = ""
+    note: str = ""
+    metadata: Dict = {}
+
 
 # ============================================================
 # 首页
@@ -174,6 +184,15 @@ async def course_system_page():
     if not course_page.exists():
         raise HTTPException(404, "课程体系页面不存在")
     return HTMLResponse(content=course_page.read_text(encoding="utf-8"))
+
+
+@app.get("/commercial-launch.html", response_class=HTMLResponse)
+async def commercial_launch_page():
+    """返回商业落地与渠道推广页面。"""
+    launch_page = PROJECT_ROOT / "commercial-launch.html"
+    if not launch_page.exists():
+        raise HTTPException(404, "商业落地页面不存在")
+    return HTMLResponse(content=launch_page.read_text(encoding="utf-8"))
 
 
 @app.get("/data/{file_path:path}")
@@ -232,6 +251,37 @@ async def get_user(user_id: str):
         "user": user,
         "active_crossings": len(crossings),
         "divinity_records": len(records),
+    }
+
+
+# ============================================================
+# 商业落地 / 渠道线索 API
+# ============================================================
+
+@app.post("/api/marketing/leads")
+async def create_marketing_lead(req: MarketingLeadRequest, request: Request):
+    """记录来自官网、小红书、抖音、数字人和机构合作页的意向线索。"""
+    contact = (req.contact or "").strip()
+    if not contact:
+        raise HTTPException(400, "请留下微信、手机号或邮箱，便于后续联系")
+    metadata = dict(req.metadata or {})
+    metadata.setdefault("client_host", request.client.host if request.client else "")
+    metadata.setdefault("user_agent", request.headers.get("user-agent", ""))
+    lead = db.create_marketing_lead(
+        source=req.source.strip() or "commercial_launch",
+        channel=req.channel.strip() or "site",
+        intent=req.intent.strip() or "trial",
+        name=req.name.strip(),
+        contact=contact,
+        organization=req.organization.strip(),
+        note=req.note.strip(),
+        metadata=metadata,
+    )
+    return {
+        "success": True,
+        "lead_id": lead["id"],
+        "status": lead["status"],
+        "message": "已收到你的申请，我们会优先跟进适合的试点与合作。",
     }
 
 

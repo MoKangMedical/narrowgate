@@ -66,7 +66,8 @@ curl http://127.0.0.1:8090/health
 | 页面 | 地址 | 说明 |
 |------|------|------|
 | 首页 | https://narrowgatemind.top | 主页，包含社会证明、用户旅程 |
-| 课程体系 | https://narrowgatemind.top/course-system.html | 30天课程可视化 |
+| 课程体系 | https://narrowgatemind.top/course-system.html | 30天训练与100门课程库 |
+| 商业落地 | https://narrowgatemind.top/commercial-launch.html | 商业模式、小红书、抖音、数字人宣传与预约合作 |
 
 ### API端点
 
@@ -77,6 +78,7 @@ curl http://127.0.0.1:8090/health
 | 课程详情 | https://narrowgatemind.top/api/course/day/1 | 单日课程+理论映射 |
 | 灵魂审计 | https://narrowgatemind.top/api/audit/start | 开始灵魂审计 |
 | 大师列表 | https://narrowgatemind.top/api/masters | 获取大师列表 |
+| 营销线索 | https://narrowgatemind.top/api/marketing/leads | 官网预约、渠道来源与机构合作线索 |
 
 ---
 

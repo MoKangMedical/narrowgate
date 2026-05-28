@@ -213,6 +213,23 @@ class Database:
                 );
                 CREATE INDEX IF NOT EXISTS idx_payment_user ON payment_orders(user_id);
                 CREATE INDEX IF NOT EXISTS idx_payment_status ON payment_orders(status);
+
+                CREATE TABLE IF NOT EXISTS marketing_leads (
+                    id TEXT PRIMARY KEY,
+                    source TEXT,
+                    channel TEXT,
+                    intent TEXT,
+                    name TEXT,
+                    contact TEXT,
+                    organization TEXT,
+                    note TEXT,
+                    metadata TEXT DEFAULT '{}',
+                    status TEXT DEFAULT 'new',
+                    created_at TEXT
+                );
+                CREATE INDEX IF NOT EXISTS idx_marketing_leads_channel ON marketing_leads(channel);
+                CREATE INDEX IF NOT EXISTS idx_marketing_leads_intent ON marketing_leads(intent);
+                CREATE INDEX IF NOT EXISTS idx_marketing_leads_created ON marketing_leads(created_at);
             """)
             
             # 初始化默认徽章
@@ -288,6 +305,60 @@ class Database:
         """更新用户层级"""
         with self._connect() as conn:
             conn.execute("UPDATE users SET level = ? WHERE id = ?", (level, user_id))
+
+    # ============================================================
+    # 营销线索
+    # ============================================================
+
+    def create_marketing_lead(
+        self,
+        source: str = "",
+        channel: str = "",
+        intent: str = "",
+        name: str = "",
+        contact: str = "",
+        organization: str = "",
+        note: str = "",
+        metadata: dict = None,
+    ) -> dict:
+        """创建商业落地和渠道推广线索。"""
+        lead_id = f"lead_{uuid.uuid4().hex[:12]}"
+        now = datetime.now().isoformat()
+        payload = {
+            "id": lead_id,
+            "source": source or "commercial_launch",
+            "channel": channel or "unknown",
+            "intent": intent or "trial",
+            "name": name,
+            "contact": contact,
+            "organization": organization,
+            "note": note,
+            "metadata": metadata or {},
+            "status": "new",
+            "created_at": now,
+        }
+        with self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO marketing_leads
+                (id, source, channel, intent, name, contact, organization, note, metadata, status, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    payload["id"],
+                    payload["source"],
+                    payload["channel"],
+                    payload["intent"],
+                    payload["name"],
+                    payload["contact"],
+                    payload["organization"],
+                    payload["note"],
+                    json.dumps(payload["metadata"], ensure_ascii=False),
+                    payload["status"],
+                    payload["created_at"],
+                ),
+            )
+        return payload
 
     # ============================================================
     # 见证人

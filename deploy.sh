@@ -32,13 +32,22 @@ git push origin main
 echo "🔄 切换到gh-pages分支..."
 git checkout gh-pages
 
-# 从main分支复制index.html
-echo "📋 复制首页文件..."
-git checkout main -- index.html
+# 从main分支复制静态页面和资源
+echo "📋 复制静态页面和资源..."
+git checkout main -- \
+    index.html \
+    course-system.html \
+    commercial-launch.html \
+    404.html \
+    tailwind.css \
+    favicon.svg \
+    manifest.json \
+    data \
+    CNAME
 
 # 提交更改
 echo "💾 提交gh-pages更改..."
-git add index.html
+git add index.html course-system.html commercial-launch.html 404.html tailwind.css favicon.svg manifest.json data CNAME
 git commit -m "deploy: 更新首页 $(date '+%Y-%m-%d %H:%M:%S')"
 
 # 推送gh-pages分支
