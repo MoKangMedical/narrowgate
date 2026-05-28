@@ -28,6 +28,7 @@ https://narrowgatemind.top/?utm_source={channel}&utm_medium=social&utm_campaign=
 
 - `data/marketing/utm_links.json`
 - `data/marketing/publishing_assets.csv`
+- `data/marketing/week1_publish_checklist.json`
 
 ## 4. 发布前质量门
 
@@ -54,7 +55,40 @@ curl -H "X-Admin-Token: $NARROWGATE_ADMIN_TOKEN" \
 curl https://narrowgatemind.top/api/marketing/leads/summary
 ```
 
-## 6. 每周复盘
+## 6. 发布状态与数据回填
+
+每条内容发布后，记录发布链接、状态和24小时数据：
+
+```bash
+curl -X POST https://narrowgatemind.top/api/marketing/posts \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Token: $NARROWGATE_ADMIN_TOKEN" \
+  -d '{
+    "content_id": "day01_xiaohongshu",
+    "day": 1,
+    "channel": "xiaohongshu",
+    "title": "你不是不自律，你是在逃避一个真问题",
+    "status": "published",
+    "publish_url": "替换为发布后的链接",
+    "metrics": {
+      "views": 0,
+      "likes": 0,
+      "comments": 0,
+      "favorites": 0,
+      "shares": 0,
+      "leads": 0
+    },
+    "notes": "评论区高频问题"
+  }'
+```
+
+公开汇总：
+
+```bash
+curl https://narrowgatemind.top/api/marketing/posts/summary
+```
+
+## 7. 每周复盘
 
 每周只做一次内容策略调整：
 

@@ -131,6 +131,10 @@ class TestHealthEndpoints:
         assert "json" in assets_resp.headers.get("content-type", "")
         assert len(assets_resp.json()["items"]) == 30
 
+        checklist_resp = await client.get("/data/marketing/week1_publish_checklist.json")
+        assert checklist_resp.status_code == 200
+        assert len(checklist_resp.json()["tasks"]) == 14
+
         csv_resp = await client.get("/data/marketing/publishing_assets.csv")
         assert csv_resp.status_code == 200
         assert "text/csv" in csv_resp.headers.get("content-type", "")
@@ -250,6 +254,50 @@ class TestMarketingLeadAPI:
             )
             assert csv_resp.status_code == 200
             assert "text/csv" in csv_resp.headers.get("content-type", "")
+
+    @pytest.mark.asyncio
+    async def test_marketing_post_status_and_metrics_flow(self, client):
+        """Operators should be able to save publishing status and metrics."""
+        payload = {
+            "content_id": "day01_xiaohongshu",
+            "day": 1,
+            "channel": "xiaohongshu",
+            "title": "你不是不自律，你是在逃避一个真问题",
+            "status": "published",
+            "publish_url": "https://example.com/post/day01",
+            "metrics": {
+                "views": 1200,
+                "likes": 80,
+                "comments": 12,
+                "favorites": 45,
+                "shares": 8,
+                "leads": 3,
+            },
+            "notes": "评论集中在拖延和关系边界。",
+        }
+        no_token = await client.post("/api/marketing/posts", json=payload)
+        assert no_token.status_code == 403
+
+        with patch.dict(os.environ, {"NARROWGATE_ADMIN_TOKEN": "pytest-admin"}):
+            resp = await client.post(
+                "/api/marketing/posts",
+                headers={"X-Admin-Token": "pytest-admin"},
+                json=payload,
+            )
+            assert resp.status_code == 200
+            data = resp.json()
+            assert data["success"] is True
+            assert data["post"]["metrics"]["leads"] == 3
+
+        list_resp = await client.get("/api/marketing/posts")
+        assert list_resp.status_code == 200
+        assert any(post["content_id"] == "day01_xiaohongshu" for post in list_resp.json()["posts"])
+
+        summary_resp = await client.get("/api/marketing/posts/summary")
+        assert summary_resp.status_code == 200
+        summary = summary_resp.json()
+        assert summary["metrics"]["views"] >= 1200
+        assert summary["metrics"]["leads"] >= 3
 
 
 # ============================================================
