@@ -1,0 +1,562 @@
+{
+  "project": "NarrowGate digital human storyboards",
+  "profile": {
+    "name": "窄门导师",
+    "persona": "平静、清醒、克制，不鸡血，不许诺，用一个问题推动行动。",
+    "visual_style": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+    "voice_style": {
+      "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+      "rate": "-6% 到 -8%",
+      "pitch": "-2Hz",
+      "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+    },
+    "video_spec": {
+      "aspect_ratio": "9:16",
+      "duration_seconds": "20-45",
+      "subtitle": "全程中文字幕，关键句用金色强调",
+      "opening_frame": "第一帧必须出现问题句或冲突句"
+    }
+  },
+  "storyboards": [
+    {
+      "id": "day03_digital_human",
+      "title": "数字人导师：你在等准备好，还是在等不用害怕？",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day03_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "你说你还没准备好，但你真正等的可能是没有恐惧",
+          "voiceover": "你说你还没准备好，但你真正等的可能是没有恐惧",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "数字人正视镜头：准备好不是恐惧消失，而是你愿意带着恐惧做一个小动作",
+          "voiceover": "数字人正视镜头：准备好不是恐惧消失，而是你愿意带着恐惧做一个小动作",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "今天的问题：你一直拖延的事，如果只做10分钟，第一步是什么",
+          "voiceover": "今天的问题：你一直拖延的事，如果只做10分钟，第一步是什么",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "进入窄门，完成第1次审计。",
+          "voiceover": "进入窄门，完成第1次审计。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day06_digital_human",
+      "title": "数字人导师：你今天的窄门问题",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day06_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "今天别问怎么变好，先问哪里不真",
+          "voiceover": "今天别问怎么变好，先问哪里不真",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "你最近最常对别人说的那句解释是什么",
+          "voiceover": "你最近最常对别人说的那句解释是什么",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "如果这句话不能再用了，你必须面对哪个事实",
+          "voiceover": "如果这句话不能再用了，你必须面对哪个事实",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "打开窄门，记录你的第一条觉察。",
+          "voiceover": "打开窄门，记录你的第一条觉察。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day09_digital_human",
+      "title": "数字人导师：你的情绪不是敌人",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day09_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "情绪不是问题，不承认情绪才是问题",
+          "voiceover": "情绪不是问题，不承认情绪才是问题",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "当你说“我没事”，身体可能已经替你说了真话",
+          "voiceover": "当你说“我没事”，身体可能已经替你说了真话",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "今天只做一件事：给情绪命名",
+          "voiceover": "今天只做一件事：给情绪命名",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "去情绪阴影课程路径，听一条导览音频。",
+          "voiceover": "去情绪阴影课程路径，听一条导览音频。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day12_digital_human",
+      "title": "数字人导师：把目标切到无法推脱",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day12_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "目标越大，越容易继续不动",
+          "voiceover": "目标越大，越容易继续不动",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "不要说我要改变人生",
+          "voiceover": "不要说我要改变人生",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "说：今晚10点前，我只打开课程，听3分钟音频，写下一个问题",
+          "voiceover": "说：今晚10点前，我只打开课程，听3分钟音频，写下一个问题",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "今天从一条3分钟课程音频开始。",
+          "voiceover": "今天从一条3分钟课程音频开始。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day15_digital_human",
+      "title": "数字人导师：关系里的窄门",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day15_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "你以为你在维持和平，其实可能在积累怨气",
+          "voiceover": "你以为你在维持和平，其实可能在积累怨气",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "今天的练习：选一个你一直不敢表达的小需要，用一句不攻击的话说出来：我需要____，如果可以，我希望____",
+          "voiceover": "今天的练习：选一个你一直不敢表达的小需要，用一句不攻击的话说出来：我需要____，如果可以，我希望____",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "真实表达不是伤害关系，是停止表演",
+          "voiceover": "真实表达不是伤害关系，是停止表演",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "进入关系真实课程路径。",
+          "voiceover": "进入关系真实课程路径。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day18_digital_human",
+      "title": "数字人导师：事业里的窄门",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day18_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "你不是没有机会，你可能没有系统",
+          "voiceover": "你不是没有机会，你可能没有系统",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "如果你一直忙但没有推进，今天不要加任务，先画系统：输入是什么，输出是什么，卡点在哪里，哪个动作最有杠杆",
+          "voiceover": "如果你一直忙但没有推进，今天不要加任务，先画系统：输入是什么，输出是什么，卡点在哪里，哪个动作最有杠杆",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "努力不等于进展",
+          "voiceover": "努力不等于进展",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "打开事业系统课程路径。",
+          "voiceover": "打开事业系统课程路径。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day21_digital_human",
+      "title": "数字人导师：你不是情绪太多，是语言太少",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day21_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "说不清的情绪，最容易变成攻击或沉默",
+          "voiceover": "说不清的情绪，最容易变成攻击或沉默",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "今天练习情绪颗粒度：把“烦”拆成失望、羞耻、恐惧、委屈、愤怒",
+          "voiceover": "今天练习情绪颗粒度：把“烦”拆成失望、羞耻、恐惧、委屈、愤怒",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "命名越准确，行动越清晰",
+          "voiceover": "命名越准确，行动越清晰",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "听一条情绪阴影课程导览。",
+          "voiceover": "听一条情绪阴影课程导览。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day24_digital_human",
+      "title": "数字人机构版口播",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day24_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "如果你的课程很有价值，别让学员在课后断掉",
+          "voiceover": "如果你的课程很有价值，别让学员在课后断掉",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "窄门可以成为你的AI课后助教：每天追问、提醒行动、记录证据、支持见证",
+          "voiceover": "窄门可以成为你的AI课后助教：每天追问、提醒行动、记录证据、支持见证",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "老师负责点燃，系统负责陪跑",
+          "voiceover": "老师负责点燃，系统负责陪跑",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "预约机构演示。",
+          "voiceover": "预约机构演示。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day27_digital_human",
+      "title": "数字人导师：给旧自己的告别",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day27_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "改变不是讨厌旧自己，而是不再让旧模式掌舵",
+          "voiceover": "改变不是讨厌旧自己，而是不再让旧模式掌舵",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "今天写一句告别：谢谢你曾经保护我，但现在我不需要继续用____来保护自己了",
+          "voiceover": "今天写一句告别：谢谢你曾经保护我，但现在我不需要继续用____来保护自己了",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "我会用____替代它",
+          "voiceover": "我会用____替代它",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "进入整合通道课程路径。",
+          "voiceover": "进入整合通道课程路径。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    },
+    {
+      "id": "day30_digital_human",
+      "title": "数字人导师：下一扇门",
+      "aspect_ratio": "9:16",
+      "duration_seconds": 42,
+      "voice": {
+        "voice": "zh-CN-YunyangNeural 或同等沉稳中文男声",
+        "rate": "-6% 到 -8%",
+        "pitch": "-2Hz",
+        "post_processing": "loudnorm=I=-16:TP=-1.5:LRA=9, 24000Hz, mono, MP3 48-64kbps"
+      },
+      "visual_identity": "深色背景，金色窄门线条，半身数字人，低饱和光影，字幕清晰。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day30_digital_human",
+      "scenes": [
+        {
+          "time": "00:00-00:03",
+          "purpose": "强钩子",
+          "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+          "subtitle": "穿过一扇门，不代表旅程结束",
+          "voiceover": "穿过一扇门，不代表旅程结束",
+          "camera": "中近景，轻微推近。"
+        },
+        {
+          "time": "00:03-00:16",
+          "purpose": "命名真实问题",
+          "visual": "左侧浮现关键词，右侧保留数字人半身。",
+          "subtitle": "你已经看见了一部分自己",
+          "voiceover": "你已经看见了一部分自己",
+          "camera": "固定镜头，字幕逐行出现。"
+        },
+        {
+          "time": "00:16-00:32",
+          "purpose": "给出最小行动",
+          "visual": "画面出现一张极简行动卡，金色边框。",
+          "subtitle": "现在的问题不是你有没有改变，而是你愿不愿意继续选择真实",
+          "voiceover": "现在的问题不是你有没有改变，而是你愿不愿意继续选择真实",
+          "camera": "行动卡轻微上移，数字人保持慢速口播。"
+        },
+        {
+          "time": "00:32-00:42",
+          "purpose": "单一转化动作",
+          "visual": "出现窄门平台名、网址和课程/审计入口。",
+          "subtitle": "进入窄门，开始下一轮30天训练。",
+          "voiceover": "进入窄门，开始下一轮30天训练。",
+          "camera": "收束到金色门线，淡出。"
+        }
+      ],
+      "production_checklist": [
+        "第一帧必须能读出问题句",
+        "字幕不超过两行，关键词用金色",
+        "口播语速慢，避免兴奋式营销",
+        "结尾只保留一个转化动作"
+      ]
+    }
+  ]
+}

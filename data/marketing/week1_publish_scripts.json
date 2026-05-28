@@ -1,0 +1,146 @@
+{
+  "campaign": "narrowgate_launch_30d",
+  "scope": "launch_week_1_publish_scripts",
+  "items": [
+    {
+      "id": "day01_xiaohongshu",
+      "day": 1,
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "title": "你不是不自律，你是在逃避一个真问题",
+      "opening": "很多人以为自己缺执行力，其实是在保护旧身份。",
+      "publish_copy": "很多人以为自己缺执行力，其实是在保护旧身份。\n\n写下你拖延最久的一件事，再写下你每次用来解释它的理由。窄门不是让你立刻改变，而是先让你看见：你到底在回避什么。\n\n评论区写一个你一直拖着没做的事，去平台做一次灵魂审计。\n\n#自我觉察 #拖延 #个人成长 #窄门 #行动力",
+      "cover_text": "很多人以为自己缺执行力，其实是在保护旧身份。",
+      "comment_prompt": "你现在最想逃开的那件事是什么？",
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day01_xiaohongshu",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    },
+    {
+      "id": "day02_douyin",
+      "day": 2,
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "title": "30秒测出你的宽门",
+      "opening": "你最常说的借口，就是你的宽门。",
+      "publish_copy": "你最常说的借口，就是你的宽门。\n\n镜头1：列出4句话：我没时间、我还没准备好、以后再说、别人也这样。镜头2：逐句拆解它们背后的回避。镜头3：给出问题：如果不再解释，你今天能做的最小动作是什么？\n\n点进主页，做一次免费灵魂审计。\n\n#宽门 #窄门 #成长 #拖延症 #觉察",
+      "cover_text": "你最常说的借口，就是你的宽门。",
+      "comment_prompt": "评论一个字：门，我把7天行动清单发你。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day02_douyin",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    },
+    {
+      "id": "day03_digital_human",
+      "day": 3,
+      "channel": "digital_human",
+      "channel_label": "数字人",
+      "title": "数字人导师：你在等准备好，还是在等不用害怕？",
+      "opening": "你说你还没准备好，但你真正等的可能是没有恐惧。",
+      "publish_copy": "你说你还没准备好，但你真正等的可能是没有恐惧。\n\n数字人正视镜头：准备好不是恐惧消失，而是你愿意带着恐惧做一个小动作。今天的问题：你一直拖延的事，如果只做10分钟，第一步是什么？\n\n进入窄门，完成第1次审计。\n\n#数字人 #AI导师 #窄门 #自我觉察",
+      "cover_text": "你说你还没准备好，但你真正等的可能是没有恐惧。",
+      "comment_prompt": "今天只回答一个问题：我在等准备好，还是在等不用害怕？",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day03_digital_human",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    },
+    {
+      "id": "day04_xiaohongshu",
+      "day": 4,
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "title": "一个成年人最危险的状态：什么都懂，但没有证据",
+      "opening": "收藏了很多方法论，不等于生活发生改变。",
+      "publish_copy": "收藏了很多方法论，不等于生活发生改变。\n\n判断成长有没有发生，不看你听懂多少，而看现实里有没有新证据：发出那条消息、拒绝一次越界、完成一次练习、记录一次真实感受。\n\n保存这张清单，今晚做一个能留下证据的小动作。\n\n#成长证据 #行动训练 #成年人自救 #窄门",
+      "cover_text": "收藏了很多方法论，不等于生活发生改变。",
+      "comment_prompt": "你现在最想逃开的那件事是什么？",
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day04_xiaohongshu",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    },
+    {
+      "id": "day05_douyin",
+      "day": 5,
+      "channel": "douyin",
+      "channel_label": "抖音",
+      "title": "你为什么总在关系里委屈自己",
+      "opening": "讨好不是善良，讨好是用失去自己换取安全感。",
+      "publish_copy": "讨好不是善良，讨好是用失去自己换取安全感。\n\n镜头1：复盘一个不敢拒绝的场景。镜头2：解释讨好背后的恐惧：怕冲突、怕被讨厌、怕失去关系。镜头3：给出窄门动作：用一句话表达边界。\n\n主页课程库里有关系真实路径，先做审计再选课。\n\n#讨好型人格 #边界感 #关系成长 #窄门",
+      "cover_text": "讨好不是善良，讨好是用失去自己换取安全感。",
+      "comment_prompt": "评论一个字：门，我把7天行动清单发你。",
+      "landing_url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day05_douyin",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    },
+    {
+      "id": "day06_digital_human",
+      "day": 6,
+      "channel": "digital_human",
+      "channel_label": "数字人",
+      "title": "数字人导师：你今天的窄门问题",
+      "opening": "今天别问怎么变好，先问哪里不真。",
+      "publish_copy": "今天别问怎么变好，先问哪里不真。\n\n你最近最常对别人说的那句解释是什么？如果这句话不能再用了，你必须面对哪个事实？把答案写下来，不发给任何人也可以，但不要再骗自己。\n\n打开窄门，记录你的第一条觉察。\n\n#每日一问 #数字人导师 #灵魂审计",
+      "cover_text": "今天别问怎么变好，先问哪里不真。",
+      "comment_prompt": "今天只回答一个问题：我在等准备好，还是在等不用害怕？",
+      "landing_url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day06_digital_human",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    },
+    {
+      "id": "day07_xiaohongshu",
+      "day": 7,
+      "channel": "xiaohongshu",
+      "channel_label": "小红书",
+      "title": "窄门7天体验：每天做一点最不想做但最需要做的事",
+      "opening": "成长不是感动，是每天留下证据。",
+      "publish_copy": "成长不是感动，是每天留下证据。\n\n第1天承认逃避，第2天看见代价，第3天命名恐惧，第4天做最小行动，第5天复盘现实，第6天建立节奏，第7天写总结。不要追求宏大，先追求真实。\n\n想要完整路径，进入平台从第1天开始。\n\n#7天挑战 #自我成长 #行动证据 #窄门",
+      "cover_text": "成长不是感动，是每天留下证据。",
+      "comment_prompt": "你现在最想逃开的那件事是什么？",
+      "landing_url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day07_xiaohongshu",
+      "after_publish_metrics": [
+        "views",
+        "likes",
+        "comments",
+        "favorites",
+        "shares",
+        "leads"
+      ]
+    }
+  ]
+}
