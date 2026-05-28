@@ -166,6 +166,17 @@ class MarketingLeadRequest(BaseModel):
     note: str = ""
     metadata: Dict = {}
 
+class MarketingPostRequest(BaseModel):
+    content_id: str
+    day: int = 0
+    channel: str = ""
+    title: str = ""
+    status: str = "published"
+    publish_url: str = ""
+    metrics: Dict = {}
+    notes: str = ""
+    published_at: str = ""
+
 
 def _require_marketing_admin(request: Request) -> None:
     """Require an operator token before exposing contact details."""
@@ -425,6 +436,44 @@ async def export_marketing_leads_csv(
         media_type="text/csv; charset=utf-8",
         headers={"Content-Disposition": "attachment; filename=narrowgate_marketing_leads.csv"},
     )
+
+
+@app.post("/api/marketing/posts")
+async def upsert_marketing_post(req: MarketingPostRequest, request: Request):
+    """记录小红书、抖音和数字人内容的发布状态与运营数据。"""
+    _require_marketing_admin(request)
+    content_id = (req.content_id or "").strip()
+    if not content_id:
+        raise HTTPException(400, "content_id 不能为空")
+    allowed_statuses = {"planned", "published", "reviewed", "paused"}
+    status = (req.status or "published").strip()
+    if status not in allowed_statuses:
+        raise HTTPException(400, "发布状态无效")
+    post = db.upsert_marketing_post(
+        content_id=content_id,
+        day=req.day,
+        channel=req.channel.strip(),
+        title=req.title.strip(),
+        status=status,
+        publish_url=req.publish_url.strip(),
+        metrics=req.metrics or {},
+        notes=req.notes.strip(),
+        published_at=req.published_at.strip(),
+    )
+    return {"success": True, "post": post}
+
+
+@app.get("/api/marketing/posts")
+async def list_marketing_posts(channel: str = "", status: str = ""):
+    """返回内容发布状态和运营数据。"""
+    posts = db.list_marketing_posts(channel=channel, status=status)
+    return {"total": len(posts), "posts": posts}
+
+
+@app.get("/api/marketing/posts/summary")
+async def get_marketing_post_summary():
+    """返回发布进度和内容表现汇总。"""
+    return db.get_marketing_post_summary()
 
 
 # ============================================================

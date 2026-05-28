@@ -153,6 +153,47 @@ def build_utm_links(assets: list[dict]) -> dict:
     return {"campaign": CAMPAIGN, "base_url": BASE_URL, "links": links}
 
 
+def build_week1_checklist(assets: list[dict]) -> dict:
+    first_week = [asset for asset in assets if int(asset["day"]) <= 7]
+    tasks = []
+    for asset in first_week:
+        tasks.extend(
+            [
+                {
+                    "asset_id": asset["id"],
+                    "day": asset["day"],
+                    "channel": asset["channel"],
+                    "task": "发布内容",
+                    "owner": "运营",
+                    "done": False,
+                    "evidence": "发布链接",
+                },
+                {
+                    "asset_id": asset["id"],
+                    "day": asset["day"],
+                    "channel": asset["channel"],
+                    "task": "24小时数据回填",
+                    "owner": "运营",
+                    "done": False,
+                    "evidence": "浏览、点赞、评论、收藏、线索数",
+                },
+            ]
+        )
+    return {
+        "campaign": CAMPAIGN,
+        "scope": "launch_week_1",
+        "goal": "用首周7条跨渠道内容验证痛点、标题和转化链路。",
+        "daily_rule": "每天发布1条内容，24小时后回填数据，周末只保留有效题材。",
+        "tasks": tasks,
+        "review_questions": [
+            "哪一条内容带来了最多评论或私信？",
+            "哪一个标题最适合继续复用？",
+            "哪一个渠道带来的审计开始数最高？",
+            "哪一条数字人脚本可以扩展成课程导览？",
+        ],
+    }
+
+
 def main() -> None:
     campaign = json.loads((MARKETING_DIR / "launch_campaign_30d.json").read_text(encoding="utf-8"))
     assets = build_assets(campaign)
@@ -168,6 +209,7 @@ def main() -> None:
         "publishing_assets.json": publishing_package,
         "digital_human_production.json": build_digital_human_package(assets),
         "utm_links.json": build_utm_links(assets),
+        "week1_publish_checklist.json": build_week1_checklist(assets),
     }
     for filename, payload in outputs.items():
         write_json(MARKETING_DIR / filename, payload)

@@ -6,7 +6,7 @@
     <title>窄门增长执行台 - NarrowGate</title>
     <meta name="description" content="窄门 NarrowGate 小红书、抖音和数字人宣传执行台，包含发布素材、UTM追踪和线索汇总。">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="tailwind.css?v=1780100000">
+    <link rel="stylesheet" href="tailwind.css?v=1780200000">
     <style>
         @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
         :root {
@@ -44,6 +44,15 @@
             resize: vertical;
             min-height: 172px;
         }
+        input, textarea {
+            background: #050508;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 12px;
+            outline: none;
+        }
+        input:focus, textarea:focus { border-color: rgba(180,148,46,0.7); }
     </style>
 </head>
 <body>
@@ -56,6 +65,7 @@
             <div class="hidden md:flex items-center gap-4 text-sm text-gray-400">
                 <a href="commercial-launch.html" class="hover:text-white">商业落地</a>
                 <a href="course-system.html" class="hover:text-white">课程库</a>
+                <a href="data/marketing/week1_publish_checklist.json" class="hover:text-white">首周清单</a>
                 <a href="data/marketing/publishing_assets.csv" class="hover:text-white">下载CSV</a>
             </div>
         </div>
@@ -85,6 +95,15 @@
                 <div class="mt-5 border-t border-white/10 pt-4 text-xs text-gray-500 leading-6">
                     线索明细需要管理令牌；公开页面只显示汇总，不暴露联系方式。
                 </div>
+                <div class="mt-5 border-t border-white/10 pt-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="font-bold text-lg">发布进度</h2>
+                        <span id="post-total" class="gold font-bold">0/30</span>
+                    </div>
+                    <div id="post-summary" class="space-y-3 text-sm text-gray-400">
+                        <p>等待发布数据。</p>
+                    </div>
+                </div>
             </aside>
         </section>
 
@@ -106,8 +125,34 @@
                 </div>
                 <div id="selected-link" class="mt-4 text-xs text-gray-500 break-all leading-5"></div>
                 <div class="mt-5 border-t border-white/10 pt-4">
+                    <h3 class="font-semibold mb-3">发布与数据回填</h3>
+                    <label class="block text-xs text-gray-500 mb-2">管理令牌</label>
+                    <input id="admin-token" class="w-full text-sm mb-3" type="password" placeholder="NARROWGATE_ADMIN_TOKEN">
+                    <label class="block text-xs text-gray-500 mb-2">发布链接</label>
+                    <input id="publish-url" class="w-full text-sm mb-3" placeholder="粘贴小红书/抖音/数字人视频链接">
+                    <div class="grid grid-cols-2 gap-3 text-xs text-gray-500">
+                        <label>浏览<input id="metric-views" type="number" min="0" class="w-full mt-1 text-sm" value="0"></label>
+                        <label>点赞<input id="metric-likes" type="number" min="0" class="w-full mt-1 text-sm" value="0"></label>
+                        <label>评论<input id="metric-comments" type="number" min="0" class="w-full mt-1 text-sm" value="0"></label>
+                        <label>收藏<input id="metric-favorites" type="number" min="0" class="w-full mt-1 text-sm" value="0"></label>
+                        <label>转发<input id="metric-shares" type="number" min="0" class="w-full mt-1 text-sm" value="0"></label>
+                        <label>线索<input id="metric-leads" type="number" min="0" class="w-full mt-1 text-sm" value="0"></label>
+                    </div>
+                    <label class="block text-xs text-gray-500 mt-3 mb-2">复盘备注</label>
+                    <textarea id="post-notes" class="w-full text-sm min-h-[88px]" placeholder="记录评论区高频问题、私信关键词、是否值得复用"></textarea>
+                    <div class="grid grid-cols-2 gap-3 mt-3">
+                        <button id="save-post" class="copy-button border border-white/10 text-gray-300 px-4 py-3 rounded-lg hover:text-white" disabled>保存数据</button>
+                        <button id="mark-published" class="copy-button gold-bg text-black px-4 py-3 rounded-lg font-semibold" disabled>标记已发布</button>
+                    </div>
+                    <p id="save-result" class="text-xs text-gray-500 mt-3"></p>
+                </div>
+                <div class="mt-5 border-t border-white/10 pt-4">
                     <h3 class="font-semibold mb-3">发布质量门</h3>
                     <ul id="quality-gate" class="text-sm text-gray-400 space-y-2"></ul>
+                </div>
+                <div class="mt-5 border-t border-white/10 pt-4">
+                    <h3 class="font-semibold mb-3">本周复盘</h3>
+                    <div id="weekly-review" class="text-sm text-gray-400 space-y-2"></div>
                 </div>
             </aside>
         </section>
@@ -117,6 +162,7 @@
         let allAssets = [];
         let currentChannel = 'all';
         let selectedAsset = null;
+        let postState = {};
 
         const channelLabel = {
             xiaohongshu: '小红书',
@@ -131,11 +177,43 @@
         };
 
         async function loadAssets() {
-            const response = await fetch('data/marketing/publishing_assets.json?v=1780100000', { cache: 'no-store' });
+            const response = await fetch('data/marketing/publishing_assets.json?v=1780200000', { cache: 'no-store' });
             const data = await response.json();
             allAssets = data.items || [];
+            loadLocalPostState();
+            await loadPostState();
             renderAssets();
             if (allAssets.length > 0) selectAsset(allAssets[0].id);
+            renderPostSummary();
+            renderWeeklyReview();
+        }
+
+        function loadLocalPostState() {
+            try {
+                postState = JSON.parse(localStorage.getItem('narrowgate_marketing_posts') || '{}');
+            } catch (error) {
+                postState = {};
+            }
+            const savedToken = localStorage.getItem('narrowgate_admin_token') || '';
+            document.getElementById('admin-token').value = savedToken;
+        }
+
+        async function loadPostState() {
+            try {
+                const response = await fetch('/api/marketing/posts', { cache: 'no-store' });
+                if (!response.ok) throw new Error('posts unavailable');
+                const data = await response.json();
+                (data.posts || []).forEach(post => {
+                    postState[post.content_id] = post;
+                });
+                persistPostState();
+            } catch (error) {
+                // Static GitHub Pages mode keeps operating from localStorage.
+            }
+        }
+
+        function persistPostState() {
+            localStorage.setItem('narrowgate_marketing_posts', JSON.stringify(postState));
         }
 
         async function loadLeadSummary() {
@@ -173,7 +251,10 @@
                     </div>
                     <h3 class="font-bold text-lg leading-6 mb-3">${asset.title}</h3>
                     <p class="text-sm text-gray-500 leading-6 line-clamp-3">${asset.hook}</p>
-                    <div class="mt-4 text-xs text-gray-500">${asset.publish_status}</div>
+                    <div class="mt-4 flex items-center justify-between gap-3 text-xs text-gray-500">
+                        <span>${asset.publish_status}</span>
+                        <span class="${postState[asset.id]?.status === 'published' ? 'text-green-400' : 'text-gray-500'}">${postState[asset.id]?.status || 'planned'}</span>
+                    </div>
                 </article>
             `).join('');
         }
@@ -186,7 +267,125 @@
             document.getElementById('selected-link').textContent = selectedAsset.landing_url || '';
             document.getElementById('copy-caption').disabled = false;
             document.getElementById('copy-link').disabled = false;
+            document.getElementById('save-post').disabled = false;
+            document.getElementById('mark-published').disabled = false;
             document.getElementById('quality-gate').innerHTML = (selectedAsset.quality_gate || []).map(item => `<li>• ${item}</li>`).join('');
+            fillPostForm(selectedAsset.id);
+        }
+
+        function fillPostForm(id) {
+            const post = postState[id] || {};
+            const metrics = post.metrics || {};
+            document.getElementById('publish-url').value = post.publish_url || '';
+            document.getElementById('metric-views').value = metrics.views || 0;
+            document.getElementById('metric-likes').value = metrics.likes || 0;
+            document.getElementById('metric-comments').value = metrics.comments || 0;
+            document.getElementById('metric-favorites').value = metrics.favorites || 0;
+            document.getElementById('metric-shares').value = metrics.shares || 0;
+            document.getElementById('metric-leads').value = metrics.leads || 0;
+            document.getElementById('post-notes').value = post.notes || '';
+            document.getElementById('save-result').textContent = post.updated_at ? `上次更新：${post.updated_at}` : '';
+        }
+
+        function numberValue(id) {
+            const value = parseInt(document.getElementById(id).value || '0', 10);
+            return Number.isFinite(value) && value >= 0 ? value : 0;
+        }
+
+        function buildPostPayload(status) {
+            return {
+                content_id: selectedAsset.id,
+                day: selectedAsset.day,
+                channel: selectedAsset.channel,
+                title: selectedAsset.title,
+                status,
+                publish_url: document.getElementById('publish-url').value.trim(),
+                metrics: {
+                    views: numberValue('metric-views'),
+                    likes: numberValue('metric-likes'),
+                    comments: numberValue('metric-comments'),
+                    favorites: numberValue('metric-favorites'),
+                    shares: numberValue('metric-shares'),
+                    leads: numberValue('metric-leads')
+                },
+                notes: document.getElementById('post-notes').value.trim(),
+                published_at: new Date().toISOString()
+            };
+        }
+
+        async function savePost(status) {
+            if (!selectedAsset) return;
+            const result = document.getElementById('save-result');
+            const token = document.getElementById('admin-token').value.trim();
+            localStorage.setItem('narrowgate_admin_token', token);
+            const payload = buildPostPayload(status);
+            result.textContent = '正在保存...';
+            try {
+                if (!token) throw new Error('missing token');
+                const response = await fetch('/api/marketing/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Admin-Token': token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error('api save failed');
+                const data = await response.json();
+                postState[payload.content_id] = data.post;
+                result.textContent = '已保存到后端。';
+            } catch (error) {
+                postState[payload.content_id] = {
+                    ...payload,
+                    updated_at: new Date().toISOString(),
+                    local_only: true
+                };
+                result.textContent = '已保存在本机浏览器；配置管理令牌后可同步到后端。';
+            }
+            persistPostState();
+            renderAssets();
+            renderPostSummary();
+            renderWeeklyReview();
+        }
+
+        function renderPostSummary() {
+            const posts = Object.values(postState);
+            const published = posts.filter(post => post.status === 'published' || post.status === 'reviewed').length;
+            document.getElementById('post-total').textContent = `${published}/${allAssets.length || 30}`;
+            const totals = posts.reduce((acc, post) => {
+                const metrics = post.metrics || {};
+                ['views', 'likes', 'comments', 'favorites', 'shares', 'leads'].forEach(key => {
+                    acc[key] += Number(metrics[key] || 0);
+                });
+                return acc;
+            }, { views: 0, likes: 0, comments: 0, favorites: 0, shares: 0, leads: 0 });
+            document.getElementById('post-summary').innerHTML = `
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="rounded-lg bg-white/[0.03] px-3 py-2"><span class="block text-xs text-gray-500">浏览</span><span class="gold font-semibold">${totals.views}</span></div>
+                    <div class="rounded-lg bg-white/[0.03] px-3 py-2"><span class="block text-xs text-gray-500">互动</span><span class="gold font-semibold">${totals.likes + totals.comments + totals.favorites + totals.shares}</span></div>
+                    <div class="rounded-lg bg-white/[0.03] px-3 py-2"><span class="block text-xs text-gray-500">评论</span><span class="gold font-semibold">${totals.comments}</span></div>
+                    <div class="rounded-lg bg-white/[0.03] px-3 py-2"><span class="block text-xs text-gray-500">线索</span><span class="gold font-semibold">${totals.leads}</span></div>
+                </div>
+            `;
+        }
+
+        function renderWeeklyReview() {
+            const posts = Object.values(postState);
+            if (!posts.length) {
+                document.getElementById('weekly-review').innerHTML = '<p>发布第一条内容并回填数据后，这里会显示复盘重点。</p>';
+                return;
+            }
+            const best = [...posts].sort((a, b) => {
+                const am = a.metrics || {};
+                const bm = b.metrics || {};
+                return Number(bm.leads || 0) - Number(am.leads || 0)
+                    || Number(bm.comments || 0) - Number(am.comments || 0)
+                    || Number(bm.favorites || 0) - Number(am.favorites || 0);
+            })[0];
+            document.getElementById('weekly-review').innerHTML = `
+                <p>当前最值得复用：<span class="gold">${best.title || best.content_id}</span></p>
+                <p>下一步：把高评论/高线索题材扩展成一条数字人口播和一篇小红书长图。</p>
+            `;
         }
 
         async function copyText(text, button) {
@@ -212,6 +411,8 @@
         document.getElementById('copy-link').addEventListener('click', event => {
             copyText(selectedAsset && selectedAsset.landing_url, event.currentTarget);
         });
+        document.getElementById('save-post').addEventListener('click', () => savePost(postState[selectedAsset?.id]?.status || 'published'));
+        document.getElementById('mark-published').addEventListener('click', () => savePost('published'));
 
         loadAssets();
         loadLeadSummary();

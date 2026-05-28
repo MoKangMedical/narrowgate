@@ -230,6 +230,24 @@ class Database:
                 CREATE INDEX IF NOT EXISTS idx_marketing_leads_channel ON marketing_leads(channel);
                 CREATE INDEX IF NOT EXISTS idx_marketing_leads_intent ON marketing_leads(intent);
                 CREATE INDEX IF NOT EXISTS idx_marketing_leads_created ON marketing_leads(created_at);
+
+                CREATE TABLE IF NOT EXISTS marketing_posts (
+                    id TEXT PRIMARY KEY,
+                    content_id TEXT UNIQUE,
+                    day INTEGER,
+                    channel TEXT,
+                    title TEXT,
+                    status TEXT DEFAULT 'planned',
+                    publish_url TEXT,
+                    metrics TEXT DEFAULT '{}',
+                    notes TEXT,
+                    published_at TEXT,
+                    created_at TEXT,
+                    updated_at TEXT
+                );
+                CREATE INDEX IF NOT EXISTS idx_marketing_posts_day ON marketing_posts(day);
+                CREATE INDEX IF NOT EXISTS idx_marketing_posts_channel ON marketing_posts(channel);
+                CREATE INDEX IF NOT EXISTS idx_marketing_posts_status ON marketing_posts(status);
             """)
             
             # 初始化默认徽章
@@ -429,6 +447,139 @@ class Database:
             "by_channel": by_channel,
             "by_intent": by_intent,
             "recent": [dict(row) for row in recent_rows],
+        }
+
+    def upsert_marketing_post(
+        self,
+        content_id: str,
+        day: int,
+        channel: str,
+        title: str,
+        status: str = "published",
+        publish_url: str = "",
+        metrics: dict = None,
+        notes: str = "",
+        published_at: str = "",
+    ) -> dict:
+        """创建或更新一条宣传内容的发布状态和数据。"""
+        now = datetime.now().isoformat()
+        metrics_payload = metrics or {}
+        with self._connect() as conn:
+            existing = conn.execute(
+                "SELECT id, created_at FROM marketing_posts WHERE content_id = ?",
+                (content_id,),
+            ).fetchone()
+            post_id = existing["id"] if existing else f"post_{uuid.uuid4().hex[:12]}"
+            created_at = existing["created_at"] if existing else now
+            conn.execute(
+                """
+                INSERT INTO marketing_posts
+                (id, content_id, day, channel, title, status, publish_url, metrics, notes, published_at, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(content_id) DO UPDATE SET
+                    day = excluded.day,
+                    channel = excluded.channel,
+                    title = excluded.title,
+                    status = excluded.status,
+                    publish_url = excluded.publish_url,
+                    metrics = excluded.metrics,
+                    notes = excluded.notes,
+                    published_at = excluded.published_at,
+                    updated_at = excluded.updated_at
+                """,
+                (
+                    post_id,
+                    content_id,
+                    day,
+                    channel,
+                    title,
+                    status,
+                    publish_url,
+                    json.dumps(metrics_payload, ensure_ascii=False),
+                    notes,
+                    published_at or now,
+                    created_at,
+                    now,
+                ),
+            )
+        return {
+            "id": post_id,
+            "content_id": content_id,
+            "day": day,
+            "channel": channel,
+            "title": title,
+            "status": status,
+            "publish_url": publish_url,
+            "metrics": metrics_payload,
+            "notes": notes,
+            "published_at": published_at or now,
+            "created_at": created_at,
+            "updated_at": now,
+        }
+
+    def list_marketing_posts(self, channel: str = "", status: str = "") -> List[dict]:
+        """列出宣传内容发布状态和运营数据。"""
+        filters = []
+        params = []
+        if channel:
+            filters.append("channel = ?")
+            params.append(channel)
+        if status:
+            filters.append("status = ?")
+            params.append(status)
+        where_clause = f"WHERE {' AND '.join(filters)}" if filters else ""
+        with self._connect() as conn:
+            rows = conn.execute(
+                f"""
+                SELECT * FROM marketing_posts
+                {where_clause}
+                ORDER BY day ASC, updated_at DESC
+                """,
+                params,
+            ).fetchall()
+        posts = []
+        for row in rows:
+            post = dict(row)
+            try:
+                post["metrics"] = json.loads(post.get("metrics") or "{}")
+            except json.JSONDecodeError:
+                post["metrics"] = {}
+            posts.append(post)
+        return posts
+
+    def get_marketing_post_summary(self) -> dict:
+        """汇总发布进度和内容表现，支持周复盘。"""
+        posts = self.list_marketing_posts()
+        by_status = {}
+        by_channel = {}
+        metric_totals = {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "shares": 0,
+            "leads": 0,
+        }
+        for post in posts:
+            by_status[post["status"]] = by_status.get(post["status"], 0) + 1
+            by_channel[post["channel"]] = by_channel.get(post["channel"], 0) + 1
+            metrics = post.get("metrics") or {}
+            for key in metric_totals:
+                try:
+                    metric_totals[key] += int(metrics.get(key, 0) or 0)
+                except (TypeError, ValueError):
+                    continue
+        top_posts = sorted(
+            posts,
+            key=lambda post: int((post.get("metrics") or {}).get("leads", 0) or 0),
+            reverse=True,
+        )[:5]
+        return {
+            "total": len(posts),
+            "by_status": by_status,
+            "by_channel": by_channel,
+            "metrics": metric_totals,
+            "top_posts": top_posts,
         }
 
     # ============================================================

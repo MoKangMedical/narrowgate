@@ -1,0 +1,140 @@
+{
+  "campaign": "narrowgate_launch_30d",
+  "scope": "launch_week_1",
+  "goal": "用首周7条跨渠道内容验证痛点、标题和转化链路。",
+  "daily_rule": "每天发布1条内容，24小时后回填数据，周末只保留有效题材。",
+  "tasks": [
+    {
+      "asset_id": "day01_xiaohongshu",
+      "day": 1,
+      "channel": "xiaohongshu",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day01_xiaohongshu",
+      "day": 1,
+      "channel": "xiaohongshu",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    },
+    {
+      "asset_id": "day02_douyin",
+      "day": 2,
+      "channel": "douyin",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day02_douyin",
+      "day": 2,
+      "channel": "douyin",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    },
+    {
+      "asset_id": "day03_digital_human",
+      "day": 3,
+      "channel": "digital_human",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day03_digital_human",
+      "day": 3,
+      "channel": "digital_human",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    },
+    {
+      "asset_id": "day04_xiaohongshu",
+      "day": 4,
+      "channel": "xiaohongshu",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day04_xiaohongshu",
+      "day": 4,
+      "channel": "xiaohongshu",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    },
+    {
+      "asset_id": "day05_douyin",
+      "day": 5,
+      "channel": "douyin",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day05_douyin",
+      "day": 5,
+      "channel": "douyin",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    },
+    {
+      "asset_id": "day06_digital_human",
+      "day": 6,
+      "channel": "digital_human",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day06_digital_human",
+      "day": 6,
+      "channel": "digital_human",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    },
+    {
+      "asset_id": "day07_xiaohongshu",
+      "day": 7,
+      "channel": "xiaohongshu",
+      "task": "发布内容",
+      "owner": "运营",
+      "done": false,
+      "evidence": "发布链接"
+    },
+    {
+      "asset_id": "day07_xiaohongshu",
+      "day": 7,
+      "channel": "xiaohongshu",
+      "task": "24小时数据回填",
+      "owner": "运营",
+      "done": false,
+      "evidence": "浏览、点赞、评论、收藏、线索数"
+    }
+  ],
+  "review_questions": [
+    "哪一条内容带来了最多评论或私信？",
+    "哪一个标题最适合继续复用？",
+    "哪一个渠道带来的审计开始数最高？",
+    "哪一条数字人脚本可以扩展成课程导览？"
+  ]
+}
