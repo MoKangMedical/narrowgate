@@ -60,6 +60,7 @@ if [ -d "$WEB_DIR" ]; then
         index.html \
         course-system.html \
         commercial-launch.html \
+        marketing-ops.html \
         404.html \
         tailwind.css \
         favicon.svg \

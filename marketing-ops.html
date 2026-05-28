@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>窄门增长执行台 - NarrowGate</title>
+    <meta name="description" content="窄门 NarrowGate 小红书、抖音和数字人宣传执行台，包含发布素材、UTM追踪和线索汇总。">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="tailwind.css?v=1780100000">
+    <style>
+        @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        :root {
+            --bg: #050508;
+            --panel: #0c0c12;
+            --gold: #b8942e;
+            --gold-light: #d4af37;
+            --cyan: #5eead4;
+            --rose: #fb7185;
+        }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: #e8e4dc;
+            font-family: Inter, "PingFang SC", sans-serif;
+        }
+        .font-serif { font-family: "Noto Serif SC", "Songti SC", serif; }
+        .panel {
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 70px rgba(0,0,0,0.26);
+        }
+        .gold { color: var(--gold); }
+        .gold-bg { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+        .tab.active {
+            background: rgba(180,148,46,0.16);
+            border-color: rgba(180,148,46,0.55);
+            color: #f3d27b;
+        }
+        .copy-button:disabled {
+            opacity: 0.55;
+            cursor: wait;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 172px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sticky top-0 z-50 bg-[#050508]/95 border-b border-white/5 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3 min-w-0">
+                <span class="w-9 h-9 rounded-lg gold-bg text-black flex items-center justify-center font-bold">门</span>
+                <span class="font-serif text-xl font-bold truncate">窄门增长执行台</span>
+            </a>
+            <div class="hidden md:flex items-center gap-4 text-sm text-gray-400">
+                <a href="commercial-launch.html" class="hover:text-white">商业落地</a>
+                <a href="course-system.html" class="hover:text-white">课程库</a>
+                <a href="data/marketing/publishing_assets.csv" class="hover:text-white">下载CSV</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-5 py-8">
+        <section class="grid lg:grid-cols-[1fr_360px] gap-5 mb-6">
+            <div class="panel rounded-lg p-6">
+                <p class="text-[#b8942e] text-xs tracking-[0.3em] uppercase mb-3">Launch Operations</p>
+                <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-4">把每天的内容发布变成可复制流程</h1>
+                <p class="text-gray-400 leading-7 max-w-3xl">按渠道筛选素材，复制文案和追踪链接。小红书负责信任沉淀，抖音负责曝光转化，数字人负责稳定规模化。</p>
+                <div class="flex flex-wrap gap-3 mt-6">
+                    <button class="tab active px-4 py-2 rounded-lg border border-white/10 text-sm" data-channel="all">全部</button>
+                    <button class="tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-channel="xiaohongshu">小红书</button>
+                    <button class="tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-channel="douyin">抖音</button>
+                    <button class="tab px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-300" data-channel="digital_human">数字人</button>
+                </div>
+            </div>
+            <aside class="panel rounded-lg p-5">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-bold text-lg">渠道线索</h2>
+                    <span id="lead-total" class="gold font-bold">0</span>
+                </div>
+                <div id="lead-summary" class="space-y-3 text-sm text-gray-400">
+                    <p>正在加载...</p>
+                </div>
+                <div class="mt-5 border-t border-white/10 pt-4 text-xs text-gray-500 leading-6">
+                    线索明细需要管理令牌；公开页面只显示汇总，不暴露联系方式。
+                </div>
+            </aside>
+        </section>
+
+        <section class="grid lg:grid-cols-[1fr_380px] gap-5">
+            <div>
+                <div class="flex items-center justify-between mb-4 gap-4">
+                    <h2 class="font-bold text-xl">30天发布队列</h2>
+                    <p id="asset-count" class="text-sm text-gray-500">加载中</p>
+                </div>
+                <div id="asset-list" class="grid md:grid-cols-2 gap-4"></div>
+            </div>
+            <aside class="panel rounded-lg p-5 h-fit lg:sticky lg:top-24">
+                <p class="text-[#b8942e] text-xs tracking-[0.3em] uppercase mb-3">Copy Desk</p>
+                <h2 id="copy-title" class="font-bold text-xl mb-4">选择一条素材</h2>
+                <textarea id="copy-text" class="w-full rounded-lg border border-white/10 bg-[#050508] p-4 text-sm text-gray-300 leading-6 outline-none focus:border-[#b8942e]/70" readonly></textarea>
+                <div class="mt-4 space-y-3">
+                    <button id="copy-caption" class="copy-button w-full gold-bg text-black px-4 py-3 rounded-lg font-semibold" disabled>复制发布文案</button>
+                    <button id="copy-link" class="copy-button w-full border border-white/10 text-gray-300 px-4 py-3 rounded-lg hover:text-white" disabled>复制追踪链接</button>
+                </div>
+                <div id="selected-link" class="mt-4 text-xs text-gray-500 break-all leading-5"></div>
+                <div class="mt-5 border-t border-white/10 pt-4">
+                    <h3 class="font-semibold mb-3">发布质量门</h3>
+                    <ul id="quality-gate" class="text-sm text-gray-400 space-y-2"></ul>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script>
+        let allAssets = [];
+        let currentChannel = 'all';
+        let selectedAsset = null;
+
+        const channelLabel = {
+            xiaohongshu: '小红书',
+            douyin: '抖音',
+            digital_human: '数字人'
+        };
+
+        const channelAccent = {
+            xiaohongshu: 'var(--rose)',
+            douyin: 'var(--cyan)',
+            digital_human: 'var(--gold)'
+        };
+
+        async function loadAssets() {
+            const response = await fetch('data/marketing/publishing_assets.json?v=1780100000', { cache: 'no-store' });
+            const data = await response.json();
+            allAssets = data.items || [];
+            renderAssets();
+            if (allAssets.length > 0) selectAsset(allAssets[0].id);
+        }
+
+        async function loadLeadSummary() {
+            const container = document.getElementById('lead-summary');
+            try {
+                const response = await fetch('/api/marketing/leads/summary', { cache: 'no-store' });
+                if (!response.ok) throw new Error('summary unavailable');
+                const summary = await response.json();
+                document.getElementById('lead-total').textContent = summary.total || 0;
+                const rows = Object.entries(summary.by_channel || {});
+                container.innerHTML = rows.length ? rows.map(([channel, count]) => `
+                    <div class="flex items-center justify-between rounded-lg bg-white/[0.03] px-3 py-2">
+                        <span>${channelLabel[channel] || channel}</span>
+                        <span class="gold font-semibold">${count}</span>
+                    </div>
+                `).join('') : '<p>暂无线索，先发布第1天素材。</p>';
+            } catch (error) {
+                container.innerHTML = '<p>静态模式下不显示实时线索。正式后端上线后会自动汇总。</p>';
+            }
+        }
+
+        function filteredAssets() {
+            return currentChannel === 'all' ? allAssets : allAssets.filter(asset => asset.channel === currentChannel);
+        }
+
+        function renderAssets() {
+            const list = document.getElementById('asset-list');
+            const assets = filteredAssets();
+            document.getElementById('asset-count').textContent = `${assets.length} 条素材`;
+            list.innerHTML = assets.map(asset => `
+                <article class="panel rounded-lg p-5 cursor-pointer hover:border-[#b8942e]/45 transition" onclick="selectAsset('${asset.id}')">
+                    <div class="flex items-center justify-between gap-3 mb-3">
+                        <span class="text-xs px-2 py-1 rounded border border-white/10" style="color:${channelAccent[asset.channel] || 'var(--gold)'}">${channelLabel[asset.channel] || asset.channel}</span>
+                        <span class="text-xs text-gray-500">Day ${asset.day}</span>
+                    </div>
+                    <h3 class="font-bold text-lg leading-6 mb-3">${asset.title}</h3>
+                    <p class="text-sm text-gray-500 leading-6 line-clamp-3">${asset.hook}</p>
+                    <div class="mt-4 text-xs text-gray-500">${asset.publish_status}</div>
+                </article>
+            `).join('');
+        }
+
+        function selectAsset(id) {
+            selectedAsset = allAssets.find(asset => asset.id === id);
+            if (!selectedAsset) return;
+            document.getElementById('copy-title').textContent = `${channelLabel[selectedAsset.channel] || selectedAsset.channel} · Day ${selectedAsset.day}`;
+            document.getElementById('copy-text').value = selectedAsset.caption || '';
+            document.getElementById('selected-link').textContent = selectedAsset.landing_url || '';
+            document.getElementById('copy-caption').disabled = false;
+            document.getElementById('copy-link').disabled = false;
+            document.getElementById('quality-gate').innerHTML = (selectedAsset.quality_gate || []).map(item => `<li>• ${item}</li>`).join('');
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            const original = button.textContent;
+            await navigator.clipboard.writeText(text);
+            button.textContent = '已复制';
+            window.setTimeout(() => button.textContent = original, 1100);
+        }
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(item => item.classList.remove('active'));
+                tab.classList.add('active');
+                currentChannel = tab.dataset.channel;
+                renderAssets();
+            });
+        });
+
+        document.getElementById('copy-caption').addEventListener('click', event => {
+            copyText(selectedAsset && selectedAsset.caption, event.currentTarget);
+        });
+        document.getElementById('copy-link').addEventListener('click', event => {
+            copyText(selectedAsset && selectedAsset.landing_url, event.currentTarget);
+        });
+
+        loadAssets();
+        loadLeadSummary();
+    </script>
+</body>
+</html>

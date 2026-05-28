@@ -1,0 +1,192 @@
+{
+  "campaign": "narrowgate_launch_30d",
+  "base_url": "https://narrowgatemind.top",
+  "links": {
+    "xiaohongshu": [
+      {
+        "id": "day01_xiaohongshu",
+        "day": 1,
+        "title": "你不是不自律，你是在逃避一个真问题",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day01_xiaohongshu"
+      },
+      {
+        "id": "day04_xiaohongshu",
+        "day": 4,
+        "title": "一个成年人最危险的状态：什么都懂，但没有证据",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day04_xiaohongshu"
+      },
+      {
+        "id": "day07_xiaohongshu",
+        "day": 7,
+        "title": "窄门7天体验：每天做一点最不想做但最需要做的事",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day07_xiaohongshu"
+      },
+      {
+        "id": "day10_xiaohongshu",
+        "day": 10,
+        "title": "真正有效的成长工具，都不太舒服",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day10_xiaohongshu"
+      },
+      {
+        "id": "day13_xiaohongshu",
+        "day": 13,
+        "title": "100门课程怎么学：不要从感兴趣开始，从最痛的地方开始",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day13_xiaohongshu"
+      },
+      {
+        "id": "day16_xiaohongshu",
+        "day": 16,
+        "title": "别再问怎么坚持，先问你为什么总想逃",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day16_xiaohongshu"
+      },
+      {
+        "id": "day19_xiaohongshu",
+        "day": 19,
+        "title": "写给总是自我怀疑的人：你需要的不是更多肯定",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day19_xiaohongshu"
+      },
+      {
+        "id": "day22_xiaohongshu",
+        "day": 22,
+        "title": "窄门商业合作：给机构一套能落地的AI成长助教",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day22_xiaohongshu"
+      },
+      {
+        "id": "day25_xiaohongshu",
+        "day": 25,
+        "title": "我用4步复盘一次失败：不再自责，而是升级系统",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day25_xiaohongshu"
+      },
+      {
+        "id": "day28_xiaohongshu",
+        "day": 28,
+        "title": "30天窄门训练最终不是为了变强，而是变真",
+        "url": "https://narrowgatemind.top/?utm_source=xiaohongshu&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day28_xiaohongshu"
+      }
+    ],
+    "douyin": [
+      {
+        "id": "day02_douyin",
+        "day": 2,
+        "title": "30秒测出你的宽门",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day02_douyin"
+      },
+      {
+        "id": "day05_douyin",
+        "day": 5,
+        "title": "你为什么总在关系里委屈自己",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day05_douyin"
+      },
+      {
+        "id": "day08_douyin",
+        "day": 8,
+        "title": "一个问题判断你是否在自欺",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day08_douyin"
+      },
+      {
+        "id": "day11_douyin",
+        "day": 11,
+        "title": "你缺的不是目标，是见证",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day11_douyin"
+      },
+      {
+        "id": "day14_douyin",
+        "day": 14,
+        "title": "3句话拆掉拖延的伪装",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day14_douyin"
+      },
+      {
+        "id": "day17_douyin",
+        "day": 17,
+        "title": "为什么你听了很多课，还是没有变",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day17_douyin"
+      },
+      {
+        "id": "day20_douyin",
+        "day": 20,
+        "title": "今天别立Flag，立证据",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day20_douyin"
+      },
+      {
+        "id": "day23_douyin",
+        "day": 23,
+        "title": "给培训机构的一句话",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day23_douyin"
+      },
+      {
+        "id": "day26_douyin",
+        "day": 26,
+        "title": "你不是玻璃心，你缺少复盘结构",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day26_douyin"
+      },
+      {
+        "id": "day29_douyin",
+        "day": 29,
+        "title": "如果你只能问自己一个问题",
+        "url": "https://narrowgatemind.top/?utm_source=douyin&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day29_douyin"
+      }
+    ],
+    "digital_human": [
+      {
+        "id": "day03_digital_human",
+        "day": 3,
+        "title": "数字人导师：你在等准备好，还是在等不用害怕？",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day03_digital_human"
+      },
+      {
+        "id": "day06_digital_human",
+        "day": 6,
+        "title": "数字人导师：你今天的窄门问题",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day06_digital_human"
+      },
+      {
+        "id": "day09_digital_human",
+        "day": 9,
+        "title": "数字人导师：你的情绪不是敌人",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day09_digital_human"
+      },
+      {
+        "id": "day12_digital_human",
+        "day": 12,
+        "title": "数字人导师：把目标切到无法推脱",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day12_digital_human"
+      },
+      {
+        "id": "day15_digital_human",
+        "day": 15,
+        "title": "数字人导师：关系里的窄门",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day15_digital_human"
+      },
+      {
+        "id": "day18_digital_human",
+        "day": 18,
+        "title": "数字人导师：事业里的窄门",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day18_digital_human"
+      },
+      {
+        "id": "day21_digital_human",
+        "day": 21,
+        "title": "数字人导师：你不是情绪太多，是语言太少",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day21_digital_human"
+      },
+      {
+        "id": "day24_digital_human",
+        "day": 24,
+        "title": "数字人机构版口播",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day24_digital_human"
+      },
+      {
+        "id": "day27_digital_human",
+        "day": 27,
+        "title": "数字人导师：给旧自己的告别",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day27_digital_human"
+      },
+      {
+        "id": "day30_digital_human",
+        "day": 30,
+        "title": "数字人导师：下一扇门",
+        "url": "https://narrowgatemind.top/?utm_source=digital_human&utm_medium=social&utm_campaign=narrowgate_launch_30d&utm_content=day30_digital_human"
+      }
+    ]
+  }
+}
