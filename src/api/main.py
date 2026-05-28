@@ -240,6 +240,122 @@ def _load_campaign_assets(base_url: str) -> List[dict]:
     return [_campaign_asset_from_item(item, base_url) for item in campaign.get("items", [])]
 
 
+def _metric(post: dict, key: str) -> int:
+    try:
+        return int((post.get("metrics") or {}).get(key, 0) or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _score_marketing_post(post: dict) -> float:
+    return (
+        _metric(post, "leads") * 100
+        + _metric(post, "comments") * 12
+        + _metric(post, "favorites") * 6
+        + _metric(post, "shares") * 4
+        + _metric(post, "likes")
+        + _metric(post, "views") * 0.02
+    )
+
+
+def _build_reuse_suggestions(posts: List[dict]) -> List[dict]:
+    ranked = sorted(posts, key=_score_marketing_post, reverse=True)
+    suggestions = []
+    for post in ranked[:5]:
+        suggestions.append({
+            "content_id": post.get("content_id"),
+            "title": post.get("title"),
+            "channel": post.get("channel"),
+            "score": round(_score_marketing_post(post), 2),
+            "reason": (
+                f"线索 {_metric(post, 'leads')}，评论 {_metric(post, 'comments')}，"
+                f"收藏 {_metric(post, 'favorites')}，适合复用为长图、短视频或数字人口播。"
+            ),
+            "next_action": "保留原钩子，换一个真实案例，重新发布一个同主题变体。",
+        })
+    if not suggestions:
+        suggestions.append({
+            "content_id": "",
+            "title": "先发布首周第1条内容",
+            "channel": "all",
+            "score": 0,
+            "reason": "还没有发布数据，无法判断有效题材。",
+            "next_action": "从增长执行台复制首条素材，发布后24小时回填数据。",
+        })
+    return suggestions
+
+
+def _build_weekly_marketing_report(posts: List[dict]) -> dict:
+    totals = {"views": 0, "likes": 0, "comments": 0, "favorites": 0, "shares": 0, "leads": 0}
+    by_channel: Dict[str, dict] = {}
+    for post in posts:
+        channel = post.get("channel") or "unknown"
+        channel_bucket = by_channel.setdefault(channel, {
+            "posts": 0,
+            "views": 0,
+            "engagement": 0,
+            "leads": 0,
+        })
+        channel_bucket["posts"] += 1
+        channel_bucket["views"] += _metric(post, "views")
+        channel_bucket["engagement"] += (
+            _metric(post, "likes")
+            + _metric(post, "comments")
+            + _metric(post, "favorites")
+            + _metric(post, "shares")
+        )
+        channel_bucket["leads"] += _metric(post, "leads")
+        for key in totals:
+            totals[key] += _metric(post, key)
+    return {
+        "campaign": "narrowgate_launch_30d",
+        "generated_at": datetime.now().isoformat(),
+        "post_count": len(posts),
+        "totals": totals,
+        "by_channel": by_channel,
+        "reuse_suggestions": _build_reuse_suggestions(posts),
+        "next_week_actions": [
+            "把线索最高的题材扩展成一篇小红书长图。",
+            "把评论最高的题材改写成30秒抖音口播。",
+            "把收藏最高的题材做成数字人课程导览。",
+            "停掉连续两次低完播、低收藏、无线索的开头句。",
+        ],
+    }
+
+
+def _weekly_report_markdown(report: dict) -> str:
+    totals = report["totals"]
+    lines = [
+        "# 窄门增长周报",
+        "",
+        f"- 生成时间：{report['generated_at']}",
+        f"- 已记录内容：{report['post_count']} 条",
+        f"- 总浏览：{totals['views']}",
+        f"- 总互动：{totals['likes'] + totals['comments'] + totals['favorites'] + totals['shares']}",
+        f"- 总线索：{totals['leads']}",
+        "",
+        "## 渠道表现",
+        "",
+    ]
+    for channel, row in report["by_channel"].items():
+        lines.append(f"- {channel}: {row['posts']} 条，浏览 {row['views']}，互动 {row['engagement']}，线索 {row['leads']}")
+    if not report["by_channel"]:
+        lines.append("- 暂无发布数据。")
+    lines.extend(["", "## 最值得复用的内容", ""])
+    for item in report["reuse_suggestions"]:
+        lines.extend([
+            f"### {item['title']}",
+            f"- 渠道：{item['channel']}",
+            f"- 分数：{item['score']}",
+            f"- 原因：{item['reason']}",
+            f"- 下一步：{item['next_action']}",
+            "",
+        ])
+    lines.extend(["## 下周动作", ""])
+    lines.extend([f"- {action}" for action in report["next_week_actions"]])
+    return "\n".join(lines).rstrip() + "\n"
+
+
 # ============================================================
 # 首页
 # ============================================================
@@ -474,6 +590,24 @@ async def list_marketing_posts(channel: str = "", status: str = ""):
 async def get_marketing_post_summary():
     """返回发布进度和内容表现汇总。"""
     return db.get_marketing_post_summary()
+
+
+@app.get("/api/marketing/posts/weekly-report")
+async def get_marketing_weekly_report():
+    """返回增长周报和最佳内容复用建议。"""
+    posts = db.list_marketing_posts()
+    return _build_weekly_marketing_report(posts)
+
+
+@app.get("/api/marketing/posts/weekly-report.md")
+async def get_marketing_weekly_report_markdown():
+    """导出Markdown格式增长周报。"""
+    report = _build_weekly_marketing_report(db.list_marketing_posts())
+    return Response(
+        _weekly_report_markdown(report),
+        media_type="text/markdown; charset=utf-8",
+        headers={"Content-Disposition": "attachment; filename=narrowgate_weekly_marketing_report.md"},
+    )
 
 
 # ============================================================

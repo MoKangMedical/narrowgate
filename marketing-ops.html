@@ -6,7 +6,7 @@
     <title>窄门增长执行台 - NarrowGate</title>
     <meta name="description" content="窄门 NarrowGate 小红书、抖音和数字人宣传执行台，包含发布素材、UTM追踪和线索汇总。">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="tailwind.css?v=1780200000">
+    <link rel="stylesheet" href="tailwind.css?v=1780300000">
     <style>
         @import url('https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
         :root {
@@ -66,6 +66,9 @@
                 <a href="commercial-launch.html" class="hover:text-white">商业落地</a>
                 <a href="course-system.html" class="hover:text-white">课程库</a>
                 <a href="data/marketing/week1_publish_checklist.json" class="hover:text-white">首周清单</a>
+                <a href="data/marketing/week1_publish_scripts.md" class="hover:text-white">逐条话术</a>
+                <a href="data/marketing/digital_human_storyboards.json" class="hover:text-white">数字人分镜</a>
+                <a href="/api/marketing/posts/weekly-report.md" class="hover:text-white">导出周报</a>
                 <a href="data/marketing/publishing_assets.csv" class="hover:text-white">下载CSV</a>
             </div>
         </div>
@@ -153,6 +156,11 @@
                 <div class="mt-5 border-t border-white/10 pt-4">
                     <h3 class="font-semibold mb-3">本周复盘</h3>
                     <div id="weekly-review" class="text-sm text-gray-400 space-y-2"></div>
+                    <div class="mt-4 grid grid-cols-2 gap-3">
+                        <a href="/api/marketing/posts/weekly-report.md" class="border border-white/10 text-gray-300 px-3 py-2 rounded-lg text-center text-sm hover:text-white">导出周报</a>
+                        <a href="data/marketing/week1_publish_scripts.md" class="border border-white/10 text-gray-300 px-3 py-2 rounded-lg text-center text-sm hover:text-white">首周话术</a>
+                        <a href="data/marketing/digital_human_storyboards.json" class="col-span-2 border border-[#b8942e]/40 text-[#d4af37] px-3 py-2 rounded-lg text-center text-sm hover:text-white">数字人分镜生产包</a>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -177,7 +185,7 @@
         };
 
         async function loadAssets() {
-            const response = await fetch('data/marketing/publishing_assets.json?v=1780200000', { cache: 'no-store' });
+            const response = await fetch('data/marketing/publishing_assets.json?v=1780300000', { cache: 'no-store' });
             const data = await response.json();
             allAssets = data.items || [];
             loadLocalPostState();

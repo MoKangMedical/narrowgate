@@ -135,6 +135,14 @@ class TestHealthEndpoints:
         assert checklist_resp.status_code == 200
         assert len(checklist_resp.json()["tasks"]) == 14
 
+        scripts_resp = await client.get("/data/marketing/week1_publish_scripts.md")
+        assert scripts_resp.status_code == 200
+        assert "窄门首周逐条发布话术" in scripts_resp.text
+
+        storyboard_resp = await client.get("/data/marketing/digital_human_storyboards.json")
+        assert storyboard_resp.status_code == 200
+        assert len(storyboard_resp.json()["storyboards"]) == 10
+
         csv_resp = await client.get("/data/marketing/publishing_assets.csv")
         assert csv_resp.status_code == 200
         assert "text/csv" in csv_resp.headers.get("content-type", "")
@@ -298,6 +306,16 @@ class TestMarketingLeadAPI:
         summary = summary_resp.json()
         assert summary["metrics"]["views"] >= 1200
         assert summary["metrics"]["leads"] >= 3
+
+        report_resp = await client.get("/api/marketing/posts/weekly-report")
+        assert report_resp.status_code == 200
+        report = report_resp.json()
+        assert report["post_count"] >= 1
+        assert report["reuse_suggestions"][0]["next_action"]
+
+        markdown_resp = await client.get("/api/marketing/posts/weekly-report.md")
+        assert markdown_resp.status_code == 200
+        assert "窄门增长周报" in markdown_resp.text
 
 
 # ============================================================

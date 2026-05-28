@@ -29,6 +29,8 @@ https://narrowgatemind.top/?utm_source={channel}&utm_medium=social&utm_campaign=
 - `data/marketing/utm_links.json`
 - `data/marketing/publishing_assets.csv`
 - `data/marketing/week1_publish_checklist.json`
+- `data/marketing/week1_publish_scripts.md`
+- `data/marketing/digital_human_storyboards.json`
 
 ## 4. 发布前质量门
 
@@ -86,6 +88,13 @@ curl -X POST https://narrowgatemind.top/api/marketing/posts \
 
 ```bash
 curl https://narrowgatemind.top/api/marketing/posts/summary
+```
+
+增长周报：
+
+```bash
+curl https://narrowgatemind.top/api/marketing/posts/weekly-report
+curl https://narrowgatemind.top/api/marketing/posts/weekly-report.md
 ```
 
 ## 7. 每周复盘

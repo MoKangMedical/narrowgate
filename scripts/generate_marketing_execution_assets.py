@@ -139,6 +139,80 @@ def build_digital_human_package(assets: list[dict]) -> dict:
     }
 
 
+def _sentence_chunks(text: str) -> list[str]:
+    normalized = text.replace("\n", "。").replace("！", "。").replace("？", "。")
+    chunks = [chunk.strip(" 。") for chunk in normalized.split("。") if chunk.strip(" 。#")]
+    return chunks[:6] or [text.strip()]
+
+
+def build_digital_human_storyboards(assets: list[dict]) -> dict:
+    storyboards = []
+    for asset in assets:
+        if asset["channel"] != "digital_human":
+            continue
+        chunks = _sentence_chunks(asset["caption"])
+        hook = chunks[0]
+        insight = chunks[1] if len(chunks) > 1 else asset["hook"]
+        action = chunks[2] if len(chunks) > 2 else asset["cta"]
+        cta = asset["cta"]
+        storyboards.append(
+            {
+                "id": asset["id"],
+                "title": asset["title"],
+                "aspect_ratio": "9:16",
+                "duration_seconds": 42,
+                "voice": DIGITAL_HUMAN_PROFILE["voice_style"],
+                "visual_identity": DIGITAL_HUMAN_PROFILE["visual_style"],
+                "landing_url": asset["landing_url"],
+                "scenes": [
+                    {
+                        "time": "00:00-00:03",
+                        "purpose": "强钩子",
+                        "visual": "黑底金色窄门线条亮起，数字人平静看向镜头。",
+                        "subtitle": hook,
+                        "voiceover": hook,
+                        "camera": "中近景，轻微推近。",
+                    },
+                    {
+                        "time": "00:03-00:16",
+                        "purpose": "命名真实问题",
+                        "visual": "左侧浮现关键词，右侧保留数字人半身。",
+                        "subtitle": insight,
+                        "voiceover": insight,
+                        "camera": "固定镜头，字幕逐行出现。",
+                    },
+                    {
+                        "time": "00:16-00:32",
+                        "purpose": "给出最小行动",
+                        "visual": "画面出现一张极简行动卡，金色边框。",
+                        "subtitle": action,
+                        "voiceover": action,
+                        "camera": "行动卡轻微上移，数字人保持慢速口播。",
+                    },
+                    {
+                        "time": "00:32-00:42",
+                        "purpose": "单一转化动作",
+                        "visual": "出现窄门平台名、网址和课程/审计入口。",
+                        "subtitle": cta,
+                        "voiceover": cta,
+                        "camera": "收束到金色门线，淡出。",
+                    },
+                ],
+                "production_checklist": [
+                    "第一帧必须能读出问题句",
+                    "字幕不超过两行，关键词用金色",
+                    "口播语速慢，避免兴奋式营销",
+                    "结尾只保留一个转化动作",
+                ],
+            }
+        )
+    return {
+        "project": "NarrowGate digital human storyboards",
+        "profile": DIGITAL_HUMAN_PROFILE,
+        "storyboards": storyboards,
+    }
+
+
 def build_utm_links(assets: list[dict]) -> dict:
     links = {}
     for asset in assets:
@@ -194,6 +268,70 @@ def build_week1_checklist(assets: list[dict]) -> dict:
     }
 
 
+def build_week1_publish_scripts(assets: list[dict]) -> tuple[dict, str]:
+    first_week = [asset for asset in assets if int(asset["day"]) <= 7]
+    items = []
+    lines = [
+        "# 窄门首周逐条发布话术",
+        "",
+        "用于第一周实际发布。每条包含标题/开场、正文或口播、评论区引导、发布后回填项。",
+        "",
+    ]
+    for asset in first_week:
+        channel_label = {
+            "xiaohongshu": "小红书",
+            "douyin": "抖音",
+            "digital_human": "数字人",
+        }.get(asset["channel"], asset["channel"])
+        comment_prompt = "你现在最想逃开的那件事是什么？"
+        if asset["channel"] == "douyin":
+            comment_prompt = "评论一个字：门，我把7天行动清单发你。"
+        if asset["channel"] == "digital_human":
+            comment_prompt = "今天只回答一个问题：我在等准备好，还是在等不用害怕？"
+        item = {
+            "id": asset["id"],
+            "day": asset["day"],
+            "channel": asset["channel"],
+            "channel_label": channel_label,
+            "title": asset["title"],
+            "opening": asset["hook"],
+            "publish_copy": asset["caption"],
+            "cover_text": asset["hook"][:28],
+            "comment_prompt": comment_prompt,
+            "landing_url": asset["landing_url"],
+            "after_publish_metrics": ["views", "likes", "comments", "favorites", "shares", "leads"],
+        }
+        items.append(item)
+        lines.extend(
+            [
+                f"## Day {asset['day']} · {channel_label}",
+                "",
+                f"**标题/开场**：{asset['title']}",
+                "",
+                f"**封面文案**：{item['cover_text']}",
+                "",
+                "**发布正文/口播**：",
+                "",
+                asset["caption"],
+                "",
+                f"**评论区引导**：{comment_prompt}",
+                "",
+                f"**追踪链接**：{asset['landing_url']}",
+                "",
+                "**发布后24小时回填**：浏览、点赞、评论、收藏、转发、线索数。",
+                "",
+            ]
+        )
+    return (
+        {
+            "campaign": CAMPAIGN,
+            "scope": "launch_week_1_publish_scripts",
+            "items": items,
+        },
+        "\n".join(lines).rstrip() + "\n",
+    )
+
+
 def main() -> None:
     campaign = json.loads((MARKETING_DIR / "launch_campaign_30d.json").read_text(encoding="utf-8"))
     assets = build_assets(campaign)
@@ -208,12 +346,17 @@ def main() -> None:
     outputs = {
         "publishing_assets.json": publishing_package,
         "digital_human_production.json": build_digital_human_package(assets),
+        "digital_human_storyboards.json": build_digital_human_storyboards(assets),
         "utm_links.json": build_utm_links(assets),
         "week1_publish_checklist.json": build_week1_checklist(assets),
     }
+    week1_scripts, week1_markdown = build_week1_publish_scripts(assets)
+    outputs["week1_publish_scripts.json"] = week1_scripts
     for filename, payload in outputs.items():
         write_json(MARKETING_DIR / filename, payload)
         write_json(DOCS_MARKETING_DIR / filename, payload)
+    for base_dir in (MARKETING_DIR, DOCS_MARKETING_DIR):
+        (base_dir / "week1_publish_scripts.md").write_text(week1_markdown, encoding="utf-8")
     write_csv(MARKETING_DIR / "publishing_assets.csv", assets)
     write_csv(DOCS_MARKETING_DIR / "publishing_assets.csv", assets)
     print(f"Generated {len(assets)} publish-ready assets")
